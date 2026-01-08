@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+}
+.addTaskLabel {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+}
+form {
+  position: relative;
+  width: 440px;
+  height: 376px;
+  top: 327px;
+  left: 328px;
+}
