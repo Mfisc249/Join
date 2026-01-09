@@ -1,0 +1,56 @@
+ .addTaskContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+ }
+
+ .addTaskButton{
+    font-size: 21px;
+ }
+
+ .tableCategories td{
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .tablecontainer {
+     margin-top: 100px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ table,
+ td {
+     border: 1px solid black; 
+ }
+
+ table {
+     border-collapse: collapse;
+ }
+
+ tr {
+     display: flex;
+ }
+
+ td {
+     display: flex;
+     flex-wrap: wrap;
+     align-content: flex-start;
+     gap: 3px;
+     /* height: 400px; */
+     width: 100%;
+ }
+
+ td div {
+     height: 100px;
+     width: 100px;
+     border: 2px solid black;
+     margin-top: 5px;
+     margin-left: 5px;
+     text-align: center;
+ }
+
+ .highlight {
+     background-color: rgb(187, 187, 187);
+ }
