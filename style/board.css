@@ -1,11 +1,8 @@
+ 
  .addTaskContainer {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
- }
-
- .addTaskButton{
-    font-size: 21px;
  }
 
  .tableCategories td{

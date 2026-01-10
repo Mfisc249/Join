@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="mainFond">
 
 <head>
     <meta charset="UTF-8">
@@ -12,15 +12,18 @@
 <body onload="render()">
     <div class="addTaskContainer">
         <h1>Board</h1>
-        <form id="formId" onsubmit="formIsSubmittet(); return false">
+        <input type="search" placeholder="Find Task">
+        <!-- <button type="submit"><img src="./assets/img/Search.svg" alt="Search"></button> -->
+        <form onsubmit="formIsSubmittet(); return false">
             <!-- <input id="titleId" type="text" required placeholder="Titel">
             <input id="contentId" type="text" required placeholder="Beschreibung"> -->
-            <button class="ButtonDarkblue addTaskButton" type="submit">Add Task <img src="./assets/img/add.svg" alt="+"></button>
+            <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add.svg"
+                    alt="+"></button>
         </form>
     </div>
     <div class="tablecontainer">
         <table>
-            <tr class = "tableCategories">
+            <tr class="tableCategories">
                 <td>To do <button>+</button></td>
                 <td>In progress <button>+</button></td>
                 <td>Await feedback <button>+</button></td>
