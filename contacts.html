@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join | Contacts</title>
+
+  <link rel="stylesheet" href="./style/standard.css" />
+  <link rel="stylesheet" href="./style/contacts.css" />
+</head>
+
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- white logo version for sidebar (du kannst später ein eigenes white svg nutzen) -->
+        <img class="sidebar-logo" src="./assets/img/logoside.svg" alt="Join Logo" />
+      </div>
+
+      <nav class="nav">
+        <a class="nav-item" href="./summary.html">
+          <span class="nav-icon"><img src="./assets/img/summary.svg" alt="Summary"></span><span>Summary</span>
+        </a>
+        <a class="nav-item" href="./add_task.html">
+          <span class="nav-icon"><img src="./assets/img/addtask.png" alt="Add Task"></span><span>Add Task</span>
+        </a>
+        <a class="nav-item" href="./board.html">
+          <span class="nav-icon"><img src="./assets/img/board.png" alt="Board"></span><span>Board</span>
+        </a>
+        <a class="nav-item active" href="./contacts.html">
+          <span class="nav-icon"><img src="./assets/img/contacts.svg" alt="Contacts"></span><span>Contacts</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a class="sidebar-link" href="./privacy.html">Privacy Policy</a>
+        <a class="sidebar-link" href="./legal.html">Legal notice</a>
+      </div>
+    </aside>
+
+    <!-- Main area -->
+    <div class="main">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-title">Kanban Project Management Tool</div>
+
+        <div class="header-right">
+          <button class="circleBadge" type="button" aria-label="Help">
+            ?
+          </button>
+
+          <button class="circleBadge" type="button" aria-label="User profile">
+            <span class="profile-initials">SM</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content layout: list panel + details -->
+      <div class="content">
+        <!-- Contacts list panel -->
+        <section class="contacts-panel" aria-label="Contacts list">
+          <div class="contacts-panel-header">
+            <button class="ButtonBlueFilled" id="addContactBtn" type="button">
+              <span>Add new contact</span>
+              <span class="btn-add-icon">+</span>
+            </button>
+          </div>
+
+          <div class="contacts-list" id="contactsList">
+            <!-- JS rendert hier Gruppen + Items -->
+          </div>
+        </section>
+
+        <!-- Details area -->
+        <section class="details" aria-label="Contact details">
+          <div class="details-headline">
+            <h1>Contacts</h1>
+            <div class="details-divider"></div>
+            <div class="details-sub">Better with a team</div>
+          </div>
+
+          <!-- Empty state (wenn nichts ausgewählt) -->
+          <div class="details-empty" id="detailsEmpty">
+            <p>Select a contact to see details.</p>
+          </div>
+
+          <!-- Selected contact details -->
+          <div class="details-card hidden" id="detailsCard">
+            <div class="details-card-top">
+              <div class="badge-large" id="detailsBadge">AM</div>
+
+              <div class="details-name-actions">
+                <div class="details-name" id="detailsName">Anton Mayer</div>
+
+                <div class="details-actions">
+                  <button class="link-icon" id="editBtn" type="button">✎ <span>Edit</span></button>
+                  <button class="link-icon" id="deleteBtn" type="button">🗑 <span>Delete</span></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="details-section-title">Contact Information</div>
+
+            <div class="details-info">
+              <div class="info-block">
+                <div class="info-label">Email</div>
+                <a class="info-link" id="detailsEmail" href="mailto:antomm@gmail.com">antomm@gmail.com</a>
+              </div>
+
+              <div class="info-block">
+                <div class="info-label">Phone</div>
+                <div class="info-value" id="detailsPhone">+49 1111 111 11 1</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="./JS/contacts.js"></script>
+</body>
+</html>
