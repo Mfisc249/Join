@@ -5,26 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
-    <link rel="stylesheet" href="./style/board.css">
     <link rel="stylesheet" href="./style/standard.css">
+    <link rel="stylesheet" href="./style/sidebar.css">
+    <link rel="stylesheet" href="./style/board.css">
 </head>
 
 <body onload="render()">
-    <div class="addTaskContainer">
-        <h1>Board</h1>
-        <div class="addTaskContainer gap32px">
-            <div class="searchBar">
-                <input name="Search" placeholder="Find Task" rows="1"></input>
-                <img onclick="" src="./assets/img/Search.svg" alt="Search">
+    <div class="app">
+        <!-- Sidebar wird automatisch hier eingefügt -->
+
+        <div class="addTaskContainer">
+            <h1>Board</h1>
+            <div class="addTaskContainer gap32px">
+                <div class="searchBar">
+                    <input name="Search" placeholder="Find Task" rows="1"></input>
+                    <img onclick="" src="./assets/img/Search.svg" alt="Search">
+                </div>
+                <form onsubmit="formIsSubmittet(); return false">
+                    <!-- <input id="titleId" type="text" required placeholder="Titel">
+                    <input id="contentId" type="text" required placeholder="Beschreibung"> -->
+                    <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add.svg"
+                            alt="+"></button>
+                </form>
             </div>
-            <form onsubmit="formIsSubmittet(); return false">
-                <!-- <input id="titleId" type="text" required placeholder="Titel">
-                <input id="contentId" type="text" required placeholder="Beschreibung"> -->
-                <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add.svg"
-                        alt="+"></button>
-            </form>
         </div>
-    </div>
     <div class="tablecontainer">
         <table>
             <tr class="tableCategories">
@@ -45,6 +49,7 @@
             </tr>
         </table>
     </div>
+    <script src="./JS/sidebar.js"></script>
     <script src="./JS/board.js"></script>
 </body>
 

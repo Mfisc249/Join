@@ -13,6 +13,18 @@
 }
 
 /*
+ * Sidebar Layout - Global
+ * Description: Layout adjustments for sidebar integration across all pages
+ */
+.app {
+    margin-left: 232px; /* Sidebar width */
+}
+
+.app > *:not(.sidebar) {
+    padding-left: 20px; /* Zusätzlicher Abstand für Hauptinhalt */
+}
+
+/*
  * Font: Inter
  * Description: Embeds the "Inter" font family.
  * Note: Multiple format entries for broad browser support.
