@@ -1,95 +1,10 @@
 
+/* Contacts Page Styles */
 .app {
   display: flex;
   min-height: 100vh;
   background: var(--color-bg);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-/* Sidebar */
-.sidebar {
-  width: 232px;
-  background: #2A3647;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 64px 0 64px 0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  z-index: 1000;
-}
-
-.sidebar-top {
-  display: flex;
-  justify-content: center;
-}
-
-.sidebar-logo {
-  width: 100px;
-  height: auto;
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 40px;
-}
-
-.nav-item {
-  height: 46px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 8px 56px;
-  color: #CDCDCD;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-.nav-item:hover {
-  background: rgba(255,255,255,0.06);
-}
-
-.nav-item.active {
-  background: #091931;
-  color: #fff;
-}
-
-.nav-icon {
-  width: 30px;
-  display: inline-flex;
-  justify-content: center;
-  opacity: 0.9;
-}
-
-.nav-icon img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) invert(1);
-}
-
-.sidebar-bottom {
-  padding-left: 52px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.sidebar-link {
-  color: var(--color-icon);
-  text-decoration: none;
-  font-size: 16px;
-  padding: 8px;
-  width: fit-content;
-}
-
-.sidebar-link:hover {
-  text-decoration: underline;
 }
 
 /* Main */
@@ -129,29 +44,92 @@
   height: 32px;
   border-radius: 50%;
   background: transparent;
-  border: 2px solid transparent;
-  color: var(--color-icon);
+  border: 2px solid #A8A8A8;
+  color: #A8A8A8;
   font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .help-btn:hover {
-  border-color: rgba(168,168,168,0.6);
+  border-color: #2A3647;
+  color: #2A3647;
 }
 
 .profile-btn {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 3px solid var(--color-main);
+  border: 3px solid #2A3647;
   background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-btn:hover {
+  background: #f5f5f5;
+}
+
+.profile-initials {
+  color: #29ABE2;
+  font-weight: 700;
+}
+
+.profile-initials {
+  color: #29ABE2;
+  font-weight: 700;
+}
+
+/* Header Buttons */
+.circleBadge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid #A8A8A8;
+  color: #A8A8A8;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.profile-initials {
-  color: var(--color-accent);
+.circleBadge:hover {
+  border-color: #2A3647;
+  color: #2A3647;
+}
+
+/* Add Contact Button Alias */
+.ButtonBlueFilled {
+  width: 352px;
+  height: 56px;
+  border-radius: 10px;
+  background: #2A3647;
+  color: #fff;
+  font-size: 21px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ButtonBlueFilled:hover {
+  background: #1e2a3a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(42, 54, 71, 0.2);
+}
+
+.ButtonBlueFilled:active {
+  transform: translateY(0);
 }
 
 /* Content split */
@@ -180,7 +158,7 @@
   width: 352px;
   height: 56px;
   border-radius: 10px;
-  background: var(--color-main);
+  background: #2A3647;
   color: #fff;
   font-size: 21px;
   font-weight: 700;
@@ -188,10 +166,19 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-add-contact:hover {
-  opacity: 0.95;
+  background: #1e2a3a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(42, 54, 71, 0.2);
+}
+
+.btn-add-contact:active {
+  transform: translateY(0);
 }
 
 .btn-add-icon {
@@ -239,15 +226,25 @@
   align-items: center;
   background: #fff;
   cursor: pointer;
+  transition: all 0.2s ease;
+  role: option;
 }
 
 .contact-item:hover {
   background: rgba(42,54,71,0.06);
+  transform: translateX(2px);
+}
+
+.contact-item:focus {
+  outline: 2px solid #29ABE2;
+  outline-offset: -2px;
 }
 
 .contact-item.active {
   background: #2A3647;
   color: #fff;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(42, 54, 71, 0.2);
 }
 
 .contact-item.active .contact-email {
@@ -365,17 +362,28 @@
 }
 
 .link-icon {
-  border: unset;
+  border: none;
   background: transparent;
-  color: var(--color-main);
+  color: #2A3647;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-size: 16px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 .link-icon:hover {
-  text-decoration: underline;
+  background: rgba(42, 54, 71, 0.1);
+  transform: translateY(-1px);
+}
+
+.link-icon svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
 }
 
 .details-section-title {
@@ -407,11 +415,42 @@
 
 .hidden { display: none !important; }
 
+/* Empty and Error States */
+.empty-contacts,
+.error-message {
+  padding: 40px 24px;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+}
+
+.error-message {
+  color: #ff4444;
+  background: #fff5f5;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  margin: 16px;
+}
+
+.empty-contacts {
+  font-style: italic;
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #666;
+}
+
 /* Responsive (min 320px, keine horizontal scroll) */
 @media (max-width: 1100px) {
   .header { padding-left: 40px; margin-left: 232px; }
   .details-headline { left: 40px; }
   .details-empty, .details-card { padding-left: 40px; }
+  .btn-add-contact { width: 300px; }
 }
 
 @media (max-width: 900px) {
@@ -420,5 +459,14 @@
   .details { display: none; } /* mobile: erstmal nur Liste (später: eigenes mobile details view) */
   .header { padding-left: 24px; margin-left: 0; }
   .main { margin-left: 0; }
-  .sidebar { display: none; } /* mobile vereinfachen */
+  .btn-add-contact { width: calc(100% - 48px); font-size: 18px; }
+}
+
+@media (max-width: 600px) {
+  .header-title { font-size: 18px; }
+  .contacts-list { padding: 16px 12px; }
+  .contact-item { height: 70px; padding: 12px 16px; gap: 20px; }
+  .contact-name { font-size: 18px; }
+  .contact-email { font-size: 14px; }
+  .badge { width: 38px; height: 38px; font-size: 14px; }
 }

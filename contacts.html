@@ -6,38 +6,13 @@
   <title>Join | Contacts</title>
 
   <link rel="stylesheet" href="./style/standard.css" />
+  <link rel="stylesheet" href="./style/sidebar.css" />
   <link rel="stylesheet" href="./style/contacts.css" />
 </head>
 
 <body>
   <div class="app">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-top">
-        <!-- white logo version for sidebar (du kannst später ein eigenes white svg nutzen) -->
-        <img class="sidebar-logo" src="./assets/img/logoside.svg" alt="Join Logo" />
-      </div>
-
-      <nav class="nav">
-        <a class="nav-item" href="./summary.html">
-          <span class="nav-icon"><img src="./assets/img/summary.svg" alt="Summary"></span><span>Summary</span>
-        </a>
-        <a class="nav-item" href="./add_task.html">
-          <span class="nav-icon"><img src="./assets/img/addtask.png" alt="Add Task"></span><span>Add Task</span>
-        </a>
-        <a class="nav-item" href="./board.html">
-          <span class="nav-icon"><img src="./assets/img/board.png" alt="Board"></span><span>Board</span>
-        </a>
-        <a class="nav-item active" href="./contacts.html">
-          <span class="nav-icon"><img src="./assets/img/contacts.svg" alt="Contacts"></span><span>Contacts</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-bottom">
-        <a class="sidebar-link" href="./privacy.html">Privacy Policy</a>
-        <a class="sidebar-link" href="./legal.html">Legal notice</a>
-      </div>
-    </aside>
+    <!-- Sidebar wird automatisch hier eingefügt -->
 
     <!-- Main area -->
     <div class="main">
@@ -94,8 +69,19 @@
                 <div class="details-name" id="detailsName">Anton Mayer</div>
 
                 <div class="details-actions">
-                  <button class="link-icon" id="editBtn" type="button">✎ <span>Edit</span></button>
-                  <button class="link-icon" id="deleteBtn" type="button">🗑 <span>Delete</span></button>
+                  <button class="link-icon" id="editBtn" type="button" aria-label="Kontakt bearbeiten">
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
+                      <path d="M2 17h3l8.586-8.586-3-3L2 14v3z" stroke="currentColor" stroke-width="2" fill="none"/>
+                      <path d="m16.586 6.414-3-3L15 2l3 3-1.414 1.414z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span>Bearbeiten</span>
+                  </button>
+                  <button class="link-icon" id="deleteBtn" type="button" aria-label="Kontakt löschen">
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
+                      <path d="M3 6h13M8 6V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2m3 0v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h10zM10 11v4M14 11v4" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span>Löschen</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -119,6 +105,7 @@
     </div>
   </div>
 
+  <script src="./JS/sidebar.js"></script>
   <script src="./JS/contacts.js"></script>
 </body>
 </html>
