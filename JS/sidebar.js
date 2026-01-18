@@ -209,9 +209,37 @@ class SidebarComponent {
 // Global sidebar instance
 window.sidebarComponent = new SidebarComponent();
 
+/**
+ * Inline SVG replacement function
+ * Replaces img tags with data-inline-svg attribute with actual SVG elements
+ */
+async function inlineAllSvgs() {
+  const imgs = document.querySelectorAll('.nav-icon img[data-inline-svg]');
+
+  await Promise.all([...imgs].map(async (img) => {
+    try {
+      const res = await fetch(img.src);
+      const svgText = await res.text();
+
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = svgText.trim();
+      const svg = wrapper.querySelector('svg');
+      if (!svg) return;
+
+      svg.style.width = '30px';
+      svg.style.height = '30px';
+
+      img.replaceWith(svg);
+    } catch (e) {
+      console.warn('SVG inline failed:', img.src);
+    }
+  }));
+}
+
 // Auto-initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   window.sidebarComponent.init();
+  inlineAllSvgs();
 });
 
 // Export for module usage
