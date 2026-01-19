@@ -2,18 +2,18 @@
 .header {
   position: fixed;
   top: 0;
-  left: 232px;                 /* Sidebar width */
-  width: calc(100% - 232px);   /* bis ganz rechts */
-  height: 96px;                /* Header height */
-
+  left: var(--sidebar-w);
+  width: calc(100% - var(--sidebar-w));
+  height: var(--header-h);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   z-index: 3000;               /* HÖCHSTER z-index - über allem */               /* Über allem anderen */
+  box-sizing: border-box;
+  overflow: hidden;      /* verhindert, dass irgendwas optisch über 96px hinaussteht */
 }
 
 /* Header title */
