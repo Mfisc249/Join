@@ -10,18 +10,35 @@
     --GlobalLightBlue: #29ABE2;
     --GlobalDarkblue: #091931;
     --CircleBadgeGray: #0C2E621F;
+
+    /* Layout */
+    --sidebar-w: 232px;
+    --header-h: 96px;
 }
 
-/*
- * Sidebar Layout - Global
- * Description: Layout adjustments for sidebar integration across all pages
- */
-.app {
-    margin-left: 232px; /* Sidebar width */
+/* =========================
+   Global App Shell Layout
+   ========================= */
+
+/* Container für Sidebar/Header/Content */
+.app{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.app > *:not(.sidebar) {
-    padding-left: 20px; /* Zusätzlicher Abstand für Hauptinhalt */
+/* DIESE FLÄCHE ist ab jetzt auf jeder Seite der "Canvas" */
+.main{
+    position: fixed !important;
+    left: 232px !important;                 /* Sidebar */
+    top: 96px !important;                   /* Header */
+    width: calc(100vw - 232px) !important;
+    height: calc(100vh - 96px) !important;
+    overflow: hidden !important;            /* Panels/Seiten entscheiden selber wo gescrollt wird */
+    box-sizing: border-box !important;
+    background: #F6F7F8 !important;         /* Hardcoded background */
+    z-index: 1 !important;                  /* Unter Header/Sidebar aber über Body */
 }
 
 /*
@@ -30,7 +47,7 @@
  * Note: Multiple format entries for broad browser support.
  */
 @font-face {
-    font-family: inter;
+    font-family: 'Inter';
     src:
         /* Internet Explorer */
         url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('embedded-opentype'),
@@ -45,11 +62,29 @@
 }
 
 /*
+ * Global Body Font
+ * Description: Sets Inter as default font for entire page
+ */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+    height: 100vh;
+}
+
+html {
+    overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+    height: 100%;
+}
+
+/*
  * Base Font
  * Description: Sets the primary font family for containers.
  */
 .mainFond {
-    font-family: inter;
+    font-family: 'Inter';
 }
 
 .ButtonBlueFilled {
@@ -126,3 +161,4 @@
     background-color: var(--CircleBadgeGray);
 }
 
+/* Cache Buster: Sun Jan 18 22:42:32 CET 2026 */

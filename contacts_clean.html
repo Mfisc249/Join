@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join | Contacts - CLEAN</title>
+
+  <!-- NUR DAS NÖTIGSTE CSS -->
+  <link rel="stylesheet" href="./style/standard.css" />
+  <!-- <link rel="stylesheet" href="./style/sidebar.css" /> -->
+  <!-- <link rel="stylesheet" href="./style/header.css" /> -->
+  <!-- <link rel="stylesheet" href="./style/contacts.css" /> -->
+  
+  <style>
+    /* INLINE CSS NUR FÜR DEN TEST */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 232px;
+      width: calc(100vw - 232px);
+      height: 96px;
+      background: #FFFFFF;
+      border-bottom: 2px solid #ddd;
+      z-index: 3000;                /* HÖCHSTER z-index */
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      font-family: Arial, sans-serif;
+    }
+    
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 232px;
+      height: 100vh;
+      background: #2A3647;
+      color: white;
+      z-index: 1000;                /* UNTER Header */
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    
+    .content {
+      display: grid;
+      grid-template-columns: 456px 1fr;
+      width: 100%;
+      height: 100%;
+      background: #F6F7F8;
+    }
+    
+    .contacts-panel {
+      background: white;
+      padding: 20px;
+    }
+    
+    .details {
+      background: #F6F7F8;
+      padding: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>Kanban Project Management Tool</h1>
+    </div>
+
+    <div class="sidebar">
+      <h2>JOIN</h2>
+      <p>Sidebar Navigation</p>
+    </div>
+
+    <div class="main">
+      <div class="content">
+        <div class="contacts-panel">
+          <h2>Contacts Panel</h2>
+          <p>Dieser Bereich sollte UNTER dem Header beginnen!</p>
+          <div style="height: 600px; background: lightblue; padding: 20px;">
+            <p>Scroll-Test Bereich</p>
+          </div>
+        </div>
+        
+        <div class="details">
+          <h1>Contacts</h1>
+          <div style="height: 3px; width: 59px; background: #29ABE2; margin: 20px 0;"></div>
+          <p>Better with a team</p>
+          <p>Select a contact to see details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

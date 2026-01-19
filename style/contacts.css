@@ -1,297 +1,252 @@
+/* ===============================
+   CONTACTS.CSS (FINAL for App-Shell)
+   Requires:
+   - .main is the fixed content area (handled in standard.css)
+   - Header/Sidebar are fixed templates
+   =============================== */
 
-/* Contacts Page Styles */
-.app {
-  display: flex;
-  min-height: 100vh;
-  background: var(--color-bg);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+/* Page layout inside .main */
+.content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 456px 1fr;
+  overflow: hidden;
+  background: #F6F7F8;
 }
 
-/* Main */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+/* ===============================
+   LEFT PANEL (Contacts list + scrollbar)
+   =============================== */
+
+.contacts-panel {
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 4px 0 6px rgba(0, 0, 0, 0.08);
+
+  /* Panel is the scroll container -> scrollbar on the panel edge */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-/* Header (96px) */
-.header {
-  height: 96px;
-  background: #fff;
-  box-shadow: 0 4px 4px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 40px 20px 40px;
-}
+/* Sticky top bar spans FULL panel width (456px) */
+.contacts-panel-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;                  /* Unter dem globalen Header (2000) */
 
-.header-title {
-  font-size: 20px;
-  line-height: 120%;
-  color: #000;
-}
+  width: 100%;
+  height: 101px;
+  box-sizing: border-box;
+  padding: 0 24px;
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.help-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: transparent;
-  border: 2px solid #A8A8A8;
-  color: #A8A8A8;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.help-btn:hover {
-  border-color: #2A3647;
-  color: #2A3647;
-}
-
-.profile-btn {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 3px solid #2A3647;
-  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
+
+  background: #FFFFFF;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.10);
 }
 
-.profile-btn:hover {
-  background: #f5f5f5;
-}
-
-.profile-initials {
-  color: #29ABE2;
-  font-weight: 700;
-}
-
-.profile-initials {
-  color: #29ABE2;
-  font-weight: 700;
-}
-
-/* Header Buttons */
-.circleBadge {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: transparent;
-  border: 2px solid #A8A8A8;
-  color: #A8A8A8;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.circleBadge:hover {
-  border-color: #2A3647;
-  color: #2A3647;
-}
-
-/* Add Contact Button Alias */
+/* Default: like Figma -> button is 352px centered */
 .ButtonBlueFilled {
+  box-sizing: border-box;
   width: 352px;
   height: 56px;
-  border-radius: 10px;
-  background: #2A3647;
-  color: #fff;
-  font-size: 21px;
-  font-weight: 700;
+  padding: 12px 16px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  border: none;
+
+  background: #2A3647;
+  border: 1px solid #2A3647;
+  border-radius: 10px;
+
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .ButtonBlueFilled:hover {
-  background: #1e2a3a;
+  background: #1a252f;
+  border-color: #1a252f;
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(42, 54, 71, 0.2);
 }
-
-.ButtonBlueFilled:active {
-  transform: translateY(0);
-}
-
-/* Content split */
-.content {
-  display: grid;
-  grid-template-columns: 456px 1fr;
-  min-height: calc(100vh - 96px);
-}
-
-/* Contacts panel */
-.contacts-panel {
-  background: #fff;
-  box-shadow: 4px 0 6px rgba(0,0,0,0.08);
-  overflow: hidden;
-}
-
-.contacts-panel-header {
-  height: 101px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-}
-
-.btn-add-contact {
-  width: 352px;
-  height: 56px;
-  border-radius: 10px;
-  background: #2A3647;
-  color: #fff;
-  font-size: 21px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-add-contact:hover {
-  background: #1e2a3a;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(42, 54, 71, 0.2);
-}
-
-.btn-add-contact:active {
-  transform: translateY(0);
-}
+.ButtonBlueFilled:active { transform: translateY(0); }
 
 .btn-add-icon {
   width: 32px;
   height: 32px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 26px;
-  line-height: 1;
+
+  background: #FFFFFF;
+  border-radius: 50%;
+  color: #2A3647;
+
+  font-size: 24px;
+  font-weight: 700;
 }
 
-/* Scroll list area */
+/* List container (JS renders groups + items into this) */
 .contacts-list {
-  height: calc(100vh - 96px - 101px);
-  overflow-y: auto;
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 16px 24px 32px 24px;
+  box-sizing: border-box;
 }
 
-/* Group header (A, B, D...) */
+/* make all list blocks same width and centered like figma */
+.contacts-list > * {
+  width: 352px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Group header + divider (generated by JS) ===== */
 .group-header {
-  padding: 17px 36px;
+  padding: 17px 36px 8px 36px;
+  font-family: 'Inter', sans-serif;
   font-size: 20px;
-  color: #000;
+  font-weight: 400;
+  line-height: 120%;
+  color: #000000;
 }
 
 .group-divider {
   height: 0;
-  border-top: 1px solid var(--color-border);
-  margin: 8px 0;
+  border-top: 1px solid #D1D1D1;
+  border-radius: 3px;
+  margin: 0 0 10px 0;
 }
 
-/* Contact item */
+/* ===== Contact item (generated by JS) ===== */
 .contact-item {
+  width: 352px;
   height: 78px;
-  border-radius: 10px;
   padding: 15px 24px;
+  box-sizing: border-box;
+
   display: flex;
-  gap: 35px;
   align-items: center;
-  background: #fff;
+  gap: 35px;
+
+  background: #FFFFFF;
+  border-radius: 10px;
+
   cursor: pointer;
-  transition: all 0.2s ease;
-  role: option;
+  transition: background-color 0.2s ease;
+
+  margin-bottom: 10px;
 }
 
 .contact-item:hover {
   background: rgba(42,54,71,0.06);
-  transform: translateX(2px);
-}
-
-.contact-item:focus {
-  outline: 2px solid #29ABE2;
-  outline-offset: -2px;
 }
 
 .contact-item.active {
   background: #2A3647;
-  color: #fff;
-  transform: translateX(4px);
-  box-shadow: 0 2px 8px rgba(42, 54, 71, 0.2);
 }
 
-.contact-item.active .contact-email {
-  color: #fff;
-  opacity: 0.9;
-}
-
+/* THIS is the round initials circle (JS uses .badge) */
 .badge {
   width: 42px;
   height: 42px;
-  border-radius: 45px;
-  border: 2px solid #fff;
-  color: #fff;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #FFFFFF;
+
+  flex: none;
 }
 
+/* text column (JS uses .contact-text) */
 .contact-text {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  min-width: 0;
 }
 
 .contact-name {
+  font-family: 'Inter', sans-serif;
   font-size: 20px;
-  color: #000;
+  font-weight: 400;
+  line-height: 120%;
+  color: #000000;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .contact-email {
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
   color: #007CEE;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.contact-item.active .contact-name {
-  color: #fff;
+/* active colors */
+.contact-item.active .contact-name,
+.contact-item.active .contact-email {
+  color: #FFFFFF;
 }
 
-/* Details area */
+/* ===== Panel scrollbar (Figma-like) ===== */
+.contacts-panel::-webkit-scrollbar { width: 24px; }
+.contacts-panel::-webkit-scrollbar-track { background: #FFFFFF; }
+.contacts-panel::-webkit-scrollbar-thumb {
+  background: #A8A8A8;
+  border-radius: 3px;
+  border: 8px solid #FFFFFF;
+  background-clip: content-box;
+  min-height: 53px;
+}
+.contacts-panel::-webkit-scrollbar-thumb:hover {
+  background: #888;
+  background-clip: content-box;
+}
+.contacts-panel::-webkit-scrollbar-thumb:active {
+  background: #666;
+  background-clip: content-box;
+}
+.contacts-panel {
+  scrollbar-width: thick;
+  scrollbar-color: #A8A8A8 #FFFFFF;
+}
+
+/* ===============================
+   RIGHT AREA (Details)
+   =============================== */
+
 .details {
-  padding: 0 0 0 0;
-  position: relative;
+  height: 100%;
+  background: #F6F7F8;
+  box-sizing: border-box;
+
+  /* Matches the target look (headline sits lower) */
+  padding: 110px 96px 40px 96px;
+
+  overflow: hidden;
 }
 
 .details-headline {
-  position: absolute;
-  left: 280px;
-  top: 110px;
   display: flex;
   align-items: center;
   gap: 30px;
@@ -299,172 +254,43 @@
 
 .details-headline h1 {
   margin: 0;
+  font-family: 'Inter', sans-serif;
   font-size: 61px;
   font-weight: 700;
   line-height: 120%;
-  color: #000;
+  color: #000000;
 }
 
 .details-divider {
+  width: 3px;
   height: 59px;
-  border-left: 3px solid var(--color-accent);
+  background: #29ABE2;
 }
 
 .details-sub {
+  font-family: 'Inter', sans-serif;
   font-size: 27px;
+  font-weight: 400;
   line-height: 120%;
-  color: var(--color-main);
-}
-
-/* Empty/details card */
-.details-empty {
-  padding: 250px 80px 40px 280px;
-  color: rgba(0,0,0,0.55);
-}
-
-.details-card {
-  padding: 250px 80px 40px 280px;
-}
-
-.details-card-top {
-  display: flex;
-  align-items: center;
-  gap: 54px;
-}
-
-.badge-large {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid #fff;
-  background: #FF7A00;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 47px;
-  font-weight: 700;
-}
-
-.details-name {
-  font-size: 47px;
-  font-weight: 700;
-  color: #000;
-}
-
-.details-actions {
-  margin-top: 8px;
-  display: flex;
-  gap: 20px;
-  color: var(--color-main);
-}
-
-.link-icon {
-  border: none;
-  background: transparent;
   color: #2A3647;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
 }
 
-.link-icon:hover {
-  background: rgba(42, 54, 71, 0.1);
-  transform: translateY(-1px);
-}
-
-.link-icon svg {
-  width: 19px;
-  height: 19px;
-  stroke: currentColor;
-}
-
-.details-section-title {
-  margin-top: 40px;
-  font-size: 20px;
-  color: #000;
-}
-
-.details-info {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.info-label {
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.info-link {
-  color: #007CEE;
-  text-decoration: none;
-}
-
-.info-link:hover {
-  text-decoration: underline;
+.details-empty {
+  margin-top: 280px;
+  text-align: center;
+  color: rgba(0,0,0,0.55);
 }
 
 .hidden { display: none !important; }
 
-/* Empty and Error States */
-.empty-contacts,
-.error-message {
-  padding: 40px 24px;
-  text-align: center;
-  color: #666;
-  font-size: 16px;
-}
-
-.error-message {
-  color: #ff4444;
-  background: #fff5f5;
-  border: 1px solid #ffcccc;
-  border-radius: 8px;
-  margin: 16px;
-}
-
-.empty-contacts {
-  font-style: italic;
-}
-
-/* Loading state */
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  color: #666;
-}
-
-/* Responsive (min 320px, keine horizontal scroll) */
+/* ===============================
+   Responsive
+   =============================== */
 @media (max-width: 1100px) {
-  .header { padding-left: 40px; margin-left: 232px; }
-  .details-headline { left: 40px; }
-  .details-empty, .details-card { padding-left: 40px; }
-  .btn-add-contact { width: 300px; }
+  .details { padding: 90px 48px 40px 48px; }
 }
 
 @media (max-width: 900px) {
   .content { grid-template-columns: 1fr; }
-  .contacts-panel { box-shadow: none; }
-  .details { display: none; } /* mobile: erstmal nur Liste (später: eigenes mobile details view) */
-  .header { padding-left: 24px; margin-left: 0; }
-  .main { margin-left: 0; }
-  .btn-add-contact { width: calc(100% - 48px); font-size: 18px; }
-}
-
-@media (max-width: 600px) {
-  .header-title { font-size: 18px; }
-  .contacts-list { padding: 16px 12px; }
-  .contact-item { height: 70px; padding: 12px 16px; gap: 20px; }
-  .contact-name { font-size: 18px; }
-  .contact-email { font-size: 14px; }
-  .badge { width: 38px; height: 38px; font-size: 14px; }
+  .details { display: none; }
 }

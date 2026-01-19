@@ -39,13 +39,18 @@ class SidebarComponent {
       }
       const sidebarHTML = await response.text();
       
-      // Insert sidebar at the beginning of body or app container
+      // Insert sidebar at the beginning of body or app container, but before .main
       const appContainer = document.querySelector('.app') || document.body;
+      const mainElement = document.querySelector('.main');
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = sidebarHTML;
       
-      // Insert sidebar as first child
-      appContainer.insertBefore(tempDiv.firstElementChild, appContainer.firstChild);
+      // Insert sidebar before .main if it exists, otherwise as first child
+      if (mainElement && appContainer.contains(mainElement)) {
+        appContainer.insertBefore(tempDiv.firstElementChild, mainElement);
+      } else {
+        appContainer.insertBefore(tempDiv.firstElementChild, appContainer.firstChild);
+      }
       
       // Add mobile toggle button and overlay
       this.addMobileElements();

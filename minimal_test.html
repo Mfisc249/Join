@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MINIMAL LAYOUT TEST</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    
+    .header {
+      position: fixed !important;
+      top: 0 !important;
+      left: 232px !important;
+      width: calc(100vw - 232px) !important;
+      height: 96px !important;
+      background: blue !important;
+      color: white !important;
+      z-index: 2000 !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 0 20px !important;
+      border: 3px solid red !important;
+    }
+    
+    .sidebar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 232px !important;
+      height: 100vh !important;
+      background: #2A3647 !important;
+      color: white !important;
+      z-index: 1001 !important;
+      padding: 20px !important;
+      border: 3px solid yellow !important;
+    }
+    
+    .main {
+      position: fixed !important;
+      left: 232px !important;
+      top: 96px !important;
+      width: calc(100vw - 232px) !important;
+      height: calc(100vh - 96px) !important;
+      background: lime !important;
+      z-index: 1 !important;
+      padding: 20px !important;
+      border: 3px solid purple !important;
+      overflow: auto !important;
+    }
+    
+    .content {
+      background: orange !important;
+      padding: 20px !important;
+      height: 200px !important;
+      border: 2px solid black !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>HEADER (BLAU) - SOLLTE GANZ OBEN SEIN</h1>
+  </div>
+
+  <div class="sidebar">
+    <h2>SIDEBAR</h2>
+    <p>Links fixiert</p>
+  </div>
+
+  <div class="main">
+    <h1>MAIN BEREICH (GRÜN)</h1>
+    <p>Dieser Bereich sollte bei top: 96px starten und NICHT unter dem blauen Header sein!</p>
+    
+    <div class="content">
+      <h2>CONTENT (ORANGE)</h2>
+      <p>Wenn du den blauen Header siehst, und darunter direkt diesen grünen MAIN Bereich (ohne Überlappung), dann funktioniert das Layout!</p>
+    </div>
+    
+    <div style="height: 1000px; background: pink; margin-top: 20px; padding: 20px;">
+      <h3>SCROLL-TEST BEREICH</h3>
+      <p>Dieser Bereich ist sehr hoch zum Testen des Scrollens. Wenn du scrollst, sollte der blaue Header oben bleiben!</p>
+    </div>
+  </div>
+</body>
+</html>

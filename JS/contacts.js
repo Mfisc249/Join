@@ -363,6 +363,16 @@ function getDemoContacts() {
     },
     { 
       id: 'c3', 
+      name: 'Anna Weber', 
+      email: 'anna.weber@gmail.com', 
+      phone: '+49 2333 333 33 3', 
+      initials: 'AW', 
+      color: '#6E52FF',
+      createdAt: new Date('2024-01-17').toISOString(),
+      updatedAt: new Date('2024-01-17').toISOString()
+    },
+    { 
+      id: 'c4', 
       name: 'Benedikt Ziegler', 
       email: 'benedikt@gmail.com', 
       phone: '+49 3333 333 33 3', 
@@ -372,7 +382,7 @@ function getDemoContacts() {
       updatedAt: new Date('2024-01-17').toISOString()
     },
     { 
-      id: 'c4', 
+      id: 'c5', 
       name: 'David Eisenberg', 
       email: 'davidberg@gmail.com', 
       phone: '+49 4444 444 44 4', 
@@ -382,7 +392,7 @@ function getDemoContacts() {
       updatedAt: new Date('2024-01-18').toISOString()
     },
     { 
-      id: 'c5', 
+      id: 'c6', 
       name: 'Eva Fischer', 
       email: 'eva@gmail.com', 
       phone: '+49 5555 555 55 5', 
@@ -392,7 +402,7 @@ function getDemoContacts() {
       updatedAt: new Date('2024-01-19').toISOString()
     },
     { 
-      id: 'c6', 
+      id: 'c7', 
       name: 'Emmanuel Mauer', 
       email: 'emmanuelma@gmail.com', 
       phone: '+49 6666 666 66 6', 
@@ -401,5 +411,135 @@ function getDemoContacts() {
       createdAt: new Date('2024-01-20').toISOString(),
       updatedAt: new Date('2024-01-20').toISOString()
     },
+    { 
+      id: 'c8', 
+      name: 'Felix Müller', 
+      email: 'felix.mueller@gmail.com', 
+      phone: '+49 7777 777 77 7', 
+      initials: 'FM', 
+      color: '#462F8A',
+      createdAt: new Date('2024-01-21').toISOString(),
+      updatedAt: new Date('2024-01-21').toISOString()
+    },
+    { 
+      id: 'c9', 
+      name: 'Greta Schmidt', 
+      email: 'greta@gmail.com', 
+      phone: '+49 8888 888 88 8', 
+      initials: 'GS', 
+      color: '#FF4646',
+      createdAt: new Date('2024-01-22').toISOString(),
+      updatedAt: new Date('2024-01-22').toISOString()
+    },
+    { 
+      id: 'c10', 
+      name: 'Hans Wagner', 
+      email: 'hans.wagner@gmail.com', 
+      phone: '+49 9999 999 99 9', 
+      initials: 'HW', 
+      color: '#FF7A00',
+      createdAt: new Date('2024-01-23').toISOString(),
+      updatedAt: new Date('2024-01-23').toISOString()
+    },
+    { 
+      id: 'c11', 
+      name: 'Iris Becker', 
+      email: 'iris.becker@gmail.com', 
+      phone: '+49 1010 101 01 0', 
+      initials: 'IB', 
+      color: '#9327FF',
+      createdAt: new Date('2024-01-24').toISOString(),
+      updatedAt: new Date('2024-01-24').toISOString()
+    },
+    { 
+      id: 'c12', 
+      name: 'Jan Hoffmann', 
+      email: 'jan.hoffmann@gmail.com', 
+      phone: '+49 1111 101 11 1', 
+      initials: 'JH', 
+      color: '#6E52FF',
+      createdAt: new Date('2024-01-25').toISOString(),
+      updatedAt: new Date('2024-01-25').toISOString()
+    },
+    { 
+      id: 'c13', 
+      name: 'Klaus Weber', 
+      email: 'klaus.weber@gmail.com', 
+      phone: '+49 1212 121 21 2', 
+      initials: 'KW', 
+      color: '#FC71FF',
+      createdAt: new Date('2024-01-26').toISOString(),
+      updatedAt: new Date('2024-01-26').toISOString()
+    },
+    { 
+      id: 'c14', 
+      name: 'Lisa Neumann', 
+      email: 'lisa.neumann@gmail.com', 
+      phone: '+49 1313 131 31 3', 
+      initials: 'LN', 
+      color: '#FFBB2B',
+      createdAt: new Date('2024-01-27').toISOString(),
+      updatedAt: new Date('2024-01-27').toISOString()
+    },
+    { 
+      id: 'c15', 
+      name: 'Martin Klein', 
+      email: 'martin.klein@gmail.com', 
+      phone: '+49 1414 141 41 4', 
+      initials: 'MK', 
+      color: '#1FD7C1',
+      createdAt: new Date('2024-01-28').toISOString(),
+      updatedAt: new Date('2024-01-28').toISOString()
+    },
+    { 
+      id: 'c16', 
+      name: 'Nina Richter', 
+      email: 'nina.richter@gmail.com', 
+      phone: '+49 1515 151 51 5', 
+      initials: 'NR', 
+      color: '#462F8A',
+      createdAt: new Date('2024-01-29').toISOString(),
+      updatedAt: new Date('2024-01-29').toISOString()
+    },
+    { 
+      id: 'c17', 
+      name: 'Oliver Koch', 
+      email: 'oliver.koch@gmail.com', 
+      phone: '+49 1616 161 61 6', 
+      initials: 'OK', 
+      color: '#FF4646',
+      createdAt: new Date('2024-01-30').toISOString(),
+      updatedAt: new Date('2024-01-30').toISOString()
+    },
+    { 
+      id: 'c18', 
+      name: 'Petra Wolf', 
+      email: 'petra.wolf@gmail.com', 
+      phone: '+49 1717 171 71 7', 
+      initials: 'PW', 
+      color: '#FF7A00',
+      createdAt: new Date('2024-01-31').toISOString(),
+      updatedAt: new Date('2024-01-31').toISOString()
+    },
+    { 
+      id: 'c19', 
+      name: 'Thomas Schreiber', 
+      email: 'thomas.schreiber@gmail.com', 
+      phone: '+49 1818 181 81 8', 
+      initials: 'TS', 
+      color: '#9327FF',
+      createdAt: new Date('2024-02-01').toISOString(),
+      updatedAt: new Date('2024-02-01').toISOString()
+    },
+    { 
+      id: 'c20', 
+      name: 'Ursula Braun', 
+      email: 'ursula.braun@gmail.com', 
+      phone: '+49 1919 191 91 9', 
+      initials: 'UB', 
+      color: '#6E52FF',
+      createdAt: new Date('2024-02-02').toISOString(),
+      updatedAt: new Date('2024-02-02').toISOString()
+    }
   ];
 }

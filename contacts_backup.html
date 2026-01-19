@@ -9,48 +9,13 @@
   <link rel="stylesheet" href="./style/sidebar.css" />
   <link rel="stylesheet" href="./style/header.css" />
   <link rel="stylesheet" href="./style/contacts.css" />
-  <!-- Layout-Fix CSS als letztes laden -->
-  <link rel="stylesheet" href="./style/layout-fix.css" />
 </head>
 
 <body>
   <div class="app">
-    <!-- STATISCHER HEADER -->
-    <header class="header">
-      <div class="header-title">Kanban Project Management Tool</div>
-      <div class="header-right">
-        <div class="header-profile">
-          <div class="profile-circle">
-            <div class="profile-initials">EM</div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <!-- Header wird automatisch hier eingefügt -->
     
-    <!-- STATISCHE SIDEBAR -->
-    <nav class="sidebar">
-      <div class="sidebar-top">
-        <img src="./assets/img/logoside.svg" alt="Join Logo" class="sidebar-logo">
-      </div>
-      <div class="nav">
-        <a href="summary.html" class="nav-item">
-          <img src="./assets/img/summary.svg" alt="" class="nav-icon">
-          <span>Summary</span>
-        </a>
-        <a href="add_task.html" class="nav-item">
-          <img src="./assets/img/addtask.png" alt="" class="nav-icon">
-          <span>Add Task</span>
-        </a>
-        <a href="board.html" class="nav-item">
-          <img src="./assets/img/board.png" alt="" class="nav-icon">
-          <span>Board</span>
-        </a>
-        <a href="contacts.html" class="nav-item active">
-          <img src="./assets/img/contacts.svg" alt="" class="nav-icon">
-          <span>Contacts</span>
-        </a>
-      </div>
-    </nav>
+    <!-- Sidebar wird automatisch hier eingefügt -->
 
     <!-- Main area -->
     <div class="main">
@@ -128,7 +93,8 @@
     </div>
   </div>
 
-
+  <script src="./JS/header.js"></script>
+  <script src="./JS/sidebar.js"></script>
   <script src="./JS/contacts.js"></script>
 </body>
 </html>

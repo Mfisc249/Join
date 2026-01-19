@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join | Contacts TEST</title>
+
+  <link rel="stylesheet" href="./style/standard.css" />
+  <link rel="stylesheet" href="./style/sidebar.css" />
+  <link rel="stylesheet" href="./style/header.css" />
+  <link rel="stylesheet" href="./style/contacts.css" />
+  
+  <style>
+    /* DEBUG CSS - DIREKT EINGEFÜGT */
+    .main {
+      position: fixed !important;
+      left: 232px !important;
+      top: 96px !important; 
+      width: calc(100vw - 232px) !important;
+      height: calc(100vh - 96px) !important;
+      background: red !important; /* Rot für Debugging */
+      z-index: 999 !important;
+    }
+    
+    .header {
+      background: blue !important; /* Blau für Debugging */
+      z-index: 2000 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <!-- STATISCHER HEADER (kein Template) -->
+    <div class="header">
+      <div class="header-title">Kanban Project Management Tool</div>
+      <div class="header-right">
+        <span>EM</span>
+      </div>
+    </div>
+    
+    <!-- STATISCHE SIDEBAR (kein Template) -->
+    <div class="sidebar">
+      <div>JOIN</div>
+      <nav>
+        <a href="#">Summary</a>
+        <a href="#">Add Task</a>
+        <a href="#">Board</a>
+        <a href="#">Contacts</a>
+      </nav>
+    </div>
+
+    <!-- MAIN AREA -->
+    <div class="main">
+      <h1 style="color: white; padding: 20px;">MAIN BEREICH - SOLLTE ROT SEIN UND BEI 96PX TOP STARTEN</h1>
+      
+      <!-- Content layout -->
+      <div class="content">
+        <div style="background: yellow; padding: 20px;">
+          <h2>CONTENT BEREICH</h2>
+          <p>Dieser Bereich sollte unter dem blauen Header beginnen</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 232px;                 /* Sidebar width */
+  width: calc(100% - 232px);   /* bis ganz rechts */
+  height: 96px;                /* Header height */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  z-index: 3000;               /* HÖCHSTER z-index - über allem */               /* Über allem anderen */
+}
+
+/* Header title */
+.header-title {
+  margin: 0 auto;
+  width: 319px;
+  height: 24px;
+  
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  color: #000000;
+  
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Header right section */
+.header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  
+  margin: 0 auto;
+  width: 104px;
+  height: 56px;
+  
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Help button */
+.header-help-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.header-icon {
+  width: 100%;
+  height: 100%;
+}
+
+/* Profile button */
+.header-profile-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Profile circle container */
+.profile-circle {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  
+  border: 3px solid #2A3647;
+  border-radius: 50%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Profile circle background */
+.profile-circle::before {
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  left: calc(50% - 48px/2);
+  top: calc(50% - 48px/2);
+  
+  background: #FFFFFF;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Profile initials */
+.profile-initials {
+  width: 27.94px;
+  height: 14.24px;
+  
+  background: #29ABE2;
+  color: #FFFFFF;
+  
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
