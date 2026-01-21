@@ -294,3 +294,775 @@
   .content { grid-template-columns: 1fr; }
   .details { display: none; }
 }
+
+/* ===== Modal ===== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+}
+
+.modal {
+  width: min(520px, calc(100% - 32px));
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-form { display: grid; gap: 12px; }
+
+.form-row { display: grid; gap: 6px; }
+
+.form-row input {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  padding: 0 12px;
+  outline: none;
+}
+
+.field-error {
+  min-height: 16px;
+  font-size: 12px;
+  color: #d11;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.btn-primary, .btn-secondary {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary { background: #2A3647; color: #fff; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary { background: #F6F7F8; color: #2A3647; border: 1px solid #D1D1D1; }
+
+/* ===== Overlay (Edit/Add Contact) ===== */
+.d-none { display: none !important; }
+
+.contact-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.contact-modal {
+  width: 1212px;
+  max-width: calc(100% - 32px);
+  height: 592px;
+  max-height: calc(100% - 32px);
+  background: #FFFFFF;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+}
+
+/* LEFT */
+.contact-modal-left {
+  width: 453px;
+  height: 594px;
+  background: #2A3647;
+  padding: 40px 46px 66px 46px;  /* Top padding reduziert von 66px auf 40px */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Logo Position wie Figma */
+.contact-modal-brand {
+  position: absolute;
+  top: 170px;  /* Nach oben - näher zu Edit contact */
+  left: 46px;
+}
+
+.contact-modal-logo {
+  width: 56px;
+  height: 66px;
+  object-fit: contain;
+  display: block;
+}
+
+.contact-modal-left-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 361px;
+}
+
+.contact-modal-title {
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 120%;
+  color: #FFFFFF;
+  width: 361px;
+  height: 89px;
+  gap: 16px;
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.contact-modal-divider {
+  width: 90px;
+  height: 0;
+  border-top: 3px solid #29ABE2;
+}
+
+/* Subtitle (nur Add contact) */
+.contact-modal-subtitle {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 120%;
+  color: #FFFFFF;
+  opacity: 0.95;
+}
+
+/* RIGHT */
+.contact-modal-right {
+  flex: 1;
+  position: relative;
+  background: #fff;
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 48px;
+  right: 48px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #2A3647;
+  border-radius: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 1000;           /* Hoher z-index damit Button über allem liegt */
+  pointer-events: auto;    /* Sicherstellen dass Button klickbar ist */
+}
+
+.contact-modal-close img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.contact-modal-close:hover {
+  background: rgba(42, 54, 71, 0.08);
+}
+
+.contact-modal-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Kein Grid mehr - absolute Positionierung für direkte Kontrolle */
+}
+
+.contact-modal-avatar-wrap {
+  position: absolute;
+  top: 220px;      /* Weiter nach unten */
+  left: 60px;      /* Weit links */
+  display: flex;
+  justify-content: center;
+}
+
+/* Avatar mit Icon für Add-Modus */
+.contact-modal-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 70px;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FF7A00; /* Default Figma color */
+  position: relative;
+}
+
+.contact-modal-avatar span {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 47px;
+  line-height: 120%;
+  color: #FFFFFF;
+  width: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Avatar icon (für Add) */
+.contact-modal-avatar-icon {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  opacity: 0.8;
+}
+
+.contact-modal-form {
+  position: absolute;
+  top: 140px;      /* Gleiche Höhe wie Avatar */
+  left: 240px;     /* Links von Avatar + Avatar-Breite + Gap */
+  width: 380px;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-input {
+  width: 380px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  box-sizing: border-box;
+}
+
+.contact-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  background: transparent;
+  padding: 0;
+  color: #000000;
+  margin: 0;
+}
+
+.contact-input:focus-within {
+  border: 1px solid #29ABE2;
+}
+
+/* Icons: wirklich SVG anzeigen (keine grauen Kästchen) */
+.contact-input-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+  opacity: 0.7;
+  margin-left: 12px;
+  filter: none;              /* WICHTIG: falls du irgendwo filter gesetzt hast */
+}
+
+.modal-error {
+  min-height: 16px;
+  font-size: 12px;
+  color: #d11;
+  margin: 2px 0 6px 0;
+}
+
+.contact-modal-actions {
+  position: absolute;
+  bottom: 100px;    /* Höher - von 60px auf 80px */
+  left: 240px;     /* Gleiche X-Position wie Form */
+  display: flex;
+  gap: 25px;
+}
+
+.btn-secondary-outline {
+  width: 113px;
+  height: 55px;
+  background: #FFFFFF;
+  border: 1px solid #2A3647;
+  border-radius: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #2A3647;
+  cursor: pointer;
+  padding: 15px 24px;
+  box-sizing: border-box;
+}
+
+.btn-primary-dark {
+  width: 111px;
+  height: 57px;
+  background: #2A3647;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.btn-primary-dark:disabled,
+.btn-secondary-outline:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .contact-modal {
+    width: min(900px, calc(100% - 24px));
+    height: min(720px, calc(100% - 24px));
+    flex-direction: column;
+  }
+
+  .contact-modal-left {
+    width: 100%;
+    padding: 40px 24px;
+  }
+
+  .contact-modal-title { font-size: 48px; }
+
+  .contact-modal-right {
+    padding: 24px;
+  }
+
+  .contact-modal-body {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    justify-items: center;
+  }
+
+  .contact-modal-form {
+    width: min(422px, 100%);
+  }
+}
+
+/* ===== Fix: wenn das Modal schrumpft, absolute X-Positionen zentrieren ===== */
+@media (max-width: 1300px) {
+  .contact-modal-body {
+    padding-left: 120px; /* weniger als 289, damit nix abgeschnitten wird */
+  }
+}
+
+@media (max-width: 1280px) {
+  /* rechter Bereich ist dann oft zu schmal für left:289 + width:422 */
+  .contact-modal-form {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .contact-modal-actions {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Avatar auch etwas mehr Richtung Mitte, damit es wie Figma wirkt */
+  .contact-modal-avatar-wrap {
+    left: 120px; /* war 97px – bisschen nach rechts für schmale Layouts */
+  }
+
+  .contact-modal-right {
+    overflow: hidden; /* verhindert hässliche Scrollbars */
+  }
+
+  .contact-modal-form,
+  .contact-input {
+    max-width: calc(100% - 48px);
+    width: min(422px, calc(100% - 48px));
+  }
+
+  .contact-input input {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .contact-modal-body {
+    grid-template-columns: 1fr;
+    padding-left: 48px;
+    justify-items: center;
+  }
+
+  .contact-modal-avatar-wrap {
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .contact-modal-form,
+  .contact-input {
+    width: 422px;
+  }
+}
+
+/* ===== CONTACT DETAILS PANEL (FIGMA SPEZIFIKATION) ===== */
+
+/* Floating contact v2 - Hauptcontainer */
+.details-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 21px;
+  position: relative;
+  width: 461px;
+  height: 364px;
+  margin-top: 40px;  /* Weiter nach unten von "Contacts Better with a team" */
+}
+
+/* Frame 105 - Avatar + Name + Actions */
+.details-card-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 54px;
+  width: 461px;
+  height: 120px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Frame 79 - Avatar Container */
+.badge-large {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 120px;
+  height: 120px;
+  background: #FF7A00;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 70px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  
+  /* AM Initials */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 47px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* Frame 104 - Name + Actions Container */
+.details-name-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 25px;        /* Mehr gap von 8px auf 25px für mehr Abstand */
+  width: 400px;     /* Erhöht von 287px auf 400px */
+  height: 105px;    /* Höhe angepasst wegen mehr gap */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Anton Mayer - Name */
+.details-name {
+  width: 400px;           /* Erhöht von 287px auf 400px für längere Namen */
+  height: 56px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;        /* Reduziert von 47px auf 32px */
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  white-space: nowrap;    /* Verhindert Zeilenumbruch */
+  overflow: hidden;       /* Falls Text zu lang */
+  text-overflow: ellipsis; /* Zeigt ... bei langem Text */
+}
+
+/* Frame 204 - Edit/Delete Actions */
+.details-actions {
+  width: 159px;
+  height: 24px;
+  position: relative;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Edit Button */
+.details-actions .link-icon:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;  /* Links ausrichten */
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  position: absolute;
+  width: 70px;       /* Breiter für "Edit" Text */
+  height: 24px;
+  left: 0px;
+  top: 0px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.details-actions .link-icon:first-child img {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.details-actions .link-icon:first-child span {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #2A3647;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Delete Button */
+.details-actions .link-icon:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;  /* Links ausrichten */
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  position: absolute;
+  width: 90px;       /* Breiter für "Delete" Text */
+  height: 24px;
+  right: 0px;
+  top: 0px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.details-actions .link-icon:last-child img {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.details-actions .link-icon:last-child span {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #2A3647;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Contact Information Title */
+.details-section-title {
+  width: 207px;
+  height: 74px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Frame 101 - Info Container */
+.details-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 22px;
+  width: 149px;
+  height: 128px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+/* Email Block */
+.info-block:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+  width: 149px;
+  height: 53px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.info-block:first-child .info-label {
+  width: 43px;
+  height: 19px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.info-block:first-child .info-link {
+  width: 149px;
+  height: 19px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #007CEE;
+  text-decoration: none;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Phone Block */
+.info-block:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+  width: 124px;
+  height: 53px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.info-block:last-child .info-label {
+  width: 50px;
+  height: 19px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.info-block:last-child .info-value {
+  width: 124px;
+  height: 19px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Hidden state */
+.details-card.hidden {
+  display: none;
+}

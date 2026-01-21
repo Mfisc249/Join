@@ -1,14 +1,18 @@
 'use strict';
 
-// Firebase configuration (später zu verwenden)
-const FIREBASE_CONFIG = {
-  // Hier später Firebase-Konfiguration einfügen
-};
+// Firebase configuration
+const DB_URL = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app'; // endet ohne slash
+const CONTACTS_PATH = '/Contacts';
+const TASKS_PATH = '/Tasks';
 
 // State Management
 let contacts = [];
 let selectedContactId = null;
 let isInitialized = false;
+
+// Modal State
+let contactModalMode = 'edit'; // 'edit' | 'add'
+let contactModalContactId = null;
 
 document.addEventListener('DOMContentLoaded', initContacts);
 
@@ -16,12 +20,12 @@ async function initContacts() {
   if (isInitialized) return;
   
   try {
-    // Später: Firebase-Kontakte laden
-    // contacts = await loadContactsFromFirebase();
-    contacts = getDemoContacts();
+    contacts = await loadContactsFromFirebase();
+    if (!contacts.length) contacts = getDemoContacts(); // optional für ersten Start
     
     renderContactsList(contacts);
     setupEventListeners();
+    setupContactModalListeners();
     
     isInitialized = true;
   } catch (error) {
@@ -215,47 +219,58 @@ function selectContact(contact, element) {
 
 // Action Functions
 function onAddContact() {
-  console.log('Neuen Kontakt hinzufügen');
-  // TODO: Modal öffnen für neuen Kontakt
-  // TODO: Firebase Integration für neuen Kontakt
-  showNotImplementedMessage('Kontakt hinzufügen');
+  openContactModal('add');
 }
 
 function onEditContact() {
-  if (!selectedContactId) {
-    showErrorMessage('Kein Kontakt ausgewählt.');
-    return;
-  }
-  
+  if (!selectedContactId) return showErrorMessage('Kein Kontakt ausgewählt.');
+
   const contact = contacts.find(c => c.id === selectedContactId);
-  if (!contact) {
-    showErrorMessage('Kontakt nicht gefunden.');
-    return;
-  }
-  
-  console.log('Kontakt bearbeiten:', contact);
-  // TODO: Modal öffnen mit vorausgefüllten Daten
-  // TODO: Firebase Integration für Kontakt-Update
-  showNotImplementedMessage('Kontakt bearbeiten');
+  if (!contact) return showErrorMessage('Kontakt nicht gefunden.');
+
+  openContactModal('edit', contact);
 }
 
-function onDeleteContact() {
+async function onDeleteContact() {
   if (!selectedContactId) {
     showErrorMessage('Kein Kontakt ausgewählt.');
     return;
   }
-  
+
   const contact = contacts.find(c => c.id === selectedContactId);
   if (!contact) {
     showErrorMessage('Kontakt nicht gefunden.');
     return;
   }
-  
-  if (confirm(`Möchten Sie den Kontakt "${contact.name}" wirklich löschen?`)) {
-    console.log('Kontakt löschen:', contact);
-    // TODO: Aus Firebase löschen
-    // TODO: Aus Tasks entfernen (Akzeptanzkriterium)
-    showNotImplementedMessage('Kontakt löschen');
+
+  if (!confirm(`Möchten Sie den Kontakt "${contact.name}" wirklich löschen?`)) return;
+
+  try {
+    setDetailsButtonsLoading(true);
+
+    // 1) Kontakt in Firebase löschen
+    await deleteContactFromFirebase(contact.id);
+
+    // 2) Kontakt aus Tasks entfernen (Akzeptanzkriterium US4)
+    await removeContactFromAllTasks(contact.id);
+
+    // 3) lokaler State + UI
+    contacts = contacts.filter(c => c.id !== contact.id);
+    selectedContactId = null;
+
+    renderContactsList(contacts);
+
+    // Details rechts wieder in "leer" setzen
+    const detailsEmpty = document.getElementById('detailsEmpty');
+    const detailsCard = document.getElementById('detailsCard');
+    if (detailsCard) detailsCard.classList.add('hidden');
+    if (detailsEmpty) detailsEmpty.classList.remove('hidden');
+
+  } catch (err) {
+    console.error(err);
+    alert('Kontakt konnte nicht gelöscht werden.');
+  } finally {
+    setDetailsButtonsLoading(false);
   }
 }
 
@@ -263,28 +278,424 @@ function showNotImplementedMessage(feature) {
   alert(`${feature} ist noch nicht implementiert. Wird mit Firebase-Integration hinzugefügt.`);
 }
 
-// Firebase Functions (Placeholder)
-async function loadContactsFromFirebase() {
-  // TODO: Firebase Integration
-  throw new Error('Firebase noch nicht konfiguriert');
+// Modal Functions
+function openContactModal(mode, contact = null) {
+  contactModalMode = mode;
+  contactModalContactId = contact ? contact.id : null;
+
+  const title = document.getElementById('contactModalTitle');
+  const subtitle = document.getElementById('contactModalSubtitle');
+
+  const deleteBtn = document.getElementById('contactModalDeleteBtn'); // wird bei Add als Cancel benutzt
+  const saveText = document.getElementById('contactModalSaveText');
+
+  const avatar = document.getElementById('contactModalAvatar');
+  const initialsEl = document.getElementById('contactModalInitials');
+  const avatarIcon = document.getElementById('contactModalAvatarIcon');
+
+  const nameEl = document.getElementById('modalName');
+  const emailEl = document.getElementById('modalEmail');
+  const phoneEl = document.getElementById('modalPhone');
+
+  clearModalErrors();
+
+  if (mode === 'add') {
+    title.textContent = 'Add contact';
+    subtitle.classList.remove('d-none');
+
+    // Button links: Cancel ✕
+    deleteBtn.classList.remove('d-none');
+    deleteBtn.textContent = 'Cancel ✕';
+    deleteBtn.onclick = closeContactModal;
+
+    // Button rechts
+    saveText.textContent = 'Create contact';
+
+    // Inputs leer
+    nameEl.value = '';
+    emailEl.value = '';
+    phoneEl.value = '';
+
+    // Avatar grau + Person-Icon
+    avatar.style.background = '#D1D1D1';
+    initialsEl.classList.add('d-none');
+    avatarIcon.classList.remove('d-none');
+
+  } else {
+    title.textContent = 'Edit contact';
+    subtitle.classList.add('d-none');
+
+    // Button links: Delete
+    deleteBtn.classList.remove('d-none');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.onclick = onDeleteFromModal;
+
+    saveText.textContent = 'Save';
+
+    // Inputs füllen
+    nameEl.value = contact?.name || '';
+    emailEl.value = contact?.email || '';
+    phoneEl.value = contact?.phone || '';
+
+    // Avatar farbig + Initials
+    const initials = generateInitials(contact?.name || '');
+    initialsEl.textContent = initials;
+
+    initialsEl.classList.remove('d-none');
+    avatarIcon.classList.add('d-none');
+
+    avatar.style.background = contact?.color || generateRandomColor();
+  }
+
+  document.getElementById('contactOverlay').classList.remove('d-none');
+  setTimeout(() => nameEl.focus(), 0);
 }
 
-async function saveContactToFirebase(contact) {
-  // TODO: Firebase Integration
-  console.log('Speichere Kontakt in Firebase:', contact);
+function closeContactModal() {
+  document.getElementById('contactOverlay').classList.add('d-none');
+  contactModalContactId = null;
+  contactModalMode = 'edit';
+}
+
+function clearModalErrors() {
+  document.getElementById('modalErrName').textContent = '';
+  document.getElementById('modalErrEmail').textContent = '';
+  document.getElementById('modalErrPhone').textContent = '';
+}
+
+function showModalErrors(errors) {
+  // sehr simple Zuordnung
+  for (const msg of errors) {
+    const low = msg.toLowerCase();
+    if (low.includes('name')) document.getElementById('modalErrName').textContent = msg;
+    if (low.includes('mail') || low.includes('e-mail')) document.getElementById('modalErrEmail').textContent = msg;
+    if (low.includes('telefon') || low.includes('phone')) document.getElementById('modalErrPhone').textContent = msg;
+  }
+}
+
+function setupContactModalListeners() {
+  const overlay = document.getElementById('contactOverlay');
+  const closeBtn = document.getElementById('contactModalClose');
+  const form = document.getElementById('contactModalForm');
+  const deleteBtn = document.getElementById('contactModalDeleteBtn');
+
+  // Close Button - mehrere Methoden für maximale Kompatibilität
+  if (closeBtn) {
+    if (!closeBtn.dataset.listenerAdded) {
+      closeBtn.addEventListener('click', closeContactModal);
+      closeBtn.onclick = closeContactModal; // Zusätzlicher onclick Handler
+      closeBtn.dataset.listenerAdded = 'true';
+    }
+  }
+
+  // Klick auf Overlay (außerhalb Modal) schließt
+  if (overlay && !overlay.dataset.listenerAdded) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeContactModal();
+    });
+    overlay.dataset.listenerAdded = 'true';
+  }
+
+  if (form && !form.dataset.listenerAdded) {
+    form.addEventListener('submit', onSubmitContactModal);
+    form.dataset.listenerAdded = 'true';
+  }
+
+  if (deleteBtn && !deleteBtn.dataset.listenerAdded) {
+    deleteBtn.addEventListener('click', onDeleteFromModal);
+    deleteBtn.dataset.listenerAdded = 'true';
+  }
+
+  // ESC schließt
+  if (!document.body.dataset.modalEsc) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !document.getElementById('contactOverlay').classList.contains('d-none')) {
+        closeContactModal();
+      }
+    });
+    document.body.dataset.modalEsc = 'true';
+  }
+}
+
+async function onSubmitContactModal(e) {
+  e.preventDefault();
+
+  const saveBtn = document.getElementById('contactModalSaveBtn');
+  const deleteBtn = document.getElementById('contactModalDeleteBtn');
+  saveBtn.disabled = true;
+  deleteBtn.disabled = true;
+
+  try {
+    clearModalErrors();
+
+    const draft = {
+      name: document.getElementById('modalName').value.trim(),
+      email: document.getElementById('modalEmail').value.trim(),
+      phone: document.getElementById('modalPhone').value.trim(),
+    };
+
+    const validation = validateContact(draft);
+    if (!validation.isValid) {
+      showModalErrors(validation.errors);
+      saveBtn.disabled = false;
+      deleteBtn.disabled = false;
+      return;
+    }
+
+    const now = new Date().toISOString();
+
+    if (contactModalMode === 'edit') {
+      const patch = {
+        ...draft,
+        initials: generateInitials(draft.name),
+        updatedAt: now
+      };
+
+      await updateContactInFirebase(contactModalContactId, patch);
+    } else {
+      // add: nutzt deine bestehende saveNewContact() / oder die PUT-Variante mit cX
+      await saveNewContact({
+        ...draft,
+        initials: generateInitials(draft.name),
+        color: generateRandomColor(),
+        createdAt: now,
+        updatedAt: now
+      });
+    }
+
+    // neu laden & UI updaten
+    contacts = await loadContactsFromFirebase();
+    renderContactsList(contacts);
+
+    // falls edit: wieder auswählen (Details rechts aktualisieren)
+    if (contactModalMode === 'edit') {
+      const updated = contacts.find(c => c.id === contactModalContactId);
+      const item = document.querySelector(`.contact-item[data-id="${contactModalContactId}"]`);
+      if (updated && item) selectContact(updated, item);
+    }
+
+    closeContactModal();
+
+  } catch (err) {
+    console.error(err);
+    alert('Speichern fehlgeschlagen (siehe Console).');
+  } finally {
+    saveBtn.disabled = false;
+    deleteBtn.disabled = false;
+  }
+}
+
+async function onDeleteFromModal() {
+  if (!contactModalContactId) return;
+
+  const contact = contacts.find(c => c.id === contactModalContactId);
+  if (!contact) return;
+
+  if (!confirm(`Kontakt "${contact.name}" wirklich löschen?`)) return;
+
+  const saveBtn = document.getElementById('contactModalSaveBtn');
+  const deleteBtn = document.getElementById('contactModalDeleteBtn');
+  saveBtn.disabled = true;
+  deleteBtn.disabled = true;
+
+  try {
+    await deleteContactFromFirebase(contact.id);
+    await removeContactFromAllTasks(contact.id);
+
+    contacts = await loadContactsFromFirebase();
+    renderContactsList(contacts);
+
+    selectedContactId = null;
+
+    const detailsEmpty = document.getElementById('detailsEmpty');
+    const detailsCard = document.getElementById('detailsCard');
+    if (detailsCard) detailsCard.classList.add('hidden');
+    if (detailsEmpty) detailsEmpty.classList.remove('hidden');
+
+    closeContactModal();
+  } catch (err) {
+    console.error(err);
+    alert('Löschen fehlgeschlagen (siehe Console).');
+  } finally {
+    saveBtn.disabled = false;
+    deleteBtn.disabled = false;
+  }
+}
+
+// Firebase REST Helper Functions
+async function fbGet(path) {
+  const res = await fetch(`${DB_URL}${path}.json`);
+  if (!res.ok) throw new Error(`GET ${path} failed: ${res.status}`);
+  return await res.json();
+}
+
+async function fbPut(path, data) {
+  const res = await fetch(`${DB_URL}${path}.json`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`PUT ${path} failed: ${res.status}`);
+  return await res.json();
+}
+
+async function fbPatch(path, data) {
+  const res = await fetch(`${DB_URL}${path}.json`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`PATCH ${path} failed: ${res.status}`);
+  return await res.json();
+}
+
+async function fbDelete(path) {
+  const res = await fetch(`${DB_URL}${path}.json`, { method: 'DELETE' });
+  if (!res.ok) throw new Error(`DELETE ${path} failed: ${res.status}`);
+  return true;
+}
+
+// Firebase Functions (Realtime DB via REST)
+async function loadContactsFromFirebase() {
+  const res = await fetch(`${DB_URL}${CONTACTS_PATH}.json`);
+  const data = await res.json();
+
+  if (!data) return [];
+
+  // Firebase liefert ein Objekt: { c1:{...}, c2:{...} }
+  return Object.entries(data).map(([id, c]) => ({
+    id,
+    ...c,
+    // falls in DB mal kein initials gespeichert ist:
+    initials: c.initials || generateInitials(c.name || ''),
+  }));
 }
 
 async function updateContactInFirebase(contactId, updatedData) {
-  // TODO: Firebase Integration
-  console.log('Update Kontakt in Firebase:', contactId, updatedData);
+  const res = await fetch(`${DB_URL}${CONTACTS_PATH}/${contactId}.json`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedData),
+  });
+
+  if (!res.ok) throw new Error('Kontakt-Update fehlgeschlagen');
+  return await res.json();
 }
 
 async function deleteContactFromFirebase(contactId) {
-  // TODO: Firebase Integration
-  console.log('Lösche Kontakt aus Firebase:', contactId);
+  const res = await fetch(`${DB_URL}${CONTACTS_PATH}/${contactId}.json`, {
+    method: 'DELETE',
+  });
+
+  if (!res.ok) throw new Error('Kontakt-Löschen fehlgeschlagen');
+}
+
+async function getNextContactId() {
+  const res = await fetch(`${DB_URL}/Contacts.json`);
+  const data = await res.json() || {};
+
+  const numbers = Object.keys(data)
+    .map(k => k.match(/^c(\d+)$/))
+    .filter(Boolean)
+    .map(m => Number(m[1]));
+
+  const next = numbers.length ? Math.max(...numbers) + 1 : 1;
+  return `c${next}`;
+}
+
+async function saveNewContact(contact) {
+  const contactId = await getNextContactId();
+
+  const payload = {
+    ...contact,
+    id: contactId,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+
+  await fetch(`${DB_URL}/Contacts/${contactId}.json`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  return contactId;
+}
+
+async function createContactFirebase(draft) {
+  const contact = {
+    name: draft.name,
+    email: draft.email,
+    phone: draft.phone || '',
+    initials: generateInitials(draft.name),
+    color: generateRandomColor(),
+    isMe: false,
+  };
+
+  await saveNewContact(contact);
+}
+
+async function removeContactFromAllTasks(contactId) {
+  const res = await fetch(`${DB_URL}${TASKS_PATH}.json`);
+  const tasksObj = await res.json();
+  if (!tasksObj) return;
+
+  const updates = {};
+
+  for (const [taskKey, task] of Object.entries(tasksObj)) {
+    if (!task) continue;
+
+    let changed = false;
+
+    // Fall A: assignedTo ist Array mit IDs (["c1","c2"])
+    if (Array.isArray(task.assignedTo)) {
+      const before = task.assignedTo.length;
+      task.assignedTo = task.assignedTo.filter(id => id !== contactId);
+      if (task.assignedTo.length !== before) changed = true;
+    }
+
+    // Fall B: assignedTo ist Objekt-Map ({c1:true, c2:true})
+    if (task.assignedTo && typeof task.assignedTo === 'object' && !Array.isArray(task.assignedTo)) {
+      if (task.assignedTo[contactId] !== undefined) {
+        delete task.assignedTo[contactId];
+        changed = true;
+      }
+    }
+
+    // Fall C: assignedContacts (manche speichern so)
+    if (Array.isArray(task.assignedContacts)) {
+      const before = task.assignedContacts.length;
+      task.assignedContacts = task.assignedContacts.filter(id => id !== contactId);
+      if (task.assignedContacts.length !== before) changed = true;
+    }
+
+    if (changed) {
+      updates[taskKey] = task;
+    }
+  }
+
+  // nur patchen, wenn nötig
+  if (Object.keys(updates).length === 0) return;
+
+  await fetch(`${DB_URL}${TASKS_PATH}.json`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  });
 }
 
 // Utility Functions
+function setDetailsButtonsLoading(isLoading) {
+  const editBtn = document.getElementById('editBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+
+  if (editBtn) editBtn.disabled = isLoading;
+  if (deleteBtn) deleteBtn.disabled = isLoading;
+
+  if (editBtn) editBtn.style.opacity = isLoading ? '0.6' : '1';
+  if (deleteBtn) deleteBtn.style.opacity = isLoading ? '0.6' : '1';
+}
+
 function generateContactId() {
   return 'contact_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 }
@@ -338,208 +749,3 @@ function generateRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Demo Data
-function getDemoContacts() {
-  return [
-    { 
-      id: 'c1', 
-      name: 'Anton Mayer', 
-      email: 'antomm@gmail.com', 
-      phone: '+49 1111 111 11 1', 
-      initials: 'AM', 
-      color: '#FF7A00',
-      createdAt: new Date('2024-01-15').toISOString(),
-      updatedAt: new Date('2024-01-15').toISOString()
-    },
-    { 
-      id: 'c2', 
-      name: 'Anja Schulz', 
-      email: 'schulz@hotmail.com', 
-      phone: '+49 2222 222 22 2', 
-      initials: 'AS', 
-      color: '#9327FF',
-      createdAt: new Date('2024-01-16').toISOString(),
-      updatedAt: new Date('2024-01-16').toISOString()
-    },
-    { 
-      id: 'c3', 
-      name: 'Anna Weber', 
-      email: 'anna.weber@gmail.com', 
-      phone: '+49 2333 333 33 3', 
-      initials: 'AW', 
-      color: '#6E52FF',
-      createdAt: new Date('2024-01-17').toISOString(),
-      updatedAt: new Date('2024-01-17').toISOString()
-    },
-    { 
-      id: 'c4', 
-      name: 'Benedikt Ziegler', 
-      email: 'benedikt@gmail.com', 
-      phone: '+49 3333 333 33 3', 
-      initials: 'BZ', 
-      color: '#6E52FF',
-      createdAt: new Date('2024-01-17').toISOString(),
-      updatedAt: new Date('2024-01-17').toISOString()
-    },
-    { 
-      id: 'c5', 
-      name: 'David Eisenberg', 
-      email: 'davidberg@gmail.com', 
-      phone: '+49 4444 444 44 4', 
-      initials: 'DE', 
-      color: '#FC71FF',
-      createdAt: new Date('2024-01-18').toISOString(),
-      updatedAt: new Date('2024-01-18').toISOString()
-    },
-    { 
-      id: 'c6', 
-      name: 'Eva Fischer', 
-      email: 'eva@gmail.com', 
-      phone: '+49 5555 555 55 5', 
-      initials: 'EF', 
-      color: '#FFBB2B',
-      createdAt: new Date('2024-01-19').toISOString(),
-      updatedAt: new Date('2024-01-19').toISOString()
-    },
-    { 
-      id: 'c7', 
-      name: 'Emmanuel Mauer', 
-      email: 'emmanuelma@gmail.com', 
-      phone: '+49 6666 666 66 6', 
-      initials: 'EM', 
-      color: '#1FD7C1',
-      createdAt: new Date('2024-01-20').toISOString(),
-      updatedAt: new Date('2024-01-20').toISOString()
-    },
-    { 
-      id: 'c8', 
-      name: 'Felix Müller', 
-      email: 'felix.mueller@gmail.com', 
-      phone: '+49 7777 777 77 7', 
-      initials: 'FM', 
-      color: '#462F8A',
-      createdAt: new Date('2024-01-21').toISOString(),
-      updatedAt: new Date('2024-01-21').toISOString()
-    },
-    { 
-      id: 'c9', 
-      name: 'Greta Schmidt', 
-      email: 'greta@gmail.com', 
-      phone: '+49 8888 888 88 8', 
-      initials: 'GS', 
-      color: '#FF4646',
-      createdAt: new Date('2024-01-22').toISOString(),
-      updatedAt: new Date('2024-01-22').toISOString()
-    },
-    { 
-      id: 'c10', 
-      name: 'Hans Wagner', 
-      email: 'hans.wagner@gmail.com', 
-      phone: '+49 9999 999 99 9', 
-      initials: 'HW', 
-      color: '#FF7A00',
-      createdAt: new Date('2024-01-23').toISOString(),
-      updatedAt: new Date('2024-01-23').toISOString()
-    },
-    { 
-      id: 'c11', 
-      name: 'Iris Becker', 
-      email: 'iris.becker@gmail.com', 
-      phone: '+49 1010 101 01 0', 
-      initials: 'IB', 
-      color: '#9327FF',
-      createdAt: new Date('2024-01-24').toISOString(),
-      updatedAt: new Date('2024-01-24').toISOString()
-    },
-    { 
-      id: 'c12', 
-      name: 'Jan Hoffmann', 
-      email: 'jan.hoffmann@gmail.com', 
-      phone: '+49 1111 101 11 1', 
-      initials: 'JH', 
-      color: '#6E52FF',
-      createdAt: new Date('2024-01-25').toISOString(),
-      updatedAt: new Date('2024-01-25').toISOString()
-    },
-    { 
-      id: 'c13', 
-      name: 'Klaus Weber', 
-      email: 'klaus.weber@gmail.com', 
-      phone: '+49 1212 121 21 2', 
-      initials: 'KW', 
-      color: '#FC71FF',
-      createdAt: new Date('2024-01-26').toISOString(),
-      updatedAt: new Date('2024-01-26').toISOString()
-    },
-    { 
-      id: 'c14', 
-      name: 'Lisa Neumann', 
-      email: 'lisa.neumann@gmail.com', 
-      phone: '+49 1313 131 31 3', 
-      initials: 'LN', 
-      color: '#FFBB2B',
-      createdAt: new Date('2024-01-27').toISOString(),
-      updatedAt: new Date('2024-01-27').toISOString()
-    },
-    { 
-      id: 'c15', 
-      name: 'Martin Klein', 
-      email: 'martin.klein@gmail.com', 
-      phone: '+49 1414 141 41 4', 
-      initials: 'MK', 
-      color: '#1FD7C1',
-      createdAt: new Date('2024-01-28').toISOString(),
-      updatedAt: new Date('2024-01-28').toISOString()
-    },
-    { 
-      id: 'c16', 
-      name: 'Nina Richter', 
-      email: 'nina.richter@gmail.com', 
-      phone: '+49 1515 151 51 5', 
-      initials: 'NR', 
-      color: '#462F8A',
-      createdAt: new Date('2024-01-29').toISOString(),
-      updatedAt: new Date('2024-01-29').toISOString()
-    },
-    { 
-      id: 'c17', 
-      name: 'Oliver Koch', 
-      email: 'oliver.koch@gmail.com', 
-      phone: '+49 1616 161 61 6', 
-      initials: 'OK', 
-      color: '#FF4646',
-      createdAt: new Date('2024-01-30').toISOString(),
-      updatedAt: new Date('2024-01-30').toISOString()
-    },
-    { 
-      id: 'c18', 
-      name: 'Petra Wolf', 
-      email: 'petra.wolf@gmail.com', 
-      phone: '+49 1717 171 71 7', 
-      initials: 'PW', 
-      color: '#FF7A00',
-      createdAt: new Date('2024-01-31').toISOString(),
-      updatedAt: new Date('2024-01-31').toISOString()
-    },
-    { 
-      id: 'c19', 
-      name: 'Thomas Schreiber', 
-      email: 'thomas.schreiber@gmail.com', 
-      phone: '+49 1818 181 81 8', 
-      initials: 'TS', 
-      color: '#9327FF',
-      createdAt: new Date('2024-02-01').toISOString(),
-      updatedAt: new Date('2024-02-01').toISOString()
-    },
-    { 
-      id: 'c20', 
-      name: 'Ursula Braun', 
-      email: 'ursula.braun@gmail.com', 
-      phone: '+49 1919 191 91 9', 
-      initials: 'UB', 
-      color: '#6E52FF',
-      createdAt: new Date('2024-02-02').toISOString(),
-      updatedAt: new Date('2024-02-02').toISOString()
-    }
-  ];
-}
