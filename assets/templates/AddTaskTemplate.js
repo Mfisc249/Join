@@ -80,10 +80,21 @@ function createTaskTemplate(taskName, taskDescription) {
         </select>
         </div>
         <div class="OptionsContainer">
-        <h2 class="ChoiceHeadline">Subtasks</h2>
-        <input class="ChoiceOption inputField" name="ChoiceOption" id="subtaskInput" placeholder="Add new subtask">
-        </select>
-        </div>
+  <h2 class="ChoiceHeadline">Subtasks</h2>
+
+  <div class="subtaskInputContainer">
+    <input
+      class="ChoiceOption inputField"
+      id="subtaskInput"
+      placeholder="Add new subtask"
+    />
+
+    <span class="subtaskIcon check" id="confirmSubtask">✔</span>
+    <span class="subtaskIcon close" id="cancelSubtask">✖</span>
+  </div>
+
+  <div id="subtaskList"></div>
+</div>
         </div>
       </div>
     </div>
@@ -103,4 +114,12 @@ function createTaskTemplate(taskName, taskDescription) {
         </button>
       </div>
       </div>`;
+}
+
+function subtaskTemplate(text) {
+  return `
+    <div class="subtaskItem">
+      ${text}
+    </div>
+  `;
 }

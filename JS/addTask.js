@@ -3,6 +3,8 @@ const BASE_URL =
 
 let taskCounter = 1;
 
+let subtasks = [];
+
 const urgentBtn = document.querySelector(".importanceLevel:nth-child(1)");
 const mediumBtn = document.querySelector(".importanceLevel:nth-child(2)");
 const lowBtn = document.querySelector(".importanceLevel:nth-child(3)");

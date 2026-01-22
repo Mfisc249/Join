@@ -65,12 +65,13 @@ h2 {
   font-family: "Inter", sans-serif;
 }
 .taskNameContainer textarea {
-  border-radius: 20px;
+  border-radius: 10px;
   border: 1px solid;
   width: 419px;
   border-color: rgba(209, 209, 209, 1);
   padding-top: 11px;
   padding-left: 22px;
+  cursor: pointer;
 }
 
 .taskNameContainer textarea:focus {
@@ -86,6 +87,7 @@ h2 {
   height: 120px;
   padding-left: 18px;
   padding-top: 11px;
+  cursor: pointer;
 }
 
 .taskDescriptionContainer textarea:focus {
@@ -114,6 +116,7 @@ h2 {
   bottom: 12px;
   left: 16px;
   height: 48px;
+  cursor: pointer;
 }
 
 .addTaskDateContainer input:focus {
@@ -220,9 +223,10 @@ h1 {
   font-weight: 400;
   line-height: 1.2;
   padding-left: 18px;
+  cursor: pointer;
 }
 .inputField {
-  max-width: 418px;
+  width: 418px;
   max-height: 44px;
 }
 
@@ -277,6 +281,44 @@ h1 {
   display: flex;
   gap: 16px;
 }
+.subtaskInputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.subtaskInputContainer input {
+  padding-right: 60px; /* Platz für Icons */
+}
+
+.subtaskIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.subtaskIcon.check {
+  right: 32px;
+  color: green;
+}
+
+.subtaskIcon.close {
+  right: 10px;
+  color: red;
+}
+
+.subtaskIcon:hover {
+  opacity: 0.7;
+}
+
+.subtaskItem {
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: #f6f6f6;
+  border-radius: 6px;
+}
 
 @media (max-width: 1100px) {
   .contentWrapper {
@@ -295,21 +337,24 @@ h1 {
     width: 970px;
   }
   h1 {
-    font-size: 47px;
+    font-size: 55px;
   }
   .priority {
-    justify-content: space-evenly;
-    padding: 0px 135px;
+    justify-content: start;
+    gap: 202px;
   }
   .importanceLevel {
     width: 192px;
     height: 57px;
   }
   .ChoiceOption {
-    width: 970px;
+    width: 993px;
   }
   .inputField {
     width: 970px;
+  }
+  .buttonRequiredField {
+    width: 989px;
   }
 }
 
@@ -318,15 +363,159 @@ h1 {
     width: 930px;
   }
   .taskNameContainer textarea {
-    width: 930px;
+    width: 929px;
   }
   .addTaskDateContainer input {
     width: 930px;
   }
   .ChoiceOption {
-    width: 930px;
+    width: 951px;
   }
   .inputField {
     width: 930px;
+  }
+  .inputField {
+    width: 928px;
+  }
+  .buttonRequiredField {
+    width: 951px;
+    margin-top: 65px;
+  }
+  .priority {
+    justify-content: start;
+    gap: 181px;
+  }
+}
+@media (max-width: 1000px) {
+  .taskNameContainer textarea {
+    width: 800px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 800px;
+  }
+  .addTaskDateContainer input {
+    width: 800px;
+  }
+  .priority {
+    justify-content: start;
+    gap: 119px;
+  }
+  .ChoiceOption {
+    width: 825px;
+  }
+  .inputField {
+    width: 803px;
+  }
+  .buttonRequiredField {
+    width: 829px;
+    margin-top: 40px;
+  }
+}
+@media (max-width: 872px) {
+  .taskNameContainer textarea {
+    width: 640px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 640px;
+    height: 105px;
+  }
+  .addTaskDateContainer input {
+    width: 640px;
+  }
+  .priority {
+    padding: 0;
+    justify-content: start;
+    gap: 36px;
+  }
+  .ChoiceOption {
+    width: 661px;
+  }
+  .inputField {
+    width: 638px;
+  }
+  .buttonRequiredField {
+    width: 660px;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 720px) {
+  h1 {
+    font-size: 50px;
+  }
+  .taskNameContainer textarea {
+    width: 470px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 470px;
+    height: 105px;
+  }
+  .addTaskDateContainer input {
+    width: 470px;
+  }
+  .priority {
+    padding: 0;
+    justify-content: start;
+    gap: 28px;
+  }
+  .ChoiceOption {
+    width: 492px;
+  }
+  .inputField {
+    width: 466px;
+  }
+  .buttonRequiredField {
+    width: 485px;
+    margin-top: 5px;
+  }
+  .importanceLevel {
+    width: 140px;
+    height: 51px;
+    font-size: 18px;
+  }
+}
+@media (max-width: 542px) {
+  h1 {
+    font-size: 47px;
+  }
+  .taskNameContainer textarea {
+    width: 259px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 259px;
+    height: 88px;
+  }
+  .addTaskDateContainer input {
+    width: 259px;
+  }
+  .priority {
+    padding: 0;
+    justify-content: start;
+    gap: 11px;
+  }
+  .importanceLevel {
+    width: 82px;
+    height: 41px;
+    font-size: 16px;
+  }
+  .ChoiceOption {
+    width: 274px;
+  }
+  .inputField {
+    width: 251px;
+  }
+  .buttonRequiredField1 {
+    width: 220px;
+    margin-top: 5px;
+  }
+  .clearButton {
+    width: 100px;
+    height: 56px;
+  }
+  .buttonRequiredField {
+    width: 267px;
+    margin-top: 5px;
+  }
+  main {
+    padding: 0 11px;
   }
 }
