@@ -19,5 +19,6 @@ function closedialog(ID) {
 
 
 function openTaskDetails(taskID) {
-    console.log(taskID);
+  let reftaskDetails = document.getElementById('taskDetails');
+  reftaskDetails.innerHTML = taskDetailsTamplate(taskID);
 }

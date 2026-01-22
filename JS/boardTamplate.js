@@ -20,3 +20,24 @@ function taskBoardTamplate(){
                     <td id="field4" ondrop="moveTo('field4')" ondragleave="removeHighlightField('field4')"
                         ondragover="dragoverHandler(event), highlightField('field4')"></td>`
 }
+
+function taskDetailsTamplate(taskID) {
+    return `<section>
+        <div class="taskCatagory" id="${taskID}">XXX</div>
+        <h1>${TASK[0][`Task${taskID}`].title}</h1>
+        <p>xxxxxx</p>
+        <table>
+            <tr>
+                <td><h2>Due date:</h2></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><h2>Priority:</h2></td>
+                <td></td>
+            </tr>
+        </table>
+        <h2>Assigned To:</h2>
+        <h2>Subtasks</h2>
+    </section>`
+     
+}

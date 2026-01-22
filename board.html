@@ -11,7 +11,7 @@
 </head>
 
 <body onload="init()">
-    <div class="addTaskContainer">
+    <section class="addTaskContainer">
         <h1>Board</h1>
         <div class="addTaskContainer gap32px">
             <div class="searchBar">
@@ -25,8 +25,8 @@
                         alt="+"></button>
             </form>
         </div>
-    </div>
-    <div class="tablecontainer">
+    </section>
+    <section class="tablecontainer">
         <table>
             <tr class="tableCategories">
                 <td>To do <button>+</button></td>
@@ -35,17 +35,18 @@
                 <td>Done</td>
             </tr>
             <tr id="fields">
-                    
+
             </tr>
         </table>
-    </div>
-    <dialog id="taskDetails">
+    </section>
+
+    <dialog id="taskDetails" onclick="closedialog('taskDetails')">
 
     </dialog>
     <script src="./JS/boardTamplate.js"></script>
     <script src="./JS/board.js"></script>
     <script src="./JS/taskDetail.js"></script>
-   
+
 </body>
 
 </html>
