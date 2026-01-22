@@ -83,6 +83,10 @@ body{
      text-align: center;
  }
 
+ .task:hover{
+    cursor: pointer;
+ }
+
  .tableCategories button{
     background-color: transparent;
     font-size: 20px;

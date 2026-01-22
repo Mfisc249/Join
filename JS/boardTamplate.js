@@ -1,10 +1,6 @@
-/**
- * Return HTML for a task.
- * @param {number} taskID Task ID.
- * @returns {string}
- */
+
 function taskTamplate(taskID) {
-    return `<div id="${taskID}" draggable="true" ondragstart="draggedTask(${taskID})">
+    return `<div id="${taskID}" class ="task" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('taskDetails')">
             ${TASK[0][`Task${taskID}`].title}
             </div>`
 }

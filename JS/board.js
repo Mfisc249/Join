@@ -6,16 +6,13 @@ let count = 0;
 let highlightTaskCount = 0;
 let curentTraggedElement;
 
+/** Initializes the board and renders tasks. */
 async function init() {
     document.getElementById('fields').innerHTML = taskBoardTamplate();
     await render();
 }
 
-/**
- * Fetch tasks from Firebase and append to `TASK`.
- * @param {string} [path=""] Optional subpath under Tasks.
- * @returns {Promise<void>}
- */
+/** Fetches tasks from Firebase and stores them in TASK. */
 async function DataGET(path = "") {
     let response = await fetch(BOARDURLBASE + path + '.json');
     let responseASJson = await response.json();
@@ -23,12 +20,7 @@ async function DataGET(path = "") {
     TASK.push(responseASJson);
 }
 
-/**
- * Write task data to the given path.
- * @param {string} [path=""] Task path (e.g., "Task3").
- * @param {Object} [data={}] Payload to store.
- * @returns {Promise<void>}
- */
+/** Writes/updates a task at the specified Firebase path. */
 async function DataPUT(path = "", data = {}) {
     let response = await fetch(BOARDURLBASE + path + '.json', {
         method: "PUT",
@@ -39,10 +31,7 @@ async function DataPUT(path = "", data = {}) {
     });
 }
 
-/**
- * Load tasks and render board columns by `category`.
- * @returns {Promise<void>}
- */
+/** Loads tasks and renders board columns by category. */
 async function render() {
     await DataGET();
     emtyFieldContent();
@@ -54,6 +43,7 @@ async function render() {
     checkFieldIsEmpty();
 }
 
+/** Appends the task template to the appropriate column. */
 function loadTaskTamplate(refTask) {
     if (refTask.category == 'field1') {
         document.getElementById('field1').innerHTML += taskTamplate(refTask.id);
@@ -72,6 +62,7 @@ function loadTaskTamplate(refTask) {
     }
 }
 
+/** Clears the content of all board columns. */
 function emtyFieldContent() {
     document.getElementById('field1').innerHTML = "";
     document.getElementById('field2').innerHTML = "";
@@ -79,13 +70,7 @@ function emtyFieldContent() {
     document.getElementById('field4').innerHTML = "";
 }
 
-/**
- * Save new task to `field1` and render it.
- * @param {number} taskID Task ID.
- * @param {HTMLInputElement|HTMLTextAreaElement} refTitel Title input.
- * @param {HTMLInputElement|HTMLTextAreaElement} refContent Content input.
- * @returns {Promise<void>}
- */
+/** Saves a new task and renders it in 'field1'. */
 async function renderaddedTask(taskID, refTitel, refContent) {
     await DataPUT(`Task${taskID}`, {
         'title': `${refTitel.value}`,
@@ -97,10 +82,7 @@ async function renderaddedTask(taskID, refTitel, refContent) {
     checkFieldIsEmpty();
 }
 
-/**
- * Re-render moved task in target column; remove old.
- * @param {string} field Target column ID.
- */
+/** Renders the moved task in the target column and removes the old one. */
 function renderMovedTask(field) {
     let refMovedTask = document.getElementById(`${TASK[0][`Task${curentTraggedElement}`].id}`);
     refMovedTask.parentNode.removeChild(refMovedTask);
@@ -108,28 +90,18 @@ function renderMovedTask(field) {
     checkFieldIsEmpty();
 }
 
-/**
- * Set current dragged task ID.
- * @param {number} taskID
- */
+/** Sets the currently dragged task and starts the animation. */
 function draggedTask(taskID) {
     curentTraggedElement = taskID;
     transormTask();
 }
 
-/**
- * Enable drop on dragover.
- * @param {DragEvent} ev
- */
+/** Enables dropping by preventing default behavior. */
 function dragoverHandler(ev) {
     ev.preventDefault();
 }
 
-/**
- * Move dragged task to column and persist.
- * @param {string} field Target column ID.
- * @returns {Promise<void>}
- */
+/** Moves the dragged task to the column and persists it. */
 async function moveTo(field) {
     TASK[0][`Task${curentTraggedElement}`].category = `${field}`;
     document.getElementById(`${field}`).classList.remove("highlight");
@@ -143,6 +115,7 @@ async function moveTo(field) {
 
 }
 
+/** Displays a highlight area (currently disabled). */
 function highlightField(ID) {
     // let refHighlightTask = document.getElementById('highlightTask');
     // if (highlightTaskCount == 0 && refHighlightTask==null) {
@@ -151,6 +124,7 @@ function highlightField(ID) {
     // highlightTaskCount++;
 }
 
+/** Removes the highlight area (currently disabled). */
 function removeHighlightField(ID) {
     // let refHighlightTask = document.getElementById('highlightTask');
     // if (refHighlightTask!=null) {
@@ -159,10 +133,7 @@ function removeHighlightField(ID) {
     // highlightTaskCount = 0;
 }
 
-/**
- * Create and save a new task from form.
- * @returns {Promise<void>}
- */
+/** Creates a new task from the form and renders it. */
 async function formIsSubmittet() {
     let taskID = TASKKEYS[0].length + count;
     let taskVar = "Task" + taskID;
@@ -179,6 +150,7 @@ async function formIsSubmittet() {
 
 }
 
+/** Shows hints when columns are empty. */
 function checkFieldIsEmpty() {
     document.getElementById('field1').hasChildNodes() == false ? document.getElementById('field1').innerHTML = `<div id="noTaskField1" class="noTaskField">No Tasks to do</div>` : null;
     (document.getElementById('field1').childElementCount >= 2) && (document.getElementById('noTaskField1') != null) ? document.getElementById('noTaskField1').remove() : null;
@@ -190,10 +162,12 @@ function checkFieldIsEmpty() {
     (document.getElementById('field4').childElementCount >= 2) && (document.getElementById('noTaskField4') != null) ? document.getElementById('noTaskField4').remove() : null;
 }
 
+/** Starts the rotation animation for the dragged task. */
 function transormTask() {
     document.getElementById(`${curentTraggedElement}`).classList.add('rotate5deg');
 }
 
+/** Stops the rotation animation after a short delay. */
 function endTransformTask() {
     setTimeout(() => {
         document.getElementById(`${curentTraggedElement}`).classList.remove('rotate5deg')
@@ -205,10 +179,10 @@ function endTransformTask() {
     }, 100);
 }
 
-
+/** Searches tasks by title and updates the view. */
 async function searchTask() {
     let refSearchInput = document.getElementById('searchInput');
-    if (refSearchInput.value.length >= 3) {
+    if (refSearchInput.value.length >= 1) {
         startTheSearch(refSearchInput);
     } else if (refSearchInput.value.length == 0) {
         document.getElementById('fields').innerHTML = taskBoardTamplate();
@@ -219,7 +193,7 @@ async function searchTask() {
     }
 }
 
-
+/** Filters tasks by title and renders the matches. */
 function startTheSearch(refSearchInput) {
     let filter = refSearchInput.value.toUpperCase();
     let searchCount = 0;
@@ -237,4 +211,5 @@ function startTheSearch(refSearchInput) {
         document.getElementById('fields').innerHTML = `<div class="noTaskFound">No Tasks Found</div>`;
     }
 }
+
 
