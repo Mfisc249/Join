@@ -1,8 +1,6 @@
 const BASE_URL =
   "https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let taskCounter = 1;
-
 let subtasks = [];
 
 const urgentBtn = document.querySelector(".importanceLevel:nth-child(1)");
@@ -24,7 +22,6 @@ async function init() {
   setupPriorityButtons();
   setDefaultPriority();
   setDateMin();
-  await loadTaskCounter();
 }
 
 function renderTemplate() {
@@ -32,7 +29,7 @@ function renderTemplate() {
 }
 
 async function saveTask(task) {
-  const taskKey = `addTask${taskCounter}`;
+  const taskKey = `addTask${Date.now()}`;
 
   const response = await fetch(`${BASE_URL}addTask/${taskKey}.json`, {
     method: "PUT",
@@ -42,18 +39,6 @@ async function saveTask(task) {
 
   if (response.ok) {
     console.log("Task gespeichert als:", taskKey);
-    taskCounter++; // nächster Task
-  }
-}
-
-async function loadTaskCounter() {
-  const response = await fetch(`${BASE_URL}tasks.json`);
-  const data = await response.json();
-
-  if (!data) {
-    taskCounter = 1;
-  } else {
-    taskCounter = Object.keys(data).length + 1;
   }
 }
 
@@ -164,10 +149,10 @@ function setupPriorityButtons() {
 
 function setDefaultPriority() {
   const buttons = document.querySelectorAll(".importanceLevel");
-  const defaultBtn = buttons[1]; // Medium
+  const defaultBtn = buttons[1];
   defaultBtn.classList.add("active");
   defaultBtn.style.backgroundColor = "orange";
-  defaultBtn.style.color = "white"; // Schriftfarbe beim Standardwert
+  defaultBtn.style.color = "white";
   task.priority = "Medium";
 }
 
@@ -182,4 +167,20 @@ function setDateMin() {
 
   dateInput.min = `${yyyy}-${mm}-${dd}`;
   dateInput.value = "";
+}
+
+function confirmSubtask() {
+  const input = document.getElementById("subtaskInput");
+  const value = input.value.trim();
+  if (!value) return;
+  task.subtasks.push(value);
+  document.getElementById("subtaskList").innerHTML += subtaskTemplate(value);
+  input.value = "";
+  input.focus();
+}
+
+function cancelSubtask() {
+  const input = document.getElementById("subtaskInput");
+  input.value = "";
+  input.focus();
 }

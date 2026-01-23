@@ -88,12 +88,14 @@ function createTaskTemplate(taskName, taskDescription) {
       id="subtaskInput"
       placeholder="Add new subtask"
     />
-
-    <span class="subtaskIcon check" id="confirmSubtask">✔</span>
-    <span class="subtaskIcon close" id="cancelSubtask">✖</span>
+    <div class="subTaskIconsContainer">
+    <span onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask">✖</span>
+    <div class="spacer"></div>
+    <span onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask">✔</span>
+    </div>
   </div>
 
-  <div id="subtaskList"></div>
+  <ul id="subtaskList"></ul>
 </div>
         </div>
       </div>
@@ -101,7 +103,7 @@ function createTaskTemplate(taskName, taskDescription) {
       <div class="buttonRequiredField">
       <div class="headlineTextArea requiredBottomLeft">
       <p class="star">*</p>
-      <p class="requiredField">this field is rehhqired</p>
+      <p class="requiredField SubTaskField">this field is rehhqired</p>
       </div>
       <div class="taskButton">
        <div>
@@ -117,9 +119,5 @@ function createTaskTemplate(taskName, taskDescription) {
 }
 
 function subtaskTemplate(text) {
-  return `
-    <div class="subtaskItem">
-      ${text}
-    </div>
-  `;
+  return `<li class="subtaskItem">${text}</li>`;
 }
