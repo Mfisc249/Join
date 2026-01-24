@@ -118,6 +118,26 @@ function createTaskTemplate(taskName, taskDescription) {
       </div>`;
 }
 
-function subtaskTemplate(text) {
-  return `<li class="subtaskItem">${text}</li>`;
+function subtaskTemplate(text, index) {
+  var isEditing = editingSubtaskIndex === index;
+
+  return `
+    <li class="subtaskItem">
+      ${
+        isEditing
+          ? `<input
+                class="subtaskEditInput"
+                value="${text}"
+                onblur="saveEditedSubtask(${index}, this.value)"
+                onkeydown="handleEditKey(event, ${index}, this.value)"
+                autofocus
+            >`
+          : `<span class="subtaskText">${text}</span>`
+      }
+      <div class="subtaskActions">
+        <span onclick="startEditSubtask(${index})">✎</span>
+        <span onclick="deleteSubtask(${index})">✖</span>
+      </div>
+    </li>
+  `;
 }

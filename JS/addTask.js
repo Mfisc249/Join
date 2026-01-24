@@ -3,6 +3,8 @@ const BASE_URL =
 
 let subtasks = [];
 
+let editingSubtaskIndex = null;
+
 const urgentBtn = document.querySelector(".importanceLevel:nth-child(1)");
 const mediumBtn = document.querySelector(".importanceLevel:nth-child(2)");
 const lowBtn = document.querySelector(".importanceLevel:nth-child(3)");
@@ -26,6 +28,18 @@ async function init() {
 
 function renderTemplate() {
   document.getElementById("mainContent").innerHTML = createTaskTemplate();
+}
+
+function renderSubtasks() {
+  var list = document.getElementById("subtaskList");
+  list.innerHTML = "";
+
+  var i;
+  for (i = 0; i < task.subtasks.length; i++) {
+    list.innerHTML += subtaskTemplate(task.subtasks[i], i);
+  }
+
+  setupSubtaskOutsideClick(); // direkt nach Render aufrufen
 }
 
 async function saveTask(task) {
@@ -173,8 +187,10 @@ function confirmSubtask() {
   const input = document.getElementById("subtaskInput");
   const value = input.value.trim();
   if (!value) return;
+
   task.subtasks.push(value);
-  document.getElementById("subtaskList").innerHTML += subtaskTemplate(value);
+  editingSubtaskIndex = null;
+  renderSubtasks(); // ✅ NUR NOCH DAS
   input.value = "";
   input.focus();
 }
@@ -183,4 +199,38 @@ function cancelSubtask() {
   const input = document.getElementById("subtaskInput");
   input.value = "";
   input.focus();
+}
+
+function deleteSubtask(index) {
+  task.subtasks.splice(index, 1);
+  renderSubtasks();
+}
+
+function startEditSubtask(index) {
+  editingSubtaskIndex = index;
+  renderSubtasks();
+}
+
+function saveEditedSubtask(index, newValue) {
+  const value = newValue.trim();
+  if (!value) {
+    editingSubtaskIndex = null;
+    renderSubtasks();
+    return;
+  }
+
+  task.subtasks[index] = value;
+  editingSubtaskIndex = null;
+  renderSubtasks();
+}
+
+function handleEditKey(event, index, value) {
+  if (event.key === "Enter") {
+    saveEditedSubtask(index, value);
+  }
+
+  if (event.key === "Escape") {
+    editingSubtaskIndex = null;
+    renderSubtasks();
+  }
 }
