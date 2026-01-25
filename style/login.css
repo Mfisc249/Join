@@ -1,3 +1,20 @@
+body{
+    background-color: var( --GlobalBackgroundWhite);
+    font-family: inter;
+}
+
+@font-face {
+    font-family: inter;
+    font-weight: 700;
+    src: url('../assets/fonts/Inter/static/Inter_18pt-Bold.ttf') format('truetype');
+}
+
+h1 {
+    font-weight: 700;
+    line-height: 1.2;  
+    font-size: 60px;
+}
+
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -8,3 +25,19 @@
   position: absolute;
   width: 1px;
 }
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+background-color: #FFFFFF;
+width: 650px;
+top: 50%;
+left: 50%;
+border-radius: 30px;
+padding-top: 48px;
+padding-right: 115px;
+padding-bottom: 48px;
+padding-left: 115px;
+gap: 32px;
+box-shadow: 0px 0px 14px 3px #0000000A;
+} 
