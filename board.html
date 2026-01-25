@@ -19,8 +19,8 @@
                 <img src="./assets/img/Search.svg" alt="Search">
             </div>
             <form onsubmit="formIsSubmittet(); return false">
-                <!-- <input id="titleId" type="text" required placeholder="Titel">
-                <input id="contentId" type="text" required placeholder="Beschreibung"> -->
+                <input id="titleId" type="text" required placeholder="Titel">
+                <input id="contentId" type="text" required placeholder="Beschreibung">
                 <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add.svg"
                         alt="+"></button>
             </form>
@@ -39,8 +39,7 @@
             </tr>
         </table>
     </section>
-
-    <dialog id="taskDetails" onclick="closedialog('taskDetails')">
+    <dialog id="allTaskDetails" class="allTaskDetails" onclick="closedialog('allTaskDetails')">
 
     </dialog>
     <script src="./JS/boardTamplate.js"></script>

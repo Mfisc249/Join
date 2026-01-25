@@ -1,6 +1,6 @@
 
 function taskTamplate(taskID) {
-    return `<div id="${taskID}" class ="task" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('taskDetails')">
+    return `<div id="${taskID}" class ="task" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
             ${TASK[0][`Task${taskID}`].title}
             </div>`
 }
@@ -22,22 +22,38 @@ function taskBoardTamplate(){
 }
 
 function taskDetailsTamplate(taskID) {
-    return `<section>
-        <div class="taskCatagory" id="${taskID}">XXX</div>
-        <h1>${TASK[0][`Task${taskID}`].title}</h1>
-        <p>xxxxxx</p>
-        <table>
-            <tr>
-                <td><h2>Due date:</h2></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><h2>Priority:</h2></td>
-                <td></td>
-            </tr>
-        </table>
-        <h2>Assigned To:</h2>
-        <h2>Subtasks</h2>
-    </section>`
+    return `
+    <div onclick="event.stopPropagation()">
+        <header>
+            <section>
+                <div class="taskCatagory">XXX</div>
+                <div class= "closeDialogX" onclick = "closedialog('allTaskDetails')">X</div>
+            </section>
+            <h1>${TASK[0][`Task${taskID}`].title}</h1>
+        </header>
+        <main>
+            <section>
+                <p>xxxxxx</p>
+                <table>
+                    <tr>
+                        <td><h2>Due date:</h2></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><h2>Priority:</h2></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <h2>Assigned To:</h2>
+                <h2>Subtasks</h2>
+            </section>
+        </main>
+        <footer>
+             <div class="taskDetailsIcons">
+                <span onmouseover="displayNone('trash','trashMousover')" onmouseout = "removeDisplayNone('trash','trashMousover')" onclick = "closedialog('allTaskDetails'); deleteTask(${taskID})" class="taskDetailsIcons"><img id ="trash" src="./assets/icons/trash_darkblue.svg" alt="trash"><img class ="displayNone" id="trashMousover" src="./assets/icons/trash_lightblue.svg" alt="trashMousover"> Delete</span>
+                <span onmouseover="displayNone('edit','editMousover')"  onmouseout = "removeDisplayNone('edit','editMousover')" class="taskDetailsIcons edit"><img id ="edit" onmouseover="" src="./assets/icons/pencil_darkblue.svg" alt="edit"><img class ="displayNone" id="editMousover" src="./assets/icons/pencil_lightblue.svg" alt="editMousover"> Edit</span>
+             </div>
+        </footer>
+    </div>`
      
 }
