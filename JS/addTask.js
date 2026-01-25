@@ -38,28 +38,32 @@ function renderSubtasks() {
   for (i = 0; i < task.subtasks.length; i++) {
     list.innerHTML += subtaskTemplate(task.subtasks[i], i);
   }
-
-  setupSubtaskOutsideClick(); // direkt nach Render aufrufen
 }
 
 async function saveTask(task) {
   const taskKey = `addTask${Date.now()}`;
 
-  const response = await fetch(`${BASE_URL}addTask/${taskKey}.json`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(task),
-  });
+  try {
+    const response = await fetch(`${BASE_URL}addTask/${taskKey}.json`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(task),
+    });
 
-  if (response.ok) {
-    console.log("Task gespeichert als:", taskKey);
+    if (!response.ok) {
+      throw new Error("Firebase save failed");
+    }
+
+    return true; // ✅ Erfolg
+  } catch (error) {
+    console.error("Fehler beim Speichern:", error);
+    return false; // ❌ Fehler
   }
 }
 
 async function createTask() {
   const titleInput = document.getElementById("taskName");
   const descInput = document.getElementById("taskDesc");
-  const subtaskInput = document.getElementById("subtaskInput");
   const assignedInput = document.getElementById("assignedTo");
   const categoryInput = document.getElementById("category");
   const dateInput = document.getElementById("DueDate");
@@ -71,11 +75,6 @@ async function createTask() {
   task.dueDate = dateInput.value;
   task.createdAt = Date.now();
 
-  if (subtaskInput.value) {
-    task.subtasks = subtaskInput.value.split(",");
-  } else {
-    task.subtasks = [];
-  }
   errorMessage();
   if (
     !task.title ||
@@ -84,10 +83,14 @@ async function createTask() {
     !task.priority ||
     !task.category
   ) {
+    return;
   }
+  const success = await saveTask(task);
 
-  await saveTask(task);
-  clearForm();
+  if (success) {
+    showToast(); // 🎉 NUR BEI ERFOLG
+    clearForm();
+  }
 }
 
 function errorMessage() {
@@ -211,14 +214,19 @@ function startEditSubtask(index) {
   renderSubtasks();
 }
 
-function saveEditedSubtask(index, newValue) {
-  const value = newValue.trim();
+function saveEditedSubtask(index) {
+  // alle Edit-Inputs abrufen
+  const inputs = document.querySelectorAll(".subTaskEditInput");
+  const input = inputs[0]; // es gibt nur ein aktives Edit-Input zurzeit
+  const value = input.value.trim();
+
   if (!value) {
     editingSubtaskIndex = null;
     renderSubtasks();
     return;
   }
 
+  // Wert speichern
   task.subtasks[index] = value;
   editingSubtaskIndex = null;
   renderSubtasks();
@@ -233,4 +241,13 @@ function handleEditKey(event, index, value) {
     editingSubtaskIndex = null;
     renderSubtasks();
   }
+}
+
+function showToast() {
+  const toast = document.getElementById("toast");
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
 }

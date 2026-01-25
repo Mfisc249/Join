@@ -74,8 +74,10 @@ function createTaskTemplate(taskName, taskDescription) {
            <h2 class="ChoiceHeadline">Category</h2>
            <p class="star">*</p>
            </div>
-           <select class="ChoiceOption" name="priority" id="category">
-           <option value="urgent">Select task category</option>
+           <select class="ChoiceOption" id="category" required>
+             <option value="" selected hidden>Select task category</option>
+             <option value="technicalTask">Technical Task</option>
+             <option value="UserStory">User Story</option>
           </div>
         </select>
         </div>
@@ -83,19 +85,21 @@ function createTaskTemplate(taskName, taskDescription) {
   <h2 class="ChoiceHeadline">Subtasks</h2>
 
   <div class="subtaskInputContainer">
+  <div class="bottomInputContainer">
     <input
-      class="ChoiceOption inputField"
+      class="ChoiceOption inputField bottomInput"
       id="subtaskInput"
       placeholder="Add new subtask"
     />
+    </div>
     <div class="subTaskIconsContainer">
     <span onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask">✖</span>
     <div class="spacer"></div>
     <span onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask">✔</span>
     </div>
   </div>
-
-  <ul id="subtaskList"></ul>
+  <div id="toast" class="toast">Task added to board</div>
+  <ul class="subTaskList" id="subtaskList"></ul>
 </div>
         </div>
       </div>
@@ -119,24 +123,41 @@ function createTaskTemplate(taskName, taskDescription) {
 }
 
 function subtaskTemplate(text, index) {
-  var isEditing = editingSubtaskIndex === index;
+  const isEditing = editingSubtaskIndex === index;
 
+  if (isEditing) {
+    return `
+      <li class="subTaskItem editing">
+  <div class="subTaskEditContainer">
+    <input
+      class="subTaskEditInput"
+      value="${text}"
+      onkeydown="handleEditKey(event, ${index}, this.value)"
+      autofocus
+    />
+
+    <div class="subTaskEditIcons">
+      <span class="subtaskEditNote" onclick="deleteSubtask(${index})">&#128465;</span>
+      <div class="spacer Edit"></div>
+     <span class="subtaskEditNote" onclick="saveEditedSubtask(${index}, this)">✔</span>
+    </div>
+  </div>
+  </li>
+    `;
+  }
+
+  // normal
   return `
-    <li class="subtaskItem">
-      ${
-        isEditing
-          ? `<input
-                class="subtaskEditInput"
-                value="${text}"
-                onblur="saveEditedSubtask(${index}, this.value)"
-                onkeydown="handleEditKey(event, ${index}, this.value)"
-                autofocus
-            >`
-          : `<span class="subtaskText">${text}</span>`
-      }
-      <div class="subtaskActions">
+    <li class="subTaskItem">
+
+    <div class="subTaskContent">
+      <span class="subTaskText">${text}</span>
+      
+      <div class="subTaskActions">
         <span onclick="startEditSubtask(${index})">✎</span>
+        <div class="spacer Edit"></div>
         <span onclick="deleteSubtask(${index})">✖</span>
+      </div>
       </div>
     </li>
   `;
