@@ -10,31 +10,43 @@
 </head>
 <body>
     
-<nav>
-    <img src="assets/img/logoside.svg" alt="join-logo">
-    <div>
+<nav class="login-nav">
+    <img class="login-logo" src="assets/img/logo-login.svg" alt="join-logo">
+    <div class="login-new-user-container">
         <span>Not a Join user?</span>
         <button>Sign up</button>
     </div>
 </nav>
-<main>
+
+<main class="login-main-container">
     <div class="login-card">
         <h1>Log in</h1>
         <form>
-            <label for="email" class="visuallyhidden">Email</label>
-            <input id="email" type="email" placeholder="Email">
-            <label for="password" class="visuallyhidden">Password</label>
-            <input id="password" type="password" placeholder="Password">
-            <button type="submit" id="loginButton">Log in</button>
-            <button type="button" id="guestButton">Guest Log in</button>
+            <div class="login-inputs">
+                <div class="login-email-input" >
+                    <label for="email" class="visuallyhidden">Email</label>
+                    <input id="login-email" autocomplete="username" type="email" placeholder="Email">
+                    <img src="./assets/img/mail.svg" alt="Email Icon">
+                </div>
+                <div class="login-password-input">
+                    <label for="password" class="visuallyhidden">Password</label>
+                    <input id="login-password" autocomplete="current-password"type="password" placeholder="Password">
+                    <img src="./assets/img/lock.svg" alt="Password Icon">
+                </div>
+                <div class="login-buttons">
+                        <button type="submit" id="loginButton">Log in</button>
+                        <button type="button" id="guestButton">Guest Log in</button>
+                </div>
+            </div>
         </form>
     </div>
 </main>
 
-<footer>
+<footer class="login-footer">
     <span>Privacy Policy</span>
     <span>Legal notice</span>
 </footer>
 
+<script src="./JS/login.js"></script>
 </body>
 </html>
