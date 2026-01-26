@@ -66,8 +66,10 @@ dialog.closed::backdrop {
 .taskDetailsIcons{
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 5px;
     color: var(--GlobalBlue);
+    font-size: 19px;
 }
 
 .taskDetailsIcons:hover{
@@ -76,7 +78,7 @@ dialog.closed::backdrop {
 }
 
 .taskDetailsIcons img{
-    height: 20px;
+    height: 19px;
 }
 
 .taskDetailsIcons .edit{

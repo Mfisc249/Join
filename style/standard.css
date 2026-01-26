@@ -11,6 +11,35 @@
     --GlobalDarkblue: #091931;
     --CircleBadgeGray: #0C2E621F;
     --GlobalBorderColorGray: #A8A8A8;
+
+     /* Layout */
+    --sidebar-w: 232px;
+    --header-h: 96px;
+}
+
+/* =========================
+   Global App Shell Layout
+   ========================= */
+
+/* Container für Sidebar/Header/Content */
+.app{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* DIESE FLÄCHE ist ab jetzt auf jeder Seite der "Canvas" */
+.main{
+    position: fixed;
+    left: var(--sidebar-w);
+    top: var(--header-h);
+    width: calc(100vw - var(--sidebar-w));
+    height: calc(100vh - var(--header-h));
+    overflow: hidden;
+    box-sizing: border-box;
+    background: var(--GlobalBackgroundWhite);
+    z-index: 1;
 }
 
 /*
@@ -31,6 +60,24 @@
         url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('truetype'),
         /* Legacy iOS */
         url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('svg');
+}
+
+/*
+ * Global Body Font
+ * Description: Sets Inter as default font for entire page
+ */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+    height: 100vh;
+}
+
+html {
+    overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+    height: 100%;
 }
 
 /*

@@ -7,7 +7,7 @@ let highlightTaskCount = 0;
 let curentTraggedElement;
 
 /** Initializes the board and renders tasks. */
-async function init() {
+async function init2() {
     document.getElementById('fields').innerHTML = taskBoardTamplate();
     await render();
 }
