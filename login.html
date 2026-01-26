@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+
+    <link rel="stylesheet" href="./style/standard.css" />
+  <link rel="stylesheet" href="./style/login.css" />
+</head>
+<body>
+    
+<nav class="login-nav">
+    <img class="login-logo" src="assets/img/logo-login.svg" alt="join-logo">
+    <div class="login-new-user-container">
+        <span>Not a Join user?</span>
+        <button>Sign up</button>
+    </div>
+</nav>
+
+<main class="login-main-container">
+    <div class="login-card">
+        <h1>Log in</h1>
+        <form>
+            <div class="login-inputs">
+                <div class="input-wrapper" >
+                    <label for="email" class="visuallyhidden">Email</label>
+                    <input id="login-email" autocomplete="username" type="email" placeholder="Email">
+                    <img src="./assets/img/mail.svg" alt="Email Icon">
+                </div>
+                <div class="input-wrapper">
+                    <label for="password" class="visuallyhidden">Password</label>
+                    <input id="login-password" autocomplete="current-password"type="password" placeholder="Password">
+                    <img src="./assets/img/lock.svg" alt="Password Icon">
+                </div>
+                <span id="login-error"></span>
+                <div class="login-buttons">
+                        <button type="submit" id="loginButton">Log in</button>
+                        <button type="button" id="guestButton">Guest Log in</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer class="login-footer">
+    <span>Privacy Policy</span>
+    <span>Legal notice</span>
+</footer>
+
+<script src="./JS/login.js"></script>
+</body>
+</html>
