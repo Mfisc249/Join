@@ -23,9 +23,6 @@ h1 {
   align-items: center;
 }
 
-.login-card-container {
-}
-
 .login-nav {
   display: flex;
   justify-content: space-between;
@@ -112,6 +109,12 @@ h1 {
   width: 100%;
   padding-right: 40px;
   box-sizing: border-box;
+}
+
+#login-error {
+    color: red;
+    text-align: center;
+    display: block;
 }
 
 .login-footer {

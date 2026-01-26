@@ -21,6 +21,11 @@ document.getElementById('loginButton').addEventListener('click', function(event)
 });
 
 
+document.getElementById('guestButton').addEventListener('click', function() {
+    window.location.href = 'summary.html';
+});
+
+
 async function getLoginData() {
     let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
     let data = await response.json();
