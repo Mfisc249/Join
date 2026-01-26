@@ -96,13 +96,11 @@ h1 {
   box-sizing: border-box;
 }
 
-.login-email-input,
-.login-password-input {
+.input-wrapper {
   position: relative;
 }
 
-.login-email-input img,
-.login-password-input img {
+.input-wrapper img {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
