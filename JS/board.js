@@ -1,31 +1,26 @@
 
 const BOARDURLBASE = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/Tasks/';
-const TASK = [];
-const TASKKEYS = [];
+let TASK = [];
+let TASKKEYS = [];
 let count = 0;
-let refField1 = document.getElementById('field1');
-let refField2 = document.getElementById('field2');
-let refField3 = document.getElementById('field3');
-let refField4 = document.getElementById('field4');
+let highlightTaskCount = 0;
 let curentTraggedElement;
 
-/**
- * Fetch tasks from Firebase and append to `TASK`.
- * @param {string} [path=""] Optional subpath under Tasks.
- * @returns {Promise<void>}
- */
+/** Initializes the board and renders tasks. */
+async function init2() {
+    document.getElementById('fields').innerHTML = taskBoardTamplate();
+    await render();
+}
+
+/** Fetches tasks from Firebase and stores them in TASK. */
 async function DataGET(path = "") {
     let response = await fetch(BOARDURLBASE + path + '.json');
     let responseASJson = await response.json();
+    TASK = [];
     TASK.push(responseASJson);
 }
 
-/**
- * Write task data to the given path.
- * @param {string} [path=""] Task path (e.g., "Task3").
- * @param {Object} [data={}] Payload to store.
- * @returns {Promise<void>}
- */
+/** Writes/updates a task at the specified Firebase path. */
 async function DataPUT(path = "", data = {}) {
     let response = await fetch(BOARDURLBASE + path + '.json', {
         method: "PUT",
@@ -36,44 +31,46 @@ async function DataPUT(path = "", data = {}) {
     });
 }
 
-/**
- * Load tasks and render board columns by `category`.
- * @returns {Promise<void>}
- */
+/** Loads tasks and renders board columns by category. */
 async function render() {
     await DataGET();
-    refField1.innerHTML = "";
-    refField2.innerHTML = "";
-    refField3.innerHTML = "";
-    refField4.innerHTML = "";
+    emtyFieldContent();
+    TASKKEYS = [];
     TASKKEYS.push(Object.keys(TASK[0]));
     TASKKEYS[0].forEach(task => {
-        if (TASK[0][`${task}`].category == 'field1') {
-            refField1.innerHTML += taskTamplate(TASK[0][`${task}`].id);
-        }
-
-        if (TASK[0][`${task}`].category == 'field2') {
-            refField2.innerHTML += taskTamplate(TASK[0][`${task}`].id);
-        }
-
-        if (TASK[0][`${task}`].category == 'field3') {
-            refField3.innerHTML += taskTamplate(TASK[0][`${task}`].id);
-        }
-
-        if (TASK[0][`${task}`].category == 'field4') {
-            refField4.innerHTML += taskTamplate(TASK[0][`${task}`].id);
-        }
+        loadTaskTamplate(TASK[0][`${task}`])
     });
     checkFieldIsEmpty();
 }
 
-/**
- * Save new task to `field1` and render it.
- * @param {number} taskID Task ID.
- * @param {HTMLInputElement|HTMLTextAreaElement} refTitel Title input.
- * @param {HTMLInputElement|HTMLTextAreaElement} refContent Content input.
- * @returns {Promise<void>}
- */
+/** Appends the task template to the appropriate column. */
+function loadTaskTamplate(refTask) {
+    if (refTask.category == 'field1') {
+        document.getElementById('field1').innerHTML += taskTamplate(refTask.id);
+    }
+
+    if (refTask.category == 'field2') {
+        document.getElementById('field2').innerHTML += taskTamplate(refTask.id);
+    }
+
+    if (refTask.category == 'field3') {
+        document.getElementById('field3').innerHTML += taskTamplate(refTask.id);
+    }
+
+    if (refTask.category == 'field4') {
+        document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
+    }
+}
+
+/** Clears the content of all board columns. */
+function emtyFieldContent() {
+    document.getElementById('field1').innerHTML = "";
+    document.getElementById('field2').innerHTML = "";
+    document.getElementById('field3').innerHTML = "";
+    document.getElementById('field4').innerHTML = "";
+}
+
+/** Saves a new task and renders it in 'field1'. */
 async function renderaddedTask(taskID, refTitel, refContent) {
     await DataPUT(`Task${taskID}`, {
         'title': `${refTitel.value}`,
@@ -85,10 +82,7 @@ async function renderaddedTask(taskID, refTitel, refContent) {
     checkFieldIsEmpty();
 }
 
-/**
- * Re-render moved task in target column; remove old.
- * @param {string} field Target column ID.
- */
+/** Renders the moved task in the target column and removes the old one. */
 function renderMovedTask(field) {
     let refMovedTask = document.getElementById(`${TASK[0][`Task${curentTraggedElement}`].id}`);
     refMovedTask.parentNode.removeChild(refMovedTask);
@@ -96,71 +90,50 @@ function renderMovedTask(field) {
     checkFieldIsEmpty();
 }
 
-/**
- * Return HTML for a task.
- * @param {number} taskID Task ID.
- * @returns {string}
- */
-function taskTamplate(taskID) {
-    return `<div id="${taskID}" draggable="true" ondragstart="draggedTask(${taskID})">
-            ${TASK[0][`Task${taskID}`].title}
-            </div>`
-}
-
-/**
- * Set current dragged task ID.
- * @param {number} taskID
- */
+/** Sets the currently dragged task and starts the animation. */
 function draggedTask(taskID) {
     curentTraggedElement = taskID;
     transormTask();
 }
 
-/**
- * Enable drop on dragover.
- * @param {DragEvent} ev
- */
+/** Enables dropping by preventing default behavior. */
 function dragoverHandler(ev) {
     ev.preventDefault();
 }
 
-/**
- * Move dragged task to column and persist.
- * @param {string} field Target column ID.
- * @returns {Promise<void>}
- */
+/** Moves the dragged task to the column and persists it. */
 async function moveTo(field) {
     TASK[0][`Task${curentTraggedElement}`].category = `${field}`;
     document.getElementById(`${field}`).classList.remove("highlight");
+    renderMovedTask(field);
     await DataPUT(`Task${curentTraggedElement}`, {
         'title': `${TASK[0][`Task${curentTraggedElement}`].title}`,
         'id': curentTraggedElement,
         'category': `${field}`,
         'content': `${TASK[0][`Task${curentTraggedElement}`].content}`
     })
-    renderMovedTask(field);
+
 }
 
-/**
- * Add drop highlight to a column.
- * @param {string} ID Column ID.
- */
+/** Displays a highlight area (currently disabled). */
 function highlightField(ID) {
-    document.getElementById(`${ID}`).classList.add("highlight");
+    // let refHighlightTask = document.getElementById('highlightTask');
+    // if (highlightTaskCount == 0 && refHighlightTask==null) {
+    //     document.getElementById(`${ID}`).innerHTML += highlightTaskTamplate();
+    // }
+    // highlightTaskCount++;
 }
 
-/**
- * Remove drop highlight from a column.
- * @param {string} ID Column ID.
- */
+/** Removes the highlight area (currently disabled). */
 function removeHighlightField(ID) {
-    document.getElementById(`${ID}`).classList.remove("highlight");
+    // let refHighlightTask = document.getElementById('highlightTask');
+    // if (refHighlightTask!=null) {
+    //     refHighlightTask.remove();
+    // }
+    // highlightTaskCount = 0;
 }
 
-/**
- * Create and save a new task from form.
- * @returns {Promise<void>}
- */
+/** Creates a new task from the form and renders it. */
 async function formIsSubmittet() {
     let taskID = TASKKEYS[0].length + count;
     let taskVar = "Task" + taskID;
@@ -177,18 +150,66 @@ async function formIsSubmittet() {
 
 }
 
+/** Shows hints when columns are empty. */
 function checkFieldIsEmpty() {
-    refField1.hasChildNodes() == false ? refField1.innerHTML = `<div id="noTaskField1" class="noTaskField">No Tasks to do</div>`: null;
-    (refField1.childElementCount>= 2) && (document.getElementById('noTaskField1')!= null) ? document.getElementById('noTaskField1').remove() : null;
-    refField2.hasChildNodes() == false ? refField2.innerHTML = `<div id="noTaskField2" class="noTaskField">No Tasks in progress</div>`: null;
-    (refField2.childElementCount>= 2) && (document.getElementById('noTaskField2')!= null) ? document.getElementById('noTaskField2').remove() : null;
-    refField3.hasChildNodes() == false ? refField3.innerHTML = `<div id="noTaskField3" class="noTaskField">No Tasks await feedback</div>`: null;
-    (refField3.childElementCount>= 2) && (document.getElementById('noTaskField3')!= null) ? document.getElementById('noTaskField3').remove() : null;
-    refField4.hasChildNodes() == false ? refField4.innerHTML = `<div id="noTaskField4" class="noTaskField">No Tasks done</div>`: null;
-    (refField4.childElementCount>= 2) && (document.getElementById('noTaskField4')!= null) ? document.getElementById('noTaskField4').remove() : null;
+    document.getElementById('field1').hasChildNodes() == false ? document.getElementById('field1').innerHTML = `<div id="noTaskField1" class="noTaskField">No Tasks to do</div>` : null;
+    (document.getElementById('field1').childElementCount >= 2) && (document.getElementById('noTaskField1') != null) ? document.getElementById('noTaskField1').remove() : null;
+    document.getElementById('field2').hasChildNodes() == false ? document.getElementById('field2').innerHTML = `<div id="noTaskField2" class="noTaskField">No Tasks in progress</div>` : null;
+    (document.getElementById('field2').childElementCount >= 2) && (document.getElementById('noTaskField2') != null) ? document.getElementById('noTaskField2').remove() : null;
+    document.getElementById('field3').hasChildNodes() == false ? document.getElementById('field3').innerHTML = `<div id="noTaskField3" class="noTaskField">No Tasks await feedback</div>` : null;
+    (document.getElementById('field3').childElementCount >= 2) && (document.getElementById('noTaskField3') != null) ? document.getElementById('noTaskField3').remove() : null;
+    document.getElementById('field4').hasChildNodes() == false ? document.getElementById('field4').innerHTML = `<div id="noTaskField4" class="noTaskField">No Tasks done</div>` : null;
+    (document.getElementById('field4').childElementCount >= 2) && (document.getElementById('noTaskField4') != null) ? document.getElementById('noTaskField4').remove() : null;
 }
 
+/** Starts the rotation animation for the dragged task. */
 function transormTask() {
-    document.getElementById(`${curentTraggedElement}`).style.transform = "rotate(5deg)";
-    
+    document.getElementById(`${curentTraggedElement}`).classList.add('rotate5deg');
 }
+
+/** Stops the rotation animation after a short delay. */
+function endTransformTask() {
+    setTimeout(() => {
+        document.getElementById(`${curentTraggedElement}`).classList.remove('rotate5deg')
+        // let refHighlightTask = document.getElementById('highlightTask');
+        // if (refHighlightTask!=null) {
+        //     refHighlightTask.remove();
+        // }
+        // highlightTaskCount = 0;
+    }, 100);
+}
+
+/** Searches tasks by title and updates the view. */
+async function searchTask() {
+    let refSearchInput = document.getElementById('searchInput');
+    if (refSearchInput.value.length >= 1) {
+        startTheSearch(refSearchInput);
+    } else if (refSearchInput.value.length == 0) {
+        document.getElementById('fields').innerHTML = taskBoardTamplate();
+        TASK = [];
+        TASKKEYS = [];
+        count = 0;
+        await render();
+    }
+}
+
+/** Filters tasks by title and renders the matches. */
+function startTheSearch(refSearchInput) {
+    let filter = refSearchInput.value.toUpperCase();
+    let searchCount = 0;
+    emtyFieldContent();
+    TASKKEYS[0].forEach(task => {
+        let refTaskTitle = TASK[0][`${task}`].title;
+        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1) {
+            loadTaskTamplate(TASK[0][`${task}`]);
+            checkFieldIsEmpty();
+            searchCount++;
+        }
+    }
+    )
+    if (searchCount == 0) {
+        document.getElementById('fields').innerHTML = `<div class="noTaskFound">No Tasks Found</div>`;
+    }
+}
+
+

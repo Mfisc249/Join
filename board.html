@@ -1,51 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" class="mainFond">
+<html lang="en" class="mainFond" ondragend="endTransformTask()">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
-    <link rel="stylesheet" href="./style/board.css">
     <link rel="stylesheet" href="./style/standard.css">
+    <link rel="stylesheet" href="./style/sidebar.css">
+    <link rel="stylesheet" href="./style/board.css">
+    <link rel="stylesheet" href="./style/taskDetail.css">
 </head>
 
-<body onload="render()">
-    <div class="addTaskContainer">
-        <h1>Board</h1>
-        <div class="addTaskContainer gap32px">
-            <div class="searchBar">
-                <input name="Search" placeholder="Find Task" rows="1"></input>
-                <img onclick="" src="./assets/img/Search.svg" alt="Search">
-            </div>
-            <form onsubmit="formIsSubmittet(); return false">
-                <!-- <input id="titleId" type="text" required placeholder="Titel">
+<body onload="init2()">
+    <div class="app">
+        <section class="addTaskContainer">
+            <h1>Board</h1>
+            <div class="addTaskContainer gap32px">
+                <div class="searchBar">
+                    <input id="searchInput" onkeyup="searchTask()" name="Search" placeholder="Find Task"
+                        rows="1"></input>
+                    <img src="./assets/img/Search.svg" alt="Search">
+                </div>
+                <form onsubmit="formIsSubmittet(); return false">
+                    <!-- <input id="titleId" type="text" required placeholder="Titel">
                 <input id="contentId" type="text" required placeholder="Beschreibung"> -->
-                <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add.svg"
-                        alt="+"></button>
-            </form>
-        </div>
+                    <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add.svg"
+                            alt="+"></button>
+                </form>
+            </div>
+        </section>
+        <section class="tablecontainer">
+            <table>
+                <tr class="tableCategories">
+                    <td>To do <button>+</button></td>
+                    <td>In progress <button>+</button></td>
+                    <td>Await feedback <button>+</button></td>
+                    <td>Done</td>
+                </tr>
+                <tr id="fields">
+
+                </tr>
+            </table>
+        </section>
+        <dialog id="allTaskDetails" class="allTaskDetails" onclick="closedialog('allTaskDetails')">
+
+        </dialog>
     </div>
-    <div class="tablecontainer">
-        <table>
-            <tr class="tableCategories">
-                <td>To do <button>+</button></td>
-                <td>In progress <button>+</button></td>
-                <td>Await feedback <button>+</button></td>
-                <td>Done</td>
-            </tr>
-            <tr>
-                <td id="field1" ondrop="moveTo('field1')" ondragleave="removeHighlightField('field1')"
-                    ondragover="dragoverHandler(event), highlightField('field1')"></td>
-                <td id="field2" ondrop="moveTo('field2')" ondragleave="removeHighlightField('field2')"
-                    ondragover="dragoverHandler(event), highlightField('field2')"></td>
-                <td id="field3" ondrop="moveTo('field3')" ondragleave="removeHighlightField('field3')"
-                    ondragover="dragoverHandler(event), highlightField('field3')"></td>
-                <td id="field4" ondrop="moveTo('field4')" ondragleave="removeHighlightField('field4')"
-                    ondragover="dragoverHandler(event), highlightField('field4')"></td>
-            </tr>
-        </table>
-    </div>
+    <script src="./JS/sidebar.js"></script>
+    <script src="./JS/boardTamplate.js"></script>
     <script src="./JS/board.js"></script>
+    <script src="./JS/taskDetail.js"></script>
+
 </body>
 
 </html>
