@@ -6,70 +6,35 @@
   <title>Join | Contacts</title>
 
   <link rel="stylesheet" href="./style/standard.css" />
+  <link rel="stylesheet" href="./style/sidebar.css" />
+  <link rel="stylesheet" href="./style/header.css" />
   <link rel="stylesheet" href="./style/contacts.css" />
 </head>
 
 <body>
   <div class="app">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-top">
-        <!-- white logo version for sidebar (du kannst später ein eigenes white svg nutzen) -->
-        <img class="sidebar-logo" src="./assets/img/logoside.svg" alt="Join Logo" />
-      </div>
-
-      <nav class="nav">
-        <a class="nav-item" href="./summary.html">
-          <span class="nav-icon"><img src="./assets/img/summary.svg" alt="Summary"></span><span>Summary</span>
-        </a>
-        <a class="nav-item" href="./add_task.html">
-          <span class="nav-icon"><img src="./assets/img/addtask.png" alt="Add Task"></span><span>Add Task</span>
-        </a>
-        <a class="nav-item" href="./board.html">
-          <span class="nav-icon"><img src="./assets/img/board.png" alt="Board"></span><span>Board</span>
-        </a>
-        <a class="nav-item active" href="./contacts.html">
-          <span class="nav-icon"><img src="./assets/img/contacts.svg" alt="Contacts"></span><span>Contacts</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-bottom">
-        <a class="sidebar-link" href="./privacy.html">Privacy Policy</a>
-        <a class="sidebar-link" href="./legal.html">Legal notice</a>
-      </div>
-    </aside>
+     <div id="sidebar-slot"></div>
+     <div id="header-slot"></div> 
+  
 
     <!-- Main area -->
     <div class="main">
-      <!-- Header -->
-      <header class="header">
-        <div class="header-title">Kanban Project Management Tool</div>
-
-        <div class="header-right">
-          <button class="circleBadge" type="button" aria-label="Help">
-            ?
-          </button>
-
-          <button class="circleBadge" type="button" aria-label="User profile">
-            <span class="profile-initials">SM</span>
-          </button>
-        </div>
-      </header>
-
       <!-- Content layout: list panel + details -->
       <div class="content">
         <!-- Contacts list panel -->
         <section class="contacts-panel" aria-label="Contacts list">
+          <!-- Add new contact button (sticky bar) -->
           <div class="contacts-panel-header">
             <button class="ButtonBlueFilled" id="addContactBtn" type="button">
+              
               <span>Add new contact</span>
-              <span class="btn-add-icon">+</span>
+              <img src="./assets/img/person_add.svg" alt="Add" width="29.33" height="20.91">
+          
             </button>
           </div>
 
-          <div class="contacts-list" id="contactsList">
-            <!-- JS rendert hier Gruppen + Items -->
-          </div>
+          <!-- JS rendert hier Gruppen + Items -->
+          <div class="contacts-list" id="contactsList"></div>
         </section>
 
         <!-- Details area -->
@@ -94,8 +59,14 @@
                 <div class="details-name" id="detailsName">Anton Mayer</div>
 
                 <div class="details-actions">
-                  <button class="link-icon" id="editBtn" type="button">✎ <span>Edit</span></button>
-                  <button class="link-icon" id="deleteBtn" type="button">🗑 <span>Delete</span></button>
+                  <button class="link-icon" id="editBtn" type="button" aria-label="Kontakt bearbeiten">
+                    <img src="./assets/img/edit.svg" alt="Edit" width="24" height="24">
+                    <span>Edit</span>
+                  </button>
+                  <button class="link-icon" id="deleteBtn" type="button" aria-label="Kontakt löschen">
+                    <img src="./assets/img/delete.svg" alt="Delete" width="24" height="24">
+                    <span>Delete</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -119,6 +90,76 @@
     </div>
   </div>
 
+<!-- EDIT/ADD CONTACT MODAL -->
+<div id="contactOverlay" class="contact-overlay d-none">
+  <div class="contact-modal">
+
+    <!-- LEFT PANEL -->
+    <div class="contact-modal-left">
+      <div class="contact-modal-brand">
+        <img src="./assets/img/logoside.svg" alt="Join" class="contact-modal-logo">
+      </div>
+
+      <div class="contact-modal-left-content">
+        <h2 id="contactModalTitle" class="contact-modal-title">Edit contact</h2>
+        <p id="contactModalSubtitle" class="contact-modal-subtitle d-none">
+          Tasks are better with a team!
+        </p>
+        <div class="contact-modal-divider"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="contact-modal-right">
+      <button id="contactModalClose" class="contact-modal-close" onclick="closeContactModal()" aria-label="Close">
+        <img src="./assets/img/Close.svg" alt="Close">
+      </button>
+
+      <div class="contact-modal-body">
+        <div class="contact-modal-avatar-wrap">
+          <div id="contactModalAvatar" class="contact-modal-avatar">
+            <span id="contactModalInitials">AM</span>
+            <img id="contactModalAvatarIcon" class="contact-modal-avatar-icon d-none" src="./assets/img/person.svg" alt="">
+          </div>
+        </div>
+
+        <form id="contactModalForm" class="contact-modal-form" novalidate>
+          <!-- Name -->
+          <div class="contact-input">
+            <input id="modalName" type="text" placeholder="Name" autocomplete="off">
+            <img class="contact-input-icon" src="./assets/img/person.svg" alt="">
+          </div>
+          <div id="modalErrName" class="modal-error"></div>
+
+          <!-- Email -->
+          <div class="contact-input">
+            <input id="modalEmail" type="text" placeholder="Email" autocomplete="off">
+            <img class="contact-input-icon" src="./assets/img/mail.svg" alt="">
+          </div>
+          <div id="modalErrEmail" class="modal-error"></div>
+
+          <!-- Phone -->
+          <div class="contact-input">
+            <input id="modalPhone" type="text" placeholder="Phone" autocomplete="off">
+            <img class="contact-input-icon" src="./assets/img/call.svg" alt="">
+          </div>
+          <div id="modalErrPhone" class="modal-error"></div>
+        </form>
+
+        <div class="contact-modal-actions">
+          <button id="contactModalDeleteBtn" type="button" class="btn-secondary-outline">Delete</button>
+          <button id="contactModalSaveBtn" type="submit" form="contactModalForm" class="btn-primary-dark">
+            <span id="contactModalSaveText">Save</span> <span class="btn-check">✓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <script src="./JS/sidebar.js"></script>
+  <script src="./JS/header.js"></script>
   <script src="./JS/contacts.js"></script>
 </body>
 </html>
