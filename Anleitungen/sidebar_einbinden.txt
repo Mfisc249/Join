@@ -1,0 +1,45 @@
+Sidebar Integration Guide - Sidebar v1.1
+
+## Schnelle 3-Schritte Integration
+
+### 1. CSS einbinden (im `<head>`)
+```html
+<link rel="stylesheet" href="./style/standard.css">
+<link rel="stylesheet" href="./style/sidebar.css">
+<link rel="stylesheet" href="./style/deine-seite.css">
+```
+
+### 2. HTML-Struktur verwenden
+```html
+<body>
+    <div class="app">
+        <!-- Sidebar wird hier automatisch eingefügt -->
+        
+        <!-- Dein Seiteninhalt hier -->
+        <div class="main">
+            <h1>Deine Seite</h1>
+            <!-- Rest deines Contents -->
+        </div>
+    </div>
+    
+    <script src="./JS/sidebar.js"></script>
+    <script src="./JS/deine-seite.js"></script>
+</body>
+```
+
+### 3. Fertig! ✅
+
+Das war's! Die Sidebar wird automatisch geladen und die korrekte Navigation wird hervorgehoben.
+
+## Wichtige Hinweise
+
+- **CSS-Reihenfolge beachten:** standard.css → sidebar.css → `deine-seite.css`
+- **`.app` Container:** Notwendig für korrektes Layout
+- **Sidebar.js einbinden:** Für automatisches Laden und SVG-Inlining
+- **Aktive Seite:** Wird automatisch basierend auf `data-page` Attribut erkannt
+
+## Beispiele
+- ✅ Funktioniert: contacts.html, board.html
+- 📁 Templates: sidebar.html
+
+**Bei Fragen:** Sidebar v1.1 implementiert Figma-Design mit 30x30px Icons, korrekten Farben (#CDCDCD inaktiv, #FFFFFF aktiv) und automatischem Layout.

@@ -1,6 +1,7 @@
-body{
-    background-color: var( --GlobalBackgroundWhite);
+body {
+    background-color: var(--GlobalBackgroundWhite);
 }
+
 .addTaskContainer {
      display: flex;
      justify-content: space-between;
