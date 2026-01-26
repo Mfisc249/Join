@@ -1,0 +1,102 @@
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  width: calc(100% - var(--sidebar-w));
+  height: 96px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 20px 340px;
+  gap: 34px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  z-index: 3000;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Header title */
+.header-title {
+  margin-right: auto;
+  width: 319px;
+  height: 24px;
+  
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  color: #000000;
+  
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+  /* Header right section */
+.header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  
+  margin-left: auto;
+  width: 104px;
+  height: 56px;
+  
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+/* Help button */
+.header-help-btn {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.header-icon {
+  width: 100%;
+  height: 100%;
+}
+
+/* circleBadge für Header */
+.header-right .circleBadge {
+  width: 56px;
+  height: 56px;
+  border: 3px solid #2A3647;
+  background: #FFFFFF;
+  border-radius: 50%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.header-right .circleBadge span {
+  width: 27.94px;
+  height: 14.24px;
+  color: #29ABE2;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
