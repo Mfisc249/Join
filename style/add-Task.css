@@ -167,52 +167,70 @@ h1 {
   height: 424px;
   color: rgba(209, 209, 209, 1);
 }
+
 .priority {
   display: flex;
-  align-items: center;
   gap: 8px;
 }
-.importanceLevel {
-  font-size: 20px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 1);
-  line-height: 1.2;
+
+.priorityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 139px;
+  height: 51px;
+
+  background-color: white;
+  border: 1px solid rgba(209, 209, 209, 1);
   border-radius: 10px;
-  cursor: pointer;
+
+  font-size: 20px;
   font-weight: 600;
   font-family: "Inter", sans-serif;
-  text-align: center;
+
+  cursor: pointer;
   transition:
-    transform 0.1s,
-    box-shadow 0.1s;
-  background-color: rgba(255, 255, 255, 1);
-  height: 51px;
-  border: 1px solid rgba(209, 209, 209, 1);
-  width: 139px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12px;
-  margin-bottom: 24px;
+    box-shadow 0.1s,
+    transform 0.1s;
 }
 
-.importanceLevel.urgent.active {
+.priorityButton:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.priorityButton.urgent.active {
   background-color: #ff2020;
   color: white;
 }
 
-.importanceLevel.medium.active {
+.priorityButton.medium.active {
   background-color: rgba(255, 168, 0, 1);
-  color: black;
+  color: white;
 }
 
-.importanceLevel.low.active {
+.priorityButton.low.active {
   background-color: #00cf00;
   color: white;
 }
 
-.importanceLevel:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+/* Icons standardmäßig passend zur Button-Farbe */
+.priorityButton.urgent .priorityIcon {
+  filter: brightness(0) invert(0); /* normales Icon */
+}
+
+.priorityButton.medium .priorityIcon {
+  filter: brightness(0) invert(0); /* normales Icon, bleibt orange */
+}
+
+.priorityButton.low .priorityIcon {
+  filter: brightness(0) invert(0); /* normales Icon */
+}
+
+/* Wenn Button aktiv: Icon wird weiß */
+.priorityButton.active .priorityIcon {
+  filter: brightness(0) invert(1);
 }
 
 .ChoiceOption {
@@ -326,9 +344,6 @@ h1 {
 
 .subtaskIcon:hover {
   opacity: 0.7;
-}
-
-.subTaskItem {
 }
 
 .subTaskContent {

@@ -57,11 +57,22 @@ function createTaskTemplate(taskName, taskDescription) {
         <div class="divider"></div>
         <div class="rightContent">
           <h2>Priority</h2>
-          <div class="priority">
-          <p class="importanceLevel urgent">Urgent</p>
-          <p class="importanceLevel medium">Medium</p>
-          <p class="importanceLevel low">Low</p>
-          </div>
+        <div class="priority">
+  <div class="priorityButton urgent">
+    <span>Urgent</span>
+    <img class="priorityIcon" src="/Join/assets/img/Prio alta.svg" />
+  </div>
+
+  <div class="priorityButton medium">
+    <span>Medium</span>
+    <img class="priorityIcon" src="/Join/assets/img/Prio media.svg" />
+  </div>
+
+  <div class="priorityButton low">
+    <span>Low</span>
+    <img class="priorityIcon" src="/Join/assets/img/Prio baja.svg" />
+  </div>
+</div>
           <div class="d">
             <div class="OptionsContainer">
             <h2 class="ChoiceHeadline">Assigned to</h2>

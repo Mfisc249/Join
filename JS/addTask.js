@@ -132,44 +132,32 @@ function toggleRequired(inputElement) {
 }
 
 function setupPriorityButtons() {
-  const buttons = document.querySelectorAll(".importanceLevel");
+  const buttons = document.querySelectorAll(".priorityButton");
 
   buttons.forEach((btn) => {
     btn.onclick = () => {
+      // 👉 FALL 1: Button war schon aktiv → deaktivieren
       if (btn.classList.contains("active")) {
-        // Button deaktivieren
         btn.classList.remove("active");
-        btn.style.backgroundColor = "white";
-        btn.style.color = "black";
         task.priority = "";
-      } else {
-        // Alle Buttons zurücksetzen
-        buttons.forEach((b) => {
-          b.classList.remove("active");
-          b.style.backgroundColor = "white";
-          b.style.color = "black";
-        });
-
-        // Geklickten Button aktivieren
-        btn.classList.add("active");
-        task.priority = btn.textContent;
-
-        if (btn.textContent === "Urgent") btn.style.backgroundColor = "#ff2020";
-        if (btn.textContent === "Medium") btn.style.backgroundColor = "orange";
-        if (btn.textContent === "Low") btn.style.backgroundColor = "#00cf00";
-
-        btn.style.color = "white";
+        return;
       }
+
+      // 👉 FALL 2: neuer Button → alle anderen aus
+      buttons.forEach((b) => b.classList.remove("active"));
+
+      btn.classList.add("active");
+
+      if (btn.classList.contains("urgent")) task.priority = "Urgent";
+      if (btn.classList.contains("medium")) task.priority = "Medium";
+      if (btn.classList.contains("low")) task.priority = "Low";
     };
   });
 }
 
 function setDefaultPriority() {
-  const buttons = document.querySelectorAll(".importanceLevel");
-  const defaultBtn = buttons[1];
+  const defaultBtn = document.querySelector(".priorityButton.medium");
   defaultBtn.classList.add("active");
-  defaultBtn.style.backgroundColor = "orange";
-  defaultBtn.style.color = "white";
   task.priority = "Medium";
 }
 
