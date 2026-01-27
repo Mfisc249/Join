@@ -7,8 +7,16 @@
       <img class="header-icon" src="./assets/img/help.svg" alt="Help">
     </button>
     
-    <button class="circleBadge" type="button" aria-label="User profile">
+    <div class="user-menu">
+      <button id="circleBadge" class="circleBadge" aria-haspopup="true" aria-expanded="false">
         <span>SM</span>
-    </button>
+      </button>
+
+      <div id="submenu" class="submenu hidden" role="menu" aria-label="User menu">
+        <a href="./legal_notice.html" role="menuitem" class="submenu-item">Legal Notice</a>
+        <a href="./privacy_policy.html" role="menuitem" class="submenu-item">Privacy Policy</a>
+        <button type="button" role="menuitem" class="submenu-item submenu-logout" onclick="logout()">Log out</button>
+      </div>
+    </div>
   </div>
 </header>

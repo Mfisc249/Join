@@ -650,6 +650,10 @@
   cursor: pointer;
   padding: 15px 24px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-primary-dark {
@@ -668,7 +672,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 8px;
   padding: 16px;
   box-sizing: border-box;
   text-align: center;
@@ -678,6 +682,44 @@
 .btn-secondary-outline:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Cancel button X styling */
+.btn-cancel-x {
+  margin-left: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Check mark styling for create button */
+.btn-check {
+  margin-left: 4px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Fix für Create Contact Button - Flexbox für Häkchen */
+.btn-primary-dark {
+  width: 200px;
+  height: 57px;
+  background: #2A3647;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Responsive */

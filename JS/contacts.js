@@ -305,7 +305,7 @@ function openContactModal(mode, contact = null) {
 
     // Button links: Cancel ✕
     deleteBtn.classList.remove('d-none');
-    deleteBtn.textContent = 'Cancel ✕';
+    deleteBtn.innerHTML = 'Cancel <img src="./assets/img/iconoir_cancel.svg" alt="" class="btn-cancel-x">';
     deleteBtn.onclick = closeContactModal;
 
     // Button rechts
