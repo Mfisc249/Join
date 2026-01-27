@@ -4,6 +4,7 @@
  * Usage: Reference via var(--token) across components and states.
  */
 :root {
+    --globalBlue: #2A3647;
     --GlobalBlue: #2A3647;
     --GlobalWhite: #FFFFFF;
     --GlobalBackgroundWhite: #F6F7F8;
