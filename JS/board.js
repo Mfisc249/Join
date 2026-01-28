@@ -7,7 +7,7 @@ let highlightTaskCount = 0;
 let curentTraggedElement;
 
 /** Initializes the board and renders tasks. */
-async function init2() {
+async function init() {
     document.getElementById('fields').innerHTML = taskBoardTamplate();
     await render();
 }
@@ -45,19 +45,19 @@ async function render() {
 
 /** Appends the task template to the appropriate column. */
 function loadTaskTamplate(refTask) {
-    if (refTask.category == 'field1') {
+    if (refTask.field == 'field1') {
         document.getElementById('field1').innerHTML += taskTamplate(refTask.id);
     }
 
-    if (refTask.category == 'field2') {
+    if (refTask.field == 'field2') {
         document.getElementById('field2').innerHTML += taskTamplate(refTask.id);
     }
 
-    if (refTask.category == 'field3') {
+    if (refTask.field == 'field3') {
         document.getElementById('field3').innerHTML += taskTamplate(refTask.id);
     }
 
-    if (refTask.category == 'field4') {
+    if (refTask.field == 'field4') {
         document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
     }
 }
@@ -75,8 +75,13 @@ async function renderaddedTask(taskID, refTitel, refContent) {
     await DataPUT(`Task${taskID}`, {
         'title': `${refTitel.value}`,
         'id': taskID,
-        'category': 'field1',
-        'content': `${refContent.value}`
+        'field': 'field1',
+        'content': `${refContent.value}`,
+        'assignedTo': "c1,c5",
+        'priority': "Medium",
+        'category': "User Story",
+        'dueDate': "27/01/2026",
+        'subTasks': "Implement Recipe Recommendation,Start Page Layout"
     });
     document.getElementById('field1').innerHTML += taskTamplate(taskID);
     checkFieldIsEmpty();
@@ -103,14 +108,20 @@ function dragoverHandler(ev) {
 
 /** Moves the dragged task to the column and persists it. */
 async function moveTo(field) {
-    TASK[0][`Task${curentTraggedElement}`].category = `${field}`;
+    TASK[0][`Task${curentTraggedElement}`].field = `${field}`;
     document.getElementById(`${field}`).classList.remove("highlight");
     renderMovedTask(field);
     await DataPUT(`Task${curentTraggedElement}`, {
         'title': `${TASK[0][`Task${curentTraggedElement}`].title}`,
         'id': curentTraggedElement,
-        'category': `${field}`,
-        'content': `${TASK[0][`Task${curentTraggedElement}`].content}`
+        'field': `${field}`,
+        'content': `${TASK[0][`Task${curentTraggedElement}`].content}`,
+        'category': `${TASK[0][`Task${curentTraggedElement}`].category}`,
+        'assignedTo': "c1,c5",
+        'priority': "Medium",
+        'category': "User Story",
+        'dueDate': "27/01/2026",
+        'subTasks': "Implement Recipe Recommendation,Start Page Layout"
     })
 
 }
@@ -142,8 +153,13 @@ async function formIsSubmittet() {
     TASK[0][taskVar] = {
         'id': taskID,
         'title': `${refTitel.value}`,
-        'category': 'field1',
-        'content': `${refContent.value}`
+        'field': 'field1',
+        'content': `${refContent.value}`,
+        'assignedTo': "c1,c5",
+        'priority': "Medium",
+        'category': "User Story",
+        'dueDate': "27/01/2026",
+        'subTasks': "Implement Recipe Recommendation,Start Page Layout"
     }
     count++;
     await renderaddedTask(taskID, refTitel, refContent);

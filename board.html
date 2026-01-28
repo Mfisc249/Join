@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="mainFond" ondragend="endTransformTask()">
+<html lang="en" ondragend="endTransformTask()">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,65 @@
     <link rel="stylesheet" href="./style/standard.css">
     <link rel="stylesheet" href="./style/board.css">
     <link rel="stylesheet" href="./style/taskDetail.css">
+    <link rel="stylesheet" href="./style/sidebar.css">
+    <link rel="stylesheet" href="./style/header.css">
 </head>
 
-<body onload="init2()">
+<body onload="init()">
     <div class="app">
+        <!-- <link rel="stylesheet" href="../style/standard.css">
+        <header class="header">
+            <div class="header-title">Kanban Project Management Tool</div>
+
+            <div class="header-right">
+                <button class="header-help-btn" type="button" aria-label="Help">
+                    <img class="header-icon" src="./assets/img/help.svg" alt="Help">
+                </button>
+
+                <button class="circleBadge" type="button" aria-label="User profile">
+                    <span>SM</span>
+                </button>
+            </div>
+        </header> -->
+
+        <!-- Sidebar Template -->
+        <!-- <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <img class="sidebar-logo" src="./assets/img/logoside.svg" alt="Join Logo" />
+            </div>
+
+            <nav class="nav">
+                <a class="nav-item" href="./summary.html" data-page="summary">
+                    <span class="nav-icon">
+                        <img src="./assets/img/summary.svg" alt="Summary">
+                    </span>
+                    <span>Summary</span>
+                </a>
+                <a class="nav-item" href="./add_task.html" data-page="add_task">
+                    <span class="nav-icon">
+                        <img src="./assets/img/addtask.png" alt="Add Task">
+                    </span>
+                    <span>Add Task</span>
+                </a>
+                <a class="nav-item" href="./board.html" data-page="board">
+                    <span class="nav-icon">
+                        <img src="./assets/img/board.png" alt="Board">
+                    </span>
+                    <span>Board</span>
+                </a>
+                <a class="nav-item" href="./contacts.html" data-page="contacts">
+                    <span class="nav-icon">
+                        <img src="./assets/img/contacts.svg" alt="Contacts">
+                    </span>
+                    <span>Contacts</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a class="sidebar-link" href="./privacy.html">Privacy Policy</a>
+                <a class="sidebar-link" href="./legal.html">Legal notice</a>
+            </div>
+        </aside> --> 
         <section class="addTaskContainer">
             <h1>Board</h1>
             <div class="addTaskContainer gap32px">
@@ -23,7 +78,7 @@
                 <form onsubmit="formIsSubmittet(); return false">
                     <!-- <input id="titleId" type="text" required placeholder="Titel">
                 <input id="contentId" type="text" required placeholder="Beschreibung"> -->
-                    <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add.svg"
+                    <button class="ButtonBlueFilled" type="submit">Add Task <img src="./assets/img/add_white.svg"
                             alt="+"></button>
                 </form>
             </div>
@@ -40,11 +95,14 @@
 
                 </tr>
             </table>
+            
         </section>
         <dialog id="allTaskDetails" class="allTaskDetails" onclick="closedialog('allTaskDetails')">
 
         </dialog>
     </div>
+    <!-- <script src="./JS/sidebar.js"></script>
+    <script src="./JS/header.js"></script> -->
     <script src="./JS/boardTamplate.js"></script>
     <script src="./JS/board.js"></script>
     <script src="./JS/taskDetail.js"></script>

@@ -26,26 +26,36 @@ function taskDetailsTamplate(taskID) {
     <div onclick="event.stopPropagation()">
         <header>
             <section>
-                <div class="taskCatagory">XXX</div>
+                <div class="taskCatagory">${TASK[0][`Task${taskID}`].category}</div>
                 <div class= "closeDialogX" onclick = "closedialog('allTaskDetails')">X</div>
             </section>
             <h1>${TASK[0][`Task${taskID}`].title}</h1>
         </header>
         <main>
             <section>
-                <p>xxxxxx</p>
+                <p>${TASK[0][`Task${taskID}`].content}</p>
                 <table>
                     <tr>
                         <td><h2>Due date:</h2></td>
-                        <td></td>
+                        <td>${TASK[0][`Task${taskID}`].dueDate}</td>
                     </tr>
                     <tr>
                         <td><h2>Priority:</h2></td>
-                        <td></td>
+                        <td>${TASK[0][`Task${taskID}`].priority}</td>
                     </tr>
                 </table>
                 <h2>Assigned To:</h2>
                 <h2>Subtasks</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                           testhcsdijp
+                        </td>
+                    </tr>
+                </table>
             </section>
         </main>
         <footer>
