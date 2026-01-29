@@ -21,6 +21,7 @@ function closedialog(ID) {
 function openTaskDetails(taskID) {
     let reftaskDetails = document.getElementById('allTaskDetails');
     reftaskDetails.innerHTML = taskDetailsTamplate(taskID);
+    renderSubtasks(taskID);
 }
 
 function displayNone(ID1, ID2) {
@@ -44,4 +45,20 @@ async function DataDELETE(path = "") {
         method: "DELETE"
     });
 
+}
+
+function checkbox(IDU, IDCheck) {
+    document.getElementById(IDU).classList.toggle('displayNone');
+    document.getElementById(IDCheck).classList.toggle('displayNone');
+}
+
+function renderSubtasks(taskID) {
+    let refSubtasks = TASK[0][`Task${taskID}`].subTasks;
+    let subTaskCount = (refSubtasks.match(/,/g)||[]).length +1;
+    for (let index = 0; index < subTaskCount; index++) {
+        let subTask = refSubtasks.split(',')[index];
+        document.getElementById('subTasks').innerHTML += subtaskTamplate(index, subTask);
+    }
+    
+    
 }

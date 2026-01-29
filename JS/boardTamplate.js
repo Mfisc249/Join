@@ -46,16 +46,8 @@ function taskDetailsTamplate(taskID) {
                 </table>
                 <h2>Assigned To:</h2>
                 <h2>Subtasks</h2>
-                <table>
-                    <tr>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                           testhcsdijp
-                        </td>
-                    </tr>
-                </table>
+                   <div id = "subTasks" class = "subTasks"></div>
+             </div>
             </section>
         </main>
         <footer>
@@ -66,4 +58,8 @@ function taskDetailsTamplate(taskID) {
         </footer>
     </div>`
      
+}
+
+function subtaskTamplate(ID, subTask) {
+    return `<span><img onclick="checkbox('stCheckboxU${ID}','stCheckboxCheck${ID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxCheck${ID}')" id="stCheckboxCheck${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
 }
