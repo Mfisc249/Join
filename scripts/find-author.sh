@@ -36,5 +36,5 @@ echo ""
 
 echo "Für detaillierte Zeilen-Informationen verwenden Sie:"
 echo "For detailed line-by-line information use:"
-echo "  git blame $FILE"
+echo "  git blame \"$FILE\""
 echo ""

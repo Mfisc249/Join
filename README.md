@@ -31,7 +31,7 @@ git blame style/standard.css
 git log -1 --pretty=format:"%an <%ae> - %ad - %s" --date=short <dateiname>
 ```
 
-#### 4. Helper-Script verwenden (siehe unten)
+#### 4. Helper-Script verwenden
 ```bash
 ./scripts/find-author.sh style/standard.css
 ```
@@ -69,7 +69,7 @@ git blame style/standard.css
 git log -1 --pretty=format:"%an <%ae> - %ad - %s" --date=short <filename>
 ```
 
-#### 4. Use helper script (see below)
+#### 4. Use helper script
 ```bash
 ./scripts/find-author.sh style/standard.css
 ```
