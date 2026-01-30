@@ -1,3 +1,18 @@
+/* CSS for logo-animation */
+
+#logo-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--GlobalBackgroundWhite);
+}
+
+#content {
+  background-color: blue;
+}
+
+/* CSS for login-site */
 body {
   background-color: var(--GlobalBackgroundWhite);
   font-family: inter;
