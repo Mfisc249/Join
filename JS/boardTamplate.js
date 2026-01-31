@@ -27,7 +27,7 @@ function taskDetailsTamplate(taskID) {
         <header>
             <section>
                 <div class="taskCatagory">${TASK[0][`Task${taskID}`].category}</div>
-                <div class= "closeDialogX" onclick = "closedialog('allTaskDetails')">X</div>
+                <div class= "closeDialogX" onclick = "closedialog('allTaskDetails'); storeSubtask()">X</div>
             </section>
             <h1>${TASK[0][`Task${taskID}`].title}</h1>
         </header>
@@ -60,6 +60,6 @@ function taskDetailsTamplate(taskID) {
      
 }
 
-function subtaskTamplate(ID, subTask) {
-    return `<span><img onclick="checkbox('stCheckboxU${ID}','stCheckboxCheck${ID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxCheck${ID}')" id="stCheckboxCheck${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
+function subtaskTamplate(ID, subTask, subTID) {
+    return `<span><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')" id="stCheckboxC${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
 }

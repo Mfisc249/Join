@@ -16,8 +16,7 @@ async function init() {
 async function DataGET(path = "") {
     let response = await fetch(BOARDURLBASE + path + '.json');
     let responseASJson = await response.json();
-    TASK = [];
-    TASK.push(responseASJson);
+    return responseASJson;
 }
 
 /** Writes/updates a task at the specified Firebase path. */
@@ -33,7 +32,8 @@ async function DataPUT(path = "", data = {}) {
 
 /** Loads tasks and renders board columns by category. */
 async function render() {
-    await DataGET();
+    TASK = [];
+    TASK.push(await DataGET());
     emtyFieldContent();
     TASKKEYS = [];
     TASKKEYS.push(Object.keys(TASK[0]));
@@ -45,19 +45,19 @@ async function render() {
 
 /** Appends the task template to the appropriate column. */
 function loadTaskTamplate(refTask) {
-    if (refTask.field == 'field1') {
+    if (refTask.field.field == 'field1') {
         document.getElementById('field1').innerHTML += taskTamplate(refTask.id);
     }
 
-    if (refTask.field == 'field2') {
+    if (refTask.field.field == 'field2') {
         document.getElementById('field2').innerHTML += taskTamplate(refTask.id);
     }
 
-    if (refTask.field == 'field3') {
+    if (refTask.field.field == 'field3') {
         document.getElementById('field3').innerHTML += taskTamplate(refTask.id);
     }
 
-    if (refTask.field == 'field4') {
+    if (refTask.field.field == 'field4') {
         document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
     }
 }
@@ -108,21 +108,12 @@ function dragoverHandler(ev) {
 
 /** Moves the dragged task to the column and persists it. */
 async function moveTo(field) {
-    TASK[0][`Task${curentTraggedElement}`].field = `${field}`;
+    TASK[0][`Task${curentTraggedElement}`].field.field = `${field}`;
     document.getElementById(`${field}`).classList.remove("highlight");
     renderMovedTask(field);
-    await DataPUT(`Task${curentTraggedElement}`, {
-        'title': `${TASK[0][`Task${curentTraggedElement}`].title}`,
-        'id': curentTraggedElement,
+    await DataPUT(`Task${curentTraggedElement}/field`, {
         'field': `${field}`,
-        'content': `${TASK[0][`Task${curentTraggedElement}`].content}`,
-        'category': `${TASK[0][`Task${curentTraggedElement}`].category}`,
-        'assignedTo': "c1,c5",
-        'priority': "Medium",
-        'category': "User Story",
-        'dueDate': "27/01/2026",
-        'subTasks': "Implement Recipe Recommendation,Start Page Layout"
-    })
+    });
 
 }
 
@@ -187,11 +178,6 @@ function transormTask() {
 function endTransformTask() {
     setTimeout(() => {
         document.getElementById(`${curentTraggedElement}`).classList.remove('rotate5deg')
-        // let refHighlightTask = document.getElementById('highlightTask');
-        // if (refHighlightTask!=null) {
-        //     refHighlightTask.remove();
-        // }
-        // highlightTaskCount = 0;
     }, 100);
 }
 
