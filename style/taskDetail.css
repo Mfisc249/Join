@@ -1,6 +1,6 @@
 /* dialog open/close*/
 dialog{
-    transform: translateX(calc(100vh + 200px));
+    transform: translateX(calc(100vh + 800px));
 }
 dialog.opend {
     transform: translateX(0px);
@@ -8,7 +8,7 @@ dialog.opend {
 }
 
 dialog.closed {
-    transform: translateX(calc(100vh + 200px));
+    transform: translateX(calc(100vh + 800px));
     transition: all 0.1s ease-in;
 }
 
@@ -83,4 +83,12 @@ dialog.closed::backdrop {
 
 .taskDetailsIcons .edit{
     border-left: 1px #D1D1D1 solid;
+}
+
+.subTasks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
 }
