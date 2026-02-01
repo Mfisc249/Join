@@ -11,14 +11,10 @@ function highlightTaskTamplate(){
 }
 
 function taskBoardTamplate(){
-    return `<td id="field1" ondrop="moveTo('field1')" ondragleave="removeHighlightField('field1')"
-                        ondragover="dragoverHandler(event), highlightField('field1')"></td>
-                    <td id="field2" ondrop="moveTo('field2')" ondragleave="removeHighlightField('field2')"
-                        ondragover="dragoverHandler(event), highlightField('field2')"></td>
-                    <td id="field3" ondrop="moveTo('field3')" ondragleave="removeHighlightField('field3')"
-                        ondragover="dragoverHandler(event), highlightField('field3')"></td>
-                    <td id="field4" ondrop="moveTo('field4')" ondragleave="removeHighlightField('field4')"
-                        ondragover="dragoverHandler(event), highlightField('field4')"></td>`
+    return ` <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
+                    <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
+                    <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
+                    <td id="field4" ondrop="moveTo('field4')" ondragover="dragoverHandler(event)"></td>`
 }
 
 function taskDetailsTamplate(taskID) {
@@ -44,9 +40,10 @@ function taskDetailsTamplate(taskID) {
                         <td>${TASK[0][`Task${taskID}`].priority}</td>
                     </tr>
                 </table>
-                <h2>Assigned To:</h2>
-                <h2>Subtasks</h2>
-                   <div id = "subTasks" class = "subTasks"></div>
+                <h2 class = "taskDetailsAT">Assigned To:</h2>
+                    <div id = "taskDetailsAT"></div>
+                <h2 class = "taskDetailsST">Subtasks</h2>
+                    <div id = "subTasks" class = "subTasks"></div>
              </div>
             </section>
         </main>
@@ -62,4 +59,11 @@ function taskDetailsTamplate(taskID) {
 
 function subtaskTamplate(ID, subTask, subTID) {
     return `<span><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')" id="stCheckboxC${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
+}
+
+function taskDetailContactsTamplate(initials, name, color){
+    return `<div class = "taskDetailsATContainer">
+            <span style="background-color: ${color};" class="badge">${initials}</span>
+            <span>${name}</span>
+            </div>`
 }

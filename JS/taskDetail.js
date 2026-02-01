@@ -1,6 +1,6 @@
-let subTaskCheckbox = [];
 let refTaskID;
-let refSubTaskCheckbox =[];
+let refSubTaskCheckbox = [];
+let allContactDetails = [];
 
 /** Opens the dialog with animation */
 function opendialog(ID) {
@@ -21,10 +21,11 @@ function closedialog(ID) {
 }
 
 
-function openTaskDetails(taskID) {
+async function openTaskDetails(taskID) {
     let reftaskDetails = document.getElementById('allTaskDetails');
     reftaskDetails.innerHTML = taskDetailsTamplate(taskID);
-    renderSubtasks(taskID);
+    await getTaskDetailsContacts(taskID);
+    await renderSubtasks(taskID);
 }
 
 function displayNone(ID1, ID2) {
@@ -50,23 +51,45 @@ async function DataDELETE(path = "") {
 
 }
 
+/** 
+* Contacts
+*/
+async function getTaskDetailsContacts(taskID) {
+   document.getElementById('subTasks').innerHTML = `<img src="./assets/img/loading-3-bars.svg" alt="loadingscreen">`;
+   let reftaskDetailsContainer = document.getElementById('taskDetailsAT');
+   reftaskDetailsContainer.innerHTML = `<img src="./assets/img/loading-3-bars.svg" alt="loadingscreen">`;
+   let refAssignedTo = await DataGET(`Tasks/Task${taskID}/assignedTo`);
+   let assignedToCount = (refAssignedTo.match(/,/g)||[]).length +1;
+   allContactDetails =[];
+   for (let index = 0; index < assignedToCount; index++) {
+        let contact = refAssignedTo.split(',')[index];
+        allContactDetails.push(await DataGET(`Contacts/${contact}`));
+    }
+    reftaskDetailsContainer.innerHTML = "";
+    renderTaskDetailsContacts(reftaskDetailsContainer)
+}
+
+function renderTaskDetailsContacts(reftaskDetailsContainer) {
+    allContactDetails.forEach(element => {
+        reftaskDetailsContainer.innerHTML += taskDetailContactsTamplate(element.initials, element.name, element.color);
+    });
+    
+}
+
 /**
  * Subtasks
  */
-
 function checkbox(IDU, IDC) {
     document.getElementById(IDU).classList.toggle('displayNone');
     document.getElementById(IDC).classList.toggle('displayNone');
 }
 
 async function renderSubtasks(taskID) {
-    let refSubtasksContainer = document.getElementById('subTasks')
-    refSubtasksContainer.innerHTML = `<img src="./assets/img/loading-3-bars.svg" alt="loadingscreen">`
-    subTaskCheckbox = await DataGET(`Task${taskID}/subTasksReview`);
+    let subTaskCheckbox = await DataGET(`Tasks/Task${taskID}/subTasksReview`);
     refSubTaskCheckbox = [];
-    let refSubtasks = await DataGET(`Task${taskID}/subTasks`);
+    let refSubtasks = await DataGET(`Tasks/Task${taskID}/subTasks`);
     let subTaskCount = (refSubtasks.match(/,/g)||[]).length +1;
-    refSubtasksContainer.innerHTML = "";
+    document.getElementById('subTasks').innerHTML = "";
     for (let index = 0; index < subTaskCount; index++) {
         let subTID = index;
         let subTask = refSubtasks.split(',')[index];
@@ -103,7 +126,7 @@ function subtaskCU(IDC, subTID) {
 
 function storeSubtask() {
     let checkboxString = refSubTaskCheckbox.toString();
-        DataPUT(`Task${refTaskID}/subTasksReview`,{
+        DataPUT(`Tasks/Task${refTaskID}/subTasksReview`,{
           0 : `${checkboxString}`
         }
         );

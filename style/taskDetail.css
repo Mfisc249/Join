@@ -40,16 +40,30 @@ dialog.closed::backdrop {
     align-items: center;
 }
 
+.taskCatagory{
+    background-color: var( --taskLightBlue);
+    color: var(--GlobalWhite);
+    padding: 4px 24px 4px 24px;
+    border-radius: 8px;
+}
+
 .allTaskDetails h1{
     font-size: 61px;
+    margin: 0;
+    margin-top: 20px;
 }
 
 
 .allTaskDetails h2{
     font-size: 24px;
     color: var(--GlobalBlue);
+    margin: 0;
 }
 
+.allTaskDetails td{
+    font-size: 24px;
+    padding-bottom: 25px;
+}
 
 .closeDialogX{
     cursor: pointer;
@@ -61,6 +75,10 @@ dialog.closed::backdrop {
     background-color: var(--CircleBadgeGray);
     border-radius: 50%;
     width: 20px;
+}
+
+.taskDetailsST{
+    margin-bottom: 4px !important;
 }
 
 .taskDetailsIcons{
@@ -91,4 +109,9 @@ dialog.closed::backdrop {
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 20px;
+}
+
+.taskDetailsATContainer{
+    display: flex;
+    align-items: center;
 }

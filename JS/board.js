@@ -1,5 +1,5 @@
 
-const BOARDURLBASE = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/Tasks/';
+const BOARDURLBASE = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/';
 let TASK = [];
 let TASKKEYS = [];
 let count = 0;
@@ -33,7 +33,7 @@ async function DataPUT(path = "", data = {}) {
 /** Loads tasks and renders board columns by category. */
 async function render() {
     TASK = [];
-    TASK.push(await DataGET());
+    TASK.push(await DataGET('Tasks'));
     emtyFieldContent();
     TASKKEYS = [];
     TASKKEYS.push(Object.keys(TASK[0]));
@@ -72,7 +72,7 @@ function emtyFieldContent() {
 
 /** Saves a new task and renders it in 'field1'. */
 async function renderaddedTask(taskID, refTitel, refContent) {
-    await DataPUT(`Task${taskID}`, {
+    await DataPUT(`Tasks/Task${taskID}`, {
         'title': `${refTitel.value}`,
         'id': taskID,
         'field': 'field1',
@@ -111,28 +111,10 @@ async function moveTo(field) {
     TASK[0][`Task${curentTraggedElement}`].field.field = `${field}`;
     document.getElementById(`${field}`).classList.remove("highlight");
     renderMovedTask(field);
-    await DataPUT(`Task${curentTraggedElement}/field`, {
+    await DataPUT(`Tasks/Task${curentTraggedElement}/field`, {
         'field': `${field}`,
     });
 
-}
-
-/** Displays a highlight area (currently disabled). */
-function highlightField(ID) {
-    // let refHighlightTask = document.getElementById('highlightTask');
-    // if (highlightTaskCount == 0 && refHighlightTask==null) {
-    //     document.getElementById(`${ID}`).innerHTML += highlightTaskTamplate();
-    // }
-    // highlightTaskCount++;
-}
-
-/** Removes the highlight area (currently disabled). */
-function removeHighlightField(ID) {
-    // let refHighlightTask = document.getElementById('highlightTask');
-    // if (refHighlightTask!=null) {
-    //     refHighlightTask.remove();
-    // }
-    // highlightTaskCount = 0;
 }
 
 /** Creates a new task from the form and renders it. */
