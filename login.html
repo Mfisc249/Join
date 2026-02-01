@@ -6,10 +6,14 @@
     <title>login</title>
 
     <link rel="stylesheet" href="./style/standard.css" />
-  <link rel="stylesheet" href="./style/login.css" />
+    <link rel="stylesheet" href="./style/login.css" />
 </head>
 <body>
-    
+
+<div id="logo-animation">
+        <img src="/assets/icons/logo-login-start.svg" alt="logo">
+      </div>    
+
 <nav class="login-nav">
     <img class="login-logo" src="assets/img/logo-login.svg" alt="join-logo">
     <div class="login-new-user-container">
@@ -35,8 +39,8 @@
                 </div>
                 <span id="login-error"></span>
                 <div class="login-buttons">
-                        <button type="submit" id="loginButton">Log in</button>
-                        <button type="button" id="guestButton">Guest Log in</button>
+                        <button class="ButtonBlueFilled" type="submit" id="loginButton">Log in</button>
+                        <button class="ButtonBlueFilled" type="button" id="guestButton">Guest Log in</button>
                 </div>
             </div>
         </form>
@@ -48,6 +52,6 @@
     <span>Legal notice</span>
 </footer>
 
-<script src="./JS/login.js"></script>
+
 </body>
 </html>

@@ -1,12 +1,46 @@
-body {
+/* CSS for logo-animation */
+#logo-animation {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--GlobalBackgroundWhite);
-  font-family: inter;
+  animation: bgFade 900ms linear forwards;
+  pointer-events: none;
+  z-index: 100;
 }
 
-@font-face {
+#logo-animation img {
+  height: 330px;
+  animation: logoMove 900ms ease-in-out forwards;
+}
+
+@keyframes bgFade {
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes logoMove {
+  to {
+    height: 120px;
+     translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+  }
+}
+
+
+#content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CSS for login-site */
+body {
+  margin: 0;
+  background-color: var(--GlobalBackgroundWhite);
   font-family: inter;
-  font-weight: 700;
-  src: url('../assets/fonts/Inter/static/Inter_18pt-Bold.ttf') format('truetype');
 }
 
 h1 {
@@ -18,6 +52,7 @@ h1 {
 }
 
 .login-main-container {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,14 +60,10 @@ h1 {
 
 .login-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 48px;
-  text-align: center;
-}
-
-.login-logo {
-  height: 100px;
-  margin-right: 8px;
+  margin-top: 22px;
+  margin-right: 22px;
 }
 
 .visuallyhidden {
@@ -48,7 +79,6 @@ h1 {
 
 .login-new-user-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 16px;
 }
@@ -131,3 +161,4 @@ h1 {
   padding: 8px;
   color: #a8a8a8;
 }
+

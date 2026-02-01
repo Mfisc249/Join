@@ -67,6 +67,12 @@
         url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('svg');
 }
 
+@font-face {
+  font-family: inter;
+  font-weight: 700;
+  src: url('../assets/fonts/Inter/static/Inter_18pt-Bold.ttf') format('truetype');
+}
+
 /*
  * Global Body Font
  * Description: Sets Inter as default font for entire page

@@ -3,9 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Join</title>
+    <link rel="stylesheet" href="./style/login.css" />
+    <link rel="stylesheet" href="./style/standard.css" />
   </head>
   <body>
-    <div id="content"></div>
+    <div id="content">
+
+    <div id="logo-animation">
+        <img src="/assets/icons/logo-login-start.svg" alt="logo">
+      </div>    
+
+<nav class="login-nav">
+    <div class="login-new-user-container">
+        <span>Not a Join user?</span>
+        <button class="ButtonBlueFilled">Sign up</button>
+    </div>
+</nav>
+
+<main class="login-main-container">
+    <div class="login-card">
+        <h1>Log in</h1>
+        <form>
+            <div class="login-inputs">
+                <div class="input-wrapper" >
+                    <label for="email" class="visuallyhidden">Email</label>
+                    <input id="login-email" autocomplete="username" type="email" placeholder="Email">
+                    <img src="./assets/img/mail.svg" alt="Email Icon">
+                </div>
+                <div class="input-wrapper">
+                    <label for="password" class="visuallyhidden">Password</label>
+                    <input id="login-password" autocomplete="current-password"type="password" placeholder="Password">
+                    <img src="./assets/img/lock.svg" alt="Password Icon">
+                </div>
+                <span id="login-error"></span>
+                <div class="login-buttons">
+                        <button class="ButtonBlueFilled" type="submit" id="loginButton">Log in</button>
+                        <button class="ButtonWhiteBlueOutline" type="button" id="guestButton">Guest Log in</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+    <footer class="login-footer">
+      <span>Privacy Policy</span>
+      <span>Legal notice</span>
+    </footer>
+
+    </div>
+
+    <script src="./JS/login.js"></script>
   </body>
 </html>
