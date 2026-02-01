@@ -1,7 +1,9 @@
 
 function taskTamplate(taskID) {
     return `<div id="${taskID}" class ="task" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
-            ${TASK[0][`Task${taskID}`].title}
+            <h2 class="boardTaskCatagory">${TASK[0][`Task${taskID}`].category}</h2>
+            <h2 class="marginleft10px">${TASK[0][`Task${taskID}`].title}<h2>
+            <h2 class="marginleft10px boardTaskContent">${TASK[0][`Task${taskID}`].content}<h2>
             </div>`
 }
 

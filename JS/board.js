@@ -184,7 +184,8 @@ function startTheSearch(refSearchInput) {
     emtyFieldContent();
     TASKKEYS[0].forEach(task => {
         let refTaskTitle = TASK[0][`${task}`].title;
-        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1) {
+        let refTskContent = TASK[0][`${task}`].content;
+        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTskContent.toUpperCase().indexOf(filter) > - 1 ) {
             loadTaskTamplate(TASK[0][`${task}`]);
             checkFieldIsEmpty();
             searchCount++;
@@ -195,5 +196,7 @@ function startTheSearch(refSearchInput) {
         document.getElementById('fields').innerHTML = `<div class="noTaskFound">No Tasks Found</div>`;
     }
 }
+
+
 
 

@@ -1,114 +1,114 @@
-:root{
+:root {
     --boardWith: 1100px;
 }
 
-body{
-    background-color: var( --GlobalBackgroundWhite);
+body {
+    background-color: var(--GlobalBackgroundWhite);
 }
+
 .addTaskContainer {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
- }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
- .addTaskContainer h1{
+.addTaskContainer h1 {
     font-size: 73px;
- }
+}
 
- .gap32px {
-     gap: 32px;
- }
+.gap32px {
+    gap: 32px;
+}
 
- .searchBar {
-     display: flex;
-     box-sizing: border-box;
-     border: 1px solid var(--GlobalBorderColorGray);
-     border-radius: 10px;
-     background-color: var(--GlobalWhite);
-     padding: 8px 16px 8px 16px;
-     width: 312px;
- }
+.searchBar {
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid var(--GlobalBorderColorGray);
+    border-radius: 10px;
+    background-color: var(--GlobalWhite);
+    padding: 8px 16px 8px 16px;
+    width: 312px;
+}
 
- .searchBar input {
-     border: none;
-     background-color: transparent;
-     font-size: 24px;
-     width: 230px;
- }
+.searchBar input {
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+    width: 230px;
+}
 
- .tableCategories td {
-     display: flex;
-     justify-content: space-between;
-     color: #42526E;
-     font-weight: 700;
-     font-size: 20px;
-     padding-right: 25px;
- }
+.tableCategories td {
+    display: flex;
+    justify-content: space-between;
+    color: #42526E;
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 25px;
+}
 
- .tablecontainer {
-     margin-top: 20px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
- }
+.tablecontainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .tablecontainer table {
-     border-collapse: collapse;
-     width: var(--boardWith);
- }
+    border-collapse: collapse;
+    width: var(--boardWith);
+}
 
 .tablecontainer tr {
-     display: flex;
-     height: 430px;
- }
+    display: flex;
+    height: 430px;
+}
 
- .tableCategories{
+.tableCategories {
     height: unset !important;
- }
+}
 
 .tablecontainer td {
-     display: flex;
-     flex-wrap: wrap;
-     align-content: flex-start;
-     gap: 5px;
-     width: 100%;
- }
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 5px;
+    width: 100%;
+}
 
 .tablecontainer td div {
-     height: 215px;
-     width: 252px;
-     border: 2px solid black;
-     border-radius: 24px;
-     margin-top: 5px;
-     text-align: center;
- }
+    height: 215px;
+    width: 252px;
+    border: 2px solid black;
+    border-radius: 24px;
+    margin-top: 5px;
+}
 
- .task:hover{
+.task:hover {
     cursor: pointer;
- }
+}
 
- .tableCategories button{
+.tableCategories button {
     background-color: transparent;
     font-size: 20px;
     border-radius: 8px;
-    color: var( --GlobalBlue);
- }
+    color: var(--GlobalBlue);
+}
 
- .tableCategories button:hover{
+.tableCategories button:hover {
     border: 2px solid var(--GlobalLightBlue);
     color: var(--GlobalLightBlue);
     cursor: pointer;
- }
+}
 
- .highlightTask {
-     height: 215px;
-     width: 252px;
-     border: 1px dotted var(--GlobalBorderColorGray);
-     border-radius: 30px;
-     margin-top: 5px;
- }
+.highlightTask {
+    height: 215px;
+    width: 252px;
+    border: 1px dotted var(--GlobalBorderColorGray);
+    border-radius: 30px;
+    margin-top: 5px;
+}
 
- .noTaskField{
+.noTaskField {
     border-radius: 10px !important;
     border: 1px dotted var(--GlobalBorderColorGray) !important;
     height: 48px !important;
@@ -116,20 +116,43 @@ body{
     align-items: center !important;
     justify-content: center !important;
     background-color: #E7E7E7 !important;
-    color: var(--GlobalBorderColorGray)!important;
- }
+    color: var(--GlobalBorderColorGray) !important;
+}
 
- .rotate5deg{
+.rotate5deg {
     transform: rotate(5deg);
- }
+}
 
- .noTaskFound{
+.noTaskFound {
     display: flex;
     justify-content: center;
     align-items: center;
     width: var(--boardWith);
- }
+}
 
- .displayNone{
+.displayNone {
     display: none !important;
- }
+}
+
+.boardTaskCatagory {
+    background-color: var(--taskLightBlue);
+    color: var(--GlobalWhite);
+    padding: 4px 16px 4px 16px;
+    border-radius: 8px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    /* inline: Breite/Höhe ignoriert;
+    nur Inhalt bestimmt den Platz. block: Belegt die ganze Zeile;
+    beginnt auf neuer Zeile. inline-block: Bleibt in der Zeile, aber du kannst Breite/Höhe setzen.  */
+    display: inline-block;
+    width: fit-content;
+    margin: 10px 10px 10px;
+}
+
+.marginleft10px{
+    margin-left: 10px;
+}
+
+.boardTaskContent{
+    color: var(--GlobalBorderColorGray);
+}

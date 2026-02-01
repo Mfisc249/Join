@@ -85,9 +85,9 @@ function checkbox(IDU, IDC) {
 }
 
 async function renderSubtasks(taskID) {
-    let subTaskCheckbox = await DataGET(`Tasks/Task${taskID}/subTasksReview`);
+    let subTaskCheckbox = TASK[0][`Task${taskID}`].subTasksReview; //await DataGET(`Tasks/Task${taskID}/subTasksReview`);
     refSubTaskCheckbox = [];
-    let refSubtasks = await DataGET(`Tasks/Task${taskID}/subTasks`);
+    let refSubtasks = TASK[0][`Task${taskID}`].subTasks; //await DataGET(`Tasks/Task${taskID}/subTasks`);
     let subTaskCount = (refSubtasks.match(/,/g)||[]).length +1;
     document.getElementById('subTasks').innerHTML = "";
     for (let index = 0; index < subTaskCount; index++) {
@@ -126,7 +126,9 @@ function subtaskCU(IDC, subTID) {
 
 function storeSubtask() {
     let checkboxString = refSubTaskCheckbox.toString();
-        DataPUT(`Tasks/Task${refTaskID}/subTasksReview`,{
+    TASK[0][`Task${refTaskID}`].subTasksReview = {0: checkboxString};
+    
+    DataPUT(`Tasks/Task${refTaskID}/subTasksReview`,{
           0 : `${checkboxString}`
         }
         );
