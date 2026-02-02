@@ -4,21 +4,20 @@
  * Usage: Reference via var(--token) across components and states.
  */
 :root {
-    --globalBlue: #2A3647;
-    --GlobalBlue: #2A3647;
-    --GlobalWhite: #FFFFFF;
-    --GlobalBackgroundWhite: #F6F7F8;
-    --GlobalLightBlue: #29ABE2;
-    --GlobalDarkblue: #091931;
-    --CircleBadgeGray: #0C2E621F;
-    --GlobalBorderColorGray:#A8A8A8;
+  --GlobalBlue: #2a3647;
+  --GlobalWhite: #ffffff;
+  --GlobalBackgroundWhite: #f6f7f8;
+  --GlobalLightBlue: #29abe2;
+  --GlobalDarkblue: #091931;
+  --CircleBadgeGray: #0c2e621f;
+  --GlobalBorderColorGray: #a8a8a8;
 
-    /* Task*/
-    --taskLightBlue: #0038FF;
+  /* Task*/
+  --taskLightBlue: #0038ff;
 
-    /* Layout */
-    --sidebar-w: 232px;
-    --header-h: 96px;
+  /* Layout */
+  --sidebar-w: 232px;
+  --header-h: 96px;
 }
 
 /* =========================
@@ -26,26 +25,25 @@
    ========================= */
 
 /* Container für Sidebar/Header/Content */
-.app{
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+.app {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* DIESE FLÄCHE ist ab jetzt auf jeder Seite der "Canvas" */
-.main{
-    position: fixed;
-    left: var(--sidebar-w);
-    top: var(--header-h);
-    width: calc(100vw - var(--sidebar-w));
-    height: calc(100vh - var(--header-h));
-    overflow: hidden;
-    box-sizing: border-box;
-    background: var(--GlobalBackgroundWhite);
-    z-index: 1;
+.main {
+  position: fixed;
+  left: var(--sidebar-w);
+  top: var(--header-h);
+  width: calc(100vw - var(--sidebar-w));
+  height: calc(100vh - var(--header-h));
+  overflow: hidden;
+  box-sizing: border-box;
+  background: var(--GlobalBackgroundWhite);
+  z-index: 1;
 }
-
 
 /*
  * Font: Inter
@@ -53,18 +51,17 @@
  * Note: Multiple format entries for broad browser support.
  */
 @font-face {
-    font-family: 'Inter';
-    src:
+  font-family: 'Inter';
+  src:
         /* Internet Explorer */
-        url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('embedded-opentype'),
-        /* Super Modern Browsers */
-        url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('woff2'),
-        /* Pretty Modern Browsers */
-        url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('woff'),
-        /* Safari, Android, iOS */
-        url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('truetype'),
-        /* Legacy iOS */
-        url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('svg');
+    url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('embedded-opentype'),
+    /* Super Modern Browsers */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf')
+      format('woff2'),
+    /* Pretty Modern Browsers */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf')
+      format('woff'),
+    /* Safari, Android, iOS */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf')
+      format('truetype'),
+    /* Legacy iOS */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('svg');
 }
 
 @font-face {
@@ -78,119 +75,157 @@
  * Description: Sets Inter as default font for entire page
  */
 
- body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow: hidden; /* Verhindert Scrollen der Hauptseite */
-    height: 100vh;
+body {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+  height: 100vh;
+  background-color: var(--GlobalBackgroundWhite);
 }
 
 html {
-    overflow: hidden; /* Verhindert Scrollen der Hauptseite */
-    height: 100%;
+  overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+  height: 100%;
 }
 
 /*
  * Base Font
  * Description: Sets the primary font family for containers.
  */
-.mainFond {
-    font-family: 'Inter';
+.mainFont {
+  font-family: 'Inter';
 }
 
 /**font sizes */
-h1{
-    font-size: 61px;
-    color: #000000;
-    font-weight: bold;
-    margin: 0;
+h1 {
+  font-size: 61px;
+  color: #000000;
+  font-weight: 700;
+  line-height: 120%;
+  margin: 0;
 }
 
-h2{
-    font-size: 20px;
-    margin: 0;
+h2 {
+  font-size: 20px;
+  margin: 0;
 }
 
-h3{
-    font-size: 16px;
-    margin: 0;
+h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+/** InputFields Icons, Error Message**/
+
+.InputWrapper {
+  position: relative;
+}
+
+.InputField {
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box;
+  height: 48px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding-left: 16px;
+  font-size: 20px;
+}
+
+.InputFieldIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  pointer-events: none;
+}
+
+.InputErrorText {
+  color: red;
+  text-align: center;
+  display: block;
 }
 
 /** Buttons*/
 .ButtonBlueFilled {
-    border-radius: 10px;
-    background-color: var(--GlobalBlue);
-    color: var(--GlobalWhite);
-    padding: 12px 16px 12px 16px;
-    font-size: 21px;
-    border: none;
+  border-radius: 10px;
+  background-color: var(--GlobalBlue);
+  color: var(--GlobalWhite);
+  padding: 12px 16px 12px 16px;
+  font-size: 21px;
+  border: none;
 }
 
 .ButtonWhiteBlueOutline {
-    border-radius: 10px;
-    background-color: var(--GlobalWhite);
-    padding: 12px 16px 12px 16px;
-    font-size: 21px;
-    border: 1px solid var(--GlobalBlue);
-    color: var(--GlobalBlue);
+  border-radius: 10px;
+  background-color: var(--GlobalWhite);
+  padding: 12px 16px 12px 16px;
+  font-size: 21px;
+  border: 1px solid var(--GlobalBlue);
+  color: var(--GlobalBlue);
 }
 
 .ButtonDarkBlueFilled {
-    border-radius: 10px;
-    background-color: var(--GlobalDarkblue);
-    color: var(--GlobalWhite);
-    padding: 12px 16px 12px 16px;
-    font-size: 21px;
-    border: none;
+  border-radius: 10px;
+  background-color: var(--GlobalDarkblue);
+  color: var(--GlobalWhite);
+  padding: 12px 16px 12px 16px;
+  font-size: 21px;
+  border: none;
 }
 
 .ButtonWhiteDarkBlueOutline {
-    border-radius: 10px;
-    background-color: var(--GlobalWhite);
-    padding: 12px 16px 12px 16px;
-    font-size: 21px;
-    border: 1px solid var(--GlobalDarkblue);
-    color: var(--GlobalDarkblue);
+  border-radius: 10px;
+  background-color: var(--GlobalWhite);
+  padding: 12px 16px 12px 16px;
+  font-size: 21px;
+  border: 1px solid var(--GlobalDarkblue);
+  color: var(--GlobalDarkblue);
 }
 
 .ButtonBlueFilled:hover {
-    cursor: pointer;
-    background-color: var(--GlobalLightBlue);
+  cursor: pointer;
+  background-color: var(--GlobalLightBlue);
 }
 
 .ButtonWhiteBlueOutline:hover {
-    cursor: pointer;
-    border: 1px solid var(--GlobalLightBlue);
-    color: var(--GlobalLightBlue);
+  cursor: pointer;
+  border: 1px solid var(--GlobalLightBlue);
+  color: var(--GlobalLightBlue);
 }
 
 /*
  * Component: Circle Badge (Avatar/Initials)
  * Purpose: Round badge to display initials or short labels.
  * Layout: Circle (48x48, radius 50%), centered bold text.
- * Colors: Outline --globalBlue, text --GlobalLightBlue, background --GlobalWhite.
+ * Colors: Outline --GlobalBlue, text --GlobalLightBlue, background --GlobalWhite.
  */
 .circleBadge {
-    border: solid 3px var(--GlobalBlue);
-    border-radius: 50%;
-    height: 48px;
-    width: 48px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--GlobalLightBlue);
-    background-color: var(--GlobalWhite);
+  border: solid 3px var(--GlobalBlue);
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--GlobalLightBlue);
+  background-color: var(--GlobalWhite);
 }
 
 /*
  * State: Hover for .circleBadge
  * Effect: Applies light gray background via --CircleBadgeGray.
  */
-.circleBadge:hover{
-    background-color: var(--CircleBadgeGray);
+.circleBadge:hover {
+  background-color: var(--CircleBadgeGray);
 }
 
 /* THIS is the round initials circle (JS uses .badge) */
@@ -198,7 +233,7 @@ h3{
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
 
   display: flex;
   align-items: center;
@@ -208,8 +243,20 @@ h3{
   font-size: 16px;
   font-weight: 400;
   line-height: 120%;
-  color: #FFFFFF;
+  color: #ffffff;
 
   flex: none;
 }
 
+/* Utility Classes */
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
