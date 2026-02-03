@@ -11,6 +11,8 @@
   --GlobalDarkblue: #091931;
   --CircleBadgeGray: #0c2e621f;
   --GlobalBorderColorGray: #a8a8a8;
+  --GlobalInputGray: #D1D1D1;
+;
 
   /* Task*/
   --taskLightBlue: #0038ff;
@@ -122,6 +124,14 @@ h3 {
   margin: 0;
 }
 
+.Separator {
+  width: 150px;
+  height: 0px;
+  border: 3px solid;
+  border-color: var(--GlobalLightBlue);
+}
+
+
 /** InputFields Icons, Error Message**/
 
 .InputWrapper {
@@ -133,11 +143,24 @@ h3 {
   padding-right: 40px;
   box-sizing: border-box;
   height: 48px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--GlobalInputGray);
   border-radius: 8px;
   padding-left: 16px;
   font-size: 20px;
+
 }
+
+.InputField::placeholder {
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--GlobalInputGray);
+}
+
+.InputField:focus {
+  outline: none;
+  border: 1px solid var(--GlobalLightBlue);
+} 
+
 
 .InputFieldIcon {
   position: absolute;
@@ -155,11 +178,12 @@ h3 {
 
 /** Buttons*/
 .ButtonBlueFilled {
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: var(--GlobalBlue);
   color: var(--GlobalWhite);
   padding: 12px 16px 12px 16px;
   font-size: 21px;
+  font-weight: 700;
   border: none;
 }
 
@@ -168,6 +192,7 @@ h3 {
   background-color: var(--GlobalWhite);
   padding: 12px 16px 12px 16px;
   font-size: 21px;
+  font-weight: 700;
   border: 1px solid var(--GlobalBlue);
   color: var(--GlobalBlue);
 }
@@ -178,6 +203,7 @@ h3 {
   color: var(--GlobalWhite);
   padding: 12px 16px 12px 16px;
   font-size: 21px;
+  font-weight: 700;
   border: none;
 }
 
@@ -186,6 +212,7 @@ h3 {
   background-color: var(--GlobalWhite);
   padding: 12px 16px 12px 16px;
   font-size: 21px;
+  font-weight: 700;
   border: 1px solid var(--GlobalDarkblue);
   color: var(--GlobalDarkblue);
 }
