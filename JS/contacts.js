@@ -461,6 +461,9 @@ async function onSubmitContactModal(e) {
         createdAt: now,
         updatedAt: now
       });
+      
+      // Show success notification for new contact
+      showContactCreatedNotification();
     }
 
     // neu laden & UI updaten
@@ -747,5 +750,28 @@ function generateRandomColor() {
     '#1FC71F', '#FF745E', '#FFA35E', '#FC71FF'
   ];
   return colors[Math.floor(Math.random() * colors.length)];
+}
+
+/**
+ * Shows the success notification with slide-in animation
+ * Slides in from the right, stays visible for 2 seconds, then slides back out
+ */
+function showContactCreatedNotification() {
+  const notification = document.getElementById('contactSuccessNotification');
+  if (!notification) return;
+  
+  // Reset position (in case it was still visible)
+  notification.classList.remove('show');
+  
+  // Force reflow to ensure the reset takes effect
+  notification.offsetHeight;
+  
+  // Show notification with slide-in animation
+  notification.classList.add('show');
+  
+  // Hide notification after 2.5 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 2500);
 }
 

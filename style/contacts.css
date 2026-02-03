@@ -1082,3 +1082,80 @@
 .details-card.hidden {
   display: none;
 }
+
+/* ===============================
+   SUCCESS NOTIFICATION
+   =============================== */
+
+.contact-success-notification {
+  position: fixed;
+  bottom: 100px;
+  right: -400px; /* Start position: off-screen to the right */
+  z-index: 1000;
+  
+  /* Main container styling */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  
+  width: 326px;
+  height: 74px;
+  
+  /* Shadow effect from Figma */
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+  
+  /* Animation */
+  transition: right 0.5s ease-in-out;
+}
+
+.contact-success-notification.show {
+  right: 50px; /* Slide into view */
+}
+
+.contact-success-content {
+  /* Auto-Layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  
+  width: 326px;
+  height: 74px;
+  
+  background: #2A3647;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  
+  /* Typography */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  color: #FFFFFF;
+  
+  /* Inside Auto-Layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-success-notification {
+    width: 280px;
+    right: -320px;
+  }
+  
+  .contact-success-notification.show {
+    right: 20px;
+  }
+  
+  .contact-success-content {
+    width: 280px;
+    font-size: 18px;
+  }
+}
