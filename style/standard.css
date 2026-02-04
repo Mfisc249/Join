@@ -40,11 +40,12 @@
     top: var(--header-h);
     width: calc(100vw - var(--sidebar-w));
     height: calc(100vh - var(--header-h));
-    overflow: hidden;
+    overflow-y: auto;      /* 🔥 DAS IST DER WICHTIGE FIX */
+    overflow-x: hidden;
     box-sizing: border-box;
     background: var(--GlobalBackgroundWhite);
-    z-index: 1;
 }
+
 
 
 /*
