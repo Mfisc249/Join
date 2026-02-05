@@ -75,7 +75,7 @@ body {
     width: 100%;
 }
 
-.tablecontainer td div {
+.tablecontainer td .taskContainer {
     height: 215px;
     width: 252px;
     border: 2px solid black;
@@ -155,4 +155,15 @@ body {
 
 .boardTaskContent{
     color: var(--GlobalBorderColorGray);
+}
+
+.subtaskProgressbarC {
+  width: 100%;
+  background-color: grey;
+}
+
+.subtaskProgressbar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
 }

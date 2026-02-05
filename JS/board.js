@@ -60,6 +60,7 @@ function loadTaskTamplate(refTask) {
     if (refTask.field.field == 'field4') {
         document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
     }
+    progressbar(refTask.id);
 }
 
 /** Clears the content of all board columns. */
@@ -93,6 +94,7 @@ function renderMovedTask(field) {
     refMovedTask.parentNode.removeChild(refMovedTask);
     document.getElementById(`${field}`).innerHTML += taskTamplate(TASK[0][`Task${curentTraggedElement}`].id);
     checkFieldIsEmpty();
+    progressbar(curentTraggedElement);
 }
 
 /** Sets the currently dragged task and starts the animation. */
@@ -141,13 +143,13 @@ async function formIsSubmittet() {
 
 /** Shows hints when columns are empty. */
 function checkFieldIsEmpty() {
-    document.getElementById('field1').hasChildNodes() == false ? document.getElementById('field1').innerHTML = `<div id="noTaskField1" class="noTaskField">No Tasks to do</div>` : null;
+    document.getElementById('field1').hasChildNodes() == false ? document.getElementById('field1').innerHTML = `<div id="noTaskField1" class="noTaskField taskContainer">No Tasks to do</div>` : null;
     (document.getElementById('field1').childElementCount >= 2) && (document.getElementById('noTaskField1') != null) ? document.getElementById('noTaskField1').remove() : null;
-    document.getElementById('field2').hasChildNodes() == false ? document.getElementById('field2').innerHTML = `<div id="noTaskField2" class="noTaskField">No Tasks in progress</div>` : null;
+    document.getElementById('field2').hasChildNodes() == false ? document.getElementById('field2').innerHTML = `<div id="noTaskField2" class="noTaskField taskContainer">No Tasks in progress</div>` : null;
     (document.getElementById('field2').childElementCount >= 2) && (document.getElementById('noTaskField2') != null) ? document.getElementById('noTaskField2').remove() : null;
-    document.getElementById('field3').hasChildNodes() == false ? document.getElementById('field3').innerHTML = `<div id="noTaskField3" class="noTaskField">No Tasks await feedback</div>` : null;
+    document.getElementById('field3').hasChildNodes() == false ? document.getElementById('field3').innerHTML = `<div id="noTaskField3" class="noTaskField taskContainer">No Tasks await feedback</div>` : null;
     (document.getElementById('field3').childElementCount >= 2) && (document.getElementById('noTaskField3') != null) ? document.getElementById('noTaskField3').remove() : null;
-    document.getElementById('field4').hasChildNodes() == false ? document.getElementById('field4').innerHTML = `<div id="noTaskField4" class="noTaskField">No Tasks done</div>` : null;
+    document.getElementById('field4').hasChildNodes() == false ? document.getElementById('field4').innerHTML = `<div id="noTaskField4" class="noTaskField taskContainer">No Tasks done</div>` : null;
     (document.getElementById('field4').childElementCount >= 2) && (document.getElementById('noTaskField4') != null) ? document.getElementById('noTaskField4').remove() : null;
 }
 
@@ -185,7 +187,7 @@ function startTheSearch(refSearchInput) {
     TASKKEYS[0].forEach(task => {
         let refTaskTitle = TASK[0][`${task}`].title;
         let refTskContent = TASK[0][`${task}`].content;
-        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTskContent.toUpperCase().indexOf(filter) > - 1 ) {
+        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTskContent.toUpperCase().indexOf(filter) > - 1) {
             loadTaskTamplate(TASK[0][`${task}`]);
             checkFieldIsEmpty();
             searchCount++;
@@ -197,6 +199,23 @@ function startTheSearch(refSearchInput) {
     }
 }
 
-
+function progressbar(taskID) {
+    let i = 0;
+    if (i == 0) {
+        i = 1;
+        let elem = document.getElementById(`subtaskProgressbar${taskID}`);
+        let width = 1;
+        let id = setInterval(frame, 2);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+            }
+        }
+    }
+}
 
 

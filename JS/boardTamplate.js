@@ -1,18 +1,21 @@
 
 function taskTamplate(taskID) {
-    return `<div id="${taskID}" class ="task" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
+    return `<div id="${taskID}" class ="task taskContainer" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
             <h2 class="boardTaskCatagory">${TASK[0][`Task${taskID}`].category}</h2>
             <h2 class="marginleft10px">${TASK[0][`Task${taskID}`].title}<h2>
             <h2 class="marginleft10px boardTaskContent">${TASK[0][`Task${taskID}`].content}<h2>
+                <div class="subtaskProgressbarC">
+                    <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
+                </div>
             </div>`
 }
 
-function highlightTaskTamplate(){
+function highlightTaskTamplate() {
     return `<div id="highlightTask" class = "highlightTask">
             </div>`
 }
 
-function taskBoardTamplate(){
+function taskBoardTamplate() {
     return ` <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
                     <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
                     <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
@@ -56,14 +59,14 @@ function taskDetailsTamplate(taskID) {
              </div>
         </footer>
     </div>`
-     
+
 }
 
 function subtaskTamplate(ID, subTask, subTID) {
     return `<span><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')" id="stCheckboxC${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
 }
 
-function taskDetailContactsTamplate(initials, name, color){
+function taskDetailContactsTamplate(initials, name, color) {
     return `<div class = "taskDetailsATContainer">
             <span style="background-color: ${color};" class="badge">${initials}</span>
             <span>${name}</span>
