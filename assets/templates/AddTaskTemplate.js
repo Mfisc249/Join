@@ -60,37 +60,40 @@ function createTaskTemplate(taskName, taskDescription) {
         <div class="priority">
   <div class="priorityButton urgent">
     <span>Urgent</span>
-    <img class="priorityIcon" src="/Join/assets/img/Prio alta.svg" />
+    <img class="priorityIcon" src="assets/img/Prio alta.svg" />
   </div>
-
-  <div class="priorityButton medium">
+ <div class="priorityButton medium">
     <span>Medium</span>
-    <img class="priorityIcon" src="/Join/assets/img/Prio media.svg" />
+    <img class="priorityIcon" src="assets/img/Prio media.svg" />
   </div>
-
   <div class="priorityButton low">
     <span>Low</span>
-    <img class="priorityIcon" src="/Join/assets/img/Prio baja.svg" />
+    <img class="priorityIcon" src="assets/img/Prio baja.svg" />
   </div>
-</div>
-          <div class="d">
-            <div class="OptionsContainer">
-            <h2 class="ChoiceHeadline">Assigned to</h2>
-           <select class="ChoiceOption borderColorOptions" name="priority" id="assignedTo">
-           <option value="urgent">Select contacts to assign</option>
-           </select>
-           </div>
+  </div>
+  <div class="OptionsContainer">
+ <h2>Assigned to</h2>
+  <div class="assignedToInput" onclick="toggleAssignedDropdown()">
+   <p>Select contacts to assign</p>
+    <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+  </div>
+  <div id="assignedDropdown" class="assignedDropdown hidden">
+  <img class="checkBox" src="./assets/img/Rectangle_5.svg" alt="">
+       </div>
+       </div>
            <div class="OptionsContainer">
            <div class="headlineTextArea">
            <h2 class="ChoiceHeadline">Category</h2>
            <p class="star">*</p>
            </div>
-           <select class="ChoiceOption" id="category" required>
-             <option value="" selected hidden>Select task category</option>
-             <option value="technicalTask">Technical Task</option>
-             <option value="UserStory">User Story</option>
-          </div>
-        </select>
+        <div class="categorySelectWrapper">
+  <select class="ChoiceOption" id="category" required>
+    <option value=""selected hidden>Select task category</option>
+    <option value="technicalTask">Technical Task</option>
+    <option value="UserStory">User Story</option>
+  </select>
+  <img class="dropDownArrow taskArrow" id="taskArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+</div>
         </div>
         <div class="OptionsContainer">
   <h2 class="ChoiceHeadline">Subtasks</h2>
@@ -127,7 +130,7 @@ function createTaskTemplate(taskName, taskDescription) {
     </button>
       </div>
         <button  onclick="createTask()" class="createButton">Create Task
-          <span>&#10003;</span>
+          <img class="createButtonIcon" src="assets/img/check.svg" />
         </button>
       </div>
       </div>`;
@@ -171,5 +174,23 @@ function subtaskTemplate(text, index) {
       </div>
       </div>
     </li>
+  `;
+}
+
+function assignedToTemplate() {
+  let html = `<option value="" selected hidden>Select contacts to assign</option>`;
+
+  for (let i = 0; i < contacts.length; i++) {
+    html += assignedToOptionTemplate(contacts[i]);
+  }
+
+  return html;
+}
+
+function assignedToOptionTemplate(contact) {
+  return `
+    <option value="${contact.name}">
+      ${contact.name}
+    </option>
   `;
 }

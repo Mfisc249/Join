@@ -171,6 +171,8 @@ h1 {
 .priority {
   display: flex;
   gap: 8px;
+  margin-bottom: 24px;
+  margin-top: 6px;
 }
 
 .priorityButton {
@@ -215,19 +217,6 @@ h1 {
   color: white;
 }
 
-/* Icons standardmäßig passend zur Button-Farbe */
-.priorityButton.urgent .priorityIcon {
-  filter: brightness(0) invert(0); /* normales Icon */
-}
-
-.priorityButton.medium .priorityIcon {
-  filter: brightness(0) invert(0); /* normales Icon, bleibt orange */
-}
-
-.priorityButton.low .priorityIcon {
-  filter: brightness(0) invert(0); /* normales Icon */
-}
-
 /* Wenn Button aktiv: Icon wird weiß */
 .priorityButton.active .priorityIcon {
   filter: brightness(0) invert(1);
@@ -246,6 +235,24 @@ h1 {
   line-height: 1.2;
   padding-left: 18px;
   cursor: pointer;
+}
+
+.assignedToInput {
+  width: 420px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: rgba(209, 209, 209, 1);
+  background-color: rgba(255, 255, 255, 1);
+  padding-left: 13px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 8px;
+  align-items: center;
 }
 .inputField {
   width: 415px;
@@ -297,6 +304,14 @@ h1 {
   line-height: 1.2;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.createButtonIcon {
+  height: 18px;
+  width: 18px;
 }
 .taskButton {
   display: flex;
@@ -414,6 +429,69 @@ h1 {
   font-size: 18px;
 }
 
+.assignedDropdown {
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  margin-top: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  justify-content: normal;
+  display: flex;
+  flex-direction: column;
+  width: 434px;
+}
+
+.assignedOption {
+  cursor: pointer;
+  border-radius: 6px;
+  height: 26px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+
+.assignedOption:hover {
+  background-color: #bfbfbf33;
+}
+
+.assignedOption.selected {
+  background-color: #05223e;
+  color: white;
+  height: 26px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+
+.dropDownArrow {
+  height: 7px;
+}
+
+.taskArrow {
+  position: relative;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 7px;
+}
+.dropDownArrow.rotate {
+  transform: rotate(180deg);
+}
+.hidden {
+  display: none;
+}
+
+/* Chrome, Edge, Safari */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* IE */
+select::-ms-expand {
+  display: none;
+}
 @media (max-width: 1100px) {
   .contentWrapper {
     flex-direction: column;

@@ -2,7 +2,7 @@ const BASE_URL =
   "https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let subtasks = [];
-
+let contacts = [];
 let editingSubtaskIndex = null;
 
 const urgentBtn = document.querySelector(".importanceLevel:nth-child(1)");
@@ -24,6 +24,7 @@ async function init() {
   setupPriorityButtons();
   setDefaultPriority();
   setDateMin();
+  await loadContacts();
 }
 
 function renderTemplate() {
@@ -68,12 +69,11 @@ async function createTask() {
   const categoryInput = document.getElementById("category");
   const dateInput = document.getElementById("DueDate");
 
-  task.assignedTo = assignedInput.value;
+  task.assignedTo = [assignedInput.value];
   task.category = categoryInput.value;
   task.title = titleInput.value;
   task.description = descInput.value;
   task.dueDate = dateInput.value;
-  task.createdAt = Date.now();
 
   errorMessage();
   if (
@@ -91,6 +91,25 @@ async function createTask() {
     showToast(); // 🎉 NUR BEI ERFOLG
     clearForm();
   }
+}
+
+async function loadContacts() {
+  try {
+    const response = await fetch(`${BASE_URL}Contacts.json`);
+    const data = await response.json();
+
+    if (!data) return;
+
+    contacts = Object.values(data);
+    renderAssignedTo();
+  } catch (error) {
+    console.error("Fehler beim Laden der Contacts:", error);
+  }
+}
+
+function renderAssignedTo() {
+  const container = document.getElementById("assignedTo");
+  container.innerHTML = assignedToTemplate();
 }
 
 function errorMessage() {
@@ -238,4 +257,47 @@ function showToast() {
   setTimeout(() => {
     toast.classList.remove("show");
   }, 2000);
+}
+
+function renderAssignedTo() {
+  const container = document.getElementById("assignedDropdown");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  contacts.forEach((contact) => {
+    container.innerHTML += `
+      <div class="assignedOption" onclick="toggleContact('${contact.name}', this)">
+     <span>${contact.name}</span>
+        <img src="./assets/img/Rectangle_5.svg" alt="checkbox" class="checkBox">
+      </div>
+    `;
+  });
+}
+function toggleContact(name, element) {
+  const index = task.assignedTo.indexOf(name);
+
+  if (index === -1) {
+    task.assignedTo.push(name);
+    element.classList.add("selected");
+  } else {
+    task.assignedTo.splice(index, 1);
+    element.classList.remove("selected");
+  }
+}
+
+function toggleAssignedDropdown() {
+  const dropdown = document.getElementById("assignedDropdown");
+  const arrow = document.querySelector(".dropDownArrow");
+  const taskArrow = document.getElementById("taskArrow");
+
+  dropdown.classList.toggle("hidden");
+
+  if (dropdown.classList.contains("hidden")) {
+    arrow.classList.remove("rotate");
+    taskArrow.classList.remove("rotate");
+  } else {
+    arrow.classList.add("rotate");
+    taskArrow.classList.add("rotate");
+  }
 }
