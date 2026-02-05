@@ -105,6 +105,8 @@ h2 {
 }
 .addTaskDateContainer {
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 .addTaskDateContainer input {
   border-radius: 10px;
@@ -448,6 +450,10 @@ h1 {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 20px;
+  /* gap: 20px; */
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 48px;
 }
 
 .assignedOption:hover {
@@ -461,6 +467,10 @@ h1 {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 20px;
+}
+
+.checkBox {
+  height: 25px;
 }
 
 .dropDownArrow {
@@ -491,6 +501,11 @@ select {
 /* IE */
 select::-ms-expand {
   display: none;
+}
+
+.eventImg {
+  position: relative;
+  right: 40px;
 }
 @media (max-width: 1100px) {
   .contentWrapper {

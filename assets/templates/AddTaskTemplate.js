@@ -46,9 +46,10 @@ function createTaskTemplate(taskName, taskDescription) {
                   type="date"
                   id="DueDate"
                   name="DueDate"
-                  placeholder="Select a date"
+                  placeholder="dd/mm/yyyy"
                   required
                 />
+                <img class="eventImg" src="./assets/img/event.svg" alt="" />
                 <p class="requiredField">this field is required</p>
               </div>
             </label>
@@ -78,7 +79,7 @@ function createTaskTemplate(taskName, taskDescription) {
     <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
   </div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
-  <img class="checkBox" src="./assets/img/Rectangle_5.svg" alt="">
+  <img class="checkBox assignedOption" src="./assets/img/Rectangle_5.svg" alt="">
        </div>
        </div>
            <div class="OptionsContainer">
