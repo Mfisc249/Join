@@ -35,17 +35,19 @@
 }
 
 /* DIESE FLÄCHE ist ab jetzt auf jeder Seite der "Canvas" */
-.main {
-  position: fixed;
-  left: var(--sidebar-w);
-  top: var(--header-h);
-  width: calc(100vw - var(--sidebar-w));
-  height: calc(100vh - var(--header-h));
-  overflow: hidden;
-  box-sizing: border-box;
-  background: var(--GlobalBackgroundWhite);
-  z-index: 1;
+.main{
+    position: fixed;
+    left: var(--sidebar-w);
+    top: var(--header-h);
+    width: calc(100vw - var(--sidebar-w));
+    height: calc(100vh - var(--header-h));
+    overflow-y: auto;      /* 🔥 DAS IST DER WICHTIGE FIX */
+    overflow-x: hidden;
+    box-sizing: border-box;
+    background: var(--GlobalBackgroundWhite);
 }
+
+
 
 /*
  * Font: Inter
