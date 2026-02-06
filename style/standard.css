@@ -12,6 +12,7 @@
   --CircleBadgeGray: #0c2e621f;
   --GlobalBorderColorGray: #a8a8a8;
   --GlobalInputGray: #D1D1D1;
+  --GlobalBlack: #000000;
 ;
 
   /* Task*/
@@ -56,16 +57,7 @@
  */
 @font-face {
   font-family: 'Inter';
-  src:
-        /* Internet Explorer */
-    url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('embedded-opentype'),
-    /* Super Modern Browsers */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf')
-      format('woff2'),
-    /* Pretty Modern Browsers */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf')
-      format('woff'),
-    /* Safari, Android, iOS */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf')
-      format('truetype'),
-    /* Legacy iOS */ url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('svg');
+  src: url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -110,7 +102,7 @@ html {
 /**font sizes */
 h1 {
   font-size: 61px;
-  color: #000000;
+  color: var(--GlobalBlack);
   font-weight: 700;
   line-height: 120%;
   margin: 0;
@@ -179,6 +171,7 @@ h3 {
 }
 
 /** Buttons*/
+
 .ButtonBlueFilled {
   border-radius: 8px;
   background-color: var(--GlobalBlue);
@@ -187,47 +180,70 @@ h3 {
   font-size: 21px;
   font-weight: 700;
   border: none;
+  cursor: pointer;
+  transition: 100ms;
 }
 
 .ButtonWhiteBlueOutline {
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: var(--GlobalWhite);
   padding: 12px 16px 12px 16px;
   font-size: 21px;
   font-weight: 700;
   border: 1px solid var(--GlobalBlue);
   color: var(--GlobalBlue);
+  cursor: pointer;
+  transition: 100ms;
 }
 
 .ButtonDarkBlueFilled {
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: var(--GlobalDarkblue);
   color: var(--GlobalWhite);
   padding: 12px 16px 12px 16px;
   font-size: 21px;
   font-weight: 700;
   border: none;
+  cursor: pointer;
+  transition: 100ms;
 }
 
 .ButtonWhiteDarkBlueOutline {
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: var(--GlobalWhite);
   padding: 12px 16px 12px 16px;
   font-size: 21px;
   font-weight: 700;
   border: 1px solid var(--GlobalDarkblue);
   color: var(--GlobalDarkblue);
+  cursor: pointer;
+  transition: ease-in-out 100ms;
 }
 
-.ButtonBlueFilled:hover {
-  cursor: pointer;
+.ButtonBlueFilled:hover,
+.ButtonBlueFilled:focus {
   background-color: var(--GlobalLightBlue);
+  box-shadow: 0px 4px 4px 0px #00000040;
+  outline: none;
 }
 
-.ButtonWhiteBlueOutline:hover {
-  cursor: pointer;
+.ButtonBlueFilled:active {
+  background-color: var(--GlobalDarkblue);
+  box-shadow: none;
+}
+
+.ButtonWhiteBlueOutline:hover,
+.ButtonWhiteBlueOutline:focus {
   border: 1px solid var(--GlobalLightBlue);
+  outline: none;
   color: var(--GlobalLightBlue);
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.ButtonDarkBlueFilled:hover,
+.ButtonDarkBlueFilled:focus {
+  outline: none;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 /*
@@ -262,7 +278,7 @@ h3 {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--GlobalWhite);
 
   display: flex;
   align-items: center;
@@ -272,7 +288,7 @@ h3 {
   font-size: 16px;
   font-weight: 400;
   line-height: 120%;
-  color: #ffffff;
+  color: var(--GlobalWhite);
 
   flex: none;
 }

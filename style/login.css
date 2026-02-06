@@ -73,7 +73,7 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--GlobalWhite);
   border-radius: 30px;
   padding-top: 48px;
   padding-right: 115px;
@@ -114,7 +114,7 @@ h1 {
 
 .loginFooterLink {
   padding: 8px;
-  color: #a8a8a8;
+  color: var(--GlobalBorderColorGray);
   cursor: pointer;
 }
 
