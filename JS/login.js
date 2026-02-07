@@ -1,16 +1,16 @@
 console.log("Login loaded, baby!");
 
 async function login() {
-    document.getElementById('login-error').textContent = '';
-    let email = document.getElementById('login-email').value;
-    let password = document.getElementById('login-password').value;
+    document.getElementById('loginError').textContent = '';
+    let email = document.getElementById('loginEmail').value;
+    let password = document.getElementById('loginPassword').value;
     let loginData = await getLoginData();
     let isValid = checkLoginData(loginData, email, password);
     
     if (isValid) {
     window.location.href = 'summary.html';
     } else {
-    document.getElementById('login-error').textContent = 'Check your email and password. Please try again.';
+    document.getElementById('loginError').textContent = 'Check your email and password. Please try again.';
 }
 }
 

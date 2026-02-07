@@ -4,41 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
-
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./style/standard.css" />
     <link rel="stylesheet" href="./style/login.css" />
 </head>
 <body>
 
-<div id="logo-animation">
+<div id="logoAnimation" class="logoAnimation">
         <img src="/assets/icons/logo-login-start.svg" alt="logo">
       </div>    
 
-<nav class="login-nav">
-    <img class="login-logo" src="assets/img/logo-login.svg" alt="join-logo">
-    <div class="login-new-user-container">
+<nav class="loginNav">
+    <img class="loginLogo" src="assets/img/logo-login.svg" alt="join-logo">
+    <div class="loginNewUserContainer">
         <span>Not a Join user?</span>
         <button>Sign up</button>
     </div>
 </nav>
 
-<main class="login-main-container">
-    <div class="login-card">
+<main class="loginMainContainer">
+    <div class="loginCard">
         <h1>Log in</h1>
         <form>
-            <div class="login-inputs">
-                <div class="input-wrapper" >
+            <div class="loginInputs">
+                <div class="InputWrapper" >
                     <label for="email" class="visuallyhidden">Email</label>
-                    <input id="login-email" autocomplete="username" type="email" placeholder="Email">
-                    <img src="./assets/img/mail.svg" alt="Email Icon">
+                    <input id="loginEmail" class="InputField" autocomplete="username" type="email" placeholder="Email">
+                    <img class="InputFieldIcon" src="./assets/img/mail.svg" alt="Email Icon">
                 </div>
-                <div class="input-wrapper">
+                <div class="InputWrapper">
                     <label for="password" class="visuallyhidden">Password</label>
-                    <input id="login-password" autocomplete="current-password"type="password" placeholder="Password">
-                    <img src="./assets/img/lock.svg" alt="Password Icon">
+                    <input id="loginPassword" class="InputField" autocomplete="current-password" type="password" placeholder="Password">
+                    <img class="InputFieldIcon" src="./assets/img/lock.svg" alt="Password Icon">
                 </div>
-                <span id="login-error"></span>
-                <div class="login-buttons">
+                <span id="loginError" class="InputErrorText"></span>
+                <div class="loginButtons">
                         <button class="ButtonBlueFilled" type="submit" id="loginButton">Log in</button>
                         <button class="ButtonBlueFilled" type="button" id="guestButton">Guest Log in</button>
                 </div>
@@ -47,9 +47,9 @@
     </div>
 </main>
 
-<footer class="login-footer">
-    <span>Privacy Policy</span>
-    <span>Legal notice</span>
+<footer class="loginFooter">
+    <span class="loginFooterLink">Privacy Policy</span>
+    <span class="loginFooterLink">Legal notice</span>
 </footer>
 
 
