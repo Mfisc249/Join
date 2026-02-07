@@ -158,12 +158,14 @@ body {
 }
 
 .subtaskProgressbarC {
-  width: 100%;
+  width: 110px;
+  border-radius: 16px;
   background-color: grey;
 }
 
 .subtaskProgressbar {
-  width: 1%;
-  height: 30px;
-  background-color: green;
+  width: 0%;
+  height: 8px;
+  border-radius: 16px;
+  background-color: #4589FF;
 }

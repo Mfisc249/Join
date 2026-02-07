@@ -60,7 +60,7 @@ function loadTaskTamplate(refTask) {
     if (refTask.field.field == 'field4') {
         document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
     }
-    progressbar(refTask.id);
+    updateSubtaskProgressbar(refTask.id);
 }
 
 /** Clears the content of all board columns. */
@@ -94,7 +94,7 @@ function renderMovedTask(field) {
     refMovedTask.parentNode.removeChild(refMovedTask);
     document.getElementById(`${field}`).innerHTML += taskTamplate(TASK[0][`Task${curentTraggedElement}`].id);
     checkFieldIsEmpty();
-    progressbar(curentTraggedElement);
+    updateSubtaskProgressbar(curentTraggedElement);
 }
 
 /** Sets the currently dragged task and starts the animation. */
@@ -199,23 +199,38 @@ function startTheSearch(refSearchInput) {
     }
 }
 
-function progressbar(taskID) {
-    let i = 0;
-    if (i == 0) {
-        i = 1;
-        let elem = document.getElementById(`subtaskProgressbar${taskID}`);
-        let width = 1;
-        let id = setInterval(frame, 2);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                i = 0;
-            } else {
-                width++;
-                elem.style.width = width + "%";
-            }
+/** Updates the animated progress bar width based on completed subtasks. */
+function updateSubtaskProgressbar(taskID) {
+    let completedPercentage = calculateSubtaskCompletionPercentage(taskID);
+    let progressbarElement = document.getElementById(`subtaskProgressbar${taskID}`);
+    let width = 0;
+    let intervalId = setInterval(frame, 2);
+    progressbarElement.style.width = width + "%";
+    function frame() {
+        if (width >= completedPercentage) {
+            clearInterval(intervalId);
+        } else {
+            width++;
+            progressbarElement.style.width = width + "%";
         }
     }
+}
+
+/** Calculates the completion percentage of all subtasks for a task. */
+function calculateSubtaskCompletionPercentage(taskID) {
+    let completedSubtaskCount = 0;
+    let subTasksReview = TASK[0][`Task${taskID}`].subTasksReview;
+    let subTasksString = TASK[0][`Task${taskID}`].subTasks;
+    let subTaskCount = (subTasksString.match(/,/g) || []).length + 1;
+    for (let index = 0; index < subTaskCount; index++) {
+        let subTaskStatus = subTasksReview[0].split(',')[index];
+        if (subTaskStatus === 'C') {
+            completedSubtaskCount++;
+        }
+    }
+
+    return Math.round((completedSubtaskCount/subTaskCount)*100);
+
 }
 
 

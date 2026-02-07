@@ -1,4 +1,4 @@
-
+/** Builds the HTML markup for a task card on the board. */
 function taskTamplate(taskID) {
     return `<div id="${taskID}" class ="task taskContainer" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
             <h2 class="boardTaskCatagory">${TASK[0][`Task${taskID}`].category}</h2>
@@ -10,11 +10,13 @@ function taskTamplate(taskID) {
             </div>`
 }
 
+/** Builds the HTML markup for the drag-and-drop highlight placeholder. */
 function highlightTaskTamplate() {
     return `<div id="highlightTask" class = "highlightTask">
             </div>`
 }
 
+/** Builds the HTML markup for the four task board columns. */
 function taskBoardTamplate() {
     return ` <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
                     <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
@@ -22,6 +24,7 @@ function taskBoardTamplate() {
                     <td id="field4" ondrop="moveTo('field4')" ondragover="dragoverHandler(event)"></td>`
 }
 
+/** Builds the HTML markup for the detailed view of a task. */
 function taskDetailsTamplate(taskID) {
     return `
     <div onclick="event.stopPropagation()">
@@ -62,10 +65,12 @@ function taskDetailsTamplate(taskID) {
 
 }
 
+/** Builds the HTML markup for a single subtask with its checkbox icons. */
 function subtaskTamplate(ID, subTask, subTID) {
-    return `<span><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="checkbox('stCheckboxU${ID}','stCheckboxC${ID}'); subtaskCU('stCheckboxC${ID}','${subTID}')" id="stCheckboxC${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
+    return `<span><img class ="displayNone" onclick="toggleSubtaskCheckboxVisibility('stCheckboxU${ID}','stCheckboxC${ID}'); toggleSubtaskStatus('stCheckboxC${ID}','${subTID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="toggleSubtaskCheckboxVisibility('stCheckboxU${ID}','stCheckboxC${ID}'); toggleSubtaskStatus('stCheckboxC${ID}','${subTID}')" id="stCheckboxC${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
 }
 
+/** Builds the HTML markup for an assigned contact in the task details. */
 function taskDetailContactsTamplate(initials, name, color) {
     return `<div class = "taskDetailsATContainer">
             <span style="background-color: ${color};" class="badge">${initials}</span>
