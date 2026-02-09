@@ -73,13 +73,13 @@ function createTaskTemplate(taskName, taskDescription) {
   </div>
   </div>
   <div class="OptionsContainer">
- <h2>Assigned to</h2>
+ <h2 class=ChoiceHeadline>Assigned to</h2>
   <div class="assignedToInput" onclick="toggleAssignedDropdown()">
-   <p>Select contacts to assign</p>
+   <p class=choiceContact>Select contacts to assign</p>
     <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
   </div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
-  <img class="checkBox assignedOption" src="./assets/img/Rectangle_5.svg" alt="">
+  <img class="checkBox assignedOption" src="./assets/img/Rectangle 5.svg" alt="">
        </div>
        </div>
            <div class="OptionsContainer">
@@ -108,9 +108,9 @@ function createTaskTemplate(taskName, taskDescription) {
     />
     </div>
     <div class="subTaskIconsContainer">
-    <span onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask">✖</span>
+    <img onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask" src="./assets/img/Subtasks icons11-3.svg" alt="" />
     <div class="spacer"></div>
-    <span onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask">✔</span>
+   <img onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask" src="assets/img/check.svg" />
     </div>
   </div>
   <div id="toast" class="toast">Task added to board</div>
@@ -127,11 +127,13 @@ function createTaskTemplate(taskName, taskDescription) {
       <div class="taskButton">
        <div>
      <button onclick="clearForm()"  class="clearButton">
-     Clear <span class="cross">&#10006;</span>
+     Clear 
+<img class="cross" src="./assets/img/Subtasks icons11-3.svg" alt="" />
+
     </button>
       </div>
         <button  onclick="createTask()" class="createButton">Create Task
-          <img class="createButtonIcon" src="assets/img/check.svg" />
+          <img class="createButtonIcon" src="assets/img/check-2.svg" />
         </button>
       </div>
       </div>`;
@@ -152,9 +154,9 @@ function subtaskTemplate(text, index) {
     />
 
     <div class="subTaskEditIcons">
-      <span class="subtaskEditNote" onclick="deleteSubtask(${index})">&#128465;</span>
+     <img class="subtaskEditNote" onclick="deleteSubtask(${index})" src="./assets/img/Subtasks icons11.svg" alt="" />
       <div class="spacer Edit"></div>
-     <span class="subtaskEditNote" onclick="saveEditedSubtask(${index}, this)">✔</span>
+    <img class="subtaskEditNote" onclick="saveEditedSubtask(${index}, this)" src="./assets/img/check.svg" alt="" />
     </div>
   </div>
   </li>
@@ -169,9 +171,9 @@ function subtaskTemplate(text, index) {
       <span class="subTaskText">${text}</span>
       
       <div class="subTaskActions">
-        <span onclick="startEditSubtask(${index})">✎</span>
+     <img onclick="startEditSubtask(${index})" src="./assets/img/Subtasks icons11-2.svg" alt="" />
         <div class="spacer Edit"></div>
-        <span onclick="deleteSubtask(${index})">✖</span>
+        <img  onclick="deleteSubtask(${index})" src="./assets/img/Subtasks icons11.svg" alt="" />
       </div>
       </div>
     </li>
