@@ -1,4 +1,9 @@
-console.log("Login loaded, baby!");
+getLoginHtml(); 
+
+function getLoginHtml() {
+   document.getElementById('content').innerHTML = loginHtml(); 
+}
+
 
 async function login() {
     document.getElementById('loginError').textContent = '';
@@ -13,17 +18,6 @@ async function login() {
     document.getElementById('loginError').textContent = 'Check your email and password. Please try again.';
 }
 }
-
-
-document.getElementById('loginButton').addEventListener('click', function(event) {
-    event.preventDefault();
-    login();
-});
-
-
-document.getElementById('guestButton').addEventListener('click', function() {
-    window.location.href = 'summary.html';
-});
 
 
 async function getLoginData() {
@@ -42,3 +36,14 @@ function checkLoginData(loginData, email, password) {
     }
     return false;
 }
+
+
+document.getElementById('loginButton').addEventListener('click', function(event) {
+    event.preventDefault();
+    login();
+});
+
+
+document.getElementById('guestButton').addEventListener('click', function() {
+    window.location.href = 'summary.html';
+});
