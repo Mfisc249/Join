@@ -1,0 +1,44 @@
+/* ===============================
+   CONTACTS – PAGE LAYOUT
+   =============================== */
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 456px 1fr;
+  overflow: hidden;
+  background: #F6F7F8;
+}
+
+/* LEFT PANEL (Grundstruktur) */
+.contacts-panel {
+  background: #fff;
+  border-right: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.04);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 3500;
+}
+
+/* Sticky Header */
+.contacts-panel-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 101px;
+  box-sizing: border-box;
+  padding: 24px 24px 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: none;
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+.d-none { display: none !important; }
