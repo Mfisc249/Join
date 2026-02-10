@@ -1,6 +1,5 @@
 let currentTaskId;
 let subtaskStatusList = [];
-let allContactDetails = [];
 
 /** Opens the dialog with animation */
 function opendialog(ID) {
@@ -21,11 +20,11 @@ function closedialog(ID) {
 }
 
 /** Opens the task details dialog and loads all data. */
-async function openTaskDetails(taskID) {
+function openTaskDetails(taskID) {
     let reftaskDetails = document.getElementById('allTaskDetails');
     reftaskDetails.innerHTML = taskDetailsTamplate(taskID);
-    await getTaskDetailsContacts(taskID);
-    await renderSubtasks(taskID);
+    renderSubtasks(taskID);
+    getTaskDetailsContacts(taskID, 1);
 }
 
 /** Hides one element and shows another. */
@@ -55,28 +54,10 @@ async function DataDELETE(path = "") {
 
 }
 
-/** Contacts section logic. */
-/** Loads and renders all contacts assigned to the given task. */
-async function getTaskDetailsContacts(taskID) {
-   document.getElementById('subTasks').innerHTML = `<img src="./assets/img/loading-3-bars.svg" alt="loadingscreen">`;
-   let reftaskDetailsContainer = document.getElementById('taskDetailsAT');
-   reftaskDetailsContainer.innerHTML = `<img src="./assets/img/loading-3-bars.svg" alt="loadingscreen">`;
-   let refAssignedTo = await DataGET(`Tasks/Task${taskID}/assignedTo`);
-   let assignedToCount = (refAssignedTo.match(/,/g)||[]).length +1;
-   allContactDetails =[];
-   for (let index = 0; index < assignedToCount; index++) {
-        let contact = refAssignedTo.split(',')[index];
-        allContactDetails.push(await DataGET(`Contacts/${contact}`));
-    }
-    reftaskDetailsContainer.innerHTML = "";
-    renderTaskDetailsContacts(reftaskDetailsContainer)
-}
-
 /** Renders all loaded contact details into the container. */
-function renderTaskDetailsContacts(reftaskDetailsContainer) {
-    allContactDetails.forEach(element => {
-        reftaskDetailsContainer.innerHTML += taskDetailContactsTamplate(element.initials, element.name, element.color);
-    });
+function renderTaskDetailsContacts(contactDetails) {
+   let reftaskDetailsATContainer = document.getElementById('taskDetailsAT');
+   reftaskDetailsATContainer.innerHTML += taskDetailContactsTamplate(contactDetails.initials, contactDetails.name, contactDetails.color);
     
 }
 
@@ -88,28 +69,27 @@ function toggleSubtaskCheckboxVisibility(uncheckedCheckboxId, checkedCheckboxId)
 }
 
 /** Renders all subtasks for a task and initializes their status. */
-async function renderSubtasks(taskID) {
+function renderSubtasks(taskID) {
     let subTaskReviewStatus = TASK[0][`Task${taskID}`].subTasksReview; //await DataGET(`Tasks/Task${taskID}/subTasksReview`);
     subtaskStatusList = [];
     let subTasksString = TASK[0][`Task${taskID}`].subTasks; //await DataGET(`Tasks/Task${taskID}/subTasks`);
     let subTaskCount = (subTasksString.match(/,/g)||[]).length +1;
     document.getElementById('subTasks').innerHTML = "";
-    for (let index = 0; index < subTaskCount; index++) {
-        let subtaskId = index;
-        let subTask = subTasksString.split(',')[index];
-        subtaskStatusList.push(subTaskReviewStatus[0].split(',')[index]);
-        document.getElementById('subTasks').innerHTML += subtaskTamplate(index, subTask, subtaskId);
-        updateSubtaskCheckboxDisplay(subtaskId);
+    for (let subtaskID = 0; subtaskID < subTaskCount; subtaskID++) {
+        let subTask = subTasksString.split(',')[subtaskID];
+        subtaskStatusList.push(subTaskReviewStatus[0].split(',')[subtaskID]);
+        document.getElementById('subTasks').innerHTML += subtaskTamplate(subtaskID, subTask);
+        updateSubtaskCheckboxDisplay(subtaskID);
     }
     currentTaskId = taskID;
     
 }
 
 /** Updates checkbox icons for a subtask based on its status. */
-function updateSubtaskCheckboxDisplay(subtaskId) {
-   let checkedCheckbox = document.getElementById(`stCheckboxC${subtaskId}`);
-   let uncheckedCheckbox = document.getElementById(`stCheckboxU${subtaskId}`);
-    if (subtaskStatusList[subtaskId] === 'U') {
+function updateSubtaskCheckboxDisplay(subtaskID) {
+   let checkedCheckbox = document.getElementById(`stCheckboxC${subtaskID}`);
+   let uncheckedCheckbox = document.getElementById(`stCheckboxU${subtaskID}`);
+    if (subtaskStatusList[subtaskID] === 'U') {
         checkedCheckbox.classList.add("displayNone");
         uncheckedCheckbox.classList.remove("displayNone");
     }else{
@@ -123,10 +103,8 @@ function toggleSubtaskStatus(checkboxId, subtaskId) {
     let firstClassOfElement = document.getElementById(checkboxId).classList.item(0);
     if (firstClassOfElement != 'displayNone' ) {
         subtaskStatusList[subtaskId] = 'C';
-        console.log(subtaskStatusList);
     }else{
         subtaskStatusList[subtaskId] = 'U';
-        console.log(subtaskStatusList);
     }
 }
 

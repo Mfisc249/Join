@@ -24,7 +24,7 @@
   background: #fff;
   box-shadow: 4px 0 6px rgba(0, 0, 0, 0.08);
   border-right: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 0 14px rgba(0, 0, 0, 0.04)
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.04);
   /* Panel is the scroll container -> scrollbar on the panel edge */
   overflow-y: auto;
   overflow-x: hidden;

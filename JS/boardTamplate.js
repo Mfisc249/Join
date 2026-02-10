@@ -4,9 +4,12 @@ function taskTamplate(taskID) {
             <h2 class="boardTaskCatagory">${TASK[0][`Task${taskID}`].category}</h2>
             <h2 class="marginleft10px">${TASK[0][`Task${taskID}`].title}<h2>
             <h2 class="marginleft10px boardTaskContent">${TASK[0][`Task${taskID}`].content}<h2>
-                <div class="subtaskProgressbarC">
-                    <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
-                </div>
+            <div class="subtaskProgressbarC">
+                <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
+            </div>
+            <div id = "taskContactsContainer" class="taskContactsContainer">
+                
+            </div>
             </div>`
 }
 
@@ -66,8 +69,8 @@ function taskDetailsTamplate(taskID) {
 }
 
 /** Builds the HTML markup for a single subtask with its checkbox icons. */
-function subtaskTamplate(ID, subTask, subTID) {
-    return `<span><img class ="displayNone" onclick="toggleSubtaskCheckboxVisibility('stCheckboxU${ID}','stCheckboxC${ID}'); toggleSubtaskStatus('stCheckboxC${ID}','${subTID}')"  id ="stCheckboxU${ID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="toggleSubtaskCheckboxVisibility('stCheckboxU${ID}','stCheckboxC${ID}'); toggleSubtaskStatus('stCheckboxC${ID}','${subTID}')" id="stCheckboxC${ID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
+function subtaskTamplate(subtaskID, subTask) {
+    return `<span><img class ="displayNone" onclick="toggleSubtaskCheckboxVisibility('stCheckboxU${subtaskID}','stCheckboxC${subtaskID}'); toggleSubtaskStatus('stCheckboxC${subtaskID}','${subtaskID}')"  id ="stCheckboxU${subtaskID}" src="./assets/img/checkboxUnchecked.svg" alt="Checkbox"><img class ="displayNone" onclick="toggleSubtaskCheckboxVisibility('stCheckboxU${subtaskID}','stCheckboxC${subtaskID}'); toggleSubtaskStatus('stCheckboxC${subtaskID}','${subtaskID}')" id="stCheckboxC${subtaskID}" src="./assets/img/checkboxChecked.svg" alt="Checkbox checked"> ${subTask}</span>`
 }
 
 /** Builds the HTML markup for an assigned contact in the task details. */
@@ -76,4 +79,8 @@ function taskDetailContactsTamplate(initials, name, color) {
             <span style="background-color: ${color};" class="badge">${initials}</span>
             <span>${name}</span>
             </div>`
+}
+
+function taskContactsTamplate(initials, color) {
+    return `<span style="background-color: ${color};" class="badge">${initials}</span>`
 }

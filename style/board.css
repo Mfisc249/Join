@@ -169,3 +169,7 @@ body {
   border-radius: 16px;
   background-color: #4589FF;
 }
+
+.taskContactsContainer{
+    display: flex;
+}

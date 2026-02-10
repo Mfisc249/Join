@@ -5,6 +5,7 @@ let TASKKEYS = [];
 let count = 0;
 let highlightTaskCount = 0;
 let curentTraggedElement;
+let allContactDetails = [];
 
 /** Initializes the board and renders tasks. */
 async function init() {
@@ -34,6 +35,7 @@ async function DataPUT(path = "", data = {}) {
 async function render() {
     TASK = [];
     TASK.push(await DataGET('Tasks'));
+    allContactDetails = await DataGET(`Contacts`);
     emtyFieldContent();
     TASKKEYS = [];
     TASKKEYS.push(Object.keys(TASK[0]));
@@ -41,10 +43,11 @@ async function render() {
         loadTaskTamplate(TASK[0][`${task}`])
     });
     checkFieldIsEmpty();
+
 }
 
 /** Appends the task template to the appropriate column. */
-function loadTaskTamplate(refTask) {
+async function loadTaskTamplate(refTask) {
     if (refTask.field.field == 'field1') {
         document.getElementById('field1').innerHTML += taskTamplate(refTask.id);
     }
@@ -61,6 +64,7 @@ function loadTaskTamplate(refTask) {
         document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
     }
     updateSubtaskProgressbar(refTask.id);
+    getTaskDetailsContacts(refTask.id, 0);
 }
 
 /** Clears the content of all board columns. */
@@ -72,21 +76,21 @@ function emtyFieldContent() {
 }
 
 /** Saves a new task and renders it in 'field1'. */
-async function renderaddedTask(taskID, refTitel, refContent) {
-    await DataPUT(`Tasks/Task${taskID}`, {
-        'title': `${refTitel.value}`,
-        'id': taskID,
-        'field': 'field1',
-        'content': `${refContent.value}`,
-        'assignedTo': "c1,c5",
-        'priority': "Medium",
-        'category': "User Story",
-        'dueDate': "27/01/2026",
-        'subTasks': "Implement Recipe Recommendation,Start Page Layout"
-    });
-    document.getElementById('field1').innerHTML += taskTamplate(taskID);
-    checkFieldIsEmpty();
-}
+// async function renderaddedTask(taskID, refTitel, refContent) {
+//     await DataPUT(`Tasks/Task${taskID}`, {
+//         'title': `${refTitel.value}`,
+//         'id': taskID,
+//         'field': 'field1',
+//         'content': `${refContent.value}`,
+//         'assignedTo': "c1,c5",
+//         'priority': "Medium",
+//         'category': "User Story",
+//         'dueDate': "27/01/2026",
+//         'subTasks': "Implement Recipe Recommendation,Start Page Layout"
+//     });
+//     document.getElementById('field1').innerHTML += taskTamplate(taskID);
+//     checkFieldIsEmpty();
+// }
 
 /** Renders the moved task in the target column and removes the old one. */
 function renderMovedTask(field) {
@@ -95,6 +99,7 @@ function renderMovedTask(field) {
     document.getElementById(`${field}`).innerHTML += taskTamplate(TASK[0][`Task${curentTraggedElement}`].id);
     checkFieldIsEmpty();
     updateSubtaskProgressbar(curentTraggedElement);
+   
 }
 
 /** Sets the currently dragged task and starts the animation. */
@@ -120,26 +125,26 @@ async function moveTo(field) {
 }
 
 /** Creates a new task from the form and renders it. */
-async function formIsSubmittet() {
-    let taskID = TASKKEYS[0].length + count;
-    let taskVar = "Task" + taskID;
-    let refTitel = document.getElementById('titleId');
-    let refContent = document.getElementById('contentId');
-    TASK[0][taskVar] = {
-        'id': taskID,
-        'title': `${refTitel.value}`,
-        'field': 'field1',
-        'content': `${refContent.value}`,
-        'assignedTo': "c1,c5",
-        'priority': "Medium",
-        'category': "User Story",
-        'dueDate': "27/01/2026",
-        'subTasks': "Implement Recipe Recommendation,Start Page Layout"
-    }
-    count++;
-    await renderaddedTask(taskID, refTitel, refContent);
+// async function formIsSubmittet() {
+//     let taskID = TASKKEYS[0].length + count;
+//     let taskVar = "Task" + taskID;
+//     let refTitel = document.getElementById('titleId');
+//     let refContent = document.getElementById('contentId');
+//     TASK[0][taskVar] = {
+//         'id': taskID,
+//         'title': `${refTitel.value}`,
+//         'field': 'field1',
+//         'content': `${refContent.value}`,
+//         'assignedTo': "c1,c5",
+//         'priority': "Medium",
+//         'category': "User Story",
+//         'dueDate': "27/01/2026",
+//         'subTasks': "Implement Recipe Recommendation,Start Page Layout"
+//     }
+//     count++;
+//     await renderaddedTask(taskID, refTitel, refContent);
 
-}
+// }
 
 /** Shows hints when columns are empty. */
 function checkFieldIsEmpty() {
@@ -233,4 +238,26 @@ function calculateSubtaskCompletionPercentage(taskID) {
 
 }
 
+/** Contacts section logic. */
+/** Loads and renders all contacts assigned to the given task. */
+function getTaskDetailsContacts(taskID, renderFunctionSelector) {
+   let refAssignedTo = TASK[0][`Task${taskID}`].assignedTo;//await DataGET(`Tasks/Task${taskID}/assignedTo`);
+   let assignedToCount = (refAssignedTo.match(/,/g)||[]).length +1;
+   for (let index = 0; index <= assignedToCount; index++) {
+        if (refAssignedTo.split(',')[index] != undefined || null) {
+            let contact = refAssignedTo.split(',')[index];
+            if (renderFunctionSelector == 0) {
+                renderTaskContacts(allContactDetails[`${contact}`]);
+            }else{
+                renderTaskDetailsContacts(allContactDetails[`${contact}`])
+            }
+           
+        }
+    }
+}
+
+function renderTaskContacts(contactDetails) {
+   let refContactsContainer = document.getElementById('taskContactsContainer');
+   refContactsContainer.innerHTML += taskContactsTamplate(contactDetails.initials, contactDetails.color);
+}
 
