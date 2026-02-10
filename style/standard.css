@@ -172,6 +172,11 @@ h3 {
   pointer-events: none;
 }
 
+.InputFieldIcon.clickable {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
 .InputErrorText {
   color: var(--GlobalErrorRed);
   text-align: center;
@@ -325,4 +330,91 @@ h3 {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+
+/* =========================
+   Toast Notification
+   ========================= */
+
+.Toast {
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--GlobalBlue);
+  color: var(--GlobalWhite);
+  padding: 16px 24px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 400;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  transition: bottom 300ms ease-in-out;
+  z-index: 1000;
+}
+
+.ToastVisible {
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+}
+
+
+/* =========================
+   Auth Pages Layout (Login / Sign-up)
+   ========================= */
+
+.contentWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginMainContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--GlobalWhite);
+  border-radius: 30px;
+  padding: 48px 115px;
+  gap: 32px;
+  box-shadow: 0px 0px 14px 3px #0000000a;
+}
+
+.loginInputs {
+  width: 422px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginFooter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 48px;
+  width: 246px;
+  height: 36px;
+  text-align: center;
+  line-height: 120%;
+  font-size: 16px;
+}
+
+.loginFooterLink {
+  padding: 8px;
+  color: var(--GlobalBorderColorGray);
+  cursor: pointer;
+  text-decoration: none;
+  transition: 100ms;
+}
+
+.loginFooterLink:hover {
+  color: var(--GlobalLightBlue);
 }

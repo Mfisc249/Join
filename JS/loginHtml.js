@@ -6,7 +6,7 @@ function loginHtml() {
 <nav class="loginNav">
     <div class="loginNewUserWrapper">
         <span>Not a Join user?</span>
-        <button class="ButtonBlueFilled">Sign up</button>
+        <a href="signup.html" class="ButtonBlueFilled" style="text-decoration:none;">Sign up</a>
     </div>
 </nav>
 

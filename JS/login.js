@@ -5,7 +5,8 @@ getLoginHtml();
  * Loads and displays the login HTML content in the content container
  */
 function getLoginHtml() {
-   document.getElementById('content').innerHTML = loginHtml(); 
+   document.getElementById('content').innerHTML = loginHtml();
+   initPasswordToggles();
 }
 
 

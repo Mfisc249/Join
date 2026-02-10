@@ -1,0 +1,26 @@
+.canvas-area {
+  padding: 80px 96px;
+}
+
+.summaryHeadline {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.summaryHeadline h1 {
+  font-size: 73px;
+}
+
+.summaryDivider {
+  width: 3px;
+  height: 60px;
+  background-color: var(--GlobalLightBlue);
+}
+
+.summarySubheadline {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--GlobalBlack);
+}

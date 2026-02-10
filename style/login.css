@@ -1,4 +1,7 @@
-/* CSS for logo-animation */
+/* =========================
+   Login Page – Logo Animation
+   ========================= */
+
 .logoAnimation {
   position: fixed;
   inset: 0;
@@ -30,22 +33,12 @@
 }
 
 
-.contentWrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+/* =========================
+   Login Page – Layout
+   ========================= */
 
-/* CSS for login-site */
 h1 {
   text-align: center;
-}
-
-.loginMainContainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .loginNav {
@@ -68,21 +61,6 @@ h1 {
   padding: 16px;
 }
 
-.loginCard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--GlobalWhite);
-  border-radius: 30px;
-  padding-top: 48px;
-  padding-right: 115px;
-  padding-bottom: 48px;
-  padding-left: 115px;
-  gap: 32px;
-  box-shadow: 0px 0px 14px 3px #0000000a;
-}
-
 .loginButtonsWrapper {
   display: flex;
   justify-content: center;
@@ -92,29 +70,3 @@ h1 {
 .loginCard .ButtonBlueFilled {
   padding: 12px 24px;
 }
-
-.loginInputs {
-  width: 422px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.loginFooter {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 48px;
-  width: 246px;
-  height: 36px;
-  text-align: center;
-  line-height: 120%;
-  font-size: 16px;
-}
-
-.loginFooterLink {
-  padding: 8px;
-  color: var(--GlobalBorderColorGray);
-  cursor: pointer;
-}
-
