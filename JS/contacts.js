@@ -638,7 +638,7 @@ async function createContactFirebase(draft) {
   await saveNewContact(contact);
 }
 
-async function removeContactFromAllTasks(contactId) {
+async function removeContactFromTasks(contactId) {
   const res = await fetch(`${DB_URL}${TASKS_PATH}.json`);
   const tasksObj = await res.json();
   if (!tasksObj) return;
@@ -646,45 +646,61 @@ async function removeContactFromAllTasks(contactId) {
   const updates = {};
 
   for (const [taskKey, task] of Object.entries(tasksObj)) {
-    if (!task) continue;
+    if (!task || typeof task !== 'object') continue;
 
-    let changed = false;
+    const cleaned = cleanAssignedTo(task.assignedTo, contactId);
 
-    // Fall A: assignedTo ist Array mit IDs (["c1","c2"])
-    if (Array.isArray(task.assignedTo)) {
-      const before = task.assignedTo.length;
-      task.assignedTo = task.assignedTo.filter(id => id !== contactId);
-      if (task.assignedTo.length !== before) changed = true;
-    }
-
-    // Fall B: assignedTo ist Objekt-Map ({c1:true, c2:true})
-    if (task.assignedTo && typeof task.assignedTo === 'object' && !Array.isArray(task.assignedTo)) {
-      if (task.assignedTo[contactId] !== undefined) {
-        delete task.assignedTo[contactId];
-        changed = true;
-      }
-    }
-
-    // Fall C: assignedContacts (manche speichern so)
-    if (Array.isArray(task.assignedContacts)) {
-      const before = task.assignedContacts.length;
-      task.assignedContacts = task.assignedContacts.filter(id => id !== contactId);
-      if (task.assignedContacts.length !== before) changed = true;
-    }
-
-    if (changed) {
-      updates[taskKey] = task;
+    if (cleaned.changed) {
+      updates[taskKey] = { ...task, assignedTo: cleaned.value };
     }
   }
 
-  // nur patchen, wenn nötig
   if (Object.keys(updates).length === 0) return;
 
-  await fetch(`${DB_URL}${TASKS_PATH}.json`, {
+  const patchRes = await fetch(`${DB_URL}${TASKS_PATH}.json`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updates),
   });
+
+  if (!patchRes.ok) {
+    throw new Error('Konnte Tasks nicht aktualisieren (PATCH /Tasks.json fehlgeschlagen).');
+  }
+}
+
+function cleanAssignedTo(assignedTo, contactId) {
+  // Nichts gesetzt → nichts zu tun
+  if (assignedTo === undefined || assignedTo === null) {
+    return { changed: false, value: assignedTo };
+  }
+
+  // Bei euch: CSV-String "c4,c5"
+  if (typeof assignedTo === 'string') {
+    const parts = assignedTo.split(',').map(s => s.trim()).filter(Boolean);
+    const filtered = parts.filter(id => id !== contactId);
+    return { changed: filtered.length !== parts.length, value: filtered.join(',') };
+  }
+
+  // Falls später mal Array verwendet wird: ["c4","c5"]
+  if (Array.isArray(assignedTo)) {
+    const filtered = assignedTo.filter(id => id !== contactId);
+    return { changed: filtered.length !== assignedTo.length, value: filtered };
+  }
+
+  // Falls später mal Map verwendet wird: {c4:true}
+  if (typeof assignedTo === 'object') {
+    if (assignedTo[contactId] !== undefined) {
+      const copy = { ...assignedTo };
+      delete copy[contactId];
+      return { changed: true, value: copy };
+    }
+  }
+
+  return { changed: false, value: assignedTo };
+}
+
+async function removeContactFromAllTasks(contactId) {
+  return removeContactFromTasks(contactId);
 }
 
 // Utility Functions
