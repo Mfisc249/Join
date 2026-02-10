@@ -1,0 +1,44 @@
+/* ===============================
+   CONTACTS – SUCCESS NOTIFICATION
+   =============================== */
+
+.contact-success-notification {
+  position: fixed;
+  bottom: 100px;
+  right: -400px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 326px;
+  height: 74px;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
+  transition: right 0.5s ease-in-out;
+}
+
+.contact-success-notification.show {
+  right: 50px;
+}
+
+.contact-success-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 326px;
+  height: 74px;
+  background: #2A3647;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  color: #fff;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
