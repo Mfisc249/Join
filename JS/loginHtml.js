@@ -1,4 +1,5 @@
-<div id="logoAnimation" class="logoAnimation">
+function loginHtml() {
+    return `<div id="logoAnimation" class="logoAnimation">
         <img src="/assets/icons/logo-login-start.svg" alt="logo">
       </div>    
 
@@ -33,4 +34,5 @@
             </div>
         </form>
     </div>
-</main>
+</main>`
+}

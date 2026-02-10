@@ -1,0 +1,77 @@
+/* =========================
+   Sign-up Page
+   ========================= */
+
+h1 {
+  text-align: center;
+}
+
+.contentWrapper .loginCard {
+  padding: 48px 88px;
+}
+
+.signupLogo {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  height: 120px;
+}
+
+.signupCardHeader {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signupBackArrow {
+  position: absolute;
+  left: 0;
+  text-decoration: none;
+  transition: 100ms;
+  cursor: pointer;
+}
+
+.signupBackArrow img {
+  height: 24px;
+}
+
+.signupBackArrow:hover {
+  transform: scale(1.1);
+}
+
+.signupCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  justify-content: center;
+}
+
+.signupCheckbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--GlobalBlue);
+}
+
+.signupPrivacyLink {
+  color: var(--GlobalLightBlue);
+  text-decoration: none;
+  cursor: pointer;
+  transition: 100ms;
+}
+
+.signupPrivacyLink:hover {
+  font-weight: 700;
+}
+
+.signupButtonWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.signupButtonWrapper .ButtonBlueFilled {
+  padding: 12px 24px;
+}
