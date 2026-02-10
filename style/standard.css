@@ -120,6 +120,10 @@ h3 {
   margin: 0;
 }
 
+/*
+ * Utility: Visual Separator
+ * Purpose: Horizontal line for content separation
+ */
 .Separator {
   width: 150px;
   height: 0px;
@@ -172,9 +176,8 @@ h3 {
   color: var(--GlobalErrorRed);
   text-align: center;
   display: block;
+  min-height: 20px;
 }
-
-
 
 /** Buttons*/
 
@@ -309,6 +312,10 @@ h3 {
 
 /* Utility Classes */
 
+/*
+ * Utility: Screen Reader Only
+ * Purpose: Hides element visually but keeps it accessible for screen readers
+ */
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
