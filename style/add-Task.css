@@ -270,7 +270,7 @@ h1 {
 .buttonRequiredField {
   display: flex;
   justify-content: space-between;
-  width: 976px;
+  width: 1120px;
   margin-top: 129px;
 }
 .requiredBottomLeft {
@@ -445,13 +445,14 @@ h1 {
   cursor: pointer;
   border-radius: 6px;
   height: 26px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 20px;
-  /* gap: 20px; */
   display: flex;
+  align-items: center;
+  padding: 9px 20px;
+  font-size: 20px;
   justify-content: space-between;
-  padding: 9px 48px;
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px;
 }
 
 .assignedOption:hover {
@@ -461,16 +462,29 @@ h1 {
 .assignedOption.selected {
   background-color: #05223e;
   color: white;
-  height: 26px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 20px;
 }
 
 .checkBox {
-  height: 25px;
+  width: 20px;
+  height: 20px;
+  background-image: url("/assets/img/Rectangle 5.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer; /
 }
 
+.assignedOption.selected .checkBox {
+  background-image: url("/assets/img/CheckButton.svg");
+    cursor: pointer;
+}
+
+.assignedOption.selected .checkbox:hover {
+  background-color: #dbeaff;
+  border-radius: 4px;
+  transform: scale(1.1);
+  height: 5px;
+}
+s
 .dropDownArrow {
   height: 7px;
 }
@@ -507,6 +521,9 @@ select {
   -moz-appearance: none;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
 /* IE */
 select::-ms-expand {
   display: none;

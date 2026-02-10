@@ -17,6 +17,7 @@ let task = {
   assignedTo: [],
   category: "",
   subtasks: [],
+  field: "1",
 };
 
 async function init() {
@@ -45,7 +46,7 @@ async function saveTask(task) {
   const taskKey = `addTask${Date.now()}`;
 
   try {
-    const response = await fetch(`${BASE_URL}addTask/${taskKey}.json`, {
+    const response = await fetch(`${BASE_URL}Tasks/${taskKey}.json`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(task),
@@ -127,6 +128,7 @@ function clearForm() {
   task.assignedTo = [];
   task.category = "";
   task.subtasks = [];
+  task.field = "1";
   task.createdAt = null;
 
   const subtaskInput = document.getElementById("subtaskInput");
@@ -300,4 +302,8 @@ function toggleAssignedDropdown() {
     arrow.classList.add("rotate");
     taskArrow.classList.add("rotate");
   }
+}
+
+function toggleOption(element) {
+  element.classList.toggle("selected");
 }

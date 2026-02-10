@@ -79,7 +79,8 @@ function createTaskTemplate(taskName, taskDescription) {
     <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
   </div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
-  <img class="checkBox assignedOption" src="./assets/img/Rectangle 5.svg" alt="">
+  <div class="checkBox assignedOption" onclick="toggleOption(this)">
+       </div>
        </div>
        </div>
            <div class="OptionsContainer">
