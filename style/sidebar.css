@@ -1,0 +1,195 @@
+/* Sidebar Component Styles */
+.sidebar,
+.sidebar * {
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--GlobalBlue);
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 64px 0 24px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 3000;                /* UNTER Header */
+  transition: transform 0.3s ease;
+}
+
+.sidebar-top {
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-logo {
+  width: 100px;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation (Figma-like) */
+.nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 150px;
+  flex: 1;   /* 🔑 schiebt Footer zuverlässig nach unten */
+}
+
+.nav-item {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+
+  padding: 8px 56px;
+  border-radius: 0;
+
+  color: #CDCDCD;
+  text-decoration: none;
+  font-size: 16px;
+
+  /* wichtig: volle Breite, kein pill-cut */
+  margin-right: 0;
+
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* raus mit der "linken leiste" und slide-effekten */
+.nav-item::before {
+  content: none;
+}
+
+.nav-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+/* SVG Größe vereinheitlichen nach JS-Inlining */
+.nav-icon svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* Hover: leicht heller + Text/Icon weiß (schülerfreundlich) */
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+}
+
+/* Active: exakt wie Figma: #091931 */
+.nav-item.active {
+  background: #091931;
+  color: #FFFFFF;
+}
+
+.nav-item.active .nav-icon svg {
+  opacity: 1;
+}
+
+/* Sidebar Bottom (passt schon sehr gut zu Figma) */
+.sidebar-bottom {
+  width: 100%;
+  margin-top: auto;
+  padding-left: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 16px;
+}
+
+.sidebar-link {
+  color: #A8A8A8;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px;
+  width: fit-content;
+  border-radius: 4px;
+}
+
+.sidebar-link:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+}
+
+/* Sidebar Toggle Button (for mobile) */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  background: #2A3647;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  background: #1e2a3a;
+}
+
+@media (max-width: 900px) {
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+}
+
+/* Overlay for mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  .sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+}
