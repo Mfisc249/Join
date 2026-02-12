@@ -21,6 +21,88 @@
                     <div class="summaryDivider"></div>
                     <span class="summarySubheadline">Key Metrics at a Glance</span>
                 </div>
+
+                <section class="summaryGrid">
+                    <!-- LEFT: Metrics -->
+                    <div class="summaryCards">
+                        <!-- Row 1 -->
+                        <div class="summaryRow">
+                            <button class="summaryCard summaryCard--wide" data-nav="todo">
+                                <div class="summaryIconCircle">
+                                    <img src="./assets/icons/edit.svg" alt="" />
+                                </div>
+                                <div class="summaryCardText">
+                                    <div class="summaryNumber" id="sum-todo">0</div>
+                                    <div class="summaryLabel">To-do</div>
+                                </div>
+                            </button>
+
+                            <button class="summaryCard summaryCard--wide" data-nav="done">
+                                <div class="summaryIconCircle">
+                                    <img src="./assets/icons/check.svg" alt="" />
+                                </div>
+                                <div class="summaryCardText">
+                                    <div class="summaryNumber" id="sum-done">0</div>
+                                    <div class="summaryLabel">Done</div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <button class="summaryCard summaryCard--full" data-nav="urgent">
+                            <div class="urgentLeft">
+                                <div class="urgentBlock">
+                                    <div class="urgentCircle">
+                                        <img src="./assets/icons/priority-urgent-white.svg" alt="" />
+                                    </div>
+                                    <div class="urgentText">
+                                        <div class="summaryNumber" id="sum-urgent">0</div>
+                                        <div class="urgentLabel">Urgent</div>
+                                    </div>
+                                </div>
+
+                                <div class="urgentDivider"></div>
+
+                                <div class="deadlineText">
+                                    <div class="deadlineDate" id="sum-deadline-date">—</div>
+                                    <div class="deadlineLabel">Upcoming Deadline</div>
+                                </div>
+                            </div>
+                        </button>
+
+                        <!-- Row 3 -->
+                        <div class="summaryRow summaryRow--3">
+                            <button class="summaryCard summaryCard--square" data-nav="board">
+                                <div class="summarySquareInner">
+                                    <div class="summaryNumber" id="sum-board">0</div>
+                                    <div class="summaryLabel summaryLabel--center">Tasks in<br />Board</div>
+                                </div>
+                            </button>
+
+                            <button class="summaryCard summaryCard--square" data-nav="inprogress">
+                                <div class="summarySquareInner">
+                                    <div class="summaryNumber" id="sum-inprogress">0</div>
+                                    <div class="summaryLabel summaryLabel--center">Tasks In<br />Progress</div>
+                                </div>
+                            </button>
+
+                            <button class="summaryCard summaryCard--square" data-nav="feedback">
+                                <div class="summarySquareInner">
+                                    <div class="summaryNumber" id="sum-feedback">0</div>
+                                    <div class="summaryLabel summaryLabel--center">Awaiting<br />Feedback</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Greeting -->
+                    <aside class="summaryGreeting">
+                        <div class="greetLine" id="greet-line">Good morning!</div>
+                        <div class="greetName" id="greet-name"></div>
+                    </aside>
+                </section>
+
+                <script src="./JS/summary.js"></script>
             </div>
         </main>
     </div>
