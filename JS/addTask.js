@@ -5,7 +5,6 @@ let subtasks = [];
 let contacts = [];
 let editingSubtaskIndex = null;
 
-const urgentBtn = document.querySelector(".importanceLevel:nth-child(1)");
 const mediumBtn = document.querySelector(".importanceLevel:nth-child(2)");
 const lowBtn = document.querySelector(".importanceLevel:nth-child(3)");
 
@@ -22,12 +21,12 @@ let task = {
 
 async function init() {
   renderTemplate();
+  setupLiveValidation(); // 👈 NEU
   setupPriorityButtons();
   setDefaultPriority();
   setDateMin();
   await loadContacts();
 }
-
 function renderTemplate() {
   document.getElementById("mainContent").innerHTML = createTaskTemplate();
 }
@@ -66,24 +65,16 @@ async function saveTask(task) {
 async function createTask() {
   const titleInput = document.getElementById("taskName");
   const descInput = document.getElementById("taskDesc");
-  const assignedInput = document.getElementById("assignedTo");
   const categoryInput = document.getElementById("category");
   const dateInput = document.getElementById("DueDate");
 
-  task.assignedTo = [assignedInput.value];
   task.category = categoryInput.value;
   task.title = titleInput.value;
   task.description = descInput.value;
   task.dueDate = dateInput.value;
 
   errorMessage();
-  if (
-    !task.title ||
-    !task.description ||
-    !task.dueDate ||
-    !task.priority ||
-    !task.category
-  ) {
+  if (!task.title || !task.description || !task.dueDate || !task.category) {
     return;
   }
   const success = await saveTask(task);
@@ -108,17 +99,13 @@ async function loadContacts() {
   }
 }
 
-function renderAssignedTo() {
-  const container = document.getElementById("assignedTo");
-  container.innerHTML = assignedToTemplate();
-}
-
 function errorMessage() {
   toggleRequired(document.getElementById("taskName"));
   toggleRequired(document.getElementById("taskDesc"));
   toggleRequired(document.getElementById("DueDate"));
-  toggleRequired(document.getElementById("priority"));
+  toggleRequired(document.getElementById("category"));
 }
+
 function clearForm() {
   document.getElementById("taskForm").reset();
   task.title = "";
@@ -140,16 +127,30 @@ function clearForm() {
 function toggleRequired(inputElement) {
   if (!inputElement) return;
 
-  const container = inputElement.closest("label") || inputElement.parentElement;
-  const requiredText = container.querySelector(".requiredField");
+  const label = inputElement.closest("label");
+  const requiredText = label?.querySelector(".requiredField");
 
   if (!requiredText) return;
 
   if (!inputElement.value) {
     requiredText.classList.add("visible");
+    inputElement.classList.add("input-error"); // 🔴 Border rot
   } else {
     requiredText.classList.remove("visible");
+    inputElement.classList.remove("input-error"); // ✅ Border normal
   }
+}
+
+function setupLiveValidation() {
+  const inputs = document.querySelectorAll(
+    "#taskForm textarea, #taskForm input, #taskForm select",
+  );
+
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      toggleRequired(input);
+    });
+  });
 }
 
 function setupPriorityButtons() {
@@ -192,7 +193,6 @@ function setDateMin() {
   const dd = String(today.getDate()).padStart(2, "0");
 
   dateInput.min = `${yyyy}-${mm}-${dd}`;
-  dateInput.value = "";
 }
 
 function confirmSubtask() {
@@ -307,3 +307,5 @@ function toggleAssignedDropdown() {
 function toggleOption(element) {
   element.classList.toggle("selected");
 }
+
+document.getElementById("taskName").classList.add("input-error");

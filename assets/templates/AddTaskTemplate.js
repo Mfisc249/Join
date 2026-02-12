@@ -17,7 +17,6 @@ function createTaskTemplate(taskName, taskDescription) {
                   id="taskName"
                   name="taskName"
                   placeholder="Enter a title"
-                  required
                 ></textarea>
                 <p class="requiredField">this field is required</p>
               </div>
@@ -30,7 +29,6 @@ function createTaskTemplate(taskName, taskDescription) {
                   id="taskDesc"
                   name="taskDesc"
                   placeholder="Enter a Description"
-                  required
                 ></textarea>
                 <p class="requiredField">this field is required</p>
               </div>
@@ -47,7 +45,6 @@ function createTaskTemplate(taskName, taskDescription) {
                   id="DueDate"
                   name="DueDate"
                   placeholder="dd/mm/yyyy"
-                  required
                 />
                 <img class="eventImg" src="./assets/img/event.svg" alt="" />
                 <p class="requiredField">this field is required</p>
@@ -89,7 +86,7 @@ function createTaskTemplate(taskName, taskDescription) {
            <p class="star">*</p>
            </div>
         <div class="categorySelectWrapper">
-  <select class="ChoiceOption" id="category" required>
+  <select class="ChoiceOption" id="category">
     <option value=""selected hidden>Select task category</option>
     <option value="technicalTask">Technical Task</option>
     <option value="UserStory">User Story</option>

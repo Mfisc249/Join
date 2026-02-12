@@ -104,11 +104,11 @@ h2 {
   margin: 0;
   color: orange;
 }
-.addTaskDateContainer {
-  width: 100%;
-  display: flex;
-  align-items: center;
+
+.input-error {
+  border: 1px solid #ff3d3d !important;
 }
+
 .addTaskDateContainer input {
   border-radius: 10px;
   border: 1px solid;
