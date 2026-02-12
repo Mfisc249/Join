@@ -39,7 +39,8 @@ h1 {
 
 .signupBackArrow:hover {
   transform: scale(1.1);
-}
+ }
+
 
 .signupCheckboxWrapper {
   display: flex;
@@ -71,6 +72,7 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
 
 .signupButtonWrapper .ButtonBlueFilled {
   padding: 12px 24px;
