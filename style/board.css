@@ -172,4 +172,19 @@ body {
 
 .taskContactsContainer{
     display: flex;
+   
+}
+
+.taskContactsbadge{
+    height: 32px !important;
+    width: 32px !important;
+}
+
+.taskContactsContainer span:not(:first-child){
+    margin-left: -10px;
+}
+
+
+.taskContactsContainer span:first-child{
+    margin-left: 10px;
 }

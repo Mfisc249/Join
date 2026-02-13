@@ -65,6 +65,7 @@ async function loadTaskTamplate(refTask) {
     }
     updateSubtaskProgressbar(refTask.id);
     getTaskDetailsContacts(refTask.id, 0);
+    taskCheckPriority(refTask.id);
 }
 
 /** Clears the content of all board columns. */
@@ -99,6 +100,8 @@ function renderMovedTask(field) {
     document.getElementById(`${field}`).innerHTML += taskTamplate(TASK[0][`Task${curentTraggedElement}`].id);
     checkFieldIsEmpty();
     updateSubtaskProgressbar(curentTraggedElement);
+    getTaskDetailsContacts(curentTraggedElement, 0);
+    taskCheckPriority(curentTraggedElement);
    
 }
 
@@ -247,7 +250,7 @@ function getTaskDetailsContacts(taskID, renderFunctionSelector) {
         if (refAssignedTo.split(',')[index] != undefined || null) {
             let contact = refAssignedTo.split(',')[index];
             if (renderFunctionSelector == 0) {
-                renderTaskContacts(allContactDetails[`${contact}`]);
+                renderTaskContacts(allContactDetails[`${contact}`], taskID);
             }else{
                 renderTaskDetailsContacts(allContactDetails[`${contact}`])
             }
@@ -256,8 +259,27 @@ function getTaskDetailsContacts(taskID, renderFunctionSelector) {
     }
 }
 
-function renderTaskContacts(contactDetails) {
-   let refContactsContainer = document.getElementById('taskContactsContainer');
+function renderTaskContacts(contactDetails, taskID) {
+   let refContactsContainer = document.getElementById(`taskContactsContainer${taskID}`);
    refContactsContainer.innerHTML += taskContactsTamplate(contactDetails.initials, contactDetails.color);
+}
+
+function taskCheckPriority(taskID) {
+    let refTaskPriorityContainer = document.getElementById(`taskPriorityContainer${taskID}`);
+    switch (TASK[0][`Task${taskID}`].priority) {
+        case 'Low':
+            refTaskPriorityContainer.innerHTML = '<img src="./assets/img/low_priority.svg" alt="Low Priority"></img>';
+            break;
+
+        case 'Medium':
+            refTaskPriorityContainer.innerHTML = '<img src="./assets/img/medium_priority.svg" alt="Medium Priority"></img>';
+            break;
+        
+        case 'High':
+            refTaskPriorityContainer.innerHTML = '<img src="./assets/img/high_priority.svg" alt="High Priority"></img>';
+            break;
+        default:
+            break;
+    }
 }
 

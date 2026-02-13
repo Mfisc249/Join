@@ -55,13 +55,12 @@ dialog.closed::backdrop {
 
 
 .allTaskDetails h2{
-    font-size: 24px;
     color: var(--GlobalBlue);
     margin: 0;
 }
 
 .allTaskDetails td{
-    font-size: 24px;
+    font-size: 20px;
     padding-bottom: 25px;
 }
 
@@ -114,4 +113,8 @@ dialog.closed::backdrop {
 .taskDetailsATContainer{
     display: flex;
     align-items: center;
+}
+
+.taskDetailsATContainer span:not(:first-child){
+    font-size: 20px;
 }

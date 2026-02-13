@@ -418,3 +418,8 @@ h3 {
 .loginFooterLink:hover {
   color: var(--GlobalLightBlue);
 }
+
+.displayFLEX{
+  display: flex;
+  justify-content: space-between;
+}
