@@ -1,7 +1,7 @@
 function createTaskTemplate(taskName, taskDescription) {
   return `
-         <h1>Add task</h1>
-      <div class="contentWrapper">
+         <h1 class="mainTitle">Add Task</h1>
+      <div class="contentWrapperAddTask">
         <!-- LINKS -->
         <div class="leftContent">
           <form id="taskForm">

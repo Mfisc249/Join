@@ -19,14 +19,18 @@ let task = {
   field: "1",
 };
 
+document.getElementById("sidebar-slot").innerHTML = sidebarTemplate();
+document.getElementById("header-slot").innerHTML = headerTemplate();
+
 async function init() {
   renderTemplate();
-  setupLiveValidation(); // 👈 NEU
+  setupLiveValidation();
   setupPriorityButtons();
   setDefaultPriority();
   setDateMin();
   await loadContacts();
 }
+
 function renderTemplate() {
   document.getElementById("mainContent").innerHTML = createTaskTemplate();
 }
