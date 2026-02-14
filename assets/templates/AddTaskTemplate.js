@@ -72,7 +72,7 @@ function createTaskTemplate(taskName, taskDescription) {
   <div class="OptionsContainer">
  <h2 class=ChoiceHeadline>Assigned to</h2>
   <div class="assignedToInput" onclick="toggleAssignedDropdown()">
-   <p class=choiceContact>Select contacts to assign</p>
+   <p id="clearContact" class=choiceContact>Select contacts to assign</p>
     <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
   </div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
@@ -194,4 +194,22 @@ function assignedToOptionTemplate(contact) {
       ${contact.name}
     </option>
   `;
+}
+
+function contactInitialsCircleTemplate(contact) {
+  return `
+    <div class="assignedOption" onclick="toggleContact('${contact.name}', this)">
+      <div class="contactLeft">
+        <span class="contactInitialsCircle" style="background-color: ${contact.color}">
+          ${contact.initials}
+        </span>
+        <span class="contactName">${contact.name}</span>
+      </div>
+      <img src="./assets/img/Rectangle_5.svg" alt="checkbox" class="checkBox">
+    </div>
+  `;
+}
+
+function clearSelectField() {
+  return ``;
 }

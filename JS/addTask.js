@@ -265,21 +265,19 @@ function showToast() {
   }, 2000);
 }
 
-function renderAssignedTo() {
+async function renderAssignedTo() {
   const container = document.getElementById("assignedDropdown");
   if (!container) return;
 
-  container.innerHTML = "";
+  let html = "";
 
   contacts.forEach((contact) => {
-    container.innerHTML += `
-      <div class="assignedOption" onclick="toggleContact('${contact.name}', this)">
-     <span>${contact.name}</span>
-        <img src="./assets/img/Rectangle_5.svg" alt="checkbox" class="checkBox">
-      </div>
-    `;
+    html += contactInitialsCircleTemplate(contact);
   });
+
+  container.innerHTML = html;
 }
+
 function toggleContact(name, element) {
   const index = task.assignedTo.indexOf(name);
 
@@ -313,3 +311,9 @@ function toggleOption(element) {
 }
 
 document.getElementById("taskName").classList.add("input-error");
+
+function clearContactSelection() {
+  const assign = document.getElementById("clearContact");
+
+  assign.innerHTML = clearSelectField();
+}

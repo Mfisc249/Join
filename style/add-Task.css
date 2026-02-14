@@ -466,17 +466,18 @@ h1 {
 }
 
 .checkBox {
-  width: 20px;
-  height: 20px;
-  background-image: url("/assets/img/Rectangle 5.svg");
-  background-size: contain;
+  width: 24px;
+  height: 24px;
+  background-image: url("./assets/img/Rectangle_5.svg"); /* kein Leerzeichen */
+  background-size: cover; /* füllt die Box komplett */
   background-repeat: no-repeat;
-  cursor: pointer; /
+  cursor: pointer;
+  padding-right: 16px;
 }
 
 .assignedOption.selected .checkBox {
-  background-image: url("/assets/img/CheckButton.svg");
-    cursor: pointer;
+  background-image: url("./assets/img/checkButton.svg");
+  cursor: pointer;
 }
 
 .assignedOption.selected .checkbox:hover {
@@ -485,8 +486,7 @@ h1 {
   transform: scale(1.1);
   height: 5px;
 }
-s
-.dropDownArrow {
+s .dropDownArrow {
   height: 7px;
 }
 
@@ -539,11 +539,49 @@ select::-ms-expand {
 .addTask textarea,
 .addTask input,
 .addTask select {
-    border: unset; /* entfernt alles vom Standard */
-    border-radius: 10px; /* eigene Form */
-    border: 1px solid rgba(209,209,209,1); /* deine eigene Farbe */
+  border: unset; /* entfernt alles vom Standard */
+  border-radius: 10px; /* eigene Form */
+  border: 1px solid rgba(209, 209, 209, 1); /* deine eigene Farbe */
 }
 
+.assignedOption {
+  cursor: pointer;
+  border-radius: 6px;
+  height: 50px; /* höher, damit Platz für Initialen+Name */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* links = Initialen+Name, rechts = Checkbox */
+  padding: 0 16px;
+  font-size: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding: 8px;
+}
+
+.contactLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Abstand zwischen Kreis und Name */
+}
+
+.contactInitialsCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  line-height: 1;
+  font-size: 16px;
+}
+
+.contactName {
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
 
 @media (max-width: 1502px) {
   .contentWrapper {
