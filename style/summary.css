@@ -1,0 +1,282 @@
+/* Canvas padding nach Figma-Spacing (ohne fixe Positionen) */
+.main {
+  overflow: hidden; /* Keine Scrollbar auf Summary-Seite */
+}
+
+.canvas-area {
+  padding: 64px 96px;
+  overflow: hidden;
+}
+
+/* Headline */
+.summaryHeadline {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 46px; /* damit es optisch wie Figma unter dem Header sitzt */
+  margin-bottom: 60px;
+}
+
+.summaryHeadline h1 {
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 120%;
+  margin: 0;
+}
+
+.summaryDivider {
+  width: 3px;
+  height: 59px;
+  background-color: var(--GlobalLightBlue);
+}
+
+.summarySubheadline {
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--GlobalDarkBlue);
+}
+
+/* Layout: links Karten, rechts Greeting */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 560px 1fr;
+  column-gap: 80px;
+  align-items: start;
+  max-width: 1120px; /* wirkt wie im Screenshot, ohne alles zu strecken */
+}
+
+.summaryCards {
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.summaryRow {
+  display: flex;
+  gap: 32px;
+}
+
+.summaryRow--3 {
+  justify-content: space-between;
+}
+
+/* Cards */
+.summaryCard {
+  border: unset;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 100ms ease, box-shadow 100ms ease, background 100ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summaryCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.summaryCard--wide {
+  width: 264px;
+  height: 168px;
+  gap: 18px;
+  padding: 38px 19px;
+}
+
+.summaryCard--full {
+  width: 560px;
+  height: 168px;
+  padding: 28px 48px;
+  justify-content: flex-start;
+}
+
+.summaryCard--square {
+  width: 168px;
+  height: 168px;
+  padding: 25px 0;
+}
+
+/* Icon circle (edit / check) */
+.summaryIconCircle {
+  width: 69px;
+  height: 69px;
+  border-radius: 999px;
+  background: var(--GlobalDarkBlue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.summaryIconCircle img {
+  width: 69px;
+  height: 69px;
+}
+
+/* Numbers & labels */
+.summaryCardText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summaryNumber {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 120%;
+  color: #000;
+}
+
+.summaryLabel {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--GlobalDarkBlue);
+}
+
+.summaryLabel--center {
+  text-align: center;
+}
+
+/* Urgent Card */
+.urgentLeft {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 61px;
+}
+
+.urgentBlock {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.urgentCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  background: #ff3d00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.urgentCircle img {
+  width: 34px;
+  height: 25px;
+}
+
+.urgentText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.urgentLabel {
+  font-size: 16px;
+  line-height: 120%;
+  color: var(--GlobalDarkBlue);
+}
+
+.urgentDivider {
+  width: 0;
+  height: 102px;
+  border-left: 2px solid #d1d1d1;
+}
+
+.deadlineText {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.deadlineDate {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 120%;
+  color: var(--GlobalDarkBlue);
+}
+
+.deadlineLabel {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--GlobalDarkBlue);
+}
+
+/* Squares */
+.summarySquareInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+}
+
+/* Greeting */
+.summaryGreeting {
+  padding-top: 180px; /* wirkt wie Figma (rechts etwas tiefer) */
+}
+
+.greetLine {
+  font-size: 47px;
+  font-weight: 500;
+  line-height: 120%;
+  color: var(--GlobalDarkBlue);
+  margin-bottom: 3px;
+}
+
+.greetName {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 120%;
+  color: var(--GlobalLightBlue);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .summaryGrid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+    max-width: 560px;
+  }
+
+  .summaryGreeting {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .canvas-area {
+    padding: 32px 16px;
+  }
+
+  .summaryHeadline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .summaryDivider {
+    display: none;
+  }
+
+  .summaryCards {
+    width: 100%;
+  }
+
+  .summaryRow {
+    flex-direction: column;
+  }
+
+  .summaryCard--wide,
+  .summaryCard--full,
+  .summaryCard--square {
+    width: 100%;
+  }
+}
+

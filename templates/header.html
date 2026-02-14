@@ -1,0 +1,22 @@
+<!-- <link rel="stylesheet" href="../style/standard.css"> -->
+<header class="header">
+  <div class="header-title">Kanban Project Management Tool</div>
+  
+  <div class="header-right">
+    <button class="header-help-btn" type="button" aria-label="Help">
+      <img class="header-icon" src="./assets/img/help.svg" alt="Help">
+    </button>
+    
+    <div class="user-menu">
+      <button id="circleBadge" class="circleBadge" aria-haspopup="true" aria-expanded="false">
+        <span>SM</span>
+      </button>
+
+      <div id="submenu" class="submenu hidden" role="menu" aria-label="User menu">
+        <a href="./legal_notice.html" role="menuitem" class="submenu-item">Legal Notice</a>
+        <a href="./privacy_policy.html" role="menuitem" class="submenu-item">Privacy Policy</a>
+        <button type="button" role="menuitem" class="submenu-item submenu-logout" onclick="logout()">Log out</button>
+      </div>
+    </div>
+  </div>
+</header>

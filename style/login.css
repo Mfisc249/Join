@@ -1,0 +1,72 @@
+/* =========================
+   Login Page – Logo Animation
+   ========================= */
+
+.logoAnimation {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--GlobalBackgroundWhite);
+  animation: bgFade 900ms linear forwards;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.logoAnimation img {
+  height: 330px;
+  animation: logoMove 900ms ease-in-out forwards;
+}
+
+@keyframes bgFade {
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes logoMove {
+  to {
+    height: 120px;
+     translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+  }
+}
+
+
+/* =========================
+   Login Page – Layout
+   ========================= */
+
+h1 {
+  text-align: center;
+}
+
+.loginNav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 48px;
+  margin-top: 22px;
+  margin-right: 22px;
+}
+
+.loginNewUserWrapper {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  line-height: 120%;
+  gap: 16px;
+}
+
+.loginNewUserWrapper .ButtonBlueFilled {
+  padding: 16px;
+}
+
+.loginButtonsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+}
+
+.loginCard .ButtonBlueFilled {
+  padding: 12px 24px;
+}

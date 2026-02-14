@@ -1,0 +1,117 @@
+/* dialog open/close*/
+dialog{
+    transform: translateX(calc(100vh + 800px));
+}
+dialog.opend {
+    transform: translateX(0px);
+    transition: all 0.1s ease-in;
+}
+
+dialog.closed {
+    transform: translateX(calc(100vh + 800px));
+    transition: all 0.1s ease-in;
+}
+
+dialog::backdrop {
+    opacity: 0;
+    background-color: rgb(0, 0, 0);
+    transition: all 0.1s ease-in;
+}
+
+dialog.opend::backdrop {
+    opacity: 0.7;
+    transition: all 0.1s ease-in;
+    cursor: pointer;
+}
+
+dialog.closed::backdrop {
+    opacity: 0;
+    transition: all 0.5s ease-in;
+}
+
+.allTaskDetails{
+    border-radius: 30px;
+    
+}
+
+.allTaskDetails header section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskCatagory{
+    background-color: var( --taskLightBlue);
+    color: var(--GlobalWhite);
+    padding: 4px 24px 4px 24px;
+    border-radius: 8px;
+}
+
+.allTaskDetails h1{
+    font-size: 61px;
+    margin: 0;
+    margin-top: 20px;
+}
+
+
+.allTaskDetails h2{
+    font-size: 24px;
+    color: var(--GlobalBlue);
+    margin: 0;
+}
+
+.allTaskDetails td{
+    font-size: 24px;
+    padding-bottom: 25px;
+}
+
+.closeDialogX{
+    cursor: pointer;
+    width: 20px;
+    text-align: center;
+}
+
+.closeDialogX:hover{
+    background-color: var(--CircleBadgeGray);
+    border-radius: 50%;
+    width: 20px;
+}
+
+.taskDetailsST{
+    margin-bottom: 4px !important;
+}
+
+.taskDetailsIcons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    color: var(--GlobalBlue);
+    font-size: 19px;
+}
+
+.taskDetailsIcons:hover{
+    color: var(--GlobalLightBlue);
+    cursor: pointer;
+}
+
+.taskDetailsIcons img{
+    height: 19px;
+}
+
+.taskDetailsIcons .edit{
+    border-left: 1px #D1D1D1 solid;
+}
+
+.subTasks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.taskDetailsATContainer{
+    display: flex;
+    align-items: center;
+}

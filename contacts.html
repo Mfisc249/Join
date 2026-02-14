@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Join | Contacts</title>
+
+  <link rel="stylesheet" href="./style/standard.css" />
+  <link rel="stylesheet" href="./style/sidebar.css" />
+  <link rel="stylesheet" href="./style/header.css" />
+  <link rel="stylesheet" href="./style/contacts/contacts.layout.css" />
+  <link rel="stylesheet" href="./style/contacts/contacts.list.css" />
+  <link rel="stylesheet" href="./style/contacts/contacts.details.css" />
+  <link rel="stylesheet" href="./style/contacts/contacts.modal.css" />
+  <link rel="stylesheet" href="./style/contacts/contacts.notifications.css" />
+  <link rel="stylesheet" href="./style/contacts/contacts.responsive.css" />
+</head>
+
+<body>
+  <div class="app">
+     <div id="sidebar-slot"></div>
+     <div id="header-slot"></div> 
+  
+
+    <!-- Main area -->
+    <div class="main">
+      <!-- Content layout: list panel + details -->
+      <div class="content">
+        <!-- Contacts list panel -->
+        <section class="contacts-panel" aria-label="Contacts list">
+          <!-- Add new contact button (sticky bar) -->
+          <div class="contacts-panel-header">
+            <button class="ButtonBlueFilled" id="addContactBtn" type="button">
+              
+              <span>Add new contact</span>
+              <img src="./assets/img/person_add.svg" alt="Add" width="29.33" height="20.91">
+          
+            </button>
+          </div>
+
+          <!-- JS rendert hier Gruppen + Items -->
+          <div class="contacts-list" id="contactsList"></div>
+        </section>
+
+        <!-- Details area -->
+        <section class="details" aria-label="Contact details">
+          <div class="details-headline">
+            <h1>Contacts</h1>
+            <div class="details-divider"></div>
+            <div class="details-sub">Better with a team</div>
+          </div>
+
+          <!-- Empty state (wenn nichts ausgewählt) -->
+          <!-- <div class="details-empty" id="detailsEmpty">
+            <p>Select a contact to see details.</p>
+          </div> -->
+
+          <!-- Selected contact details -->
+          <div class="details-card hidden" id="detailsCard">
+            <div class="details-card-top">
+              <div class="badge-large" id="detailsBadge">AM</div>
+
+              <div class="details-name-actions">
+                <div class="details-name" id="detailsName">Anton Mayer</div>
+
+                <div class="details-actions">
+                  <button class="link-icon" id="editBtn" type="button" aria-label="Kontakt bearbeiten">
+                    <img src="./assets/img/edit.svg" alt="Edit" width="24" height="24">
+                    <span>Edit</span>
+                  </button>
+                  <button class="link-icon" id="deleteBtn" type="button" aria-label="Kontakt löschen">
+                    <img src="./assets/img/delete.svg" alt="Delete" width="24" height="24">
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="details-section-title">Contact Information</div>
+
+            <div class="details-info">
+              <div class="info-block">
+                <div class="info-label">Email</div>
+                <a class="info-link" id="detailsEmail" href="mailto:antomm@gmail.com">antomm@gmail.com</a>
+              </div>
+
+              <div class="info-block">
+                <div class="info-label">Phone</div>
+                <div class="info-value" id="detailsPhone">+49 1111 111 11 1</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+<!-- EDIT/ADD CONTACT MODAL -->
+<div id="contactOverlay" class="contact-overlay d-none">
+  <div class="contact-modal">
+
+    <!-- LEFT PANEL -->
+    <div class="contact-modal-left">
+      <div class="contact-modal-brand">
+        <img src="./assets/img/logoside.svg" alt="Join" class="contact-modal-logo">
+      </div>
+
+      <div class="contact-modal-left-content">
+        <h2 id="contactModalTitle" class="contact-modal-title">Edit contact</h2>
+        <p id="contactModalSubtitle" class="contact-modal-subtitle d-none">
+          Tasks are better with a team!
+        </p>
+        <div class="contact-modal-divider"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="contact-modal-right">
+      <button id="contactModalClose" class="contact-modal-close" aria-label="Close">
+        <img src="./assets/img/Close.svg" alt="Close">
+      </button>
+
+      <div class="contact-modal-body">
+        <div class="contact-modal-avatar-wrap">
+          <div id="contactModalAvatar" class="contact-modal-avatar">
+            <span id="contactModalInitials">AM</span>
+            <img id="contactModalAvatarIcon" class="contact-modal-avatar-icon d-none" src="./assets/img/person.svg" alt="">
+          </div>
+        </div>
+
+        <form id="contactModalForm" class="contact-modal-form" novalidate>
+          <!-- Name -->
+          <div class="contact-input">
+            <input id="modalName" type="text" placeholder="Name" autocomplete="off" class="InputField">
+            <img class="contact-input-icon" src="./assets/img/person.svg" alt="">
+          </div>
+          <div id="modalErrName" class="modal-error"></div>
+
+          <!-- Email -->
+          <div class="contact-input">
+            <input id="modalEmail" type="text" placeholder="Email" autocomplete="off" class="InputField">
+            <img class="contact-input-icon" src="./assets/img/mail.svg" alt="">
+          </div>
+          <div id="modalErrEmail" class="modal-error"></div>
+
+          <!-- Phone -->
+          <div class="contact-input">
+            <input id="modalPhone" type="text" placeholder="Phone" autocomplete="off" class="InputField">
+            <img class="contact-input-icon" src="./assets/img/call.svg" alt="">
+          </div>
+          <div id="modalErrPhone" class="modal-error"></div>
+        </form>
+
+        <div class="contact-modal-actions">
+          <button id="contactModalDeleteBtn" type="button" class="btn-secondary-outline">Delete</button>
+          <button id="contactModalSaveBtn" type="submit" form="contactModalForm" class="btn-primary-dark">
+            <span id="contactModalSaveText">Save</span> <img src="./assets/img/check.svg" alt="" class="btn-check">
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Success Notification -->
+<div id="contactSuccessNotification" class="contact-success-notification">
+  <div class="contact-success-content">
+    Contact successfully created
+  </div>
+</div>
+
+  <script src="./JS/sidebar.js"></script>
+  <script src="./JS/header.js"></script>
+  <script src="./JS/contacts/contacts.config.js"></script>
+  <script src="./JS/contacts/contacts.api.js"></script>
+  <script src="./JS/contacts/contacts.firebase.js"></script>
+  <script src="./JS/contacts/contacts.tasks.js"></script>
+  <script src="./JS/contacts/contacts.validation.js"></script>
+  <script src="./JS/contacts/contacts.ui.list.js"></script>
+  <script src="./JS/contacts/contacts.ui.modal.js"></script>
+  <script src="./JS/contacts/contacts.page.js"></script>
+</body>
+</html>

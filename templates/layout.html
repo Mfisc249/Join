@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join | App Layout</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="./style/standard.css" />
+  <link rel="stylesheet" href="./style/sidebar.css" />
+  <link rel="stylesheet" href="./style/header.css" />
+  <!-- <link rel="stylesheet" href="./style/page.css" /> -->
+</head>
+
+<body>
+  <div class="app">
+
+    
+    <div id="sidebar-slot"></div>
+    <div id="header-slot"></div> 
+    <!-- SIDEBAR (wird per JS geladen) -->
+    <!-- HEADER (wird per JS geladen) -->
+   
+
+    <!-- 🔥 HAUPTBEREICH FÜR SEITEN -->
+    <main class="main">
+      <div id="app-canvas" class="canvas-area">
+        <!-- ===================================== -->
+        <!--   HIER DEN SEITENINHALT EINSETZEN   -->
+        <!-- ===================================== -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Core Layout Scripts -->
+  <script src="./JS/sidebar.js"></script>
+  <script src="./JS/header.js"></script>
+
+  <!-- Seiten dürfen eigenes JS laden -->
+  <!-- <script src="./JS/page.js"></script> -->
+</body>
+</html>

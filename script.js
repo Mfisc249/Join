@@ -4,13 +4,17 @@
  */
 function initPasswordToggles() {
   let wrappers = document.querySelectorAll(".InputWrapper");
+
   wrappers.forEach(function (wrapper) {
     let input = wrapper.querySelector('input[type="password"]');
     if (!input) return;
+
     let icon = wrapper.querySelector(".InputFieldIcon");
+
     input.addEventListener("input", function () {
       updatePasswordIcon(input, icon);
     });
+
     icon.addEventListener("click", function () {
       togglePasswordVisibility(input, icon);
     });
@@ -42,6 +46,7 @@ function updatePasswordIcon(input, icon) {
  */
 function togglePasswordVisibility(input, icon) {
   if (input.value.length === 0) return;
+
   if (input.type === "password") {
     input.type = "text";
     icon.src = "./assets/img/visibility.svg";

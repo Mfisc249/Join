@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Sign up</title>
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./style/standard.css" />
+    <link rel="stylesheet" href="./style/signup.css" />
+  </head>
+  <body>
+    <div class="contentWrapper">
+      <img class="signupLogo" src="./assets/icons/logo-login.svg" alt="Join Logo">
+
+      <main class="loginMainContainer">
+        <div class="loginCard">
+          <div class="signupCardHeader">
+            <a href="index.html" class="signupBackArrow" aria-label="Back to login">
+              <img src="./assets/icons/arrow-left-line.svg" alt="Back">
+            </a>
+            <h1>Sign up</h1>
+          </div>
+          <div class="Separator"></div>
+          <form novalidate>
+            <div class="loginInputs">
+              <div class="InputWrapper">
+                <label for="signupName" class="visuallyhidden">Name</label>
+                <input id="signupName" class="InputField" type="text" placeholder="Name">
+                <img class="InputFieldIcon" src="./assets/img/person.svg" alt="Name Icon">
+              </div>
+              <div class="InputWrapper">
+                <label for="signupEmail" class="visuallyhidden">Email</label>
+                <input id="signupEmail" class="InputField" type="email" placeholder="Email">
+                <img class="InputFieldIcon" src="./assets/img/mail.svg" alt="Email Icon">
+              </div>
+              <div class="InputWrapper">
+                <label for="signupPassword" class="visuallyhidden">Password</label>
+                <input id="signupPassword" class="InputField" type="password" placeholder="Password">
+                <img class="InputFieldIcon" src="./assets/img/lock.svg" alt="Password Icon">
+              </div>
+              <div class="InputWrapper">
+                <label for="signupConfirm" class="visuallyhidden">Confirm Password</label>
+                <input id="signupConfirm" class="InputField" type="password" placeholder="Confirm Password">
+                <img class="InputFieldIcon" src="./assets/img/lock.svg" alt="Password Icon">
+              </div>
+              <span id="signupError" class="InputErrorText"></span>
+              <div class="signupCheckboxWrapper">
+                <input type="checkbox" id="signupPrivacy" class="signupCheckbox">
+                <label for="signupPrivacy">I accept the <a href="privacy.html" class="signupPrivacyLink">Privacy policy</a></label>
+              </div>
+              <div class="signupButtonWrapper">
+                <button class="ButtonBlueFilled" type="submit" id="signupButton" disabled>Sign up</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+    <footer class="loginFooter">
+      <a class="loginFooterLink" href="privacy.html">Privacy Policy</a>
+      <a class="loginFooterLink" href="legal_notice.html">Legal notice</a>
+    </footer>
+    <script src="script.js"></script>
+    <script src="JS/signup.js"></script>
+  </body>
+</html>
