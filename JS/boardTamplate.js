@@ -1,7 +1,7 @@
 /** Builds the HTML markup for a task card on the board. */
 function taskTamplate(taskID) {
     return `<div id="${taskID}" class ="task taskContainer" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
-                <h2 class="boardTaskCatagory">${TASK[0][`Task${taskID}`].category}</h2>
+                <h2 id ="boardTaskCatagory${taskID}" class="boardTaskCatagory">${TASK[0][`Task${taskID}`].category}</h2>
                 <h2 class="marginleft10px">${TASK[0][`Task${taskID}`].title}<h2>
                 <h2 class="marginleft10px boardTaskContent">${TASK[0][`Task${taskID}`].content}<h2>
                 <div class="subtaskProgressbarC marginleft10px">
@@ -18,8 +18,8 @@ function taskTamplate(taskID) {
 }
 
 /** Builds the HTML markup for the drag-and-drop highlight placeholder. */
-function highlightTaskTamplate() {
-    return `<div id="highlightTask" class = "highlightTask">
+function highlightTaskTamplate(ID) {
+    return `<div id="highlightTask${ID}" class = "highlightTask">
             </div>`
 }
 
@@ -34,10 +34,10 @@ function taskBoardTamplate() {
 /** Builds the HTML markup for the detailed view of a task. */
 function taskDetailsTamplate(taskID) {
     return `
-    <div onclick="event.stopPropagation()">
+    <div class = "maxWith525 minWith350" onclick="event.stopPropagation()">
         <header>
             <section>
-                <div class="taskCatagory">${TASK[0][`Task${taskID}`].category}</div>
+                <div id ="taskDetailsCatagory" class="taskCatagory">${TASK[0][`Task${taskID}`].category}</div>
                 <div class= "closeDialogX" onclick = "closedialog('allTaskDetails'); storeSubtask()">X</div>
             </section>
             <h1>${TASK[0][`Task${taskID}`].title}</h1>
@@ -52,7 +52,11 @@ function taskDetailsTamplate(taskID) {
                     </tr>
                     <tr>
                         <td><h2>Priority:</h2></td>
-                        <td>${TASK[0][`Task${taskID}`].priority}</td>
+                        <td class = "displayFLEX">
+                            ${TASK[0][`Task${taskID}`].priority}
+                            <div id = "taskDetailsPriorityContainer${taskID}">
+                            </div>
+                        </td>
                     </tr>
                 </table>
                 <h2 class = "taskDetailsAT">Assigned To:</h2>

@@ -63,9 +63,10 @@ async function loadTaskTamplate(refTask) {
     if (refTask.field.field == 'field4') {
         document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
     }
+    taskCatagory(refTask.id, document.getElementById(`boardTaskCatagory${refTask.id}`));
     updateSubtaskProgressbar(refTask.id);
     getTaskDetailsContacts(refTask.id, 0);
-    taskCheckPriority(refTask.id);
+    taskCheckPriority(refTask.id, document.getElementById(`taskPriorityContainer${refTask.id}`));
 }
 
 /** Clears the content of all board columns. */
@@ -99,16 +100,19 @@ function renderMovedTask(field) {
     refMovedTask.parentNode.removeChild(refMovedTask);
     document.getElementById(`${field}`).innerHTML += taskTamplate(TASK[0][`Task${curentTraggedElement}`].id);
     checkFieldIsEmpty();
+    taskCatagory(curentTraggedElement, document.getElementById(`boardTaskCatagory${curentTraggedElement}`));
     updateSubtaskProgressbar(curentTraggedElement);
     getTaskDetailsContacts(curentTraggedElement, 0);
-    taskCheckPriority(curentTraggedElement);
-   
+    taskCheckPriority(curentTraggedElement, document.getElementById(`taskPriorityContainer${curentTraggedElement}`));
+    removeHighlightBoardTaskFields();
 }
 
 /** Sets the currently dragged task and starts the animation. */
 function draggedTask(taskID) {
     curentTraggedElement = taskID;
+    highlightBoardTaskFields();
     transormTask();
+
 }
 
 /** Enables dropping by preventing default behavior. */
@@ -168,6 +172,7 @@ function transormTask() {
 
 /** Stops the rotation animation after a short delay. */
 function endTransformTask() {
+    removeHighlightBoardTaskFields();
     setTimeout(() => {
         document.getElementById(`${curentTraggedElement}`).classList.remove('rotate5deg')
     }, 100);
@@ -215,7 +220,7 @@ function updateSubtaskProgressbar(taskID) {
     let intervalId = setInterval(frame, 2);
     progressbarElement.style.width = width + "%";
     function frame() {
-        if (width >= completedPercentage) {
+        if (width > completedPercentage) {
             clearInterval(intervalId);
         } else {
             width++;
@@ -237,35 +242,34 @@ function calculateSubtaskCompletionPercentage(taskID) {
         }
     }
 
-    return Math.round((completedSubtaskCount/subTaskCount)*100);
+    return Math.round((completedSubtaskCount / subTaskCount) * 100);
 
 }
 
 /** Contacts section logic. */
 /** Loads and renders all contacts assigned to the given task. */
 function getTaskDetailsContacts(taskID, renderFunctionSelector) {
-   let refAssignedTo = TASK[0][`Task${taskID}`].assignedTo;//await DataGET(`Tasks/Task${taskID}/assignedTo`);
-   let assignedToCount = (refAssignedTo.match(/,/g)||[]).length +1;
-   for (let index = 0; index <= assignedToCount; index++) {
+    let refAssignedTo = TASK[0][`Task${taskID}`].assignedTo;//await DataGET(`Tasks/Task${taskID}/assignedTo`);
+    let assignedToCount = (refAssignedTo.match(/,/g) || []).length + 1;
+    for (let index = 0; index <= assignedToCount; index++) {
         if (refAssignedTo.split(',')[index] != undefined || null) {
             let contact = refAssignedTo.split(',')[index];
             if (renderFunctionSelector == 0) {
                 renderTaskContacts(allContactDetails[`${contact}`], taskID);
-            }else{
+            } else {
                 renderTaskDetailsContacts(allContactDetails[`${contact}`])
             }
-           
+
         }
     }
 }
 
 function renderTaskContacts(contactDetails, taskID) {
-   let refContactsContainer = document.getElementById(`taskContactsContainer${taskID}`);
-   refContactsContainer.innerHTML += taskContactsTamplate(contactDetails.initials, contactDetails.color);
+    let refContactsContainer = document.getElementById(`taskContactsContainer${taskID}`);
+    refContactsContainer.innerHTML += taskContactsTamplate(contactDetails.initials, contactDetails.color);
 }
 
-function taskCheckPriority(taskID) {
-    let refTaskPriorityContainer = document.getElementById(`taskPriorityContainer${taskID}`);
+function taskCheckPriority(taskID, refTaskPriorityContainer) {
     switch (TASK[0][`Task${taskID}`].priority) {
         case 'Low':
             refTaskPriorityContainer.innerHTML = '<img src="./assets/img/low_priority.svg" alt="Low Priority"></img>';
@@ -274,12 +278,67 @@ function taskCheckPriority(taskID) {
         case 'Medium':
             refTaskPriorityContainer.innerHTML = '<img src="./assets/img/medium_priority.svg" alt="Medium Priority"></img>';
             break;
-        
+
         case 'High':
             refTaskPriorityContainer.innerHTML = '<img src="./assets/img/high_priority.svg" alt="High Priority"></img>';
             break;
         default:
             break;
+    }
+}
+
+function taskCatagory(taskID, refTaskCatagory) {
+    switch (TASK[0][`Task${taskID}`].category) {
+        case 'User Story':
+            refTaskCatagory.classList.remove("boardTaskCatagoryGreen");
+            refTaskCatagory.classList.add("boardTaskCatagoryBlue");
+            break;
+        case 'Technical Task':
+            refTaskCatagory.classList.remove("boardTaskCatagoryBlue");
+            refTaskCatagory.classList.add("boardTaskCatagoryGreen");
+            break;
+        default:
+            break;
+    }
+
+}
+
+function highlightBoardTaskFields() {
+    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field1' && curentTraggedElement != null && curentTraggedElement != undefined) {
+        document.getElementById('field2').innerHTML += highlightTaskTamplate(2);
+        document.getElementById('field3').innerHTML += highlightTaskTamplate(3);
+        document.getElementById('field4').innerHTML += highlightTaskTamplate(4);
+    }
+    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field2' && curentTraggedElement != null && curentTraggedElement != undefined) {
+        document.getElementById('field1').innerHTML += highlightTaskTamplate(1);
+        document.getElementById('field3').innerHTML += highlightTaskTamplate(3);
+        document.getElementById('field4').innerHTML += highlightTaskTamplate(4);
+    }
+    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field3' && curentTraggedElement != null && curentTraggedElement != undefined) {
+        document.getElementById('field1').innerHTML += highlightTaskTamplate(1);
+        document.getElementById('field2').innerHTML += highlightTaskTamplate(2);
+        document.getElementById('field4').innerHTML += highlightTaskTamplate(4);
+    }
+    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field4' && curentTraggedElement != null && curentTraggedElement != undefined) {
+        document.getElementById('field1').innerHTML += highlightTaskTamplate(1);
+        document.getElementById('field2').innerHTML += highlightTaskTamplate(2);
+        document.getElementById('field3').innerHTML += highlightTaskTamplate(3);
+    }
+
+}
+
+function removeHighlightBoardTaskFields() {
+    if (document.getElementById('highlightTask1') != null) {
+        document.getElementById('highlightTask1').remove();
+    }
+    if (document.getElementById('highlightTask2') != null) {
+        document.getElementById('highlightTask2').remove();
+    }
+    if (document.getElementById('highlightTask3') != null) {
+        document.getElementById('highlightTask3').remove();
+    }
+    if (document.getElementById('highlightTask4') != null) {
+        document.getElementById('highlightTask4').remove();
     }
 }
 

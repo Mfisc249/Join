@@ -41,7 +41,6 @@ dialog.closed::backdrop {
 }
 
 .taskCatagory{
-    background-color: var( --taskLightBlue);
     color: var(--GlobalWhite);
     padding: 4px 24px 4px 24px;
     border-radius: 8px;
@@ -117,4 +116,12 @@ dialog.closed::backdrop {
 
 .taskDetailsATContainer span:not(:first-child){
     font-size: 20px;
+}
+
+.maxWith525{
+    max-width: 525px;
+}
+
+.minWith350{
+    min-width: 350px;
 }
