@@ -1,11 +1,4 @@
-getLoginHtml(); 
-
-
-function getLoginHtml() {
-   document.getElementById('content').innerHTML = loginHtml();
-   initPasswordToggles();
-}
-
+checkSessionForAnimation();
 
 /** Validates credentials and redirects on success */
 async function login() {
@@ -61,4 +54,11 @@ document.getElementById('loginEmail').addEventListener('input', function(event) 
     event.target.classList.remove('InputFieldError');
     document.getElementById('loginPassword').classList.remove('InputFieldError');
 });
+
+function checkSessionForAnimation() {
+ if (!(sessionStorage.getItem('animationPlayed'))) {
+  document.getElementById('logoAnimation').classList.remove('skipAnimation');
+  sessionStorage.setItem('animationPlayed', 'true');
+} 
+}
 

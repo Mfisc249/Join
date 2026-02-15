@@ -14,7 +14,7 @@ async function signUp() {
   await createNewUser(email.value, password.value);
   showToast('You Signed Up successfully');
   setTimeout(function() {
-    window.location.href = 'summary.html';
+    window.location.href = 'index.html';
   }, 1100);
 }
 
@@ -112,7 +112,6 @@ function initSignup() {
   let checkbox = document.getElementById('signupPrivacy');
   checkbox.addEventListener('change', toggleSignupButton);
 }
-
 
 initSignup();
 initPasswordToggles();
