@@ -99,12 +99,13 @@ function renderMovedTask(field) {
     let refMovedTask = document.getElementById(`${TASK[0][`Task${curentTraggedElement}`].id}`);
     refMovedTask.parentNode.removeChild(refMovedTask);
     document.getElementById(`${field}`).innerHTML += taskTamplate(TASK[0][`Task${curentTraggedElement}`].id);
+    removeHighlightBoardTaskFields();
     checkFieldIsEmpty();
     taskCatagory(curentTraggedElement, document.getElementById(`boardTaskCatagory${curentTraggedElement}`));
     updateSubtaskProgressbar(curentTraggedElement);
     getTaskDetailsContacts(curentTraggedElement, 0);
     taskCheckPriority(curentTraggedElement, document.getElementById(`taskPriorityContainer${curentTraggedElement}`));
-    removeHighlightBoardTaskFields();
+   
 }
 
 /** Sets the currently dragged task and starts the animation. */

@@ -10,6 +10,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 64px;
+    padding-left: 96px;
+    padding-right: 96px;
+    margin-bottom: 10px;
 }
 
 .addTaskContainer h1 {
