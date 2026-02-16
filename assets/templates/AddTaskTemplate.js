@@ -210,6 +210,10 @@ function contactInitialsCircleTemplate(contact) {
   `;
 }
 
-function clearSelectField() {
+function assignedEmptyTemplate() {
   return ``;
+}
+
+function assignedClosedTemplate() {
+  return `An:`;
 }

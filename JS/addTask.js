@@ -288,21 +288,30 @@ function toggleContact(name, element) {
     task.assignedTo.splice(index, 1);
     element.classList.remove("selected");
   }
+
+  updateAssignedLabel(); // 🔥 Text aktualisieren
 }
 
 function toggleAssignedDropdown() {
   const dropdown = document.getElementById("assignedDropdown");
   const arrow = document.querySelector(".dropDownArrow");
   const taskArrow = document.getElementById("taskArrow");
-
-  dropdown.classList.toggle("hidden");
+  const label = document.getElementById("clearContact");
 
   if (dropdown.classList.contains("hidden")) {
-    arrow.classList.remove("rotate");
-    taskArrow.classList.remove("rotate");
-  } else {
+    // Öffnen → Feld leer
+    dropdown.classList.remove("hidden");
     arrow.classList.add("rotate");
     taskArrow.classList.add("rotate");
+
+    label.innerHTML = assignedEmptyTemplate();
+  } else {
+    // Schließen → "An:"
+    dropdown.classList.add("hidden");
+    arrow.classList.remove("rotate");
+    taskArrow.classList.remove("rotate");
+
+    label.innerHTML = assignedClosedTemplate();
   }
 }
 
@@ -316,4 +325,16 @@ function clearContactSelection() {
   const assign = document.getElementById("clearContact");
 
   assign.innerHTML = clearSelectField();
+}
+
+function updateAssignedLabel() {
+  const label = document.getElementById("clearContact");
+
+  // Wenn kein Kontakt ausgewählt → Standardtext
+  if (task.assignedTo.length === 0) {
+    label.textContent = "Kontakte auswählen";
+  } else {
+    // Wenn Kontakte ausgewählt → "An:"
+    label.textContent = "An:";
+  }
 }
