@@ -155,5 +155,42 @@ function initSignup() {
   checkbox.addEventListener('change', toggleSignupButton);
 }
 
+
+async function getNextContactId() {
+  let response = await fetch(FIREBASE_URL + '/Contacts.json');
+  let contacts = await response.json();
+  if (!contacts) return 'c1';
+  let keys = Object.keys(contacts);
+  let maxNumber = 0;
+  for (let i = 0; i < keys.length; i++) {
+    let number = parseInt(keys[i].replace('c', ''));
+    if (number > maxNumber) {
+      maxNumber = number;
+    }
+  }
+  return 'c' + (maxNumber + 1);
+}
+
+
+function generateInitials(name) {
+let parts = name.split(' ');
+let initials = parts[0][0] + parts[1][0];
+return initials.toUpperCase();
+}
+
+function generateRandomColor() {
+  let colors = [
+    '#FF7A00', '#9327FF', '#6E52FF', '#FC71FF',
+    '#FFBB2B', '#1FD7C1', '#FF5EB3', '#00BEE8',
+    '#1FC71F', '#FF745E', '#FFA35E', '#FC71FF'
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+
+function createNewContact() {
+  
+}
+
 initSignup();
 initPasswordToggles();
