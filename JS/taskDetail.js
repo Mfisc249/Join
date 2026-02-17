@@ -23,8 +23,10 @@ function closedialog(ID) {
 function openTaskDetails(taskID) {
     let reftaskDetails = document.getElementById('allTaskDetails');
     reftaskDetails.innerHTML = taskDetailsTamplate(taskID);
+    taskCatagory(taskID, document.getElementById('taskDetailsCatagory'));
     renderSubtasks(taskID);
     getTaskDetailsContacts(taskID, 1);
+    taskCheckPriority(taskID, document.getElementById(`taskDetailsPriorityContainer${taskID}`));
 }
 
 /** Hides one element and shows another. */
@@ -119,3 +121,4 @@ async function storeSubtask() {
 
     updateSubtaskProgressbar(currentTaskId);
 }
+

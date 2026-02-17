@@ -32,6 +32,16 @@
   }
 }
 
+.logoAnimation.skipAnimation {
+  animation: none;
+  background-color: transparent;
+}
+
+.logoAnimation.skipAnimation img {
+  animation: none;
+  height: 120px;
+  translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+}
 
 /* =========================
    Login Page – Layout

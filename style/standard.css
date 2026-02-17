@@ -418,3 +418,33 @@ h3 {
 .loginFooterLink:hover {
   color: var(--GlobalLightBlue);
 }
+
+.displayFLEX{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paddingBottom5{
+    padding-bottom: 5px;
+}
+
+.paddingBottom15{
+    padding-bottom: 15px;
+}
+
+.paddingTop15{
+    padding-top: 15px;
+}
+
+.displayNone {
+    display: none !important;
+}
+
+.rotate5deg {
+    transform: rotate(5deg);
+}
+
+.marginleft10px{
+    margin-left: 10px;
+}
