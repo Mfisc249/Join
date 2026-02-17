@@ -11,10 +11,10 @@ async function signUp() {
   let confirm = document.getElementById('signupConfirm');
   if (!checkSignupInputs(name, email, password, confirm)) return;
   if (await checkEmailExists(email.value)) {
-    // Funktionsaufruf für Fehlermeldung, dass die Email schon existiert.
-    showSignupError(); 
+      showSignupError(); 
     return; 
   }
+  await createNewUser(email.value, password.value);
   document.getElementById('signupButton').disabled = true;
   showToast('You Signed Up successfully');
   setTimeout(function() {
