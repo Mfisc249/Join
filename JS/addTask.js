@@ -19,14 +19,18 @@ let task = {
   field: "1",
 };
 
+document.getElementById("sidebar-slot").innerHTML = sidebarTemplate();
+document.getElementById("header-slot").innerHTML = headerTemplate();
+
 async function init() {
   renderTemplate();
-  setupLiveValidation(); // 👈 NEU
+  setupLiveValidation();
   setupPriorityButtons();
   setDefaultPriority();
   setDateMin();
   await loadContacts();
 }
+
 function renderTemplate() {
   document.getElementById("mainContent").innerHTML = createTaskTemplate();
 }
@@ -261,21 +265,19 @@ function showToast() {
   }, 2000);
 }
 
-function renderAssignedTo() {
+async function renderAssignedTo() {
   const container = document.getElementById("assignedDropdown");
   if (!container) return;
 
-  container.innerHTML = "";
+  let html = "";
 
   contacts.forEach((contact) => {
-    container.innerHTML += `
-      <div class="assignedOption" onclick="toggleContact('${contact.name}', this)">
-     <span>${contact.name}</span>
-        <img src="./assets/img/Rectangle_5.svg" alt="checkbox" class="checkBox">
-      </div>
-    `;
+    html += contactInitialsCircleTemplate(contact);
   });
+
+  container.innerHTML = html;
 }
+
 function toggleContact(name, element) {
   const index = task.assignedTo.indexOf(name);
 
@@ -286,21 +288,31 @@ function toggleContact(name, element) {
     task.assignedTo.splice(index, 1);
     element.classList.remove("selected");
   }
+
+  // KEIN updateAssignedLabel hier!
 }
 
 function toggleAssignedDropdown() {
   const dropdown = document.getElementById("assignedDropdown");
   const arrow = document.querySelector(".dropDownArrow");
   const taskArrow = document.getElementById("taskArrow");
-
-  dropdown.classList.toggle("hidden");
+  const label = document.getElementById("clearContact");
 
   if (dropdown.classList.contains("hidden")) {
-    arrow.classList.remove("rotate");
-    taskArrow.classList.remove("rotate");
-  } else {
+    // Öffnen → Feld leer
+    dropdown.classList.remove("hidden");
     arrow.classList.add("rotate");
     taskArrow.classList.add("rotate");
+
+    label.innerHTML = assignedEmptyTemplate();
+  } else {
+    // Schließen → "An:"
+    // Schließen → Label abhängig von Auswahl setzen
+    dropdown.classList.add("hidden");
+    arrow.classList.remove("rotate");
+    taskArrow.classList.remove("rotate");
+
+    updateAssignedLabel(); // 🔥 NUR HIER aufrufen
   }
 }
 
@@ -309,3 +321,21 @@ function toggleOption(element) {
 }
 
 document.getElementById("taskName").classList.add("input-error");
+
+function clearContactSelection() {
+  const assign = document.getElementById("clearContact");
+
+  assign.innerHTML = clearSelectField();
+}
+
+function updateAssignedLabel() {
+  const label = document.getElementById("clearContact");
+
+  // Wenn kein Kontakt ausgewählt → Standardtext
+  if (task.assignedTo.length === 0) {
+    label.textContent = "Select contacts to assign";
+  } else {
+    // Wenn Kontakte ausgewählt → "An:"
+    label.textContent = "An:";
+  }
+}

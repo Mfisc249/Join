@@ -1,7 +1,7 @@
 function createTaskTemplate(taskName, taskDescription) {
   return `
-         <h1>Add task</h1>
-      <div class="contentWrapper">
+         <h1 class="mainTitle">Add Task</h1>
+      <div class="contentWrapperAddTask">
         <!-- LINKS -->
         <div class="leftContent">
           <form id="taskForm">
@@ -72,7 +72,7 @@ function createTaskTemplate(taskName, taskDescription) {
   <div class="OptionsContainer">
  <h2 class=ChoiceHeadline>Assigned to</h2>
   <div class="assignedToInput" onclick="toggleAssignedDropdown()">
-   <p class=choiceContact>Select contacts to assign</p>
+   <p id="clearContact" class=choiceContact>Select contacts to assign</p>
     <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
   </div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
@@ -193,5 +193,24 @@ function assignedToOptionTemplate(contact) {
     <option value="${contact.name}">
       ${contact.name}
     </option>
+  `;
+}
+
+function contactInitialsCircleTemplate(contact) {
+  const isSelected = task.assignedTo.includes(contact.name);
+  const selectedClass = isSelected ? "selected" : "";
+
+  return `
+    <div class="assignedOption ${selectedClass}" 
+         onclick="toggleContact('${contact.name}', this)">
+      <div class="contactLeft">
+        <span class="contactInitialsCircle" 
+              style="background-color: ${contact.color}">
+          ${contact.initials}
+        </span>
+        <span class="contactName">${contact.name}</span>
+      </div>
+      <img src="./assets/img/Rectangle_5.svg" alt="checkbox" class="checkBox">
+    </div>
   `;
 }
