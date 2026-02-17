@@ -82,9 +82,9 @@ body {
 .tablecontainer td .taskContainer {
     /* height: 215px; */
     width: 252px;
-    border: 2px solid black;
     border-radius: 24px;
     margin-top: 5px;
+    box-shadow: 1px 1px 8px -1px rgba(0,0,0,0.54);
 }
 
 .task:hover {
