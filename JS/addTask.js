@@ -289,7 +289,7 @@ function toggleContact(name, element) {
     element.classList.remove("selected");
   }
 
-  updateAssignedLabel(); // 🔥 Text aktualisieren
+  // KEIN updateAssignedLabel hier!
 }
 
 function toggleAssignedDropdown() {
@@ -307,11 +307,12 @@ function toggleAssignedDropdown() {
     label.innerHTML = assignedEmptyTemplate();
   } else {
     // Schließen → "An:"
+    // Schließen → Label abhängig von Auswahl setzen
     dropdown.classList.add("hidden");
     arrow.classList.remove("rotate");
     taskArrow.classList.remove("rotate");
 
-    label.innerHTML = assignedClosedTemplate();
+    updateAssignedLabel(); // 🔥 NUR HIER aufrufen
   }
 }
 
@@ -332,7 +333,7 @@ function updateAssignedLabel() {
 
   // Wenn kein Kontakt ausgewählt → Standardtext
   if (task.assignedTo.length === 0) {
-    label.textContent = "Kontakte auswählen";
+    label.textContent = "Select contacts to assign";
   } else {
     // Wenn Kontakte ausgewählt → "An:"
     label.textContent = "An:";

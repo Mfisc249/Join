@@ -197,10 +197,15 @@ function assignedToOptionTemplate(contact) {
 }
 
 function contactInitialsCircleTemplate(contact) {
+  const isSelected = task.assignedTo.includes(contact.name);
+  const selectedClass = isSelected ? "selected" : "";
+
   return `
-    <div class="assignedOption" onclick="toggleContact('${contact.name}', this)">
+    <div class="assignedOption ${selectedClass}" 
+         onclick="toggleContact('${contact.name}', this)">
       <div class="contactLeft">
-        <span class="contactInitialsCircle" style="background-color: ${contact.color}">
+        <span class="contactInitialsCircle" 
+              style="background-color: ${contact.color}">
           ${contact.initials}
         </span>
         <span class="contactName">${contact.name}</span>
@@ -208,12 +213,4 @@ function contactInitialsCircleTemplate(contact) {
       <img src="./assets/img/Rectangle_5.svg" alt="checkbox" class="checkBox">
     </div>
   `;
-}
-
-function assignedEmptyTemplate() {
-  return ``;
-}
-
-function assignedClosedTemplate() {
-  return `An:`;
 }
