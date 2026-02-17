@@ -1,14 +1,14 @@
 /** Builds the HTML markup for a task card on the board. */
 function taskTamplate(taskID) {
     return `<div id="${taskID}" class ="task taskContainer" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
-                <h2 id ="boardTaskCatagory${taskID}" class="boardTaskCatagory">${TASK[0][`Task${taskID}`].category}</h2>
-                <h2 class="marginleft10px">${TASK[0][`Task${taskID}`].title}<h2>
-                <h2 class="marginleft10px boardTaskContent">${TASK[0][`Task${taskID}`].content}<h2>
+                <h2 id ="boardTaskCatagory${taskID}" class="boardTaskCatagory paddingBottom15">${TASK[0][`Task${taskID}`].category}</h2>
+                <h2 class="marginleft10px paddingBottom5">${TASK[0][`Task${taskID}`].title}<h2>
+                <h2 class="marginleft10px boardTaskContent paddingBottom15">${TASK[0][`Task${taskID}`].content}<h2>
                 <div class="subtaskProgressbarC marginleft10px">
                     <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
                 </div>
-                <div class = "displayFLEX">
-                    <div id = "taskContactsContainer${taskID}" class="taskContactsContainer">
+                <div class = "displayFLEX paddingBottom5 paddingTop15">
+                    <div id = "taskContactsContainer${taskID}" class="taskContactsContainer paddingBottom5">
                 
                     </div>
                     <div id = "taskPriorityContainer${taskID}">
