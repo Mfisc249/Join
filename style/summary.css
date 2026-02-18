@@ -78,6 +78,28 @@
 .summaryCard:hover {
   transform: translateY(-1px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  background: var(--GlobalDarkblue);
+  color: #fff;
+}
+
+.summaryCard:hover .summaryNumber,
+.summaryCard:hover .summaryLabel,
+.summaryCard:hover .urgentLabel,
+.summaryCard:hover .deadlineDate,
+.summaryCard:hover .deadlineLabel {
+  color: #fff;
+}
+
+.summaryCard:hover .summaryIconCircle {
+  background: #fff;
+}
+
+.summaryCard--wide:hover .summaryIconCircle img[src$="pen.svg"] {
+  content: url("../assets/icons/pen-hover.svg");
+}
+
+.summaryCard--wide:hover .summaryIconCircle img[src$="check.svg"] {
+  content: url("../assets/icons/check-hover.svg");
 }
 
 .summaryCard--wide {
