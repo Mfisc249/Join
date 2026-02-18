@@ -1,0 +1,801 @@
+body {
+  margin: 0;
+  background-color: rgba(246, 247, 248, 1);
+}
+main {
+  max-width: 1200px; /* PC-Größe */
+  margin: 190px auto 0 auto;
+  margin-left: 365px;
+}
+.addTaskLabel {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+form {
+  position: relative;
+}
+.mainTitle {
+  color: rgba(0, 0, 0, 1);
+  font-size: 61px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  line-height: 1.2;
+  margin-bottom: 50px;
+}
+h2 {
+  font-size: 20px;
+  line-height: 1.2;
+  gap: 0px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  color: Version 2 / main colors rgba(0, 0, 0, 1);
+  padding-left: 6px;
+}
+.addTaskLabelDescription {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.addTaskLabelDate {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.taskName {
+  font-weight: 400;
+  height: 34px;
+  line-height: 1.2;
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+}
+.taskDescription {
+  font-weight: 400;
+  height: 20px;
+  line-height: 1.2;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: "Inter", sans-serif;
+}
+.taskNameContainer textarea {
+  border-radius: 10px;
+  border: 1px solid;
+  width: 419px;
+  border-color: rgba(209, 209, 209, 1);
+  padding-top: 11px;
+  padding-left: 22px;
+  cursor: pointer;
+}
+
+.taskNameContainer textarea:focus {
+  border: 2px solid #88e9fa; /* kräftiges Blau */
+  outline: none;
+}
+
+.taskDescriptionContainer textarea {
+  border-radius: 20px;
+  border: 1px solid;
+  width: 423px;
+  border-color: rgba(209, 209, 209, 1);
+  height: 120px;
+  padding-left: 18px;
+  padding-top: 11px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+}
+
+.taskDescriptionContainer textarea:focus {
+  border: 2px solid #88e9fa; /* kräftiges Blau */
+  outline: none;
+}
+
+.headlineTextArea {
+  display: flex;
+  align-items: center;
+}
+.star {
+  margin: 0;
+  color: orange;
+}
+
+.input-error {
+  border: 1px solid #ff3d3d !important;
+}
+
+.addTaskDateContainer input {
+  border-radius: 10px;
+  border: 1px solid;
+  width: 425px;
+  color: rgba(209, 209, 209, 1);
+  top: 12px;
+  right: 16px;
+  bottom: 12px;
+  left: 16px;
+  height: 48px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+}
+
+.addTaskDateContainer input:focus {
+  border: 2px solid #88e9fa; /* kräftiges Blau */
+  outline: none;
+}
+.taskDateInput {
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  height: 24px;
+  width: 119px;
+  color: rgba(209, 209, 209, 1);
+  padding-left: 18px;
+}
+.taskDateInput::-webkit-calendar-picker-indicator {
+  filter: brightness(0.5);
+}
+.requiredField {
+  color: rgba(230, 0, 38, 0);
+  font-size: 12px;
+  font-weight: 400;
+  font-family: poppins;
+  width: 119px;
+  margin-top: 4px;
+}
+
+.SubTaskField {
+  color: black;
+}
+
+.requiredField.visible {
+  color: rgba(230, 0, 38, 1); /* sichtbar wenn Klasse .visible */
+}
+
+.contentWrapperAddTask {
+  display: flex;
+  gap: 48px;
+}
+
+h1 {
+  margin: 0 0 40px 0;
+}
+
+.divider {
+  border-left: 1px solid #d1d1d1; /* 👈 DER STRICH */
+  height: 424px;
+  color: rgba(209, 209, 209, 1);
+}
+
+.priority {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  margin-top: 6px;
+}
+
+.priorityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 139px;
+  height: 51px;
+  background-color: white;
+  border: 1px solid rgba(209, 209, 209, 1);
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.priorityButton:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.priorityButton.urgent.active {
+  background-color: #ff3d00;
+  color: white;
+}
+
+.priorityButton.medium.active {
+  background-color: rgba(255, 168, 0, 1);
+  color: white;
+}
+
+.priorityButton.low.active {
+  background-color: #7ae229;
+  color: white;
+}
+
+/* Wenn Button aktiv: Icon wird weiß */
+.priorityButton.active .priorityIcon {
+  filter: brightness(0) invert(1);
+}
+
+.ChoiceOption {
+  width: 440px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: rgba(209, 209, 209, 1);
+  background-color: rgba(255, 255, 255, 1);
+  padding-left: 13px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  padding-left: 18px;
+  cursor: pointer;
+}
+
+.assignedToInput {
+  width: 420px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: rgba(209, 209, 209, 1);
+  background-color: rgba(255, 255, 255, 1);
+  padding-left: 13px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 8px;
+  align-items: center;
+}
+.inputField {
+  width: 415px;
+  max-height: 44px;
+}
+
+.ChoiceOption:focus {
+  border: 2px solid #88e9fa; /* kräftiges Blau */
+  outline: none;
+}
+.OptionsContainer {
+  margin-bottom: 24px;
+}
+.ChoiceHeadline {
+  margin-bottom: 8px;
+}
+.buttonRequiredField {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+  margin-top: 80px;
+}
+.requiredBottomLeft {
+  display: flex;
+  align-items: start;
+}
+.clearButton {
+  border-radius: 10px;
+  height: 56px;
+  width: 100px;
+  border: 1px solid;
+  border-color: rgba(42, 54, 71, 1);
+  background-color: rgba(246, 247, 248, 1);
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.createButton {
+  width: 183px;
+  height: 56px;
+  border-radius: 10px;
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.2;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.createButtonIcon {
+  height: 18px;
+  width: 18px;
+}
+.taskButton {
+  display: flex;
+  gap: 16px;
+}
+.subtaskInputContainer {
+  position: relative;
+  width: fit-content; /* passt sich deiner festen Input-Breite an */
+}
+.subtaskIcon {
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.subTaskIconsContainer {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spacer {
+  width: 1px;
+  height: 23px;
+  background-color: rgba(209, 209, 209, 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.subtaskInputContainer:focus-within .spacer {
+  opacity: 1;
+  pointer-events: auto;
+}
+.subtaskInputContainer:focus-within .subtaskIcon {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.subtaskIcon:hover {
+  opacity: 0.7;
+}
+
+.subTaskContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subTaskItem:hover {
+  background-color: rgba(240, 240, 240, 1);
+}
+
+.Edit {
+  opacity: 1;
+}
+
+.subTaskActions {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.subTaskEditInput {
+  width: 390px;
+  height: 31px;
+  border: none;
+  border-bottom: 1px solid #7cf0ff;
+  outline: none;
+}
+
+.subTaskEditIcons {
+  display: flex;
+  position: relative;
+  right: 13%;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.subTaskEditContainer {
+  display: flex;
+  align-items: center;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: -100px; /* startet unsichtbar */
+  transform: translateX(-50%);
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+/* Sichtbarer Zustand */
+.toast.show {
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.subtaskEditNote {
+  font-size: 18px;
+}
+
+.assignedDropdown {
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  margin-top: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  justify-content: normal;
+  display: flex;
+  flex-direction: column;
+  width: 434px;
+}
+
+.assignedOption {
+  cursor: pointer;
+  border-radius: 6px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  padding: 9px 20px;
+  font-size: 20px;
+  justify-content: space-between;
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px;
+}
+
+.assignedOption:hover {
+  background-color: #bfbfbf33;
+}
+
+.assignedOption.selected {
+  background-color: #05223e;
+  color: white;
+}
+
+.checkBox {
+  width: 24px;
+  height: 24px;
+  background-image: url("./assets/img/Rectangle_5.svg"); /* kein Leerzeichen */
+  background-size: cover; /* füllt die Box komplett */
+  background-repeat: no-repeat;
+  cursor: pointer;
+  padding-right: 16px;
+}
+
+.assignedOption.selected .checkBox {
+  background-image: url("./assets/img/checkButton.svg");
+  cursor: pointer;
+}
+
+.assignedOption.selected .checkbox:hover {
+  background-color: #dbeaff;
+  border-radius: 4px;
+  transform: scale(1.1);
+  height: 5px;
+}
+s .dropDownArrow {
+  height: 7px;
+}
+
+.subTaskList {
+  padding-right: 20px;
+}
+.choiceContact {
+  padding-left: 9px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.taskArrow {
+  position: relative;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 7px;
+}
+.dropDownArrow.rotate {
+  transform: rotate(180deg);
+}
+.hidden {
+  display: none;
+}
+
+/* Chrome, Edge, Safari */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+/* IE */
+select::-ms-expand {
+  display: none;
+}
+
+.eventImg {
+  position: relative;
+  right: 40px;
+  top: 3px;
+}
+
+.addTask textarea,
+.addTask input,
+.addTask select {
+  border: unset; /* entfernt alles vom Standard */
+  border-radius: 10px; /* eigene Form */
+  border: 1px solid rgba(209, 209, 209, 1); /* deine eigene Farbe */
+}
+
+.assignedOption {
+  cursor: pointer;
+  border-radius: 6px;
+  height: 50px; /* höher, damit Platz für Initialen+Name */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* links = Initialen+Name, rechts = Checkbox */
+  padding: 0 16px;
+  font-size: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding: 8px;
+}
+
+.contactLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Abstand zwischen Kreis und Name */
+}
+
+.contactInitialsCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  line-height: 1;
+  font-size: 16px;
+}
+
+.contactName {
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+@media (max-width: 1502px) {
+  .contentWrapper {
+    flex-direction: column;
+  }
+  .divider {
+    display: none;
+  }
+  .taskDescriptionContainer textarea {
+    width: 970px;
+  }
+  .taskNameContainer textarea {
+    width: 970px;
+  }
+  .addTaskDateContainer input {
+    width: 970px;
+  }
+  h1 {
+    font-size: 55px;
+  }
+  .priority {
+    justify-content: start;
+    gap: 202px;
+  }
+  .importanceLevel {
+    width: 192px;
+    height: 57px;
+  }
+  .ChoiceOption {
+    width: 993px;
+  }
+  .inputField {
+    width: 970px;
+  }
+  .buttonRequiredField {
+    width: 989px;
+  }
+}
+
+@media (max-width: 1370px) {
+  .taskDescriptionContainer textarea {
+    width: 930px;
+  }
+  .taskNameContainer textarea {
+    width: 929px;
+  }
+  .addTaskDateContainer input {
+    width: 930px;
+  }
+  .ChoiceOption {
+    width: 951px;
+  }
+  .inputField {
+    width: 930px;
+  }
+  .inputField {
+    width: 928px;
+  }
+  .buttonRequiredField {
+    width: 951px;
+    margin-top: 65px;
+  }
+  .priority {
+    justify-content: start;
+    gap: 181px;
+  }
+}
+@media (max-width: 1329px) {
+  .taskNameContainer textarea {
+    width: 800px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 800px;
+  }
+  .addTaskDateContainer input {
+    width: 800px;
+  }
+  .priority {
+    justify-content: start;
+    gap: 119px;
+  }
+  .ChoiceOption {
+    width: 825px;
+  }
+  .inputField {
+    width: 803px;
+  }
+  .buttonRequiredField {
+    width: 829px;
+    margin-top: 40px;
+  }
+}
+@media (max-width: 1195px) {
+  .taskNameContainer textarea {
+    width: 640px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 640px;
+    height: 105px;
+  }
+  .addTaskDateContainer input {
+    width: 640px;
+  }
+  .priority {
+    padding: 0;
+    justify-content: start;
+    gap: 36px;
+  }
+  .ChoiceOption {
+    width: 661px;
+  }
+  .inputField {
+    width: 638px;
+  }
+  .buttonRequiredField {
+    width: 660px;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 1035px) {
+  h1 {
+    font-size: 50px;
+  }
+  .taskNameContainer textarea {
+    width: 470px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 470px;
+    height: 105px;
+  }
+  .addTaskDateContainer input {
+    width: 470px;
+  }
+  .priority {
+    padding: 0;
+    justify-content: start;
+    gap: 28px;
+  }
+  .ChoiceOption {
+    width: 492px;
+  }
+  .inputField {
+    width: 466px;
+  }
+  .buttonRequiredField {
+    width: 485px;
+    margin-top: 5px;
+  }
+  .importanceLevel {
+    width: 140px;
+    height: 51px;
+    font-size: 18px;
+  }
+}
+@media (max-width: 870px) {
+  h1 {
+    font-size: 47px;
+  }
+  .taskNameContainer textarea {
+    width: 259px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 259px;
+    height: 88px;
+  }
+  .addTaskDateContainer input {
+    width: 259px;
+  }
+  .priority {
+    padding: 0;
+    justify-content: start;
+    gap: 11px;
+  }
+  .importanceLevel {
+    width: 82px;
+    height: 41px;
+    font-size: 16px;
+  }
+  .ChoiceOption {
+    width: 274px;
+  }
+  .inputField {
+    width: 251px;
+  }
+  .buttonRequiredField1 {
+    width: 220px;
+    margin-top: 5px;
+  }
+  .clearButton {
+    width: 100px;
+    height: 56px;
+  }
+  .buttonRequiredField {
+    width: 267px;
+    margin-top: 5px;
+    flex-direction: column;
+  }
+  main {
+    padding: 0 15px;
+  }
+  .taskButton {
+    margin-top: 25px;
+    justify-content: end;
+  }
+  .createButton {
+    width: 123px;
+    height: 43px;
+    align-items: center;
+    gap: 3px;
+    font-size: 16px;
+  }
+  .clearButton {
+    width: 89px;
+    height: 43px;
+    font-size: 16px;
+  }
+}
