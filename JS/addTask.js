@@ -4,6 +4,7 @@ const BASE_URL =
 let subtasks = [];
 let contacts = [];
 let editingSubtaskIndex = null;
+let assignedPreviewMode = false;
 
 const mediumBtn = document.querySelector(".importanceLevel:nth-child(2)");
 const lowBtn = document.querySelector(".importanceLevel:nth-child(3)");
@@ -298,44 +299,71 @@ function toggleAssignedDropdown() {
   const taskArrow = document.getElementById("taskArrow");
   const label = document.getElementById("clearContact");
 
+  // 🔹 FALL 1: Komplett geschlossen → Öffnen (alle Kontakte)
   if (dropdown.classList.contains("hidden")) {
-    // Öffnen → Feld leer
     dropdown.classList.remove("hidden");
     arrow.classList.add("rotate");
     taskArrow.classList.add("rotate");
 
-    label.innerHTML = assignedEmptyTemplate();
-  } else {
-    // Schließen → "An:"
-    // Schließen → Label abhängig von Auswahl setzen
-    dropdown.classList.add("hidden");
-    arrow.classList.remove("rotate");
-    taskArrow.classList.remove("rotate");
+    assignedPreviewMode = false;
 
-    updateAssignedLabel(); // 🔥 NUR HIER aufrufen
+    // Beim Öffnen: alle Kontakte rendern
+    renderAssignedTo();
+
+    // Text im Feld ausblenden während Dropdown offen ist
+    label.textContent = "";
+    return;
   }
-}
 
-function toggleOption(element) {
-  element.classList.toggle("selected");
-}
+  // 🔹 FALL 2: Offen (alle Kontakte) → Preview (nur ausgewählte)
+  if (!assignedPreviewMode) {
+    if (task.assignedTo.length > 0) {
+      renderSelectedContactsInDropdown();
+      assignedPreviewMode = true;
 
-document.getElementById("taskName").classList.add("input-error");
+      // Text oben im Preview auf "An:" setzen
+      label.textContent = "An:";
+    } else {
+      // Nichts ausgewählt → direkt komplett schließen
+      dropdown.classList.add("hidden");
+      arrow.classList.remove("rotate");
+      taskArrow.classList.remove("rotate");
+      assignedPreviewMode = false;
 
-function clearContactSelection() {
-  const assign = document.getElementById("clearContact");
+      // Text auf Standard zurücksetzen
+      label.textContent = "Select contacts to assign";
+    }
+    return;
+  }
 
-  assign.innerHTML = clearSelectField();
+  // 🔹 FALL 3: Preview → komplett schließen
+  dropdown.classList.add("hidden");
+  arrow.classList.remove("rotate");
+  taskArrow.classList.remove("rotate");
+  assignedPreviewMode = false;
+
+  // Text wieder auf Standard
+  label.textContent = "Select contacts to assign";
 }
 
 function updateAssignedLabel() {
   const label = document.getElementById("clearContact");
+  label.textContent = "Select contacts to assign";
+}
 
-  // Wenn kein Kontakt ausgewählt → Standardtext
-  if (task.assignedTo.length === 0) {
-    label.textContent = "Select contacts to assign";
-  } else {
-    // Wenn Kontakte ausgewählt → "An:"
-    label.textContent = "An:";
+function renderSelectedContactsInDropdown() {
+  const container = document.getElementById("assignedDropdown");
+  if (!container) return;
+
+  let html = "";
+
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+
+    if (task.assignedTo.includes(contact.name)) {
+      html += contactInitialsCircleTemplate(contact);
+    }
   }
+
+  container.innerHTML = html;
 }

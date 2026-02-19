@@ -75,6 +75,7 @@ function createTaskTemplate(taskName, taskDescription) {
    <p id="clearContact" class=choiceContact>Select contacts to assign</p>
     <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
   </div>
+  <div id="assignedPreviewContainer" class="assignedPreviewContainer"></div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
   <div class="checkBox assignedOption" onclick="toggleOption(this)">
        </div>
