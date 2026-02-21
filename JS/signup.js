@@ -5,16 +5,13 @@ const FIREBASE_URL = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatab
 /** Validates form and creates user account */
 async function signUp() {
   clearSignupErrors();
-  let name = document.getElementById('signupName');
-  let email = document.getElementById('signupEmail');
-  let password = document.getElementById('signupPassword');
-  let confirm = document.getElementById('signupConfirm');
-  if (!checkSignupInputs(name, email, password, confirm)) return;
-  if (await checkEmailExists(email.value)) {
+  let signupObj = getSignupData(); 
+  if (!checkSignupInputs(signupObj.name, signupObj.email, signupObj.password, signupObj.confirm)) return;
+  if (await checkEmailExists(signupObj.email.value)) {
       showSignupError(); 
     return; 
   }
-  await createNewUser(email.value, password.value);
+ await gatherUserInfo(signupObj.name.value, signupObj.email.value, signupObj.password.value);
   document.getElementById('signupButton').disabled = true;
   showToast('You Signed Up successfully');
   setTimeout(function() {
@@ -22,30 +19,35 @@ async function signUp() {
   }, 1100);
 }
 
+function getSignupData() {
+   return {
+    name: document.getElementById('signupName'),
+    email: document.getElementById('signupEmail'),
+    password: document.getElementById('signupPassword'),
+    confirm: document.getElementById('signupConfirm')
+  };
+}
 
 function showSignupError() {
     document.getElementById('signupEmail').classList.add('InputFieldError');
     document.getElementById('signupError').textContent = 'This email is already registered.';
 }
 
-
-// 2. 
+ 
 async function checkEmailExists(email) {
-  // hier kommt das Objekt an und heißt jetzt loginData
   let loginData = await getLoginData();
-  // wir schicken das Objekt und die Email an die Checkfunktion
   return checkEmailData(loginData, email);
 
 }
 
-// 1 das hier hold das die daten und gibt das objekt zurück. 
+
 async function getLoginData() {
     let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
     let data = await response.json();
     return data;
 }
 
-// 3. hier holen wir das Objekt und gehen via forschleife durch und prüfen, ob die email schon existiert. und geben true oder false zurück. 
+
 /** @returns {boolean} */
 function checkEmailData(loginData,email) {
     let users = Object.values(loginData);
@@ -55,7 +57,6 @@ function checkEmailData(loginData,email) {
           return true;
         }
     }
-    // wenn die Email neu ist, dann geht es hier weiter. 
     return false;
 }
 
@@ -67,7 +68,11 @@ function checkSignupInputs(name, email, password, confirm) {
   if (name.value.trim() === '') {
     showInputError(name, 'Please enter your name.');
     isValid = false;
+  } else if (!name.value.trim().includes(' ')) {
+    showInputError(name, 'Please enter your first and last name.')
+    isValid = false;
   }
+ 
   if (!isValidEmail(email.value)) {
     showInputError(email, 'Please enter a valid email address.');
     isValid = false;
@@ -108,15 +113,40 @@ function clearSignupErrors() {
   });
 }
 
+async function gatherUserInfo(name, email, password) {
+  let id = await getNextContactId();
+  let initials = generateInitials(name);
+  let date = new Date().toISOString();
+  let color = generateRandomColor()
+  await createNewUserContact(id, color, date, email, initials, name); 
+  await createNewUserLogin(id, email, password); 
+}
 
-async function createNewUser(email, password) {
-  await fetch(FIREBASE_URL + '/LoginData.json', {
-    method: 'POST',
+async function createNewUserContact(id, color, date, email, initials, name) {
+  await fetch(FIREBASE_URL + `/Contacts/${id}.json`, {
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, password: password })
+    body: JSON.stringify({
+      color: color,
+      createdAt: date,
+      email: email,
+      id: id,
+      initials: initials,
+      name: name,
+      phone: "",
+      updatedAt: date})
   });
 }
 
+async function createNewUserLogin(id, email, password) {
+   await fetch(FIREBASE_URL + `/LoginData/${id}.json`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: email,
+      password: password})
+  });
+}
 
 function showToast(message) {
   let toast = document.createElement('div');
@@ -128,15 +158,29 @@ function showToast(message) {
 
 
 function toggleSignupButton() {
-  let name = document.getElementById('signupName').value.trim();
-  let email = document.getElementById('signupEmail').value.trim();
-  let password = document.getElementById('signupPassword').value;
+  let name = getSignupUserName(); 
+  let email = getSignupEmail(); 
+  let password = getSignupPassword();
   let confirm = document.getElementById('signupConfirm').value;
   let checkbox = document.getElementById('signupPrivacy').checked;
   let button = document.getElementById('signupButton');
   button.disabled = !(name && email && password && confirm && checkbox);
 }
 
+function getSignupUserName() {
+  let name = document.getElementById('signupName').value.trim();
+  return name; 
+}
+
+function getSignupEmail() {
+  let email = document.getElementById('signupEmail').value.trim();
+  return email; 
+}
+
+function getSignupPassword() {
+  let password = document.getElementById('signupPassword').value;
+  return password; 
+}
 
 function initSignup() {
   let form = document.querySelector('form');
@@ -188,9 +232,7 @@ function generateRandomColor() {
 }
 
 
-function createNewContact() {
-  
-}
+
 
 initSignup();
 initPasswordToggles();
