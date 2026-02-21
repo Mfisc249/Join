@@ -35,16 +35,16 @@ function showSignupError() {
 
  
 async function checkEmailExists(email) {
-  let loginData = await getLoginData();
+  let loginData = await fetchLoginData();
   return checkEmailData(loginData, email);
 
 }
 
 
-async function getLoginData() {
+async function fetchLoginData() {
     let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
-    let data = await response.json();
-    return data;
+    let loginData = await response.json();
+    return loginData;
 }
 
 

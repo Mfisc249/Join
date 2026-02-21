@@ -6,7 +6,7 @@ async function login() {
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPassword').value;
     document.getElementById('loginButton').disabled = true;
-    let loginData = await getLoginData();
+    let loginData = await fetchLoginData();
     let userKey = checkLoginData(loginData, email, password);
     
     if (userKey) {
@@ -22,23 +22,28 @@ async function login() {
 }
 
 async function saveLogedInUser(userKey) {
-    await fetchContact(userKey);
-    // Save data to sessionStorage
-    sessionStorage.setItem("id", "value");
+    let user = await fetchContactData(userKey); 
+    let name = user.name; 
+    let initials = user.initials;
+    let color = user.color; 
+   
+    sessionStorage.setItem("contactId", userKey);
+    sessionStorage.setItem("userName", name);
+    sessionStorage.setItem("userInitials", initials);
+    sessionStorage.setItem("userColor", color);
+    
+    sessionStorage.setItem("isGuest", "false");
 }
 
-// Get saved data from sessionStorage
-let data = sessionStorage.getItem("key");
 
-// Remove saved data from sessionStorage
-sessionStorage.removeItem("key");
-
-// Remove all saved data from sessionStorage
-sessionStorage.clear();
+async function fetchContactData(userKey) {
+    let response = await fetch(`https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/Contacts/${userKey}.json`);
+    let contactData = await response.json();
+    return contactData; 
+}
 
 
-
-async function getLoginData() {
+async function fetchLoginData() {
     let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
     let data = await response.json();
     return data;
@@ -64,8 +69,18 @@ document.getElementById('loginButton').addEventListener('click', function(event)
 
 
 document.getElementById('guestButton').addEventListener('click', function() {
+    setGuest(); 
     window.location.href = 'summary.html';
 });
+
+function setGuest() {
+    sessionStorage.setItem("contactId", "");
+    sessionStorage.setItem("userName", "");
+    sessionStorage.setItem("userInitials", "G");
+    sessionStorage.setItem("userColor", "#2A3647");
+    sessionStorage.setItem("isGuest", "true");
+}
+
 
 document.getElementById('loginEmail').addEventListener('input', function(event) {
     event.target.classList.remove('InputFieldError');
