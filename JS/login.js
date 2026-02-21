@@ -7,9 +7,10 @@ async function login() {
     let password = document.getElementById('loginPassword').value;
     document.getElementById('loginButton').disabled = true;
     let loginData = await getLoginData();
-    let isValid = checkLoginData(loginData, email, password);
+    let userKey = checkLoginData(loginData, email, password);
     
-    if (isValid) {
+    if (userKey) {
+    await saveLogedInUser(userKey); 
     window.location.href = 'summary.html';
     document.getElementById('loginButton').disabled = false;
     } else {
@@ -19,6 +20,22 @@ async function login() {
     document.getElementById('loginButton').disabled = false;
     }
 }
+
+async function saveLogedInUser(userKey) {
+    await fetchContact(userKey);
+    // Save data to sessionStorage
+    sessionStorage.setItem("id", "value");
+}
+
+// Get saved data from sessionStorage
+let data = sessionStorage.getItem("key");
+
+// Remove saved data from sessionStorage
+sessionStorage.removeItem("key");
+
+// Remove all saved data from sessionStorage
+sessionStorage.clear();
+
 
 
 async function getLoginData() {
@@ -30,10 +47,10 @@ async function getLoginData() {
 
 /** @returns {boolean} */
 function checkLoginData(loginData, email, password) {
-    let users = Object.values(loginData);
+    let users = Object.keys(loginData);
     for (let i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].password === password) {
-            return true;
+        if (loginData[users[i]].email === email && loginData[users[i]].password === password) {
+            return users[i];
         }
     }
     return false;
