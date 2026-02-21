@@ -6,10 +6,11 @@ async function login() {
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPassword').value;
     document.getElementById('loginButton').disabled = true;
-    let loginData = await getLoginData();
-    let isValid = checkLoginData(loginData, email, password);
+    let loginData = await fetchLoginData();
+    let userKey = checkLoginData(loginData, email, password);
     
-    if (isValid) {
+    if (userKey) {
+    await saveLogedInUser(userKey); 
     window.location.href = 'summary.html';
     document.getElementById('loginButton').disabled = false;
     } else {
@@ -20,8 +21,29 @@ async function login() {
     }
 }
 
+async function saveLogedInUser(userKey) {
+    let user = await fetchContactData(userKey); 
+    let name = user.name; 
+    let initials = user.initials;
+    let color = user.color; 
+   
+    sessionStorage.setItem("contactId", userKey);
+    sessionStorage.setItem("userName", name);
+    sessionStorage.setItem("userInitials", initials);
+    sessionStorage.setItem("userColor", color);
+    
+    sessionStorage.setItem("isGuest", "false");
+}
 
-async function getLoginData() {
+
+async function fetchContactData(userKey) {
+    let response = await fetch(`https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/Contacts/${userKey}.json`);
+    let contactData = await response.json();
+    return contactData; 
+}
+
+
+async function fetchLoginData() {
     let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
     let data = await response.json();
     return data;
@@ -30,10 +52,10 @@ async function getLoginData() {
 
 /** @returns {boolean} */
 function checkLoginData(loginData, email, password) {
-    let users = Object.values(loginData);
+    let users = Object.keys(loginData);
     for (let i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].password === password) {
-            return true;
+        if (loginData[users[i]].email === email && loginData[users[i]].password === password) {
+            return users[i];
         }
     }
     return false;
@@ -47,13 +69,25 @@ document.getElementById('loginButton').addEventListener('click', function(event)
 
 
 document.getElementById('guestButton').addEventListener('click', function() {
+    setGuest(); 
     window.location.href = 'summary.html';
 });
+
+
+function setGuest() {
+    sessionStorage.setItem("contactId", "");
+    sessionStorage.setItem("userName", "");
+    sessionStorage.setItem("userInitials", "G");
+    sessionStorage.setItem("userColor", "#2A3647");
+    sessionStorage.setItem("isGuest", "true");
+}
+
 
 document.getElementById('loginEmail').addEventListener('input', function(event) {
     event.target.classList.remove('InputFieldError');
     document.getElementById('loginPassword').classList.remove('InputFieldError');
 });
+
 
 function checkSessionForAnimation() {
  if (!(sessionStorage.getItem('animationPlayed'))) {
@@ -62,3 +96,4 @@ function checkSessionForAnimation() {
 } 
 }
 
+initPasswordToggles();
