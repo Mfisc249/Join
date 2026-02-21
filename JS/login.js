@@ -73,6 +73,7 @@ document.getElementById('guestButton').addEventListener('click', function() {
     window.location.href = 'summary.html';
 });
 
+
 function setGuest() {
     sessionStorage.setItem("contactId", "");
     sessionStorage.setItem("userName", "");
@@ -86,6 +87,7 @@ document.getElementById('loginEmail').addEventListener('input', function(event) 
     event.target.classList.remove('InputFieldError');
     document.getElementById('loginPassword').classList.remove('InputFieldError');
 });
+
 
 function checkSessionForAnimation() {
  if (!(sessionStorage.getItem('animationPlayed'))) {
