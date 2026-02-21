@@ -49,19 +49,19 @@ async function render() {
 /** Appends the task template to the appropriate column. */
 async function loadTaskTamplate(refTask) {
     if (refTask.field.field == 'field1') {
-        document.getElementById('field1').innerHTML += taskTamplate(refTask.id);
+        document.getElementById('field1').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
 
     if (refTask.field.field == 'field2') {
-        document.getElementById('field2').innerHTML += taskTamplate(refTask.id);
+        document.getElementById('field2').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
 
     if (refTask.field.field == 'field3') {
-        document.getElementById('field3').innerHTML += taskTamplate(refTask.id);
+        document.getElementById('field3').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
 
     if (refTask.field.field == 'field4') {
-        document.getElementById('field4').innerHTML += taskTamplate(refTask.id);
+        document.getElementById('field4').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
     taskCatagory(refTask.id, document.getElementById(`boardTaskCatagory${refTask.id}`));
     updateSubtaskProgressbar(refTask.id);
@@ -90,7 +90,7 @@ function emtyFieldContent() {
 //         'dueDate': "27/01/2026",
 //         'subTasks': "Implement Recipe Recommendation,Start Page Layout"
 //     });
-//     document.getElementById('field1').innerHTML += taskTamplate(taskID);
+//     document.getElementById('field1').insertAdjacentHTML('beforeend', taskTamplate(taskID));
 //     checkFieldIsEmpty();
 // }
 
@@ -98,7 +98,7 @@ function emtyFieldContent() {
 function renderMovedTask(field) {
     let refMovedTask = document.getElementById(`${TASK[0][`Task${curentTraggedElement}`].id}`);
     refMovedTask.parentNode.removeChild(refMovedTask);
-    document.getElementById(`${field}`).innerHTML += taskTamplate(TASK[0][`Task${curentTraggedElement}`].id);
+    document.getElementById(`${field}`).insertAdjacentHTML('beforeend', taskTamplate(TASK[0][`Task${curentTraggedElement}`].id));
     removeHighlightBoardTaskFields();
     checkFieldIsEmpty();
     taskCatagory(curentTraggedElement, document.getElementById(`boardTaskCatagory${curentTraggedElement}`));
@@ -267,7 +267,7 @@ function getTaskDetailsContacts(taskID, renderFunctionSelector) {
 
 function renderTaskContacts(contactDetails, taskID) {
     let refContactsContainer = document.getElementById(`taskContactsContainer${taskID}`);
-    refContactsContainer.innerHTML += taskContactsTamplate(contactDetails.initials, contactDetails.color);
+    refContactsContainer.insertAdjacentHTML('beforeend', taskContactsTamplate(contactDetails.initials, contactDetails.color));
 }
 
 function taskCheckPriority(taskID, refTaskPriorityContainer) {
@@ -280,7 +280,7 @@ function taskCheckPriority(taskID, refTaskPriorityContainer) {
             refTaskPriorityContainer.innerHTML = '<img src="./assets/img/medium_priority.svg" alt="Medium Priority"></img>';
             break;
 
-        case 'High':
+        case 'Urgent':
             refTaskPriorityContainer.innerHTML = '<img src="./assets/img/high_priority.svg" alt="High Priority"></img>';
             break;
         default:
@@ -306,24 +306,24 @@ function taskCatagory(taskID, refTaskCatagory) {
 
 function highlightBoardTaskFields() {
     if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field1' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field2').innerHTML += highlightTaskTamplate(2);
-        document.getElementById('field3').innerHTML += highlightTaskTamplate(3);
-        document.getElementById('field4').innerHTML += highlightTaskTamplate(4);
+        document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
+        document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
+        document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
     }
     if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field2' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field1').innerHTML += highlightTaskTamplate(1);
-        document.getElementById('field3').innerHTML += highlightTaskTamplate(3);
-        document.getElementById('field4').innerHTML += highlightTaskTamplate(4);
+        document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
+        document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
+        document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
     }
     if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field3' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field1').innerHTML += highlightTaskTamplate(1);
-        document.getElementById('field2').innerHTML += highlightTaskTamplate(2);
-        document.getElementById('field4').innerHTML += highlightTaskTamplate(4);
+        document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
+        document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
+        document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
     }
     if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field4' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field1').innerHTML += highlightTaskTamplate(1);
-        document.getElementById('field2').innerHTML += highlightTaskTamplate(2);
-        document.getElementById('field3').innerHTML += highlightTaskTamplate(3);
+        document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
+        document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
+        document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
     }
 
 }
