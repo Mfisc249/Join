@@ -73,12 +73,11 @@ function createTaskTemplate(taskName, taskDescription) {
  <h2 class=ChoiceHeadline>Assigned to</h2>
   <div class="assignedToInput" onclick="toggleAssignedDropdown()">
    <p id="clearContact" class=choiceContact>Select contacts to assign</p>
-    <img class="dropDownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+    <img class="dropDownArrow" id="assignedDropdownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
   </div>
   <div id="assignedPreviewContainer" class="assignedPreviewContainer"></div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
-  <div class="checkBox assignedOption" onclick="toggleOption(this)">
-       </div>
+ 
        </div>
        </div>
            <div class="OptionsContainer">
@@ -86,7 +85,7 @@ function createTaskTemplate(taskName, taskDescription) {
            <h2 class="ChoiceHeadline">Category</h2>
            <p class="star">*</p>
            </div>
-        <div class="categorySelectWrapper">
+        <div class="categorySelectWrapper" onclick="toggleCategoryArrow()">
   <select class="ChoiceOption" id="category">
     <option value=""selected hidden>Select task category</option>
     <option value="technicalTask">Technical Task</option>
@@ -109,7 +108,7 @@ function createTaskTemplate(taskName, taskDescription) {
     <div class="subTaskIconsContainer">
     <img onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask" src="./assets/img/Subtasks icons11-3.svg" alt="" />
     <div class="spacer"></div>
-   <img onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask" src="assets/img/check.svg" />
+   <img onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask" src="assets/img/check.png" />
     </div>
   </div>
   <div id="toast" class="toast">Task added to board</div>
@@ -155,7 +154,7 @@ function subtaskTemplate(text, index) {
     <div class="subTaskEditIcons">
      <img class="subtaskEditNote" onclick="deleteSubtask(${index})" src="./assets/img/Subtasks icons11.svg" alt="" />
       <div class="spacer Edit"></div>
-    <img class="subtaskEditNote" onclick="saveEditedSubtask(${index}, this)" src="./assets/img/check.svg" alt="" />
+    <img class="subtaskEditNote checkEdit" onclick="saveEditedSubtask(${index}, this)" src="./assets/img/check.png" alt="" />
     </div>
   </div>
   </li>
@@ -200,18 +199,30 @@ function assignedToOptionTemplate(contact) {
 function contactInitialsCircleTemplate(contact) {
   const isSelected = task.assignedTo.includes(contact.name);
   const selectedClass = isSelected ? "selected" : "";
+  const checkboxImg = isSelected
+    ? "./assets/img/checkButton.svg"
+    : "./assets/img/Rectangle_5.svg";
 
   return `
-    <div class="assignedOption ${selectedClass}" 
-         onclick="toggleContact('${contact.name}', this)">
-      <div class="contactLeft">
-        <span class="contactInitialsCircle" 
-              style="background-color: ${contact.color}">
-          ${contact.initials}
-        </span>
-        <span class="contactName">${contact.name}</span>
-      </div>
-      <img src="./assets/img/Rectangle_5.svg" alt="checkbox" class="checkBox">
+  <div class="assignedOption ${selectedClass}" 
+       onclick="toggleContact('${contact.name}', this)">
+    <div class="contactLeft">
+      <span class="contactInitialsCircle" 
+            style="background-color: ${contact.color}">
+        ${contact.initials}
+      </span>
+      <span class="contactName">${contact.name}</span>
+    </div>
+    <img class="checkBox" src="${checkboxImg}" alt="checkbox">
+  </div>
+`;
+}
+
+function contactInitialsPreviewTemplate(contact) {
+  return `
+    <div class="assignedCircle" 
+         style="background-color: ${contact.color}">
+      ${contact.initials}
     </div>
   `;
 }

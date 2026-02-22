@@ -194,7 +194,8 @@ h1 {
   font-weight: 400;
   font-family: "Inter", sans-serif;
   cursor: pointer;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.25);
+  border: unset;
 }
 
 .priorityButton:hover {
@@ -368,8 +369,49 @@ h1 {
   align-items: center;
 }
 
-.subTaskItem:hover {
+.subTaskItem {
+  padding: 5px;
+  border-radius: 10px;
+  list-style: none;
+  position: relative;
+  padding: 5px 5px 5px 30px;
+  border-radius: 10px;
+  margin-top: 16px;
+  margin-left: 7px;
+}
+
+.subTaskItem::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  background-color: #a8a8a8;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.subTaskItem.editing::before {
+  display: none; /* Punkt verschwindet */
+}
+
+.subTaskItem:not(.editing):hover {
   background-color: rgba(240, 240, 240, 1);
+}
+
+.subTaskList {
+  padding-left: 0; /* entfernt Browser Default Einrückung */
+  margin: 0;
+  padding-right: 20px;
+  list-style: none;
+}
+
+.subTaskItem.editing {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
 }
 
 .Edit {
@@ -383,19 +425,24 @@ h1 {
 }
 
 .subTaskEditInput {
-  width: 390px;
+  width: 430px;
   height: 31px;
-  border: none;
+  border: unset;
   border-bottom: 1px solid #7cf0ff;
   outline: none;
 }
 
+.checkEdit {
+  height: 13px;
+}
 .subTaskEditIcons {
   display: flex;
   position: relative;
   right: 13%;
   gap: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .subTaskEditContainer {
@@ -424,10 +471,6 @@ h1 {
   bottom: 50%;
   transform: translate(-50%, 50%);
   opacity: 1;
-}
-
-.subtaskEditNote {
-  font-size: 18px;
 }
 
 .assignedDropdown {
@@ -461,38 +504,57 @@ h1 {
 }
 
 .assignedOption.selected {
-  background-color: #05223e;
+  background-color: rgba(42, 54, 71, 1);
   color: white;
+  height: 45px;
+}
+
+.assignedOption.selected:hover {
+  background-color: rgba(9, 25, 49, 1);
 }
 
 .checkBox {
   width: 24px;
   height: 24px;
-  background-image: url("./assets/img/Rectangle_5.svg"); /* kein Leerzeichen */
-  background-size: cover; /* füllt die Box komplett */
-  background-repeat: no-repeat;
-  cursor: pointer;
   padding-right: 16px;
 }
 
-.assignedOption.selected .checkBox {
-  background-image: url("./assets/img/checkButton.svg");
-  cursor: pointer;
-}
-
-.assignedOption.selected .checkbox:hover {
+.assignedOption.selected .checkBox:hover {
   background-color: #dbeaff;
   border-radius: 4px;
   transform: scale(1.1);
-  height: 5px;
+  height: 20px;
 }
-s .dropDownArrow {
+.dropDownArrow {
   height: 7px;
+  right: 3px;
+  position: relative;
 }
 
-.subTaskList {
-  padding-right: 20px;
+.assignedCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  line-height: 1;
+  font-size: 16px;
+  box-shadow: 0 0 0 2.5px white;
 }
+
+.assignedPreviewContainer {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.categorySelectWrapper {
+  display: flex;
+  align-items: center;
+}
+
 .choiceContact {
   padding-left: 9px;
   font-family: "Inter", sans-serif;
@@ -505,7 +567,6 @@ s .dropDownArrow {
   position: relative;
   right: 24px;
   top: 50%;
-  transform: translateY(-50%);
   height: 7px;
 }
 .dropDownArrow.rotate {
@@ -575,6 +636,7 @@ select::-ms-expand {
   text-align: center;
   line-height: 1;
   font-size: 16px;
+  box-shadow: 0 0 0 2.5px white;
 }
 
 .contactName {
@@ -585,217 +647,128 @@ select::-ms-expand {
 
 @media (max-width: 1502px) {
   .contentWrapper {
-    flex-direction: column;
   }
   .divider {
-    display: none;
   }
   .taskDescriptionContainer textarea {
-    width: 970px;
   }
   .taskNameContainer textarea {
-    width: 970px;
   }
   .addTaskDateContainer input {
-    width: 970px;
   }
   h1 {
-    font-size: 55px;
   }
   .priority {
-    justify-content: start;
-    gap: 202px;
   }
   .importanceLevel {
-    width: 192px;
-    height: 57px;
   }
   .ChoiceOption {
-    width: 993px;
   }
   .inputField {
-    width: 970px;
   }
   .buttonRequiredField {
-    width: 989px;
   }
 }
 
 @media (max-width: 1370px) {
   .taskDescriptionContainer textarea {
-    width: 930px;
   }
   .taskNameContainer textarea {
-    width: 929px;
   }
   .addTaskDateContainer input {
-    width: 930px;
   }
   .ChoiceOption {
-    width: 951px;
   }
   .inputField {
-    width: 930px;
   }
   .inputField {
-    width: 928px;
   }
   .buttonRequiredField {
-    width: 951px;
-    margin-top: 65px;
   }
   .priority {
-    justify-content: start;
-    gap: 181px;
   }
 }
 @media (max-width: 1329px) {
   .taskNameContainer textarea {
-    width: 800px;
   }
   .taskDescriptionContainer textarea {
-    width: 800px;
   }
   .addTaskDateContainer input {
-    width: 800px;
   }
   .priority {
-    justify-content: start;
-    gap: 119px;
   }
   .ChoiceOption {
-    width: 825px;
   }
   .inputField {
-    width: 803px;
   }
   .buttonRequiredField {
-    width: 829px;
-    margin-top: 40px;
   }
 }
 @media (max-width: 1195px) {
   .taskNameContainer textarea {
-    width: 640px;
   }
   .taskDescriptionContainer textarea {
-    width: 640px;
-    height: 105px;
   }
   .addTaskDateContainer input {
-    width: 640px;
   }
   .priority {
-    padding: 0;
-    justify-content: start;
-    gap: 36px;
   }
   .ChoiceOption {
-    width: 661px;
   }
   .inputField {
-    width: 638px;
   }
   .buttonRequiredField {
-    width: 660px;
-    margin-top: 10px;
   }
 }
 @media (max-width: 1035px) {
   h1 {
-    font-size: 50px;
   }
   .taskNameContainer textarea {
-    width: 470px;
   }
   .taskDescriptionContainer textarea {
-    width: 470px;
-    height: 105px;
   }
   .addTaskDateContainer input {
-    width: 470px;
   }
   .priority {
-    padding: 0;
-    justify-content: start;
-    gap: 28px;
   }
   .ChoiceOption {
-    width: 492px;
   }
   .inputField {
-    width: 466px;
   }
   .buttonRequiredField {
-    width: 485px;
-    margin-top: 5px;
   }
   .importanceLevel {
-    width: 140px;
-    height: 51px;
-    font-size: 18px;
   }
 }
 @media (max-width: 870px) {
   h1 {
-    font-size: 47px;
   }
   .taskNameContainer textarea {
-    width: 259px;
   }
   .taskDescriptionContainer textarea {
-    width: 259px;
-    height: 88px;
   }
   .addTaskDateContainer input {
-    width: 259px;
   }
   .priority {
-    padding: 0;
-    justify-content: start;
-    gap: 11px;
   }
   .importanceLevel {
-    width: 82px;
-    height: 41px;
-    font-size: 16px;
   }
   .ChoiceOption {
-    width: 274px;
   }
   .inputField {
-    width: 251px;
   }
   .buttonRequiredField1 {
-    width: 220px;
-    margin-top: 5px;
   }
   .clearButton {
-    width: 100px;
-    height: 56px;
   }
   .buttonRequiredField {
-    width: 267px;
-    margin-top: 5px;
-    flex-direction: column;
   }
   main {
-    padding: 0 15px;
   }
   .taskButton {
-    margin-top: 25px;
-    justify-content: end;
   }
   .createButton {
-    width: 123px;
-    height: 43px;
-    align-items: center;
-    gap: 3px;
-    font-size: 16px;
   }
   .clearButton {
-    width: 89px;
-    height: 43px;
-    font-size: 16px;
   }
 }

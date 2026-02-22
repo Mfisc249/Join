@@ -163,14 +163,12 @@ function setupPriorityButtons() {
 
   buttons.forEach((btn) => {
     btn.onclick = () => {
-      // 👉 FALL 1: Button war schon aktiv → deaktivieren
       if (btn.classList.contains("active")) {
         btn.classList.remove("active");
         task.priority = "";
         return;
       }
 
-      // 👉 FALL 2: neuer Button → alle anderen aus
       buttons.forEach((b) => b.classList.remove("active"));
 
       btn.classList.add("active");
@@ -207,7 +205,7 @@ function confirmSubtask() {
 
   task.subtasks.push(value);
   editingSubtaskIndex = null;
-  renderSubtasks(); // ✅ NUR NOCH DAS
+  renderSubtasks();
   input.value = "";
   input.focus();
 }
@@ -229,9 +227,8 @@ function startEditSubtask(index) {
 }
 
 function saveEditedSubtask(index) {
-  // alle Edit-Inputs abrufen
   const inputs = document.querySelectorAll(".subTaskEditInput");
-  const input = inputs[0]; // es gibt nur ein aktives Edit-Input zurzeit
+  const input = inputs[0];
   const value = input.value.trim();
 
   if (!value) {
@@ -240,7 +237,6 @@ function saveEditedSubtask(index) {
     return;
   }
 
-  // Wert speichern
   task.subtasks[index] = value;
   editingSubtaskIndex = null;
   renderSubtasks();
@@ -281,69 +277,40 @@ async function renderAssignedTo() {
 
 function toggleContact(name, element) {
   const index = task.assignedTo.indexOf(name);
+  const img = element.querySelector(".checkBox");
 
   if (index === -1) {
     task.assignedTo.push(name);
     element.classList.add("selected");
+    img.src = "./assets/img/checkButton.svg";
   } else {
     task.assignedTo.splice(index, 1);
     element.classList.remove("selected");
+    img.src = "./assets/img/Rectangle_5.svg";
   }
 
-  // KEIN updateAssignedLabel hier!
+  const dropdown = document.getElementById("assignedDropdown");
+  if (dropdown.classList.contains("hidden")) {
+    renderSelectedContactsBelowInput();
+  }
 }
 
 function toggleAssignedDropdown() {
   const dropdown = document.getElementById("assignedDropdown");
-  const arrow = document.querySelector(".dropDownArrow");
-  const taskArrow = document.getElementById("taskArrow");
+  const arrow = document.getElementById("assignedDropdownArrow");
   const label = document.getElementById("clearContact");
 
-  // 🔹 FALL 1: Komplett geschlossen → Öffnen (alle Kontakte)
   if (dropdown.classList.contains("hidden")) {
-    dropdown.classList.remove("hidden");
-    arrow.classList.add("rotate");
-    taskArrow.classList.add("rotate");
-
-    assignedPreviewMode = false;
-
-    // Beim Öffnen: alle Kontakte rendern
-    renderAssignedTo();
-
-    // Text im Feld ausblenden während Dropdown offen ist
-    label.textContent = "";
+    openDropdown(dropdown, arrow, label);
     return;
   }
 
-  // 🔹 FALL 2: Offen (alle Kontakte) → Preview (nur ausgewählte)
   if (!assignedPreviewMode) {
-    if (task.assignedTo.length > 0) {
-      renderSelectedContactsInDropdown();
-      assignedPreviewMode = true;
-
-      // Text oben im Preview auf "An:" setzen
-      label.textContent = "An:";
-    } else {
-      // Nichts ausgewählt → direkt komplett schließen
-      dropdown.classList.add("hidden");
-      arrow.classList.remove("rotate");
-      taskArrow.classList.remove("rotate");
-      assignedPreviewMode = false;
-
-      // Text auf Standard zurücksetzen
-      label.textContent = "Select contacts to assign";
-    }
+    openPreview(dropdown, arrow, label);
     return;
   }
 
-  // 🔹 FALL 3: Preview → komplett schließen
-  dropdown.classList.add("hidden");
-  arrow.classList.remove("rotate");
-  taskArrow.classList.remove("rotate");
-  assignedPreviewMode = false;
-
-  // Text wieder auf Standard
-  label.textContent = "Select contacts to assign";
+  closeDropdown(dropdown, arrow, label);
 }
 
 function updateAssignedLabel() {
@@ -356,14 +323,72 @@ function renderSelectedContactsInDropdown() {
   if (!container) return;
 
   let html = "";
-
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
-
+  contacts.forEach((contact) => {
     if (task.assignedTo.includes(contact.name)) {
       html += contactInitialsCircleTemplate(contact);
     }
-  }
+  });
 
   container.innerHTML = html;
+
+  if (task.assignedTo.length === 0) {
+    container.innerHTML = "";
+  }
+}
+
+function toggleCategoryArrow() {
+  const arrow = document.getElementById("taskArrow");
+  arrow.classList.toggle("rotate");
+}
+
+function renderSelectedContactsBelowInput() {
+  const previewContainer = document.getElementById("assignedPreviewContainer");
+  const dropdown = document.getElementById("assignedDropdown");
+  if (!previewContainer) return;
+
+  if (!dropdown.classList.contains("hidden")) {
+    previewContainer.innerHTML = "";
+    return;
+  }
+
+  if (task.assignedTo.length === 0) {
+    previewContainer.innerHTML = "";
+    return;
+  }
+  let html = "";
+  contacts.forEach((contact) => {
+    if (task.assignedTo.includes(contact.name)) {
+      html += contactInitialsPreviewTemplate(contact);
+    }
+  });
+
+  previewContainer.innerHTML = html;
+}
+
+function openDropdown(dropdown, arrow, label) {
+  dropdown.classList.remove("hidden");
+  arrow.classList.add("rotate");
+  renderAssignedTo();
+  label.textContent = "";
+  assignedPreviewMode = false;
+}
+
+function openPreview(dropdown, arrow, label) {
+  if (task.assignedTo.length > 0) {
+    renderSelectedContactsInDropdown();
+    label.textContent = "An:";
+    assignedPreviewMode = true;
+  } else {
+    dropdown.classList.add("hidden");
+    arrow.classList.remove("rotate");
+    assignedPreviewMode = false;
+  }
+}
+
+function closeDropdown(dropdown, arrow, label) {
+  dropdown.classList.add("hidden");
+  arrow.classList.remove("rotate");
+  assignedPreviewMode = false;
+  label.textContent = "Select contacts to assign";
+  renderSelectedContactsBelowInput();
 }
