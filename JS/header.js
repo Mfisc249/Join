@@ -13,6 +13,8 @@ async function loadTemplate(url, targetSelector) {
   
   // Setup submenu nach dem Template-Load
   setupSubmenu();
+  // Initialize header user badge (initials / color / guest) after template load
+  initHeaderUser();
 }
 
 function setupSubmenu() {
@@ -56,4 +58,27 @@ function logout() {
   // Hier kannst du die Logout-Logik implementieren
   console.log("User logged out");
   // Beispiel: window.location.href = "./login.html";
+}
+
+// Set user initials and color in header badge from sessionStorage
+function initHeaderUser() {
+  const initials = sessionStorage.getItem('userInitials');
+  const color = sessionStorage.getItem('userColor');
+  const isGuest = sessionStorage.getItem('isGuest');
+
+  const badge = document.getElementById('circleBadge');
+  if (!badge) return;
+  const badgeSpan = badge.querySelector('span');
+  if (!badgeSpan) return;
+
+  if (isGuest === "true") {
+    badgeSpan.textContent = "G";
+    return;
+  }
+
+  if (initials) {
+    badgeSpan.textContent = initials;
+  }
+
+  // Do not change badge background color here; keep styling in CSS.
 }
