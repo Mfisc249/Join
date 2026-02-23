@@ -15,6 +15,19 @@ ContactsApp.firebase = {
     }));
   },
 
+  // Load a single contact by id
+  async loadContactById(contactId) {
+    const { CONTACTS_PATH } = ContactsApp.config;
+    const c = await ContactsApp.api.get(`${CONTACTS_PATH}/${contactId}`);
+    if (!c) return null;
+
+    return {
+      id: contactId,
+      ...c,
+      initials: c.initials || ContactsApp.validation.generateInitials(c.name || ''),
+    };
+  },
+
   async updateContact(contactId, patch) {
     const { CONTACTS_PATH } = ContactsApp.config;
     return await ContactsApp.api.patch(`${CONTACTS_PATH}/${contactId}`, patch);

@@ -8,6 +8,10 @@ ContactsApp.page = {
 
     try {
       ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
+
+      // Ensure current user's contact is present in the list (if applicable)
+      await this._ensureCurrentUserContactInList();
+
       ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
 
       this._bindButtons();
@@ -18,6 +22,22 @@ ContactsApp.page = {
       console.error('Fehler beim Initialisieren der Kontakte:', err);
       this._showListError('Kontakte konnten nicht geladen werden.');
     }
+  },
+
+  async _ensureCurrentUserContactInList() {
+    const isGuest = sessionStorage.getItem('isGuest') === 'true';
+    const myId = sessionStorage.getItem('contactId');
+
+    if (isGuest || !myId) return;
+
+    const alreadyInList = ContactsApp.state.contacts.some(c => c.id === myId);
+    if (alreadyInList) return;
+
+    const me = await ContactsApp.firebase.loadContactById(myId);
+    if (!me) return;
+
+    // add to the beginning so the user is visible
+    ContactsApp.state.contacts.unshift(me);
   },
 
   _bindButtons() {
