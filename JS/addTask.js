@@ -20,16 +20,13 @@ let task = {
   field: "1",
 };
 
-document.getElementById("sidebar-slot").innerHTML = sidebarTemplate();
-document.getElementById("header-slot").innerHTML = headerTemplate();
-
 async function init() {
-  renderTemplate();
-  setupLiveValidation();
-  setupPriorityButtons();
-  setDefaultPriority();
-  setDateMin();
-  await loadContacts();
+  renderTemplate(); // rendert das HTML
+  setupLiveValidation(); // Live-Validation für Inputs
+  setupPriorityButtons(); // Prioritätsbuttons
+  setDefaultPriority(); // Standard-Priorität
+  setupDueDateInput(); // <<< HIER den neuen Date-Input aktivieren
+  await loadContacts(); // Kontakte laden
 }
 
 function renderTemplate() {
@@ -139,10 +136,10 @@ function toggleRequired(inputElement) {
 
   if (!inputElement.value) {
     requiredText.classList.add("visible");
-    inputElement.classList.add("input-error"); // 🔴 Border rot
+    inputElement.classList.add("input-error");
   } else {
     requiredText.classList.remove("visible");
-    inputElement.classList.remove("input-error"); // ✅ Border normal
+    inputElement.classList.remove("input-error");
   }
 }
 
@@ -184,18 +181,6 @@ function setDefaultPriority() {
   const defaultBtn = document.querySelector(".priorityButton.medium");
   defaultBtn.classList.add("active");
   task.priority = "Medium";
-}
-
-function setDateMin() {
-  const dateInput = document.getElementById("DueDate");
-  if (!dateInput) return;
-
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const dd = String(today.getDate()).padStart(2, "0");
-
-  dateInput.min = `${yyyy}-${mm}-${dd}`;
 }
 
 function confirmSubtask() {
@@ -299,18 +284,22 @@ function toggleAssignedDropdown() {
   const dropdown = document.getElementById("assignedDropdown");
   const arrow = document.getElementById("assignedDropdownArrow");
   const label = document.getElementById("clearContact");
+  const button = document.querySelector(".assignedToInput"); // 👈 NEU
 
   if (dropdown.classList.contains("hidden")) {
     openDropdown(dropdown, arrow, label);
+    button.focus(); // 👈 DAS ist der Key Fix
     return;
   }
 
   if (!assignedPreviewMode) {
     openPreview(dropdown, arrow, label);
+    button.focus(); // 👈 wichtig
     return;
   }
 
   closeDropdown(dropdown, arrow, label);
+  button.focus(); // 👈 wichtig
 }
 
 function updateAssignedLabel() {
@@ -366,11 +355,27 @@ function renderSelectedContactsBelowInput() {
 }
 
 function openDropdown(dropdown, arrow, label) {
+  const button = document.querySelector(".assignedToInput");
+
   dropdown.classList.remove("hidden");
   arrow.classList.add("rotate");
   renderAssignedTo();
   label.textContent = "";
   assignedPreviewMode = false;
+
+  button.classList.add("activeFocus"); // 🔥 bleibt blau
+}
+
+function closeDropdown(dropdown, arrow, label) {
+  const button = document.querySelector(".assignedToInput");
+
+  dropdown.classList.add("hidden");
+  arrow.classList.remove("rotate");
+  assignedPreviewMode = false;
+  label.textContent = "Select contacts to assign";
+  renderSelectedContactsBelowInput();
+
+  button.classList.remove("activeFocus"); // zurück normal
 }
 
 function openPreview(dropdown, arrow, label) {
@@ -385,10 +390,51 @@ function openPreview(dropdown, arrow, label) {
   }
 }
 
-function closeDropdown(dropdown, arrow, label) {
-  dropdown.classList.add("hidden");
-  arrow.classList.remove("rotate");
-  assignedPreviewMode = false;
-  label.textContent = "Select contacts to assign";
-  renderSelectedContactsBelowInput();
+function formatDueDateInput(input) {
+  input.addEventListener("input", () => {
+    // Nur Zahlen erlauben
+    let val = input.value.replace(/[^\d]/g, "");
+    if (val.length > 8) val = val.slice(0, 8);
+
+    // Automatisch Slashes setzen
+    let formatted = "";
+    if (val.length > 4) {
+      formatted = val.slice(0, 2) + "/" + val.slice(2, 4) + "/" + val.slice(4);
+    } else if (val.length > 2) {
+      formatted = val.slice(0, 2) + "/" + val.slice(2);
+    } else {
+      formatted = val;
+    }
+
+    input.value = formatted;
+  });
+}
+
+function validateDueDateInput(input) {
+  input.addEventListener("blur", () => {
+    // Prüfen, ob Format DD/MM/YYYY korrekt ist
+    const regex = /^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$/;
+    if (!regex.test(input.value)) {
+      input.value = "";
+      return;
+    }
+
+    // Prüfen, ob Datum in der Zukunft liegt
+    const [d, m, y] = input.value.split("/").map(Number);
+    const chosenDate = new Date(y, m - 1, d);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (chosenDate < today) {
+      input.value = "";
+    }
+  });
+}
+
+function setupDueDateInput() {
+  const input = document.getElementById("DueDate");
+  if (!input) return;
+
+  formatDueDateInput(input);
+  validateDueDateInput(input);
 }

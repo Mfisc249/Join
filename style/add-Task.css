@@ -32,7 +32,7 @@ h2 {
   font-weight: 400;
   font-family: "Inter", sans-serif;
   margin: 0;
-  color: Version 2 / main colors rgba(0, 0, 0, 1);
+  color: rgba(0, 0, 0, 1);
   padding-left: 6px;
 }
 .addTaskLabelDescription {
@@ -114,7 +114,6 @@ h2 {
   border-radius: 10px;
   border: 1px solid;
   width: 425px;
-  color: rgba(209, 209, 209, 1);
   top: 12px;
   right: 16px;
   bottom: 12px;
@@ -122,6 +121,7 @@ h2 {
   height: 48px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
+  border-color: rgba(209, 209, 209, 1);
 }
 
 .addTaskDateContainer input:focus {
@@ -135,9 +135,15 @@ h2 {
   line-height: 1.2;
   height: 24px;
   width: 119px;
-  color: rgba(209, 209, 209, 1);
+  color: rgba(0, 0, 0, 1); /* Textfarbe wenn was eingegeben wird */
   padding-left: 18px;
 }
+
+.taskDateInput::placeholder {
+  color: rgba(209, 209, 209, 1);
+  font-weight: 400;
+}
+
 .taskDateInput::-webkit-calendar-picker-indicator {
   filter: brightness(0.5);
 }
@@ -223,7 +229,7 @@ h1 {
 }
 
 .ChoiceOption {
-  width: 440px;
+  width: 430px;
   height: 48px;
   border-radius: 10px;
   border: 1px solid;
@@ -238,13 +244,12 @@ h1 {
 }
 
 .assignedToInput {
-  width: 420px;
-  height: 38px;
+  width: 430px;
+  height: 48px;
   border-radius: 10px;
   border: 1px solid;
   border-color: rgba(209, 209, 209, 1);
   background-color: rgba(255, 255, 255, 1);
-  padding-left: 13px;
   font-size: 20px;
   font-weight: 400;
   line-height: 1.2;
@@ -253,10 +258,22 @@ h1 {
   justify-content: space-between;
   padding: 5px 8px;
   align-items: center;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.assignedToInput:focus-visible {
+  border: 2px solid #88e9fa;
+  outline: none;
+}
+
+.assignedToInput.activeFocus {
+  border: 2px solid #88e9fa;
 }
 .inputField {
-  width: 415px;
-  max-height: 44px;
+  width: 406px;
+  max-height: 40px;
 }
 
 .ChoiceOption:focus {
@@ -425,7 +442,7 @@ h1 {
 }
 
 .subTaskEditInput {
-  width: 430px;
+  width: 423px;
   height: 31px;
   border: unset;
   border-bottom: 1px solid #7cf0ff;

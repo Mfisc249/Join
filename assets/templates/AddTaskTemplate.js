@@ -41,10 +41,11 @@ function createTaskTemplate(taskName, taskDescription) {
               <div class="addTaskDateContainer">
                 <input
                   class="taskDateInput"
-                  type="date"
+                  type="text"
                   id="DueDate"
                   name="DueDate"
                   placeholder="dd/mm/yyyy"
+                   maxlength="10"
                 />
                 <img class="eventImg" src="./assets/img/event.svg" alt="" />
                 <p class="requiredField">this field is required</p>
@@ -71,10 +72,13 @@ function createTaskTemplate(taskName, taskDescription) {
   </div>
   <div class="OptionsContainer">
  <h2 class=ChoiceHeadline>Assigned to</h2>
-  <div class="assignedToInput" onclick="toggleAssignedDropdown()">
+  <button 
+  type="button"
+  class="assignedToInput"
+  onclick="toggleAssignedDropdown()">
    <p id="clearContact" class=choiceContact>Select contacts to assign</p>
     <img class="dropDownArrow" id="assignedDropdownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
-  </div>
+  </button>
   <div id="assignedPreviewContainer" class="assignedPreviewContainer"></div>
   <div id="assignedDropdown" class="assignedDropdown hidden">
  
