@@ -55,14 +55,8 @@ function setupSubmenu() {
 }
 
 function logout() {
-  // 1. komplette Session löschen
   sessionStorage.clear();
-
-  // 2. optional: zusätzlich localStorage löschen,
-  // falls irgendwo noch alte Daten rumliegen
   localStorage.clear();
-
-  // 3. Redirect zur Login-/Startseite
   window.location.href = "./index.html"; // oder "./login.html"
 }
 
