@@ -25,10 +25,45 @@ function highlightTaskTamplate(ID) {
 
 /** Builds the HTML markup for the four task board columns. */
 function taskBoardTamplate() {
-    return ` <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
-                    <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
-                    <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
-                    <td id="field4" ondrop="moveTo('field4')" ondragover="dragoverHandler(event)"></td>`
+    return `        <tr class="tableCategories">
+                        <td>To do <button>+</button></td>
+                        <td>In progress <button>+</button></td>
+                        <td>Await feedback <button>+</button></td>
+                        <td>Done</td>
+                    </tr>
+                    <tr id="fields">
+                        <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
+                        <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
+                        <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
+                        <td id="field4" ondrop="moveTo('field4')" ondragover="dragoverHandler(event)"></td>
+                    </tr>`
+}
+
+function taskBoardTamplateMobile() {
+    return `            <tr>
+                            <td class="tableCategories">To do <button>+</button></th>
+                        </tr>
+                        <tr>
+                            <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
+                        </tr>
+                        <tr>
+                            <td class="tableCategories">In progress <button>+</button></th>
+                        </tr>
+                        <tr>
+                            <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
+                        </tr>
+                        <tr>
+                            <td class="tableCategories">Await feedback <button>+</button></th>
+                        </tr>
+                        <tr>
+                            <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
+                        </tr>
+                        <tr>
+                            <td class="tableCategories">Await feedback <button>+</button></th>
+                        </tr>
+                        <tr>
+                            <td id="field4" ondrop="moveTo('field4')" ondragover="dragoverHandler(event)"></td>
+                        </tr>`
 }
 
 /** Builds the HTML markup for the detailed view of a task. */

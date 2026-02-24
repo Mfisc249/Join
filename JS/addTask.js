@@ -19,8 +19,8 @@ let task = {
   field: "1",
 };
 
-document.getElementById("sidebar-slot").innerHTML = sidebarTemplate();
-document.getElementById("header-slot").innerHTML = headerTemplate();
+// document.getElementById("sidebar-slot").innerHTML = sidebarTemplate();
+// document.getElementById("header-slot").innerHTML = headerTemplate();
 
 async function init() {
   renderTemplate();
@@ -320,7 +320,7 @@ function toggleOption(element) {
   element.classList.toggle("selected");
 }
 
-document.getElementById("taskName").classList.add("input-error");
+// document.getElementById("taskName").classList.add("input-error");
 
 function clearContactSelection() {
   const assign = document.getElementById("clearContact");

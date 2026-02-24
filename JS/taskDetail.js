@@ -24,7 +24,7 @@ function openTaskDetails(taskID) {
     let reftaskDetails = document.getElementById('allTaskDetails');
     reftaskDetails.innerHTML = taskDetailsTamplate(taskID);
     taskCatagory(taskID, document.getElementById('taskDetailsCatagory'));
-    renderSubtasks(taskID);
+    renderSubtasksTaskDetails(taskID);
     getTaskDetailsContacts(taskID, 1);
     taskCheckPriority(taskID, document.getElementById(`taskDetailsPriorityContainer${taskID}`));
 }
@@ -71,7 +71,7 @@ function toggleSubtaskCheckboxVisibility(uncheckedCheckboxId, checkedCheckboxId)
 }
 
 /** Renders all subtasks for a task and initializes their status. */
-function renderSubtasks(taskID) {
+function renderSubtasksTaskDetails(taskID) {
     let subTaskReviewStatus = TASK[0][`Task${taskID}`].subTasksReview; //await DataGET(`Tasks/Task${taskID}/subTasksReview`);
     subtaskStatusList = [];
     let subTasksString = TASK[0][`Task${taskID}`].subTasks; //await DataGET(`Tasks/Task${taskID}/subTasks`);

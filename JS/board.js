@@ -6,10 +6,15 @@ let count = 0;
 let highlightTaskCount = 0;
 let curentTraggedElement;
 let allContactDetails = [];
+let myMediaQuery = window.matchMedia('(max-width: 1350px)');
 
 /** Initializes the board and renders tasks. */
-async function init() {
-    document.getElementById('fields').innerHTML = taskBoardTamplate();
+async function boardInit() {
+    if (myMediaQuery.matches) {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+    } else {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+    }
     await render();
 }
 
@@ -105,7 +110,7 @@ function renderMovedTask(field) {
     updateSubtaskProgressbar(curentTraggedElement);
     getTaskDetailsContacts(curentTraggedElement, 0);
     taskCheckPriority(curentTraggedElement, document.getElementById(`taskPriorityContainer${curentTraggedElement}`));
-   
+
 }
 
 /** Sets the currently dragged task and starts the animation. */
@@ -343,3 +348,19 @@ function removeHighlightBoardTaskFields() {
     }
 }
 
+async function widthChangeCallback(myMediaQuery) {
+    if (myMediaQuery.matches) {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+        TASK = [];
+        TASKKEYS = [];
+        count = 0;
+        await render();
+    } else {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+        TASK = [];
+        TASKKEYS = [];
+        count = 0;
+        await render();
+    }
+}
+myMediaQuery.addEventListener('change', widthChangeCallback);

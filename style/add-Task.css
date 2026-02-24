@@ -1,12 +1,12 @@
-body {
+/* body {
   margin: 0;
   background-color: rgba(246, 247, 248, 1);
 }
 main {
   max-width: 1200px; /* PC-Größe */
-  margin: 190px auto 0 auto;
+  /* margin: 190px auto 0 auto;
   margin-left: 365px;
-}
+} */ 
 .addTaskLabel {
   display: flex;
   align-items: baseline;
@@ -25,7 +25,7 @@ form {
   line-height: 1.2;
   margin-bottom: 50px;
 }
-h2 {
+/* h2 {
   font-size: 20px;
   line-height: 1.2;
   gap: 0px;
@@ -34,7 +34,7 @@ h2 {
   margin: 0;
   color: Version 2 / main colors rgba(0, 0, 0, 1);
   padding-left: 6px;
-}
+} */
 .addTaskLabelDescription {
   display: flex;
   align-items: baseline;
@@ -163,9 +163,9 @@ h2 {
   gap: 48px;
 }
 
-h1 {
+/* h1 {
   margin: 0 0 40px 0;
-}
+} */
 
 .divider {
   border-left: 1px solid #d1d1d1; /* 👈 DER STRICH */
@@ -599,9 +599,9 @@ select::-ms-expand {
   .addTaskDateContainer input {
     width: 970px;
   }
-  h1 {
+  /* h1 {
     font-size: 55px;
-  }
+  } */
   .priority {
     justify-content: start;
     gap: 202px;
@@ -702,9 +702,9 @@ select::-ms-expand {
   }
 }
 @media (max-width: 1035px) {
-  h1 {
+  /* h1 {
     font-size: 50px;
-  }
+  } */
   .taskNameContainer textarea {
     width: 470px;
   }
@@ -737,9 +737,9 @@ select::-ms-expand {
   }
 }
 @media (max-width: 870px) {
-  h1 {
+  /* h1 {
     font-size: 47px;
-  }
+  } */
   .taskNameContainer textarea {
     width: 259px;
   }
@@ -779,9 +779,9 @@ select::-ms-expand {
     margin-top: 5px;
     flex-direction: column;
   }
-  main {
+  /* main {
     padding: 0 15px;
-  }
+  } */
   .taskButton {
     margin-top: 25px;
     justify-content: end;

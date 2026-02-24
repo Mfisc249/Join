@@ -84,7 +84,7 @@ body {
     width: 252px;
     border-radius: 24px;
     margin-top: 5px;
-    box-shadow: 1px 1px 8px -3px rgba(0,0,0,0.28);
+    box-shadow: 1px 1px 8px -3px rgba(0, 0, 0, 0.28);
 }
 
 .task:hover {
@@ -144,46 +144,58 @@ body {
     margin: 10px 10px 10px;
 }
 
-.boardTaskCatagoryBlue{
+.boardTaskCatagoryBlue {
     background-color: var(--taskLightBlue);
 }
 
-.boardTaskCatagoryGreen{
+.boardTaskCatagoryGreen {
     background-color: #1FD7C1;
 }
 
-.boardTaskContent{
+.boardTaskContent {
     color: var(--GlobalBorderColorGray);
 }
 
 .subtaskProgressbarC {
-  width: 110px;
-  border-radius: 16px;
-  background-color: grey;
+    width: 110px;
+    border-radius: 16px;
+    background-color: grey;
 }
 
 .subtaskProgressbar {
-  width: 0%;
-  height: 8px;
-  border-radius: 16px;
-  background-color: #4589FF;
+    width: 0%;
+    height: 8px;
+    border-radius: 16px;
+    background-color: #4589FF;
 }
 
-.taskContactsContainer{
+.taskContactsContainer {
     display: flex;
-   
+
 }
 
-.taskContactsbadge{
+.taskContactsbadge {
     height: 32px !important;
     width: 32px !important;
 }
 
-.taskContactsContainer span:not(:first-child){
+.taskContactsContainer span:not(:first-child) {
     margin-left: -10px;
 }
 
 
-.taskContactsContainer span:first-child{
+.taskContactsContainer span:first-child {
     margin-left: 10px;
+}
+
+@media(max-width:1350px) {
+    .tablecontainer tr {
+        display: flex;
+        height: unset;
+    }
+
+    .taskContainer{
+        margin-bottom: 20px;
+    }
+
 }
