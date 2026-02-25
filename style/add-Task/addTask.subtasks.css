@@ -1,0 +1,132 @@
+.subtaskInputContainer {
+  position: relative;
+  width: fit-content; /* passt sich deiner festen Input-Breite an */
+}
+.subtaskIcon {
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.subTaskIconsContainer {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.spacer {
+  width: 1px;
+  height: 23px;
+  background-color: rgba(209, 209, 209, 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.subtaskInputContainer:focus-within .spacer {
+  opacity: 1;
+  pointer-events: auto;
+}
+.subtaskInputContainer:focus-within .subtaskIcon {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.subtaskIcon:hover {
+  opacity: 0;
+}
+
+.subTaskContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subTaskItem {
+  list-style: none;
+  position: relative;
+  padding: 5px 5px 5px 30px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.subTaskItem::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  background-color: #a8a8a8;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.subTaskItem.editing::before {
+  display: none; /* Punkt verschwindet */
+}
+
+.subTaskItem:not(.editing):hover {
+  background-color: rgba(240, 240, 240, 1);
+}
+
+.subTaskList {
+  padding-left: 0; /* entfernt Browser Default Einrückung */
+  margin: 0;
+  padding-right: 20px;
+  list-style: none;
+}
+
+.subTaskItem.editing {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.Edit {
+  opacity: 1;
+}
+
+.subTaskActions {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.subTaskEditInput {
+  width: 434px;
+  height: 32px;
+  border: unset;
+  border-bottom: 1px solid rgba(0, 93, 255, 1);
+  outline: none;
+}
+
+.checkEdit {
+  height: 13px;
+}
+.subTaskEditIcons {
+  display: flex;
+  position: relative;
+  right: 13%;
+  gap: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.subTaskEditContainer {
+  display: flex;
+  align-items: center;
+}
+
+.SubTaskField {
+  color: black;
+}

@@ -1,0 +1,52 @@
+.priority {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  margin-top: 6px;
+}
+
+.priorityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 136px;
+  height: 51px;
+  background-color: white; /* default */
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
+  border: unset;
+  color: black; /* default Textfarbe */
+}
+
+.priorityButton:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.priorityButton.urgent.active {
+  background-color: #ff3d00;
+  color: white;
+}
+
+.priorityButton.medium.active {
+  background-color: rgba(255, 168, 0, 1);
+  color: white;
+}
+
+.priorityButton.low.active {
+  background-color: #7ae229;
+  color: white;
+}
+
+.priorityButton .priorityIcon {
+  filter: none; /* normal */
+}
+
+/* Wenn Button aktiv: Icon wird weiß */
+.priorityButton.active .priorityIcon {
+  filter: brightness(0) invert(1);
+}

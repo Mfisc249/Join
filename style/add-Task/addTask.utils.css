@@ -1,0 +1,57 @@
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: -100px; /* startet unsichtbar */
+  transform: translateX(-50%);
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+/* Sichtbarer Zustand */
+.toast.show {
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Chrome, Edge, Safari */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+/* IE */
+select::-ms-expand {
+  display: none;
+}
+
+.eventImg {
+  position: relative;
+  right: 40px;
+  top: 3px;
+}
+
+.star {
+  margin: 0;
+  color: orange;
+}
+.descriptionImg {
+  position: relative;
+  bottom: 8px;
+  right: 31px;
+}

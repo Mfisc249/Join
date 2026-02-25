@@ -1,144 +1,190 @@
 function createTaskTemplate(taskName, taskDescription) {
   return `
-         <h1 class="mainTitle">Add Task</h1>
-      <div class="contentWrapperAddTask">
-        <!-- LINKS -->
-        <div class="leftContent">
-          <form id="taskForm">
-            <label class="addTaskLabel" for="taskName">
-              <div class="headlineTextArea">
-                <h2>Title</h2>
-                <p class="star">*</p>
-              </div>
-              <div class="taskNameContainer">
-                <textarea
-                  class="taskName"
-                  type="text"
-                  id="taskName"
-                  name="taskName"
-                  placeholder="Enter a title"
-                ></textarea>
-                <p class="requiredField">this field is required</p>
-              </div>
-            </label>
-            <label class="addTaskLabelDescription" for="taskDesc">
-              <h2>Description</h2>
-              <div class="taskDescriptionContainer">
-                <textarea
-                  class="taskDescription"
-                  id="taskDesc"
-                  name="taskDesc"
-                  placeholder="Enter a Description"
-                ></textarea>
-                <p class="requiredField">this field is required</p>
-              </div>
-            </label>
-            <label class="addTaskLabelDate" for="DueDate">
-              <div class="headlineTextArea">
-                <h2>Due Date</h2>
-                <p class="star">*</p>
-              </div>
-              <div class="addTaskDateContainer">
-                <input
-                  class="taskDateInput"
-                  type="text"
-                  id="DueDate"
-                  name="DueDate"
-                  placeholder="dd/mm/yyyy"
-                   maxlength="10"
-                />
-                <img class="eventImg" src="./assets/img/event.svg" alt="" />
-                <p class="requiredField">this field is required</p>
-              </div>
-            </label>
-          </form>
-        </div>
-        <div class="divider"></div>
-        <div class="rightContent">
-          <h2>Priority</h2>
+    <h1 class="mainTitle">Add Task</h1>
+
+    <div class="contentWrapperAddTask">
+
+      <!-- LEFT -->
+      <div class="leftContent">
+        <form id="taskForm">
+
+          <!-- TITLE -->
+          <label class="addTaskLabel" for="taskName">
+            <div class="headlineTextArea">
+              <h2>Title</h2>
+              <p class="star">*</p>
+            </div>
+
+            <div class="taskNameContainer">
+              <textarea
+                class="taskName"
+                id="taskName"
+                name="taskName"
+                placeholder="Enter a title"
+              >${taskName ?? ""}</textarea>
+
+              <!-- MUST stay inside label for toggleRequired() -->
+              <p class="requiredField">this field is required</p>
+            </div>
+          </label>
+
+          <!-- DESCRIPTION -->
+          <label class="addTaskLabelDescription" for="taskDesc">
+            <h2>Description</h2>
+
+            <div class="taskDescriptionContainer">
+              <textarea
+                class="taskDescription"
+                id="taskDesc"
+                name="taskDesc"
+                placeholder="Enter a Description"
+              >${taskDescription ?? ""}</textarea>
+              <img class="descriptionImg" src="./assets/icons/Capa 2.svg" alt="" />
+
+              <!-- same label context -->
+              <p class="requiredField">this field is required</p>
+            </div>
+          </label>
+
+          <!-- DUE DATE -->
+          <label class="addTaskLabelDate" for="DueDate">
+            <div class="headlineTextArea">
+              <h2>Due Date</h2>
+              <p class="star">*</p>
+            </div>
+
+            <div class="addTaskDateContainer">
+              <input
+                class="taskDateInput"
+                type="text"
+                id="DueDate"
+                name="DueDate"
+                placeholder="dd/mm/yyyy"
+                maxlength="10"
+              />
+
+              <img class="eventImg" src="./assets/img/event.svg" alt="" />
+
+              <!-- requiredField stays inside label -->
+              <p class="requiredField">this field is required</p>
+            </div>
+          </label>
+
+        </form>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- RIGHT -->
+      <div class="rightContent">
+        <h2>Priority</h2>
+
         <div class="priority">
-  <div class="priorityButton urgent">
-    <span>Urgent</span>
-    <img class="priorityIcon" src="assets/img/Prio alta.svg" />
-  </div>
- <div class="priorityButton medium">
-    <span>Medium</span>
-    <img class="priorityIcon" src="assets/img/Prio media.svg" />
-  </div>
-  <div class="priorityButton low">
-    <span>Low</span>
-    <img class="priorityIcon" src="assets/img/Prio baja.svg" />
-  </div>
-  </div>
-  <div class="OptionsContainer">
- <h2 class=ChoiceHeadline>Assigned to</h2>
-  <button 
-  type="button"
-  class="assignedToInput"
-  onclick="toggleAssignedDropdown()">
-   <p id="clearContact" class=choiceContact>Select contacts to assign</p>
-    <img class="dropDownArrow" id="assignedDropdownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
-  </button>
-  <div id="assignedPreviewContainer" class="assignedPreviewContainer"></div>
-  <div id="assignedDropdown" class="assignedDropdown hidden">
- 
-       </div>
-       </div>
-           <div class="OptionsContainer">
-           <div class="headlineTextArea">
-           <h2 class="ChoiceHeadline">Category</h2>
-           <p class="star">*</p>
-           </div>
-        <div class="categorySelectWrapper" onclick="toggleCategoryArrow()">
-  <select class="ChoiceOption" id="category">
-    <option value=""selected hidden>Select task category</option>
-    <option value="technicalTask">Technical Task</option>
-    <option value="UserStory">User Story</option>
-  </select>
-  <img class="dropDownArrow taskArrow" id="taskArrow" src="./assets/img/arrow_drop_down.svg" alt="">
-</div>
+          <div class="priorityButton urgent">
+            <span>Urgent</span>
+            <img class="priorityIcon" src="assets/img/Prio alta.svg" />
+          </div>
+
+          <div class="priorityButton medium">
+            <span>Medium</span>
+            <img class="priorityIcon" src="assets/img/Prio media.svg" />
+          </div>
+
+          <div class="priorityButton low">
+            <span>Low</span>
+            <img class="priorityIcon" src="assets/img/Prio baja.svg" />
+          </div>
         </div>
+
         <div class="OptionsContainer">
-  <h2 class="ChoiceHeadline">Subtasks</h2>
+          <h2 class="ChoiceHeadline">Assigned to</h2>
 
-  <div class="subtaskInputContainer">
-  <div class="bottomInputContainer">
-    <input
-      class="ChoiceOption inputField bottomInput"
-      id="subtaskInput"
-      placeholder="Add new subtask"
-    />
-    </div>
-    <div class="subTaskIconsContainer">
-    <img onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask" src="./assets/img/Subtasks icons11-3.svg" alt="" />
-    <div class="spacer"></div>
-   <img onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask" src="assets/img/check.png" />
-    </div>
-  </div>
-  <div id="toast" class="toast">Task added to board</div>
-  <ul class="subTaskList" id="subtaskList"></ul>
-</div>
+          <button 
+            type="button"
+            class="assignedToInput"
+            onclick="toggleAssignedDropdown(event)">
+            <p id="clearContact" class="choiceContact">
+              Select contacts to assign
+            </p>
+            <img 
+              class="dropDownArrow"
+              id="assignedDropdownArrow"
+              src="./assets/img/arrow_drop_down.svg"
+              alt="">
+          </button>
+
+          <div id="assignedPreviewContainer" class="assignedPreviewContainer"></div>
+          <div id="assignedDropdown" class="assignedDropdown hidden"></div>
         </div>
+
+        <div class="OptionsContainer">
+          <div class="headlineTextArea">
+            <h2 class="ChoiceHeadline">Category</h2>
+            <p class="star">*</p>
+          </div>
+
+          <div class="categorySelectWrapper" onclick="toggleCategoryArrow()">
+            <select class="ChoiceOption" id="category">
+              <option value="" selected hidden>Select task category</option>
+              <option value="technicalTask">Technical Task</option>
+              <option value="UserStory">User Story</option>
+            </select>
+            <img 
+              class="taskArrow"
+              id="taskArrow"
+              src="./assets/img/arrow_drop_down.svg"
+              alt="">
+          </div>
+        </div>
+
+        <div class="OptionsContainer">
+          <h2 class="ChoiceHeadline">Subtasks</h2>
+
+          <div class="subtaskInputContainer">
+            <div class="bottomInputContainer">
+              <input
+                class="inputField bottomInput"
+                id="subtaskInput"
+                placeholder="Add new subtask"
+              />
+            </div>
+
+            <div class="subTaskIconsContainer">
+              <img onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask" src="./assets/img/Subtasks icons11-3.svg" alt="" />
+              <div class="spacer"></div>
+              <img onclick="confirmSubtask()" class="subtaskIcon close" id="confirmSubtask" src="assets/img/check.png" />
+            </div>
+          </div>
+
+          <div id="toast" class="toast">Task added to board</div>
+          <ul class="subTaskList" id="subtaskList"></ul>
+        </div>
+
       </div>
     </div>
-      <div class="buttonRequiredField">
-      <div class="headlineTextArea requiredBottomLeft">
-      <p class="star">*</p>
-      <p class="requiredField SubTaskField">this field is rehhqired</p>
-      </div>
-      <div class="taskButton">
-       <div>
-     <button onclick="clearForm()"  class="clearButton">
-     Clear 
-<img class="cross" src="./assets/img/Subtasks icons11-3.svg" alt="" />
 
-    </button>
+    <div class="buttonRequiredField">
+      <div class="headlineTextArea requiredBottomLeft">
+        <p class="star">*</p>
+        <p class="requiredField SubTaskField">this field is rehhqired</p>
       </div>
-        <button  onclick="createTask()" class="createButton">Create Task
+
+      <div class="taskButton">
+        <button onclick="clearForm()" class="clearButton">
+          Clear 
+          <img class="cross" src="./assets/img/Subtasks icons11-3.svg" alt="" />
+        </button>
+
+        <button onclick="createTask()" class="createButton">
+          Create Task
           <img class="createButtonIcon" src="assets/img/check-2.svg" />
         </button>
       </div>
-      </div>`;
+    </div>
+    </main>
+    <footer>
+    </footer>
+  `;
 }
 
 function subtaskTemplate(text, index) {
