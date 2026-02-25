@@ -1,6 +1,17 @@
+function isLoggedIn() {
+  return !!sessionStorage.getItem("contactId");
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   loadTemplate('./templates/header.html', '#header-slot');
+  handleHeaderAuth();
 });
+
+function handleHeaderAuth() {
+  if (!isLoggedIn()) {
+    document.body.classList.add("guest-mode");
+  }
+}
 
 async function loadTemplate(url, targetSelector) {
   const target = document.querySelector(targetSelector);
