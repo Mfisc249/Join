@@ -188,14 +188,44 @@ body {
     margin-left: 10px;
 }
 
+.mobileArrows{
+    display: none;
+}
+
 @media(max-width:1350px) {
+
     .tablecontainer tr {
         display: flex;
         height: unset;
     }
 
-    .taskContainer{
+    .tablecontainer tr:nth-child(2n) {
+        display: flex;
+        min-height: 215px;
+    }
+
+    .taskContainer {
         margin-bottom: 20px;
+    }
+
+    :root {
+        --boardWith: 800px;
+    }
+
+    .tablecontainer table {
+        min-width: var(--boardWith);
+    }
+
+    .tableCategories {
+        color: var(--GlobalBlue);
+        font-weight: 700;
+        font-size: 27px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .mobileArrows{
+        display: unset;
     }
 
 }

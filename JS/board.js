@@ -190,7 +190,11 @@ async function searchTask() {
     if (refSearchInput.value.length >= 1) {
         startTheSearch(refSearchInput);
     } else if (refSearchInput.value.length == 0) {
-        document.getElementById('fields').innerHTML = taskBoardTamplate();
+        if (myMediaQuery.matches) {
+            document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+        } else {
+            document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+        }
         TASK = [];
         TASKKEYS = [];
         count = 0;

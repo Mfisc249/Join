@@ -1,7 +1,10 @@
 /** Builds the HTML markup for a task card on the board. */
 function taskTamplate(taskID) {
     return `<div id="${taskID}" class ="task taskContainer" draggable="true" ondragstart="draggedTask('${taskID}')" onclick = "openTaskDetails('${taskID}'), opendialog('allTaskDetails')">
+                <div class = "displayFLEX">
                 <h2 id ="boardTaskCatagory${taskID}" class="boardTaskCatagory paddingBottom15">${TASK[0][`Task${taskID}`].category}</h2>
+                <img class = "mobileArrows" src="./assets/img/mobileArrows.svg" alt="Arrows">
+                </div>
                 <h2 class="marginleft10px paddingBottom5">${TASK[0][`Task${taskID}`].title}<h2>
                 <h2 class="marginleft10px boardTaskContent paddingBottom15">${TASK[0][`Task${taskID}`].content}<h2>
                 <div class="subtaskProgressbarC marginleft10px">
