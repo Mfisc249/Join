@@ -1,12 +1,14 @@
 body {
   margin: 0;
   background-color: rgba(246, 247, 248, 1);
+  overflow-y: auto;
 }
 
 main {
   max-width: 1200px; /* PC-Größe */
   margin: 190px auto 0 auto;
   margin-left: 338px;
+  min-height: 100vh;
 }
 
 form {
@@ -40,6 +42,7 @@ h2 {
 
 .contentWrapperAddTask {
   display: flex;
+  align-items: flex-start;
 }
 
 h1 {
@@ -83,7 +86,6 @@ h1 {
 .buttonRequiredField {
   display: flex;
   justify-content: space-between;
-  width: 1000px;
   margin-top: 80px;
 }
 
@@ -136,8 +138,8 @@ h1 {
 }
 
 .categorySelectWrapper {
-  display: flex;
-  align-items: center;
+  position: relative;
+  display: inline-block;
 }
 
 .taskArrow {

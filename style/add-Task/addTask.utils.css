@@ -5,7 +5,7 @@
   transform: translateX(-50%);
   background-color: rgba(42, 54, 71, 1);
   color: white;
-  padding: 16px 32px;
+  padding: 24px 32px;
   border-radius: 12px;
   font-size: 20px;
   font-weight: 500;
@@ -54,4 +54,8 @@ select::-ms-expand {
   position: relative;
   bottom: 8px;
   right: 31px;
+}
+
+.toastText {
+  margin-right: 18px;
 }

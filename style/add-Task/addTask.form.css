@@ -56,24 +56,23 @@
 
 .taskDescriptionContainer textarea {
   border-radius: 20px;
-  border: 1px solid;
   width: 440px;
-  border-color: rgba(209, 209, 209, 1);
   height: 120px;
   padding-left: 18px;
   padding-top: 11px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
+  border: unset;
+  box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
 }
 
 .taskDescriptionContainer textarea:focus {
-  border: 2px solid #88e9fa; /* kräftiges Blau */
+  box-shadow: 0 0 0 2px #88e9fa; /* Fokus "Border" */
   outline: none;
 }
 
 .addTaskDateContainer input {
   border-radius: 10px;
-  border: 1px solid;
   width: 440px;
   top: 12px;
   right: 16px;
@@ -82,11 +81,12 @@
   height: 48px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
-  border-color: rgba(209, 209, 209, 1);
+  border: unset;
+  box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
 }
 
 .addTaskDateContainer input:focus {
-  border: 2px solid #88e9fa; /* kräftiges Blau */
+  box-shadow: 0 0 0 2px #88e9fa; /* Fokus "Border" */
   outline: none;
 }
 .taskDateInput {
@@ -98,6 +98,8 @@
   width: 119px;
   color: rgba(0, 0, 0, 1); /* Textfarbe wenn was eingegeben wird */
   padding-left: 18px;
+  border: unset;
+  box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
 }
 
 .taskDateInput::placeholder {
@@ -141,8 +143,7 @@
 }
 
 .ChoiceOption:focus {
-  border: 2px solid #88e9fa; /* kräftiges Blau */
-  outline: none;
+  border: 1px solid #88e9fa; /* kräftiges Blau */
 }
 
 .choiceContact {
@@ -167,4 +168,54 @@
 
 .rightContent {
   margin-left: 54px;
+}
+
+.TaskCategoryInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categoryDropdown {
+  position: absolute; /* absolut relativ zum Wrapper */
+  top: 100%; /* direkt unter dem Input */
+  left: 0; /* linksbündig */
+  width: 100%; /* gleiche Breite wie Wrapper */
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  background-color: white;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryOption {
+  cursor: pointer;
+  padding: 8px 16px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.categoryOption:hover {
+  background-color: #bfbfbf33;
+}
+
+.categoryOption.selected {
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+}
+
+.categoryOption {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  font-size: 18px;
+}
+
+.categoryOption:hover {
+  background-color: #bfbfbf33;
 }

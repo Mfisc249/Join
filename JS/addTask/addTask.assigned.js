@@ -1,3 +1,5 @@
+let selectedCategory = "";
+
 async function loadContacts() {
   try {
     const response = await fetch(`${BASE_URL}Contacts.json`);
@@ -167,3 +169,28 @@ function setupAssignedDropdownClose() {
     }
   });
 }
+
+/////////// Kategorie Dropdown ///////////
+function toggleCategoryDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById("categoryDropdown");
+  dropdown.classList.toggle("hidden");
+}
+
+// Kategorie auswählen
+function selectCategory(category) {
+  selectedCategory = category;
+  document.getElementById("categoryLabel").textContent = category;
+  document.getElementById("categoryDropdown").classList.add("hidden");
+}
+
+// Klick außerhalb schließt das Dropdown
+document.addEventListener("click", (event) => {
+  const dropdown = document.getElementById("categoryDropdown");
+  const wrapper = document.querySelector(".categorySelectWrapper");
+
+  if (!dropdown || !wrapper) return;
+  if (!dropdown.contains(event.target) && !wrapper.contains(event.target)) {
+    dropdown.classList.add("hidden");
+  }
+});

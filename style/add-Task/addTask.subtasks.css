@@ -102,29 +102,31 @@
 }
 
 .subTaskEditInput {
-  width: 434px;
+  width: 100%;
   height: 32px;
   border: unset;
   border-bottom: 1px solid rgba(0, 93, 255, 1);
   outline: none;
+  padding-left: 20px;
 }
-
 .checkEdit {
   height: 13px;
 }
 .subTaskEditIcons {
+  position: absolute; /* 🔥 KEY FIX */
+  right: 12px; /* sitzt im Input rechts */
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  position: relative;
-  right: 13%;
-  gap: 5px;
-  cursor: pointer;
-  display: flex;
+  gap: 8px;
   align-items: center;
+  cursor: pointer;
 }
 
 .subTaskEditContainer {
   display: flex;
   align-items: center;
+  width: 434px; /* 🔥 gleiche Breite wie dein Input vorher */
 }
 
 .SubTaskField {
