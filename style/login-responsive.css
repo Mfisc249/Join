@@ -69,10 +69,10 @@
     line-height: 75%;
   }
 
-  /* Signup Pfeil: auf Mobile näher an der Card-Kante */
+  /* Signup Pfeil: Position an kleineres Card-Padding anpassen */
   .signupBackArrow {
-    left: 0;
-    top: 8px;
+    top: 52px;
+    left: 16px;
   }
 
   /* Buttons: untereinander, gleiche Breite, 16px Font */
