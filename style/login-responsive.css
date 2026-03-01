@@ -69,9 +69,14 @@
     line-height: 75%;
   }
 
+  /* Signup Button: breiter auf Mobile */
+  .signupButtonWrapper .ButtonBlueFilled {
+    min-width: 180px;
+  }
+
   /* Signup Pfeil: Position an kleineres Card-Padding anpassen */
   .signupBackArrow {
-    top: 52px;
+    top: 36px;
     left: 16px;
   }
 
@@ -144,15 +149,23 @@
 
 @media (max-width: 450px) {
 
+  /* Main: kein Flex-Centering mehr, Card fließt von oben */
+  .loginMainContainer {
+    flex: unset;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 30px;
+  }
+
   /* Card: noch weniger Padding */
   .contentWrapper .loginCard {
-    padding: 24px 16px;
+    padding: 36px 16px;
   }
 
   /* h1 bleibt bei 48px laut Figma */
   .loginCard h1 {
     font-size: 48px;
-    padding-top: 48px;
+    padding-top: 16px;
   }
 
   /* Nav-Text: 20px laut Figma */
@@ -171,6 +184,17 @@
   /* Buttons in Card etwas schmaler */
   .loginButtonsWrapper {
     gap: 24px;
+  }
+
+  /* Nav: vertikal zentrieren im verbleibenden Platz */
+  .loginNav {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  /* Footer: kein auto-margin mehr, Nav übernimmt Zentrierung */
+  .loginFooter {
+    margin-top: 0;
   }
 
   /* Separator: 88px breit laut Figma */
