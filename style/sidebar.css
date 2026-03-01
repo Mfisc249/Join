@@ -35,6 +35,29 @@
   transform: scale(1.05);
 }
 
+/* Guest Login Button */
+.sidebar-login {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 56px;
+  margin-top: 120px;
+
+  color: #CDCDCD;
+  text-decoration: none;
+  font-size: 16px;
+
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-login:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+}
+
 /* Navigation (Figma-like) */
 .nav {
   width: 100%;

@@ -29,6 +29,15 @@
    Global App Shell Layout
    ========================= */
 
+/* Guest-Mode Styles */
+body.guest-mode .header-right {
+  display: none;
+}
+
+body.guest-mode .nav {
+  display: none;
+}
+
 /* Container für Sidebar/Header/Content */
 .app {
   position: relative;
