@@ -23,8 +23,8 @@ function createTaskTemplate(taskName, taskDescription) {
                 placeholder="Enter a title"
               >${taskName ?? ""}</textarea>
 
-              <!-- MUST stay inside label for toggleRequired() -->
-              <p class="requiredField">this field is required</p>
+             
+              <p class="requiredField">This field is required</p>
             </div>
           </label>
 
@@ -42,7 +42,7 @@ function createTaskTemplate(taskName, taskDescription) {
               <img class="descriptionImg" src="./assets/icons/Capa 2.svg" alt="" />
 
               <!-- same label context -->
-              <p class="requiredField">this field is required</p>
+              <p class="requiredField">This field is required</p>
             </div>
           </label>
 
@@ -66,7 +66,7 @@ function createTaskTemplate(taskName, taskDescription) {
               <img class="eventImg" src="./assets/img/event.svg" alt="" />
 
               <!-- requiredField stays inside label -->
-              <p class="requiredField">this field is required</p>
+              <p class="requiredField">This field is required</p>
             </div>
           </label>
 
@@ -110,7 +110,6 @@ function createTaskTemplate(taskName, taskDescription) {
   <div class="OptionsContainer">
     <div class="headlineTextArea">
       <h2 class="ChoiceHeadline">Category</h2>
-      <p class="star">*</p>
     </div>
 
     <div class="categorySelectWrapper">
@@ -144,6 +143,8 @@ function createTaskTemplate(taskName, taskDescription) {
     </div>
     <ul class="subTaskList" id="subtaskList"></ul>
   </div>
+    </div>
+  </div>
    <div class="buttonRequiredField">
     <div class="headlineTextArea requiredBottomLeft">
       <p class="star">*</p>
@@ -158,11 +159,6 @@ function createTaskTemplate(taskName, taskDescription) {
         Create Task
         <img class="createButtonIcon" src="assets/img/check-2.svg" />
       </button>
-    </div>
-  </div>
-</div> 
-
-  <!-- BUTTONS FIXED UNTEN --><!-- Ende rightContent -->
     </main>
     <footer>
     </footer>

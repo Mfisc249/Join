@@ -2,7 +2,6 @@ function errorMessage() {
   toggleRequired(document.getElementById("taskName"));
   toggleRequired(document.getElementById("taskDesc"));
   toggleRequired(document.getElementById("DueDate"));
-  toggleRequired(document.getElementById("category"));
 }
 
 function toggleRequired(inputElement) {

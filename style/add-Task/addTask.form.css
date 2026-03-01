@@ -83,6 +83,7 @@
   font-family: "Inter", sans-serif;
   border: unset;
   box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
+  margin-bottom: 3px;
 }
 
 .addTaskDateContainer input:focus {
@@ -115,8 +116,8 @@
   font-size: 12px;
   font-weight: 400;
   font-family: poppins;
-  width: 119px;
-  margin-top: 4px;
+  margin-top: 0px;
+  margin-bottom: 9px;
 }
 
 .requiredField.visible {

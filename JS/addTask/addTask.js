@@ -36,66 +36,93 @@ function renderTemplate() {
 }
 
 async function saveTask(task) {
-  const taskKey = `addTask${Date.now()}`;
-
   try {
-    const response = await fetch(`${BASE_URL}Tasks/${taskKey}.json`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(task),
+    // 1. Alle vorhandenen Tasks holen
+    const existingTasks = (await DataGET("Tasks")) || {};
+    const taskKeys = Object.keys(existingTasks);
+
+    // 2. Neue Task-ID berechnen: vorhandene Tasks + count
+    const taskID = taskKeys.length + count;
+    const taskKey = `Task${taskID}`; // Task0, Task1, ...
+
+    // 3. Task in Firebase speichern (PUT an eindeutigen Key)
+    await DataPUT(`Tasks/${taskKey}`, {
+      ...task,
+      id: taskID,
+      field: "field1", // default field
     });
 
-    if (!response.ok) {
-      throw new Error("Firebase save failed");
-    }
+    console.log("Task saved with ID:", taskKey);
 
-    return true;
+    count++; // lokaler Zähler hochsetzen
+    return taskKey;
   } catch (error) {
-    return false;
+    console.error("Fehler beim Speichern:", error);
+    return null;
   }
 }
 
 async function createTask() {
   const titleInput = document.getElementById("taskName");
   const descInput = document.getElementById("taskDesc");
-  const categoryInput = document.getElementById("category");
   const dateInput = document.getElementById("DueDate");
 
-  task.category = categoryInput.value;
   task.title = titleInput.value;
   task.description = descInput.value;
   task.dueDate = dateInput.value;
 
-  errorMessage();
-  if (!task.title || !task.description || !task.dueDate || !task.category) {
-    return;
-  }
-  const success = await saveTask(task);
+  task.category = selectedCategory;
 
-  if (success) {
+  errorMessage();
+  if (!task.title || !task.description || !task.dueDate) return;
+
+  // Task speichern → bekommt Key wie Task0, Task1 …
+  const taskKey = await saveTask(task);
+
+  if (taskKey) {
     showToast();
     clearForm();
+
+    // Optional direkt ins UI rendern (wie loadTaskTamplate)
+    renderNewTask(taskKey, task);
   }
 }
 
 function clearForm() {
+  // Formular zurücksetzen
   document.getElementById("taskForm").reset();
-  task.title = "";
-  task.description = "";
-  task.dueDate = "";
-  task.priority = "";
-  task.assignedTo = [];
-  task.category = "";
-  task.subtasks = [];
-  task.field = "1";
-  task.createdAt = null;
 
-  const subtaskInput = document.getElementById("subtaskInput");
-  if (subtaskInput) subtaskInput.value = "";
+  // Task-Objekt auf Standardwerte zurücksetzen
+  task = {
+    title: "",
+    description: "",
+    dueDate: "",
+    priority: "",
+    assignedTo: [],
+    category: "",
+    subtasks: [],
+    field: "1",
+    createdAt: null,
+  };
 
-  console.log("Formular + Task-Objekt + Subtasks zurückgesetzt ✅");
+  // Subtasks + Vorschau leeren
+  document.getElementById("subtaskInput").value = "";
+  renderSubtasks();
+
+  // Kategorie zurücksetzen
+  selectedCategory = "";
+  document.getElementById("categoryLabel").textContent = "Select category";
+
+  // Ausgewählte Kontakte zurücksetzen
+  document.getElementById("assignedPreviewContainer").innerHTML = "";
+  renderSelectedContactsBelowInput();
+
+  // Alle Priorität-Buttons zurücksetzen und Standard setzen
+  document
+    .querySelectorAll(".priorityButton")
+    .forEach((b) => b.classList.remove("active"));
+  setDefaultPriority();
 }
-
 function showToast() {
   const toast = document.getElementById("toast");
   toast.classList.add("show");

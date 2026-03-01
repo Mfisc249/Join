@@ -5,9 +5,9 @@ body {
 }
 
 main {
-  max-width: 1200px; /* PC-Größe */
-  margin: 190px auto 0 auto;
-  margin-left: 338px;
+  max-width: 1200px;
+  margin: 227px auto 0 auto;
+  margin-left: 347px;
   min-height: 100vh;
 }
 
@@ -86,7 +86,9 @@ h1 {
 .buttonRequiredField {
   display: flex;
   justify-content: space-between;
-  margin-top: 80px;
+  margin-top: 108px;
+  width: 1030px;
+  align-items: center;
 }
 
 .requiredBottomLeft {
