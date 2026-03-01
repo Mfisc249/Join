@@ -1,25 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="auth-page">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/icons/favicon-lightmode.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="./assets/icons/favicon-darkmode.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
     <link rel="stylesheet" href="./style/standard.css" />
     <link rel="stylesheet" href="./style/login.css" />
+    <link rel="stylesheet" href="./style/login-responsive.css" />
   </head>
   <body>
+    <!-- TEMP: Figma Overlay zum Ausrichten – nach Fertigstellung löschen
+    <img id="figmaOverlay" src="./assets/img/figma-overlay-login.png" 
+      style="position:fixed; top:0; left:0; width:100%; height:100vh; 
+      opacity:0.3; z-index:9999; pointer-events:none; object-fit:fill;" />
+    -->
     <div id="content" class="contentWrapper">
       <div id="logoAnimation" class="logoAnimation skipAnimation">
         <img src="/assets/icons/logo-login-start.svg" alt="logo" />
       </div>
-
-      <nav class="loginNav">
-        <div class="loginNewUserWrapper">
-          <span>Not a Join user?</span>
-          <a href="signup.html" class="ButtonBlueFilled" style="text-decoration: none">Sign up</a>
-        </div>
-      </nav>
 
       <main class="loginMainContainer">
         <div class="loginCard">
@@ -58,11 +58,19 @@
           </form>
         </div>
       </main>
+
+      <nav class="loginNav">
+        <div class="loginNewUserWrapper">
+          <span>Not a Join user?</span>
+          <a href="signup.html" class="ButtonBlueFilled" style="text-decoration: none">Sign up</a>
+        </div>
+      </nav>
+
+      <footer class="loginFooter">
+        <a class="loginFooterLink" href="privacy.html">Privacy Policy</a>
+        <a class="loginFooterLink" href="legal_notice.html">Legal notice</a>
+      </footer>
     </div>
-    <footer class="loginFooter">
-      <a class="loginFooterLink" href="privacy.html">Privacy Policy</a>
-      <a class="loginFooterLink" href="legal_notice.html">Legal notice</a>
-    </footer>
     <script src="script.js"></script>
     <script src="./JS/login.js"></script>
   </body>

@@ -126,9 +126,8 @@ h3 {
  */
 .Separator {
   width: 150px;
-  height: 0px;
-  border: 3px solid;
-  border-color: var(--GlobalLightBlue);
+  border: none;
+  border-top: 3px solid var(--GlobalLightBlue);
 }
 
 
@@ -364,6 +363,7 @@ h3 {
    ========================= */
 
 .contentWrapper {
+  position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -389,7 +389,8 @@ h3 {
 }
 
 .loginInputs {
-  width: 422px;
+  width: 100%;
+  max-width: 422px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -400,15 +401,14 @@ h3 {
   left: 50%;
   transform: translateX(-50%);
   bottom: 48px;
-  width: 246px;
-  height: 36px;
+  width: auto;
   text-align: center;
   line-height: 120%;
   font-size: 16px;
 }
 
 .loginFooterLink {
-  padding: 8px;
+  padding: 12px;
   color: var(--GlobalBorderColorGray);
   cursor: pointer;
   text-decoration: none;

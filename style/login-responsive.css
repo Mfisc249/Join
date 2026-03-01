@@ -1,0 +1,193 @@
+/* =========================
+   Responsive: Login & Sign-up
+   Breakpoint 1: 768px (Tablet/Mobile)
+   Breakpoint 2: 450px (kleine Smartphones)
+   ========================= */
+
+
+/* ----- Breakpoint 1: 768px ----- */
+
+@media (max-width: 768px) {
+
+  /* CRITICAL: Scrollen ermöglichen auf Auth-Seiten */
+  html.auth-page,
+  html.auth-page body {
+    overflow: auto;
+    height: auto;
+  }
+
+  /* Card: weniger Padding, kompakterer Gap */
+  .contentWrapper .loginCard {
+    padding: 32px 24px;
+    width: 90%;
+    max-width: 500px;
+    gap: 24px;
+  }
+
+  /* Inputs: volle Card-Breite nutzen */
+  .loginInputs {
+    max-width: 100%;
+  }
+
+  /* Form muss volle Breite nehmen */
+  .loginCard form {
+    width: 100%;
+  }
+
+  .InputWrapper {
+    height: 48px;
+  }
+
+  /* Layout: alles fließt kompakt von oben nach unten */
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+    overflow: auto;
+  }
+
+  /* Main-Bereich: Card vertikal zentriert im verfügbaren Raum */
+  .loginMainContainer {
+    flex: 1;
+    padding: 0 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Nav: absolute aufheben, normal im Flow */
+  .loginNav {
+    position: relative;
+    justify-content: center;
+    padding: 16px;
+    margin: 16px;
+  }
+
+  /* h1: 48px laut Figma, line-height reduziert für weniger Abstand zum Separator */
+  .loginCard h1 {
+    font-size: 48px;
+    line-height: 75%;
+  }
+
+  /* Signup Pfeil: auf Mobile näher an der Card-Kante */
+  .signupBackArrow {
+    left: 0;
+    top: 8px;
+  }
+
+  /* Buttons: untereinander, gleiche Breite, 16px Font */
+  .loginButtonsWrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .loginButtonsWrapper .ButtonBlueFilled,
+  .loginButtonsWrapper .ButtonWhiteBlueOutline,
+  .loginButtonsWrapper .ButtonWhiteDarkBlueOutline {
+    min-width: 180px;
+    font-size: 16px;
+  }
+
+  /* ===== LOGIN LOGO: Animation-Overlay wird normales Element ===== */
+  .logoAnimation.skipAnimation {
+    position: relative;
+    inset: auto;
+    display: block;
+    margin-top: 32px;
+    margin-left: 24px;
+  }
+
+  .contentWrapper .logoAnimation.skipAnimation img {
+    width: 64px;
+    height: 78px;
+    translate: none;
+  }
+
+  /* Wenn Animation noch läuft: bleibt fullscreen */
+  .logoAnimation:not(.skipAnimation) img {
+    animation: logoMoveMobile 900ms ease-in-out forwards;
+  }
+
+  @keyframes logoMoveMobile {
+    to {
+      height: 78px;
+      translate: calc(-50vw + 24px + 32px) calc(-50vh + 24px + 32px);
+    }
+  }
+
+  /* ===== SIGNUP LOGO: linksbündig ===== */
+  .signupLogo {
+    position: relative;
+    top: auto;
+    left: auto;
+    height: 78px;
+    margin: 24px;
+    margin-right: auto;
+  }
+
+  /* Footer: nach Nav (order 2), klebt unten */
+  .loginFooter {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    padding: 16px 0;
+    margin-top: auto;
+  }
+}
+
+
+/* ----- Breakpoint 2: 450px ----- */
+
+@media (max-width: 450px) {
+
+  /* Card: noch weniger Padding */
+  .contentWrapper .loginCard {
+    padding: 24px 16px;
+  }
+
+  /* h1 bleibt bei 48px laut Figma */
+  .loginCard h1 {
+    font-size: 48px;
+    padding-top: 48px;
+  }
+
+  /* Nav-Text: 20px laut Figma */
+  .loginNewUserWrapper {
+    font-size: 20px;
+    gap: 24px;
+  }
+
+  .loginNewUserWrapper .ButtonBlueFilled {
+    padding: 12px;
+    font-size: 16px;
+    min-width: 104px;
+    text-align: center;
+  }
+
+  /* Buttons in Card etwas schmaler */
+  .loginButtonsWrapper {
+    gap: 24px;
+  }
+
+  /* Separator: 88px breit laut Figma */
+  .Separator {
+    width: 88px;
+    margin-top: 0px;
+  }
+
+  /* Login Logo: gleich wie Signup */
+  .logoAnimation.skipAnimation {
+    margin: 24px;
+  }
+
+  /* Sign-up Logo noch kleiner */
+  .signupLogo {
+    height: 78px;
+    margin: 24px;
+    margin-right: auto;
+  }
+}

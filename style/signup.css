@@ -27,14 +27,15 @@ h1 {
 
 .signupBackArrow {
   position: absolute;
-  left: 0;
+  left: -32px;
+  top: 12px;
   text-decoration: none;
   transition: 100ms;
   cursor: pointer;
 }
 
 .signupBackArrow img {
-  height: 24px;
+  height: 32px;
 }
 
 .signupBackArrow:hover {
