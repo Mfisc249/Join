@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/svg" href="./assets/icons/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,12 +14,11 @@
     <link rel="stylesheet" href="./style/sidebar.css" />
     <link rel="stylesheet" href="./style/header.css" />
     <link rel="stylesheet" href="style/standard.css" />
-    <link rel="stylesheet" href="./style/add-Task/addTask.css" />
-    <link rel="stylesheet" href="./style/add-Task/addTask.form.css" />
-    <link rel="stylesheet" href="./style/add-Task/addTask.priority.css" />
-    <link rel="stylesheet" href="./style/add-Task/addTask.assigned.css" />
-    <link rel="stylesheet" href="./style/add-Task/addTask.subtasks.css" />
-    <link rel="stylesheet" href="./style/add-Task/addTask.utils.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskForm.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskPriority.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskAssigned.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskSubtasks.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskUtils.css" />
     <script src="./assets/templates/AddTaskTemplate.js" defer></script>
     <script src="./JS/addTask.js" defer></script>
     <script src="./JS/sidebar.js"></script>
@@ -26,9 +26,9 @@
     <script src="./JS/boardTamplate.js"></script>
     <script src="./JS/taskDetail.js"></script>
     <script src="./JS/board.js"></script>
-    <script src="./JS/addTask/addTask.assigned.js"></script>
-    <script src="./JS/addTask/addTask.subtasks.js"></script>
-    <script src="./JS/addTask/addTask.form.js"></script>
+    <script src="./JS/addTask/addTaskAssigned.js"></script>
+    <script src="./JS/addTask/addTaskSubtasks.js"></script>
+    <script src="./JS/addTask/addTaskForm.js"></script>
     <script src="./JS/addTask/addTask.js"></script>
   </head>
   <body onload="init()">
@@ -37,5 +37,6 @@
     <main>
       <div id="mainContent"></div>
     </main>
+    <link rel="stylesheet" href="./style/add-Task/addTask.css" />
   </body>
 </html>

@@ -77,6 +77,7 @@ h1 {
 
 .OptionsContainer {
   margin-bottom: 24px;
+  position: relative;
 }
 
 .ChoiceHeadline {
@@ -151,130 +152,215 @@ h1 {
   height: 7px;
 }
 
-@media (max-width: 1502px) {
-  .contentWrapper {
+@media (max-width: 1380px) {
+  .contentWrapperAddTask {
+    display: unset;
   }
   .divider {
+    display: none;
   }
   .taskDescriptionContainer textarea {
+    width: 860px;
   }
   .taskNameContainer textarea {
+    width: 860px;
   }
   .addTaskDateContainer input {
+    width: 860px;
+  }
+  .assignedToInput {
+    width: 883px;
   }
   h1 {
   }
   .priority {
+    gap: 237px;
   }
   .importanceLevel {
   }
   .ChoiceOption {
+    width: 883px;
   }
   .inputField {
+    width: 858px;
   }
+  .rightContent {
+    margin-left: 0px;
+  }
+
   .buttonRequiredField {
+    margin-top: 70px;
+    width: 900px;
+  }
+  .assignedDropdown {
+    width: 880px;
+  }
+  .subTaskContent {
+    width: 840px;
+  }
+  .subTaskEditContainer {
+    width: 880px;
+  }
+  .subTaskItem {
+    width: 845px;
+  }
+  .subTaskEditIcons {
+    right: 17px;
   }
 }
 
-@media (max-width: 1370px) {
-  .taskDescriptionContainer textarea {
-  }
-  .taskNameContainer textarea {
-  }
-  .addTaskDateContainer input {
-  }
-  .ChoiceOption {
-  }
-  .inputField {
-  }
-  .inputField {
-  }
-  .buttonRequiredField {
-  }
+@media (max-width: 1300px) {
   .priority {
-  }
-}
-@media (max-width: 1329px) {
-  .taskNameContainer textarea {
+    gap: 147px;
   }
   .taskDescriptionContainer textarea {
-  }
-  .addTaskDateContainer input {
-  }
-  .priority {
-  }
-  .ChoiceOption {
-  }
-  .inputField {
-  }
-  .buttonRequiredField {
-  }
-}
-@media (max-width: 1195px) {
-  .taskNameContainer textarea {
-  }
-  .taskDescriptionContainer textarea {
-  }
-  .addTaskDateContainer input {
-  }
-  .priority {
-  }
-  .ChoiceOption {
-  }
-  .inputField {
-  }
-  .buttonRequiredField {
-  }
-}
-@media (max-width: 1035px) {
-  h1 {
+    width: 680px;
   }
   .taskNameContainer textarea {
-  }
-  .taskDescriptionContainer textarea {
-  }
-  .addTaskDateContainer input {
-  }
-  .priority {
-  }
-  .ChoiceOption {
-  }
-  .inputField {
-  }
-  .buttonRequiredField {
-  }
-  .importanceLevel {
-  }
-}
-@media (max-width: 870px) {
-  h1 {
-  }
-  .taskNameContainer textarea {
-  }
-  .taskDescriptionContainer textarea {
+    width: 680px;
   }
   .addTaskDateContainer input {
+    width: 680px;
   }
-  .priority {
-  }
-  .importanceLevel {
-  }
-  .ChoiceOption {
-  }
-  .inputField {
-  }
-  .buttonRequiredField1 {
-  }
-  .clearButton {
-  }
-  .buttonRequiredField {
+  .assignedToInput {
+    width: 701px;
   }
   main {
+    margin-left: 295px;
+    margin-top: 170px;
   }
-  .taskButton {
+  .ChoiceOption {
+    width: 701px;
   }
-  .createButton {
+  .inputField {
+    width: 679px;
+  }
+  .SubTaskField {
+    display: none;
+  }
+  .star {
+    display: none;
+  }
+  .buttonRequiredField {
+    width: 717px;
   }
   .clearButton {
+    font-size: 18px;
+    height: 50px;
+    width: 92px;
+  }
+  .createButton {
+    font-size: 18px;
+    height: 50px;
+    width: 177px;
+  }
+  .assignedDropdown {
+    width: 700px;
+  }
+  .mainTitle {
+    font-size: 55px;
+  }
+
+  .subTaskItem {
+    width: 100%;
+  }
+  .subTaskEditContainer {
+    width: 700px;
+  }
+  .subTaskContent {
+    width: 653px;
+  }
+  .descriptionImg {
+    position: relative;
+    bottom: 30px;
+    left: 672px;
+  }
+  .eventImg {
+    position: relative;
+    bottom: 38px;
+    left: 660px;
+  }
+  .subTaskList {
+    width: 72%;
+  }
+  .subTaskEditIcons {
+    right: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .priority {
+    gap: 90px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 570px;
+  }
+  .taskNameContainer textarea {
+    width: 570px;
+  }
+  .addTaskDateContainer input {
+    width: 570px;
+  }
+  .assignedToInput {
+    width: 586px;
+  }
+  main {
+    margin-left: 295px;
+    margin-top: 170px;
+  }
+  .ChoiceOption {
+    width: 586px;
+  }
+  .inputField {
+    width: 560px;
+  }
+  .SubTaskField {
+    display: none;
+  }
+  .star {
+    display: none;
+  }
+  .buttonRequiredField {
+    width: 595px;
+  }
+
+  .clearButton {
+    font-size: 18px;
+    height: 50px;
+    width: 92px;
+  }
+  .createButton {
+    font-size: 18px;
+    height: 50px;
+    width: 177px;
+  }
+  .assignedDropdown {
+    width: 580px;
+  }
+
+  .mainTitle {
+    font-size: 55px;
+  }
+  .subTaskItem {
+    width: 548px;
+  }
+  .subTaskEditContainer {
+    width: 580px;
+  }
+  .subTaskContent {
+    width: 540px;
+  }
+  .subTaskEditIcons {
+    right: 16px;
+  }
+  .descriptionImg {
+    position: relative;
+    bottom: 29px;
+    left: 563px;
+  }
+  .eventImg {
+    position: relative;
+    bottom: -35px;
+    left: 550px;
   }
 }

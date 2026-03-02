@@ -115,6 +115,10 @@ function renderSelectedContactsBelowInput() {
 
 function openDropdown(dropdown, arrow, label) {
   const button = document.querySelector(".assignedToInput");
+  const preview = document.getElementById("assignedPreviewContainer");
+
+  // 🔥 Preview verstecken wenn Dropdown offen ist
+  preview.style.display = "none";
 
   dropdown.classList.remove("hidden");
   arrow.classList.add("rotate");
@@ -127,11 +131,14 @@ function openDropdown(dropdown, arrow, label) {
 
 function closeDropdown(dropdown, arrow, label) {
   const button = document.querySelector(".assignedToInput");
+  const preview = document.getElementById("assignedPreviewContainer");
 
   dropdown.classList.add("hidden");
   arrow.classList.remove("rotate");
   assignedPreviewMode = false;
   label.textContent = "Select contacts to assign";
+
+  preview.style.display = "flex"; // 👈 wieder einblenden
   renderSelectedContactsBelowInput();
 
   button.classList.remove("activeFocus");
