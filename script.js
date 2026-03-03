@@ -1,4 +1,22 @@
 /**
+ * Auth Guard – Redirects unauthenticated users to login.
+ * Only runs on protected pages (not login, signup, legal, etc.).
+ */
+function checkAuth() {
+  let publicPages = ["index.html", "signup.html", "privacy_policy.html", "legal_notice.html", "help.html", ""];
+  let currentPage = location.pathname.split("/").pop() || "index.html";
+  if (publicPages.includes(currentPage)) return;
+  let contactId = sessionStorage.getItem("contactId");
+  let isGuest = sessionStorage.getItem("isGuest");
+  if (!contactId && isGuest !== "true") {
+    window.location.href = "index.html";
+  }
+}
+
+checkAuth();
+
+
+/**
  * Initializes password toggle functionality for all password fields.
  * Swaps icons based on input state: lock (empty), visibility_off (hidden), visibility (visible).
  */
