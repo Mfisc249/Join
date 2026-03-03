@@ -2,14 +2,20 @@ function isLoggedIn() {
   return !!sessionStorage.getItem("contactId");
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadTemplate('./templates/header.html', '#header-slot');
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadTemplate('./templates/header.html', '#header-slot');
   handleHeaderAuth();
 });
 
 function handleHeaderAuth() {
-  if (!isLoggedIn()) {
+  const isLoggedIn_now = !!sessionStorage.getItem("contactId");
+  const isGuest = sessionStorage.getItem("isGuest") === "true";
+  
+  // guest-mode: nur bei NICHT eingeloggt UND NICHT als Gast
+  if (!isLoggedIn_now && !isGuest) {
     document.body.classList.add("guest-mode");
+  } else {
+    document.body.classList.remove("guest-mode");
   }
 }
 

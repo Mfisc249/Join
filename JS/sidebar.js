@@ -7,8 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 function handleSidebarAuth() {
   const nav = document.querySelector(".nav");
   const sidebarTop = document.querySelector(".sidebar-top");
+  const isGuest = sessionStorage.getItem("isGuest") === "true";
+  const isLoggedIn = !!sessionStorage.getItem("contactId");
 
-  if (!sessionStorage.getItem("contactId")) {
+  // Nur bei nicht eingeloggt, nicht als Gast: abgespeckte Sidebar mit Login Button
+  if (!isLoggedIn && !isGuest) {
     // Navigation ausblenden
     if (nav) nav.style.display = "none";
 
