@@ -1,7 +1,36 @@
 document.addEventListener('DOMContentLoaded', async () => {
   await loadTemplate('./templates/sidebar.html', '#sidebar-slot');
   markActiveNav();
+  handleSidebarAuth();
 });
+
+function handleSidebarAuth() {
+  const nav = document.querySelector(".nav");
+  const sidebarTop = document.querySelector(".sidebar-top");
+  const isGuest = sessionStorage.getItem("isGuest") === "true";
+  const isLoggedIn = !!sessionStorage.getItem("contactId");
+
+  // Nur bei nicht eingeloggt, nicht als Gast: abgespeckte Sidebar mit Login Button
+  if (!isLoggedIn && !isGuest) {
+    // Navigation ausblenden
+    if (nav) nav.style.display = "none";
+
+    // Login Button einfügen
+    if (!document.querySelector(".sidebar-login")) {
+      const loginBtn = document.createElement("a");
+      loginBtn.href = "./index.html";
+      loginBtn.className = "sidebar-login";
+      loginBtn.innerHTML = `
+        <span class="nav-icon">
+          <img src="./assets/img/login.svg" alt="Login">
+        </span>
+        <span>Log In</span>
+      `;
+
+      sidebarTop.insertAdjacentElement("afterend", loginBtn);
+    }
+  }
+}
 
 async function loadTemplate(url, targetSelector) {
   const target = document.querySelector(targetSelector);

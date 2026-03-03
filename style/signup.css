@@ -2,11 +2,13 @@
    Sign-up Page
    ========================= */
 
-h1 {
+.signupCardHeader h1 {
+  flex: 1;
   text-align: center;
 }
 
 .contentWrapper .loginCard {
+  position: relative;
   padding: 48px 88px;
 }
 
@@ -18,23 +20,23 @@ h1 {
 }
 
 .signupCardHeader {
-  position: relative;
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
 }
 
 .signupBackArrow {
   position: absolute;
-  left: 0;
+  top: 52px;
+  left: 32px;
   text-decoration: none;
   transition: 100ms;
   cursor: pointer;
+  padding: 8px;
 }
 
 .signupBackArrow img {
-  height: 24px;
+  height: 32px;
 }
 
 .signupBackArrow:hover {

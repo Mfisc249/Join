@@ -147,10 +147,19 @@ ContactsApp.uiModal = {
     const delBtn = document.getElementById('contactModalDeleteBtn');
     saveBtn.disabled = true;
     delBtn.disabled = true;
-
     try {
+      const myId = sessionStorage.getItem('contactId');
+      const isMe = contact.id === myId;
+
       await ContactsApp.firebase.deleteContact(contact.id);
       await ContactsApp.tasks.removeContactFromAllTasks(contact.id);
+
+      if (isMe) {
+        // clear session and redirect out if user deleted their own account
+        sessionStorage.clear();
+        window.location.href = './index.html';
+        return;
+      }
 
       ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
       ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);

@@ -1,0 +1,83 @@
+/* disclaimer.css for legal_notice.html, privacy_policy.html and help.html */
+
+.canvas-area.disclaimer-text {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 96px 64px;
+  text-align: left;
+}
+
+.canvas-area.disclaimer-text h1,
+.canvas-area.disclaimer-text h2,
+.canvas-area.disclaimer-text h3 {
+  text-align: left;
+}
+
+.canvas-area.disclaimer-text h1 {
+  margin: 0 0 16px;
+}
+
+.canvas-area.disclaimer-text h2 {
+  margin: 28px 0 10px;
+}
+
+.canvas-area.disclaimer-text p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.canvas-area.disclaimer-text ul {
+  margin: 0 0 12px 18px;
+}
+
+.sidebar-bottom {
+  padding-left: 0;
+}
+
+.sidebar-bottom .sidebar-link {
+  display: block;
+  width: 100%;
+  padding: 8px 56px;
+  border-radius: 0;
+  text-decoration: none;
+}
+
+.sidebar-bottom .sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  font-weight: 700;
+  color: var(--GlobalLightBlue);
+  text-decoration: none;
+}
+
+.sidebar-bottom .sidebar-link.active-bottom {
+  background: #091931;
+  color: #ffffff;
+}
+
+.legal-highlight {
+  color: var(--GlobalLightBlue);
+  font-weight: 400;
+  text-decoration: none;
+  cursor: default;
+}
+
+.page-help .header-help-btn{
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .main {
+    left: 0;
+    width: 100vw;
+  }
+
+  .header {
+    left: 0;
+    width: 100vw;
+  }
+}

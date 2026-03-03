@@ -84,7 +84,13 @@ ContactsApp.uiList = {
 
     const name = document.createElement('div');
     name.className = 'contact-name';
-    name.textContent = contact.name || 'Unbekannt';
+    const isMe = contact.id === sessionStorage.getItem('contactId');
+    if (isMe) {
+      el.classList.add('is-me');
+      name.textContent = (contact.name || 'Unbekannt') + ' (You)';
+    } else {
+      name.textContent = contact.name || 'Unbekannt';
+    }
 
     const email = document.createElement('div');
     email.className = 'contact-email';

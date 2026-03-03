@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="auth-page">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join - Sign up</title>
-    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="./assets/icons/favicon-lightmode.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="./assets/icons/favicon-darkmode.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="./style/standard.css" />
     <link rel="stylesheet" href="./style/signup.css" />
+    <link rel="stylesheet" href="./style/login-responsive.css" />
   </head>
   <body>
     <div class="contentWrapper">
@@ -46,7 +48,7 @@
               <span id="signupError" class="InputErrorText"></span>
               <div class="signupCheckboxWrapper">
                 <input type="checkbox" id="signupPrivacy" class="signupCheckbox">
-                <label for="signupPrivacy">I accept the <a href="privacy.html" class="signupPrivacyLink">Privacy policy</a></label>
+                <label for="signupPrivacy">I accept the <a href="privacy_policy.html" class="signupPrivacyLink">Privacy policy</a></label>
               </div>
               <div class="signupButtonWrapper">
                 <button class="ButtonBlueFilled" type="submit" id="signupButton" disabled>Sign up</button>
@@ -55,11 +57,11 @@
           </form>
         </div>
       </main>
+      <footer class="loginFooter">
+        <a class="loginFooterLink" href="privacy_policy.html">Privacy Policy</a>
+        <a class="loginFooterLink" href="legal_notice.html">Legal notice</a>
+      </footer>
     </div>
-    <footer class="loginFooter">
-      <a class="loginFooterLink" href="privacy.html">Privacy Policy</a>
-      <a class="loginFooterLink" href="legal_notice.html">Legal notice</a>
-    </footer>
     <script src="script.js"></script>
     <script src="JS/signup.js"></script>
   </body>

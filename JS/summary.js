@@ -27,8 +27,14 @@ async function initSummary() {
 
   const nextDeadline = getUpcomingDeadline(tasks);
   setText('sum-deadline-date', nextDeadline ? formatDateLong(nextDeadline) : '—');
+  // Optional: redirect to login if no session info (set to true to enable)
+  const ENABLE_REDIRECT_IF_NO_SESSION = false;
+  if (ENABLE_REDIRECT_IF_NO_SESSION && !sessionStorage.getItem('userName')) {
+    window.location.href = 'login.html';
+    return;
+  }
 
-  renderGreeting();
+  initGreeting();
   wireSummaryNavigation();
 }
 
@@ -94,22 +100,33 @@ function setText(id, value) {
   if (el) el.textContent = String(value);
 }
 
-function renderGreeting() {
+function initGreeting() {
+  const greetLine = document.getElementById("greet-line");
+  const greetName = document.getElementById("greet-name");
+
+  const userName = sessionStorage.getItem("userName");
+  const isGuest = sessionStorage.getItem("isGuest");
+
   const hour = new Date().getHours();
-  let line = 'Good morning!';
 
-  if (hour >= 12 && hour <= 17) line = 'Good afternoon!';
-  else if (hour >= 18 && hour <= 21) line = 'Good evening!';
-  else if (hour >= 22 || hour <= 4) line = 'Good night!';
+  let greeting = "Hello";
+  if (hour < 12) greeting = "Good morning";
+  else if (hour < 18) greeting = "Good afternoon";
+  else greeting = "Good evening";
 
-  const name = getUserName();
-  document.getElementById('greet-line').textContent = name ? `${line},` : line;
-  document.getElementById('greet-name').textContent = name || '';
+  if (greetLine) greetLine.textContent = greeting + "!";
+
+  // For guest logins or missing session, show no name; only show name for logged-in users
+  if (isGuest === "true" || !userName) {
+    if (greetName) greetName.textContent = "";
+  } else {
+    if (greetName) greetName.textContent = userName;
+  }
 }
 
+// For other uses, prefer sessionStorage for the user name
 function getUserName() {
-  // anpassen, falls ihr euren Login anders speichert
-  return localStorage.getItem('userName') || '';
+  return sessionStorage.getItem('userName') || '';
 }
 
 /** Summary-Karten -> Board navigieren */
