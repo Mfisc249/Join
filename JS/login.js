@@ -10,7 +10,7 @@ async function login() {
     let userKey = checkLoginData(loginData, email, password);
     
     if (userKey) {
-    await saveLogedInUser(userKey); 
+    await saveLoggedInUser(userKey); 
     window.location.href = 'summary.html';
     document.getElementById('loginButton').disabled = false;
     } else {
@@ -21,7 +21,7 @@ async function login() {
     }
 }
 
-async function saveLogedInUser(userKey) {
+async function saveLoggedInUser(userKey) {
     let user = await fetchContactData(userKey); 
     let name = user.name; 
     let initials = user.initials;

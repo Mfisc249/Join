@@ -14,9 +14,22 @@
   z-index: 100;
 }
 
-.logoAnimation img {
+.logoWrapper {
+  position: relative;
   height: 330px;
   animation: logoMove 900ms ease-in-out forwards;
+}
+
+.logoWrapper .logoDark,
+.logoWrapper .logoWhite {
+  height: 100%;
+}
+
+.logoWrapper .logoWhite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
 }
 
 @keyframes bgFade {
@@ -37,7 +50,7 @@
   background-color: transparent;
 }
 
-.logoAnimation.skipAnimation img {
+.logoAnimation.skipAnimation .logoWrapper {
   animation: none;
   height: 120px;
   translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
@@ -52,6 +65,9 @@ h1 {
 }
 
 .loginNav {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: flex;
   justify-content: flex-end;
   padding: 48px;

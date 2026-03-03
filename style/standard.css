@@ -135,9 +135,8 @@ h3 {
  */
 .Separator {
   width: 150px;
-  height: 0px;
-  border: 3px solid;
-  border-color: var(--GlobalLightBlue);
+  border: none;
+  border-top: 3px solid var(--GlobalLightBlue);
 }
 
 
@@ -373,6 +372,7 @@ h3 {
    ========================= */
 
 .contentWrapper {
+  position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -398,7 +398,8 @@ h3 {
 }
 
 .loginInputs {
-  width: 422px;
+  width: 100%;
+  max-width: 422px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -409,15 +410,14 @@ h3 {
   left: 50%;
   transform: translateX(-50%);
   bottom: 48px;
-  width: 246px;
-  height: 36px;
+  width: auto;
   text-align: center;
   line-height: 120%;
   font-size: 16px;
 }
 
 .loginFooterLink {
-  padding: 8px;
+  padding: 12px;
   color: var(--GlobalBorderColorGray);
   cursor: pointer;
   text-decoration: none;
@@ -456,4 +456,38 @@ h3 {
 
 .marginleft10px{
     margin-left: 10px;
+}
+
+/* =========================
+   Landscape-Sperre (Mobile)
+   ========================= */
+
+.landscapeOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: var(--GlobalBackgroundWhite);
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  padding: 24px;
+}
+
+.landscapeOverlay img {
+  width: 64px;
+  height: 78px;
+}
+
+.landscapeOverlay p {
+  font-size: 20px;
+  color: var(--GlobalDarkBlue);
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .landscapeOverlay {
+    display: flex;
+  }
 }
