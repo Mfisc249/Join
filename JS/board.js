@@ -6,10 +6,15 @@ let count = 0;
 let highlightTaskCount = 0;
 let curentTraggedElement;
 let allContactDetails = [];
+let myMediaQuery = window.matchMedia('(max-width: 1350px)');
 
 /** Initializes the board and renders tasks. */
-async function init() {
-    document.getElementById('fields').innerHTML = taskBoardTamplate();
+async function boardInit() {
+    if (myMediaQuery.matches) {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+    } else {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+    }
     await render();
 }
 
@@ -95,17 +100,16 @@ function emtyFieldContent() {
 // }
 
 /** Renders the moved task in the target column and removes the old one. */
-function renderMovedTask(field) {
-    let refMovedTask = document.getElementById(`${TASK[0][`Task${curentTraggedElement}`].id}`);
+function renderMovedTask(field, taskID = curentTraggedElement) {
+    let refMovedTask = document.getElementById(`${TASK[0][`Task${taskID}`].id}`);
     refMovedTask.parentNode.removeChild(refMovedTask);
-    document.getElementById(`${field}`).insertAdjacentHTML('beforeend', taskTamplate(TASK[0][`Task${curentTraggedElement}`].id));
+    document.getElementById(`${field}`).insertAdjacentHTML('beforeend', taskTamplate(TASK[0][`Task${taskID}`].id));
     removeHighlightBoardTaskFields();
+    taskCatagory(taskID, document.getElementById(`boardTaskCatagory${taskID}`));
+    updateSubtaskProgressbar(taskID);
+    getTaskDetailsContacts(taskID, 0);
+    taskCheckPriority(taskID, document.getElementById(`taskPriorityContainer${taskID}`));
     checkFieldIsEmpty();
-    taskCatagory(curentTraggedElement, document.getElementById(`boardTaskCatagory${curentTraggedElement}`));
-    updateSubtaskProgressbar(curentTraggedElement);
-    getTaskDetailsContacts(curentTraggedElement, 0);
-    taskCheckPriority(curentTraggedElement, document.getElementById(`taskPriorityContainer${curentTraggedElement}`));
-   
 }
 
 /** Sets the currently dragged task and starts the animation. */
@@ -129,7 +133,6 @@ async function moveTo(field) {
     await DataPUT(`Tasks/Task${curentTraggedElement}/field`, {
         'field': `${field}`,
     });
-
 }
 
 /** Creates a new task from the form and renders it. */
@@ -154,16 +157,29 @@ async function moveTo(field) {
 
 // }
 
-/** Shows hints when columns are empty. */
+/** Shows hints when columns are empty (checks for real task elements). */
 function checkFieldIsEmpty() {
-    document.getElementById('field1').hasChildNodes() == false ? document.getElementById('field1').innerHTML = `<div id="noTaskField1" class="noTaskField taskContainer">No Tasks to do</div>` : null;
-    (document.getElementById('field1').childElementCount >= 2) && (document.getElementById('noTaskField1') != null) ? document.getElementById('noTaskField1').remove() : null;
-    document.getElementById('field2').hasChildNodes() == false ? document.getElementById('field2').innerHTML = `<div id="noTaskField2" class="noTaskField taskContainer">No Tasks in progress</div>` : null;
-    (document.getElementById('field2').childElementCount >= 2) && (document.getElementById('noTaskField2') != null) ? document.getElementById('noTaskField2').remove() : null;
-    document.getElementById('field3').hasChildNodes() == false ? document.getElementById('field3').innerHTML = `<div id="noTaskField3" class="noTaskField taskContainer">No Tasks await feedback</div>` : null;
-    (document.getElementById('field3').childElementCount >= 2) && (document.getElementById('noTaskField3') != null) ? document.getElementById('noTaskField3').remove() : null;
-    document.getElementById('field4').hasChildNodes() == false ? document.getElementById('field4').innerHTML = `<div id="noTaskField4" class="noTaskField taskContainer">No Tasks done</div>` : null;
-    (document.getElementById('field4').childElementCount >= 2) && (document.getElementById('noTaskField4') != null) ? document.getElementById('noTaskField4').remove() : null;
+    updateEmptyHintForField('field1', 'noTaskField1', 'No Tasks to do');
+    updateEmptyHintForField('field2', 'noTaskField2', 'No Tasks in progress');
+    updateEmptyHintForField('field3', 'noTaskField3', 'No Tasks await feedback');
+    updateEmptyHintForField('field4', 'noTaskField4', 'No Tasks done');
+}
+
+/** Adds/removes the "no tasks" placeholder depending on whether the field has any task elements. */
+function updateEmptyHintForField(fieldId, placeholderId, placeholderText) {
+    let field = document.getElementById(fieldId);
+    let hasTasks = field.querySelector('.task') !== null;
+    let placeholder = document.getElementById(placeholderId);
+
+    if (!hasTasks) {
+        if (!placeholder) {
+            field.innerHTML = `<div id="${placeholderId}" class="noTaskField taskContainer">${placeholderText}</div>`;
+        }
+    } else {
+        if (placeholder) {
+            placeholder.remove();
+        }
+    }
 }
 
 /** Starts the rotation animation for the dragged task. */
@@ -185,7 +201,11 @@ async function searchTask() {
     if (refSearchInput.value.length >= 1) {
         startTheSearch(refSearchInput);
     } else if (refSearchInput.value.length == 0) {
-        document.getElementById('fields').innerHTML = taskBoardTamplate();
+        if (myMediaQuery.matches) {
+            document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+        } else {
+            document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+        }
         TASK = [];
         TASKKEYS = [];
         count = 0;
@@ -343,3 +363,79 @@ function removeHighlightBoardTaskFields() {
     }
 }
 
+async function widthChangeCallback(myMediaQuery) {
+    if (myMediaQuery.matches) {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+        TASK = [];
+        TASKKEYS = [];
+        count = 0;
+        await render();
+    } else {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+        TASK = [];
+        TASKKEYS = [];
+        count = 0;
+        await render();
+    }
+}
+myMediaQuery.addEventListener('change', widthChangeCallback);
+
+function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
+    let refMobileArrowsMoveTaskID = document.getElementById(mobileArrowsMoveTaskID);
+    let mobileArrowsMoveTaskPosition = refMobileArrowsMoveTaskID.getBoundingClientRect();
+    let refDiv = document.createElement("div");
+    checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition);
+    document.getElementById('app-canvas').appendChild(refDiv);
+}
+
+function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
+    switch (TASK[0][`Task${taskID}`].field.field) {
+        case 'field1':
+            refDiv.innerHTML = `<div class="submenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+                     <span>Move to</span>
+                     <p onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="submenu-item"><img src="./assets/img/arrow_downward_TaskMobile.svg" alt="Arrow Down">Review</p>
+                    </div>`;
+            break;
+
+        case 'field4':
+            refDiv.innerHTML = `<div class="submenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+                     <span>Move to</span>
+                     <p onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="submenu-item"><img src="./assets/img/arrow_upward_TaskMobile.svg" alt="Arrow UP">To-do</p>
+                    </div>`;
+            break;
+
+        default:
+            refDiv.innerHTML = `<div class="submenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+                     <span>Move to</span>
+                     <p onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="submenu-item"><img src="./assets/img/arrow_upward_TaskMobile.svg" alt="Arrow UP">To-do</p>
+                     <p onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="submenu-item"><img src="./assets/img/arrow_downward_TaskMobile.svg" alt="Arrow Down">Review</p>
+                    </div>`;
+            break;
+    }
+}
+
+function removeMobileMoveTask() {
+    document.querySelector(".taskMobileMove").remove();
+}
+
+function taskMoveUpMobile(taskID) {
+    let refField = TASK[0][`Task${taskID}`].field.field.slice(-1) * 1;
+    if (refField > 1) {
+        moveToMobile(`field${refField - 1}`, taskID);
+    }
+}
+
+function taskMoveDownMobile(taskID) {
+    let refField = TASK[0][`Task${taskID}`].field.field.slice(-1) * 1;
+    if (refField < 4) {
+        moveToMobile(`field${refField + 1}`, taskID);
+    }
+}
+
+async function moveToMobile(field, taskID) {
+    TASK[0][`Task${taskID}`].field.field = `${field}`;
+    renderMovedTask(field, taskID);
+    await DataPUT(`Tasks/Task${taskID}/field`, {
+        'field': `${field}`,
+    });
+}
