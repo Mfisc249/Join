@@ -1,0 +1,137 @@
+.assignedToInput {
+  width: 440px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: rgba(209, 209, 209, 1);
+  background-color: rgba(255, 255, 255, 1);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 8px;
+  align-items: center;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.assignedToInput:focus-visible {
+  border: 2px solid #88e9fa;
+  outline: none;
+}
+
+.assignedToInput.activeFocus {
+  border: 2px solid #88e9fa;
+}
+
+.assignedDropdown {
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  justify-content: normal;
+  display: flex;
+  flex-direction: column;
+  width: 434px;
+}
+
+.assignedOption {
+  cursor: pointer;
+  border-radius: 6px;
+  height: 50px; /* höher, damit Platz für Initialen+Name */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* links = Initialen+Name, rechts = Checkbox */
+  padding: 0 16px;
+  font-size: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding: 8px;
+}
+.assignedOption:hover {
+  background-color: #bfbfbf33;
+}
+
+.assignedOption.selected {
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+  height: 45px;
+}
+
+.assignedOption.selected:hover {
+  background-color: rgba(9, 25, 49, 1);
+}
+
+.checkBox {
+  width: 24px;
+  height: 24px;
+  padding-right: 16px;
+  cursor: pointer;
+}
+
+.assignedOption.selected .checkBox:hover {
+  filter: brightness(0) invert(1); /* wird weiß */
+  transform: scale(1.1);
+}
+
+.assignedOption .checkBox:hover {
+  transform: scale(1.1);
+}
+
+.dropDownArrow {
+  height: 7px;
+  right: 7px;
+  position: relative;
+}
+
+.assignedCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  line-height: 1;
+  font-size: 16px;
+  box-shadow: 0 0 0 2.5px white;
+}
+
+.assignedPreviewContainer {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dropDownArrow.rotate {
+  transform: rotate(180deg);
+}
+
+.contactLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Abstand zwischen Kreis und Name */
+}
+
+.contactInitialsCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  line-height: 1;
+  font-size: 16px;
+  box-shadow: 0 0 0 2.5px white;
+}
+
+.contactName {
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}

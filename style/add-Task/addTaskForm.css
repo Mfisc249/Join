@@ -1,0 +1,222 @@
+.addTaskLabel {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.addTaskLabelDescription {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.addTaskLabelDate {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.taskName {
+  font-weight: 400;
+  height: 34px;
+  line-height: 1.2;
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+}
+
+.taskDescription {
+  font-weight: 400;
+  height: 20px;
+  line-height: 1.2;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: "Inter", sans-serif;
+}
+
+.taskNameContainer textarea {
+  border-radius: 10px;
+  border: 1px solid;
+  width: 440px;
+  border-color: rgba(209, 209, 209, 1);
+  padding-top: 11px;
+  padding-left: 22px;
+  cursor: pointer;
+}
+
+.taskNameContainer textarea:focus {
+  border: 2px solid #88e9fa; /* kräftiges Blau */
+  outline: none;
+}
+
+.taskDescriptionContainer textarea {
+  border-radius: 20px;
+  width: 440px;
+  height: 120px;
+  padding-left: 18px;
+  padding-top: 11px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  border: unset;
+  box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
+}
+
+.taskDescriptionContainer textarea:focus {
+  box-shadow: 0 0 0 2px #88e9fa; /* Fokus "Border" */
+  outline: none;
+}
+
+.addTaskDateContainer input {
+  border-radius: 10px;
+  width: 440px;
+  top: 12px;
+  right: 16px;
+  bottom: 12px;
+  left: 16px;
+  height: 48px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  border: unset;
+  box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
+  margin-bottom: 3px;
+}
+
+.addTaskDateContainer input:focus {
+  box-shadow: 0 0 0 2px #88e9fa; /* Fokus "Border" */
+  outline: none;
+}
+.taskDateInput {
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  height: 24px;
+  width: 119px;
+  color: rgba(0, 0, 0, 1); /* Textfarbe wenn was eingegeben wird */
+  padding-left: 18px;
+  border: unset;
+  box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
+}
+
+.taskDateInput::placeholder {
+  color: rgba(209, 209, 209, 1);
+  font-weight: 400;
+}
+
+.taskDateInput::-webkit-calendar-picker-indicator {
+  filter: brightness(0.5);
+}
+.requiredField {
+  color: rgba(230, 0, 38, 0);
+  font-size: 12px;
+  font-weight: 400;
+  font-family: poppins;
+  margin-top: 0px;
+  margin-bottom: 9px;
+}
+
+.requiredField.visible {
+  color: rgba(230, 0, 38, 1); /* sichtbar wenn Klasse .visible */
+}
+
+.input-error {
+  border: 1px solid #ff3d3d !important;
+}
+
+.ChoiceOption {
+  width: 440px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: rgba(209, 209, 209, 1);
+  background-color: rgba(255, 255, 255, 1);
+  padding-left: 13px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  padding-left: 18px;
+  cursor: pointer;
+}
+
+.ChoiceOption:focus {
+  border: 1px solid #88e9fa; /* kräftiges Blau */
+}
+
+.choiceContact {
+  padding-left: 9px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.addTask textarea,
+.addTask input,
+.addTask select {
+  border: unset; /* entfernt alles vom Standard */
+  border-radius: 10px; /* eigene Form */
+  border: 1px solid rgba(209, 209, 209, 1); /* deine eigene Farbe */
+}
+
+.leftContent {
+  margin-right: 30px;
+}
+
+.rightContent {
+  margin-left: 54px;
+}
+
+.TaskCategoryInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categoryDropdown {
+  position: absolute; /* absolut relativ zum Wrapper */
+  top: 100%; /* direkt unter dem Input */
+  left: 0; /* linksbündig */
+  width: 100%; /* gleiche Breite wie Wrapper */
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  background-color: white;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryOption {
+  cursor: pointer;
+  padding: 8px 16px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.categoryOption:hover {
+  background-color: #bfbfbf33;
+}
+
+.categoryOption.selected {
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+}
+
+.categoryOption {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  font-size: 18px;
+}
+
+.categoryOption:hover {
+  background-color: #bfbfbf33;
+}
