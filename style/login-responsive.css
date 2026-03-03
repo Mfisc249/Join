@@ -104,14 +104,14 @@
     margin-left: 24px;
   }
 
-  .contentWrapper .logoAnimation.skipAnimation img {
+  .logoAnimation.skipAnimation .logoWrapper {
     width: 64px;
     height: 78px;
     translate: none;
   }
 
   /* Wenn Animation noch läuft: bleibt fullscreen */
-  .logoAnimation:not(.skipAnimation) img {
+  .logoAnimation:not(.skipAnimation) .logoWrapper {
     animation: logoMoveMobile 900ms ease-in-out forwards;
   }
 
@@ -149,12 +149,17 @@
 
 @media (max-width: 450px) {
 
-  /* Main: kein Flex-Centering mehr, Card fließt von oben */
+  /* Main: kein Flex-Centering mehr */
   .loginMainContainer {
     flex: unset;
     justify-content: flex-start;
     align-items: flex-start;
     margin-top: 30px;
+  }
+
+  /* Nur Login: margin-top kompensiert Logo (out of flow) */
+  .logoAnimation ~ .loginMainContainer {
+    margin-top: 156px;
   }
 
   /* Card: noch weniger Padding */
@@ -203,9 +208,34 @@
     margin-top: 0px;
   }
 
-  /* Login Logo: gleich wie Signup */
+  /* Login Logo: immer out of flow, Platz wird durch margin-top auf Main kompensiert */
   .logoAnimation.skipAnimation {
+    inset: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
     margin: 24px;
+  }
+
+  /* ===== MOBILE LOGO ANIMATION: Dunkelblau → Transparent, Weiß → Dunkel ===== */
+  .logoAnimation:not(.skipAnimation) {
+    background-color: #2A3647;
+    animation: bgFadeMobile 900ms linear forwards;
+  }
+
+  .logoAnimation:not(.skipAnimation) .logoWhite {
+    display: block;
+    animation: logoWhiteFade 900ms ease-in-out forwards;
+  }
+
+  @keyframes bgFadeMobile {
+    0%, 50% { background-color: #2A3647; }
+    100% { background-color: transparent; }
+  }
+
+  @keyframes logoWhiteFade {
+    0%, 40% { opacity: 1; }
+    100% { opacity: 0; }
   }
 
   /* Sign-up Logo noch kleiner */

@@ -457,3 +457,37 @@ h3 {
 .marginleft10px{
     margin-left: 10px;
 }
+
+/* =========================
+   Landscape-Sperre (Mobile)
+   ========================= */
+
+.landscapeOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: var(--GlobalBackgroundWhite);
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  padding: 24px;
+}
+
+.landscapeOverlay img {
+  width: 64px;
+  height: 78px;
+}
+
+.landscapeOverlay p {
+  font-size: 20px;
+  color: var(--GlobalDarkBlue);
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .landscapeOverlay {
+    display: flex;
+  }
+}

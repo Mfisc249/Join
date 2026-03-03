@@ -55,3 +55,16 @@ function togglePasswordVisibility(input, icon) {
     icon.src = "./assets/img/visibility_off.svg";
   }
 }
+
+
+/** Injects landscape overlay into body (global, no HTML copy-paste needed) */
+function initLandscapeOverlay() {
+  let overlay = document.createElement('div');
+  overlay.className = 'landscapeOverlay';
+  overlay.innerHTML = `
+    <img src="./assets/icons/logo-login.svg" alt="Join Logo">
+    <p>Please rotate your device to portrait mode.</p>`;
+  document.body.insertBefore(overlay, document.body.firstChild);
+}
+
+initLandscapeOverlay();
