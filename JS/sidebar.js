@@ -56,4 +56,10 @@ function markActiveNav() {
     const linkPage = link.getAttribute('href').split('/').pop();
     link.classList.toggle('active', linkPage === currentPage);
   });
+
+  // Mark active for sidebar bottom links
+  document.querySelectorAll('.sidebar-bottom .sidebar-link').forEach(link => {
+    const linkPage = link.getAttribute('href').split('/').pop();
+    link.classList.toggle('active', linkPage === currentPage);
+  });
 }

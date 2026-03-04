@@ -28,7 +28,7 @@
 .sidebar-logo {
   width: 100px;
   height: auto;
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
 }
 
 .sidebar-logo:hover {
@@ -42,20 +42,17 @@
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 8px 56px;
   margin-top: 120px;
-
-  color: #CDCDCD;
+  color: var(--GlobalLinkGray);
   text-decoration: none;
   font-size: 16px;
-
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.1s ease, color 0.1s ease;
 }
 
 .sidebar-login:hover {
   background: rgba(255, 255, 255, 0.06);
-  color: #FFFFFF;
+  color: var(--GlobalWhite);
 }
 
 /* Navigation (Figma-like) */
@@ -75,18 +72,13 @@
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-
   padding: 8px 56px;
   border-radius: 0;
-
-  color: #CDCDCD;
+  color: var(--GlobalLinkGray);
   text-decoration: none;
   font-size: 16px;
-
-  /* wichtig: volle Breite, kein pill-cut */
   margin-right: 0;
-
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.1s ease, color 0.1s ease;
 }
 
 /* raus mit der "linken leiste" und slide-effekten */
@@ -117,24 +109,24 @@
 /* Hover: leicht heller + Text/Icon weiß (schülerfreundlich) */
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.06);
-  color: #FFFFFF;
+  color: var(--GlobalWhite);
 }
 
 /* Active: exakt wie Figma: #091931 */
 .nav-item.active {
-  background: #091931;
-  color: #FFFFFF;
+  background: var(--GlobalDarkblue);
+  color: var(--GlobalWhite);
 }
 
 .nav-item.active .nav-icon svg {
   opacity: 1;
 }
 
-/* Sidebar Bottom (passt schon sehr gut zu Figma) */
+/* Sidebar Bottom */
 .sidebar-bottom {
   width: 100%;
   margin-top: auto;
-  padding-left: 56px;
+  padding-left: 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -142,17 +134,26 @@
 }
 
 .sidebar-link {
-  color: #A8A8A8;
+  color: var(--GlobalBorderColorGray);
   text-decoration: none;
   font-size: 16px;
-  padding: 8px;
-  width: fit-content;
-  border-radius: 4px;
+  padding: 8px 56px;
+  display: block;
+  width: 100%;
+  border-radius: 0;
+  transition: background 0.1s ease, color 0.1s ease;
 }
 
 .sidebar-link:hover {
-  color: #FFFFFF;
-  text-decoration: underline;
+  color: var(--GlobalLightBlue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sidebar-link.active {
+  background: var(--GlobalDarkblue);
+  color: var(--GlobalWhite);
+  pointer-events: none;
 }
 
 /* Mobile Responsive */
@@ -173,18 +174,18 @@
   top: 20px;
   left: 20px;
   z-index: 1001;
-  background: #2A3647;
-  color: #fff;
+  background: var(--GlobalBlue);
+  color: var(--GlobalWhite);
   border: none;
   border-radius: 6px;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.1s ease;
 }
 
 .sidebar-toggle:hover {
-  background: #1e2a3a;
+  background: var(--GlobalBlueHover);
 }
 
 @media (max-width: 768px) {
@@ -238,7 +239,7 @@
     left: 0;
     width: 100%;
     height: 80px;
-    background: #2A3647;
+    background: var(--GlobalBlue);
     box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
     z-index: 1000;
     justify-content: space-around;
@@ -255,7 +256,7 @@
     flex: 1;
     height: 64px;
     border-radius: 16px;
-    color: #CDCDCD;
+    color: var(--GlobalLinkGray);
     text-decoration: none;
     transition: background 0.2s ease, color 0.2s ease;
     padding: 8px;
@@ -263,8 +264,8 @@
 
   .mobile-nav-item:hover,
   .mobile-nav-item.active {
-    background: #091931;
-    color: #FFFFFF;
+    background: var(--GlobalDarkblue);
+    color: var(--GlobalWhite);
   }
 
   .mobile-nav-icon {
