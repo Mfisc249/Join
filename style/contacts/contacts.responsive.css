@@ -198,25 +198,9 @@
     filter: brightness(0) invert(1);
   }
 
-  /* Success notification mobile position */
+  /* Success notification mobile position - HIDDEN ON MOBILE */
   .contact-success-notification {
-    width: 80%;
-    max-width: 300px;
-    bottom: 120px; /* Above bottom nav */
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%) translateX(400px);
-  }
-  
-  .contact-success-notification.show {
-    transform: translateX(-50%);
-    right: auto;
-  }
-  
-  .contact-success-content {
-    width: 100%;
-    font-size: 16px;
-    padding: 16px;
+    display: none; /* Hide success notification on mobile */
   }
 
   /* ===========================
