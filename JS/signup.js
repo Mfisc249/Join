@@ -53,7 +53,6 @@ function checkEmailData(loginData,email) {
     let users = Object.values(loginData);
     for (let i = 0; i < users.length; i++) {
         if (users[i].email === email) {
-            // dann sollte hier eine Funktion rein, die Fehlermeldung ausgibt
           return true;
         }
     }

@@ -41,7 +41,7 @@
 @keyframes logoMove {
   to {
     height: 120px;
-     translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+    translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
   }
 }
 
@@ -85,6 +85,7 @@ h1 {
 
 .loginNewUserWrapper .ButtonBlueFilled {
   padding: 16px;
+  text-decoration: none;
 }
 
 .loginButtonsWrapper {
