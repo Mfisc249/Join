@@ -104,17 +104,309 @@
 }
 
 @media (max-width: 768px) {
+  /* ===========================
+     MOBILE CONTACTS LAYOUT
+     =========================== */
+  
+  /* Content area: list and details side by side */
+  .content {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+
+  /* Contacts panel: visible by default */
+  .contacts-panel {
+    width: 100%;
+    border-right: none;
+  }
+
+  /* Details: hidden by default, shown when contact is selected */
+  .details {
+    display: none;
+    position: fixed;
+    top: 80px; /* Below mobile header */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px - 80px); /* Minus header and bottom nav */
+    background: #F6F7F8;
+    z-index: 5000;
+    overflow-y: auto;
+    padding: 24px 16px 100px 16px;
+  }
+
+  /* When a contact is selected on mobile */
+  .content.mobile-details-open .contacts-panel {
+    display: none;
+  }
+
+  .content.mobile-details-open .details {
+    display: block;
+  }
+
+  /* Details card adjustments */
+  .details-card {
+    padding: 24px 16px;
+  }
+
+  .details-headline {
+    margin-bottom: 32px;
+  }
+
+  .details-headline h1 {
+    font-size: 48px;
+  }
+
+  .badge-large {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+  }
+
+  .details-name {
+    font-size: 32px;
+  }
+
+  .details-actions {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  /* Mobile back button in details */
+  .mobile-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+    background: #2A3647;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    z-index: 5001;
+  }
+
+  .mobile-back.hidden {
+    display: none;
+  }
+
+  .mobile-back img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Success notification mobile position */
   .contact-success-notification {
-    width: 280px;
-    right: -320px;
+    width: 80%;
+    max-width: 300px;
+    bottom: 120px; /* Above bottom nav */
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%) translateX(400px);
   }
   
   .contact-success-notification.show {
-    right: 20px;
+    transform: translateX(-50%);
+    right: auto;
   }
   
   .contact-success-content {
-    width: 280px;
-    font-size: 18px;
+    width: 100%;
+    font-size: 16px;
+    padding: 16px;
+  }
+
+  /* ===========================
+     MOBILE FABs (Floating Action Buttons)
+     =========================== */
+  
+  .fab {
+    position: fixed;
+    right: 24px;
+    bottom: 120px; /* Above bottom nav */
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #2A3647;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .fab:hover {
+    transform: scale(1.05);
+    background: #1e2a3a;
+  }
+
+  .fab img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  .fab-add {
+    display: none; /* Show via JS in list view */
+  }
+
+  .fab-add:not(.hidden) {
+    display: flex;
+  }
+
+  .fab-menu {
+    display: none; /* Show via JS in details view */
+  }
+
+  .fab-menu:not(.hidden) {
+    display: flex;
+  }
+
+  /* Mobile Options Menu */
+  .contact-options-menu {
+    position: fixed;
+    right: 24px;
+    bottom: 190px; /* Above FAB */
+    background: white;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 1002;
+    display: none;
+    min-width: 150px;
+  }
+
+  .contact-options-menu.active {
+    display: block;
+  }
+
+  .contact-options-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #2A3647;
+    transition: background 0.2s ease;
+  }
+
+  .contact-options-item:hover {
+    background: #F6F7F8;
+  }
+
+  .contact-options-item img {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ===========================
+     MOBILE MODAL/OVERLAY FULLSCREEN
+     =========================== */
+  
+  .contact-overlay {
+    align-items: stretch;
+    justify-content: stretch;
+  }
+
+  .contact-modal {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    flex-direction: column;
+  }
+
+  .contact-modal-left {
+    width: 100%;
+    height: auto;
+    padding: 32px 24px;
+    justify-content: flex-start;
+  }
+
+  .contact-modal-brand {
+    position: static;
+    margin-bottom: 16px;
+  }
+
+  .contact-modal-logo {
+    width: 48px;
+    height: 56px;
+  }
+
+  .contact-modal-left-content {
+    width: 100%;
+  }
+
+  .contact-modal-title {
+    font-size: 36px;
+    width: 100%;
+    height: auto;
+  }
+
+  .contact-modal-subtitle {
+    font-size: 20px;
+  }
+
+  .contact-modal-right {
+    flex: 1;
+    padding: 24px 16px;
+    overflow-y: auto;
+  }
+
+  .contact-modal-close {
+    top: 16px;
+    right: 16px;
+  }
+
+  .contact-modal-body {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    gap: 24px;
+  }
+
+  .contact-modal-avatar-wrap {
+    position: static;
+    left: auto;
+    margin: 0 auto 24px;
+  }
+
+  .contact-modal-form {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-modal-actions {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .contact-modal-actions button {
+    width: 100%;
   }
 }

@@ -38,6 +38,14 @@
   order: 0;
   flex-grow: 0;
 }
+
+/* Mobile Logo - hidden on desktop */
+.header-logo-mobile {
+  display: none;
+  height: 40px;
+  width: auto;
+}
+
   /* Header right section */
 .header-right {
   display: flex;
@@ -167,4 +175,33 @@
 /* Button-Reset fürs Logout */
 .submenu-logout {
   width: 130px;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+   =============================== */
+@media (max-width: 768px) {
+  .header {
+    left: 0; /* No sidebar offset on mobile */
+    width: 100%;
+    padding: 0 16px;
+    height: 80px;
+  }
+
+  /* Show mobile logo, hide desktop title */
+  .header-logo-mobile {
+    display: block;
+  }
+
+  .header-title {
+    display: none;
+  }
+
+  .header-help-btn {
+    display: none; /* Hide help button on mobile */
+  }
+
+  .header-right {
+    margin-left: auto;
+  }
 }

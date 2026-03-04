@@ -45,6 +45,11 @@
 
         <!-- Details area -->
         <section class="details" aria-label="Contact details">
+          <!-- Mobile back button -->
+          <button class="mobile-back hidden" id="mobileBackBtn">
+            <img src="./assets/icons/arrow-left-line.svg" alt="Back">
+          </button>
+
           <div class="details-headline">
             <h1>Contacts</h1>
             <div class="details-divider"></div>
@@ -95,6 +100,27 @@
       </div>
     </div>
   </div>
+
+<!-- Mobile FABs (Floating Action Buttons) -->
+<button class="fab fab-add hidden" id="fabAdd">
+  <img src="./assets/img/person_add.svg" alt="Add Contact">
+</button>
+
+<button class="fab fab-menu hidden" id="fabMenu">
+  <img src="./assets/icons/more_vert.svg" alt="Options">
+</button>
+
+<!-- Mobile Options Menu -->
+<div class="contact-options-menu" id="contactOptionsMenu">
+  <button class="contact-options-item" id="mobileEditBtn">
+    <img src="./assets/img/edit.svg" alt="Edit">
+    <span>Edit</span>
+  </button>
+  <button class="contact-options-item" id="mobileDeleteBtn">
+    <img src="./assets/img/delete.svg" alt="Delete">
+    <span>Delete</span>
+  </button>
+</div>
 
 <!-- EDIT/ADD CONTACT MODAL -->
 <div id="contactOverlay" class="contact-overlay d-none">
@@ -181,5 +207,6 @@
   <script src="./JS/contacts/contacts.ui.list.js"></script>
   <script src="./JS/contacts/contacts.ui.modal.js"></script>
   <script src="./JS/contacts/contacts.page.js"></script>
+  <script src="./JS/contacts/contacts.mobile.js"></script>
 </body>
 </html>
