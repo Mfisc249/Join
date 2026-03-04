@@ -5,7 +5,7 @@
   left: var(--sidebar-w);
   width: calc(100vw - var(--sidebar-w));
   height: var(--header-h);
-  background: #fff;
+  background: var(--GlobalWhite);
   display: flex;
   align-items: center;
   padding: 0 40px;
@@ -25,7 +25,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
-  color: #000000;
+  color: var(--GlobalBlack);
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -67,8 +67,8 @@
 .header-right .circleBadge {
   width: 56px;
   height: 56px;
-  border: 3px solid #2a3647;
-  background: #ffffff;
+  border: 3px solid var(--GlobalBlue);
+  background: var(--GlobalWhite);
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -83,7 +83,7 @@
 .header-right .circleBadge span {
   width: 27.94px;
   height: 14.24px;
-  color: #29abe2;
+  color: var(--GlobalLightBlue);
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -113,7 +113,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
-  background: #2a3647;
+  background: var(--GlobalBlue);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px 0px 20px 20px;
   z-index: 25000;
@@ -135,7 +135,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
-  color: #cdcdcd;
+  color: var(--GlobalLinkGray);
   text-decoration: none;
   background: transparent;
   border: none;
@@ -145,7 +145,7 @@
 }
 
 .submenu-item:hover {
-  background: #2a3d59;
+  background: var(--GlobalBlueHover);
 }
 
 /* Button-Reset fürs Logout */
