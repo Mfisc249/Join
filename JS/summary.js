@@ -36,6 +36,9 @@ async function initSummary() {
 
   initGreeting();
   wireSummaryNavigation();
+  
+  // Show mobile greeting overlay after login
+  showMobileGreetingIfNeeded();
 }
 
 async function DataGET(path = '') {
@@ -136,4 +139,53 @@ function wireSummaryNavigation() {
       window.location.href = 'board.html';
     });
   });
+}
+
+/**
+ * Show mobile greeting overlay after login (only on mobile, only once)
+ */
+function showMobileGreetingIfNeeded() {
+  // Only on mobile (max-width: 768px)
+  if (window.innerWidth > 768) return;
+  
+  // Check if this is the first visit to summary after login
+  const summaryVisited = sessionStorage.getItem('summaryVisited');
+  if (summaryVisited) return;
+  
+  // Mark as visited so it doesn't show again
+  sessionStorage.setItem('summaryVisited', 'true');
+  
+  // Get greeting text
+  const userName = sessionStorage.getItem("userName");
+  const isGuest = sessionStorage.getItem("isGuest");
+  
+  const hour = new Date().getHours();
+  let greeting = "Hello";
+  if (hour < 12) greeting = "Good morning";
+  else if (hour < 18) greeting = "Good afternoon";
+  else greeting = "Good evening";
+  
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'greeting-overlay';
+  
+  const greetLine = document.createElement('div');
+  greetLine.className = 'greetLine';
+  greetLine.textContent = greeting + ',';
+  
+  const greetName = document.createElement('div');
+  greetName.className = 'greetName';
+  greetName.textContent = (isGuest === "true" || !userName) ? "" : userName;
+  
+  overlay.appendChild(greetLine);
+  overlay.appendChild(greetName);
+  document.body.appendChild(overlay);
+  
+  // Fade out after 2 seconds, remove after animation
+  setTimeout(() => {
+    overlay.classList.add('fade-out');
+    setTimeout(() => {
+      overlay.remove();
+    }, 500); // Match CSS transition duration
+  }, 2000);
 }

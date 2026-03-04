@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style/add-Task.css" />
     <link rel="stylesheet" href="./style/standard.css" />
     <link rel="stylesheet" href="./style/sidebar.css" />
     <link rel="stylesheet" href="./style/header.css" />
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="./style/taskDetail.css">
 </head>
 
-<body onload="init()">
+<body onload="boardInit()">
     <div class="app">
         <div id="sidebar-slot"></div>
         <div id="header-slot"></div>
@@ -22,47 +23,47 @@
             <div id="app-canvas" class="canvas-area">
                 <section class="addTaskContainer">
                     <h1>Board</h1>
-                    <div class =" displayFLEX gap32px">
+                    <div class=" displayFLEX gap32px">
                         <div class="searchBar">
                             <input id="searchInput" onkeyup="searchTask()" name="Search" placeholder="Find Task"
                                 rows="1"></input>
                             <img src="./assets/img/Search.svg" alt="Search">
                         </div>
-                        <form onsubmit="formIsSubmittet(); return false">
-                            <!-- <input id="titleId" type="text" required placeholder="Titel">
+                        <!-- <form onsubmit="formIsSubmittet(); return false"> -->
+                        <!-- <input id="titleId" type="text" required placeholder="Titel">
                             <input id="contentId" type="text" required placeholder="Beschreibung"> -->
-                            <button class="ButtonBlueFilled" type="submit">Add Task <img
-                                    src="./assets/img/add_white.svg" alt="+"></button>
-                        </form>
+                        <button onclick="opendialog('boardAddTask');init()" class="ButtonBlueFilled" type="button">Add
+                            Task <img src="./assets/img/add_white.svg" alt="+"></button>
+                        <!-- </form> -->
                     </div>
                 </section>
                 <section class="tablecontainer">
-                    <table>
-                        <tr class="tableCategories">
-                            <td>To do <button>+</button></td>
-                            <td>In progress <button>+</button></td>
-                            <td>Await feedback <button>+</button></td>
-                            <td>Done</td>
-                        </tr>
-                        <tr id="fields">
-                        </tr>
+                    <table id="taskTableContent">
+
                     </table>
                 </section>
                 <dialog id="allTaskDetails" class="allTaskDetails"
                     onclick="closedialog('allTaskDetails'); storeSubtask()">
 
                 </dialog>
+                <dialog id="boardAddTask" onclick="closedialog('boardAddTask')">
+                    <main onclick="event.stopPropagation()">
+                        <div id="mainContent"></div>
+                    </main>
+                </dialog>
             </div>
         </main>
-
     </div>
-    
+
     <script src="./JS/sidebar.js"></script>
     <script src="./JS/header.js"></script>
     <script src="./JS/taskDetailsandBoardTemplate.js"></script>
     <script src="./JS/taskDetail.js"></script>
     <script src="./JS/board.js"></script>
-    
+    <script src="./assets/templates/AddTaskTemplate.js"></script>
+    <script src="./JS/addTask.js"></script>
+
+
 
 </body>
 

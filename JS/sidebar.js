@@ -45,7 +45,14 @@ async function loadTemplate(url, targetSelector) {
 function markActiveNav() {
   const currentPage = location.pathname.split('/').pop();
 
+  // Mark active for desktop sidebar
   document.querySelectorAll('.nav-item').forEach(link => {
+    const linkPage = link.getAttribute('href').split('/').pop();
+    link.classList.toggle('active', linkPage === currentPage);
+  });
+
+  // Mark active for mobile bottom nav
+  document.querySelectorAll('.mobile-nav-item').forEach(link => {
     const linkPage = link.getAttribute('href').split('/').pop();
     link.classList.toggle('active', linkPage === currentPage);
   });
