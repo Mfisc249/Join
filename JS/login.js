@@ -10,17 +10,27 @@ async function login() {
   let userKey = checkLoginData(loginData, email, password);
 
   if (userKey) {
+    await startUserSession(userKey);
+  } else {
+    showLoginError();
+  }
+}
+
+
+async function startUserSession(userKey) {
     await saveLoggedInUser(userKey);
     window.location.href = 'summary.html';
-    document.getElementById('loginButton').disabled = false;
-  } else {
+}
+
+
+function showLoginError() {
     document.getElementById('loginEmail').classList.add('InputFieldError');
     document.getElementById('loginPassword').classList.add('InputFieldError');
     document.getElementById('loginError').textContent =
       'Check your email and password. Please try again.';
     document.getElementById('loginButton').disabled = false;
-  }
 }
+
 
 async function saveLoggedInUser(userKey) {
   let user = await fetchContactData(userKey);
@@ -36,6 +46,7 @@ async function saveLoggedInUser(userKey) {
   sessionStorage.setItem('isGuest', 'false');
 }
 
+
 async function fetchContactData(userKey) {
   let response = await fetch(
     `https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/Contacts/${userKey}.json`,
@@ -44,13 +55,6 @@ async function fetchContactData(userKey) {
   return contactData;
 }
 
-async function fetchLoginData() {
-  let response = await fetch(
-    'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json',
-  );
-  let data = await response.json();
-  return data;
-}
 
 /** @returns {string|false} */
 function checkLoginData(loginData, email, password) {
@@ -63,15 +67,18 @@ function checkLoginData(loginData, email, password) {
   return false;
 }
 
+
 document.getElementById('loginButton').addEventListener('click', function (event) {
   event.preventDefault();
   login();
 });
 
+
 document.getElementById('guestButton').addEventListener('click', function () {
   setGuest();
   window.location.href = 'summary.html';
 });
+
 
 function setGuest() {
   sessionStorage.setItem('contactId', '');
@@ -81,10 +88,12 @@ function setGuest() {
   sessionStorage.setItem('isGuest', 'true');
 }
 
+
 document.getElementById('loginEmail').addEventListener('input', function (event) {
   event.target.classList.remove('InputFieldError');
   document.getElementById('loginPassword').classList.remove('InputFieldError');
 });
+
 
 function checkSessionForAnimation() {
   if (!sessionStorage.getItem('animationPlayed')) {
@@ -92,5 +101,6 @@ function checkSessionForAnimation() {
     sessionStorage.setItem('animationPlayed', 'true');
   }
 }
+
 
 initPasswordToggles();

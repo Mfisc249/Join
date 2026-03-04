@@ -1,77 +1,62 @@
 /** Firebase base URL */
 const FIREBASE_URL = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app';
 
-
 /** Validates form and creates user account */
 async function signUp() {
   clearSignupErrors();
-  let signupObj = getSignupData(); 
-  if (!checkSignupInputs(signupObj.name, signupObj.email, signupObj.password, signupObj.confirm)) return;
+  let signupObj = getSignupData();
+  if (!checkSignupInputs(signupObj.name, signupObj.email, signupObj.password, signupObj.confirm))
+    return;
   if (await checkEmailExists(signupObj.email.value)) {
-      showSignupError(); 
-    return; 
+    showSignupError();
+    return;
   }
- await gatherUserInfo(signupObj.name.value, signupObj.email.value, signupObj.password.value);
   document.getElementById('signupButton').disabled = true;
+  await gatherUserInfo(signupObj.name.value, signupObj.email.value, signupObj.password.value);
   showToast('You Signed Up successfully');
-  setTimeout(function() {
+  setTimeout(function () {
     window.location.href = 'index.html';
   }, 1100);
 }
 
+
 function getSignupData() {
-   return {
+  return {
     name: document.getElementById('signupName'),
     email: document.getElementById('signupEmail'),
     password: document.getElementById('signupPassword'),
-    confirm: document.getElementById('signupConfirm')
+    confirm: document.getElementById('signupConfirm'),
   };
 }
 
+
 function showSignupError() {
-    document.getElementById('signupEmail').classList.add('InputFieldError');
-    document.getElementById('signupError').textContent = 'This email is already registered.';
+  document.getElementById('signupEmail').classList.add('InputFieldError');
+  document.getElementById('signupError').textContent = 'This email is already registered.';
 }
 
- 
+
 async function checkEmailExists(email) {
   let loginData = await fetchLoginData();
   return checkEmailData(loginData, email);
-
-}
-
-
-async function fetchLoginData() {
-    let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
-    let loginData = await response.json();
-    return loginData;
 }
 
 
 /** @returns {boolean} */
-function checkEmailData(loginData,email) {
-    let users = Object.values(loginData);
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].email === email) {
-          return true;
-        }
+function checkEmailData(loginData, email) {
+  let users = Object.values(loginData);
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].email === email) {
+      return true;
     }
-    return false;
+  }
+  return false;
 }
-
 
 
 /** @returns {boolean} True if all inputs are valid */
 function checkSignupInputs(name, email, password, confirm) {
-  let isValid = true;
-  if (name.value.trim() === '') {
-    showInputError(name, 'Please enter your name.');
-    isValid = false;
-  } else if (!name.value.trim().includes(' ')) {
-    showInputError(name, 'Please enter your first and last name.')
-    isValid = false;
-  }
- 
+  let isValid = validateName(name);
   if (!isValidEmail(email.value)) {
     showInputError(email, 'Please enter a valid email address.');
     isValid = false;
@@ -85,6 +70,19 @@ function checkSignupInputs(name, email, password, confirm) {
     isValid = false;
   }
   return isValid;
+}
+
+
+function validateName(name) {
+  if (name.value.trim() === '') {
+    showInputError(name, 'Please enter your name.');
+    return false;
+  }
+  if (!name.value.trim().includes(' ')) {
+    showInputError(name, 'Please enter your first and last name.');
+    return false;
+  }
+  return true;
 }
 
 
@@ -107,19 +105,21 @@ function showInputError(input, message) {
 function clearSignupErrors() {
   document.getElementById('signupError').textContent = '';
   let inputs = document.querySelectorAll('.InputField');
-  inputs.forEach(function(input) {
+  inputs.forEach(function (input) {
     input.classList.remove('InputFieldError');
   });
 }
+
 
 async function gatherUserInfo(name, email, password) {
   let id = await getNextContactId();
   let initials = generateInitials(name);
   let date = new Date().toISOString();
-  let color = generateRandomColor()
-  await createNewUserContact(id, color, date, email, initials, name); 
-  await createNewUserLogin(id, email, password); 
+  let color = generateRandomColor();
+  await createNewUserContact(id, color, date, email, initials, name);
+  await createNewUserLogin(id, email, password);
 }
+
 
 async function createNewUserContact(id, color, date, email, initials, name) {
   await fetch(FIREBASE_URL + `/Contacts/${id}.json`, {
@@ -132,33 +132,39 @@ async function createNewUserContact(id, color, date, email, initials, name) {
       id: id,
       initials: initials,
       name: name,
-      phone: "",
-      updatedAt: date})
+      phone: '',
+      updatedAt: date,
+    }),
   });
 }
 
+
 async function createNewUserLogin(id, email, password) {
-   await fetch(FIREBASE_URL + `/LoginData/${id}.json`, {
+  await fetch(FIREBASE_URL + `/LoginData/${id}.json`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email: email,
-      password: password})
+      password: password,
+    }),
   });
 }
+
 
 function showToast(message) {
   let toast = document.createElement('div');
   toast.className = 'Toast';
   toast.textContent = message;
   document.body.appendChild(toast);
-  setTimeout(function() { toast.classList.add('ToastVisible'); }, 50);
+  setTimeout(function () {
+    toast.classList.add('ToastVisible');
+  }, 50);
 }
 
 
 function toggleSignupButton() {
-  let name = getSignupUserName(); 
-  let email = getSignupEmail(); 
+  let name = getSignupUserName();
+  let email = getSignupEmail();
   let password = getSignupPassword();
   let confirm = document.getElementById('signupConfirm').value;
   let checkbox = document.getElementById('signupPrivacy').checked;
@@ -166,30 +172,34 @@ function toggleSignupButton() {
   button.disabled = !(name && email && password && confirm && checkbox);
 }
 
+
 function getSignupUserName() {
   let name = document.getElementById('signupName').value.trim();
-  return name; 
+  return name;
 }
+
 
 function getSignupEmail() {
   let email = document.getElementById('signupEmail').value.trim();
-  return email; 
+  return email;
 }
+
 
 function getSignupPassword() {
   let password = document.getElementById('signupPassword').value;
-  return password; 
+  return password;
 }
+
 
 function initSignup() {
   let form = document.querySelector('form');
-  form.addEventListener('submit', function(event) {
+  form.addEventListener('submit', function (event) {
     event.preventDefault();
     signUp();
   });
   let fields = document.querySelectorAll('.InputField');
-  fields.forEach(function(field) {
-    field.addEventListener('input', function() {
+  fields.forEach(function (field) {
+    field.addEventListener('input', function () {
       field.classList.remove('InputFieldError');
       toggleSignupButton();
     });
@@ -216,21 +226,29 @@ async function getNextContactId() {
 
 
 function generateInitials(name) {
-let parts = name.split(' ');
-let initials = parts[0][0] + parts[1][0];
-return initials.toUpperCase();
+  let parts = name.split(' ');
+  let initials = parts[0][0] + parts[1][0];
+  return initials.toUpperCase();
 }
+
 
 function generateRandomColor() {
   let colors = [
-    '#FF7A00', '#9327FF', '#6E52FF', '#FC71FF',
-    '#FFBB2B', '#1FD7C1', '#FF5EB3', '#00BEE8',
-    '#1FC71F', '#FF745E', '#FFA35E', '#FC71FF'
+    '#FF7A00',
+    '#9327FF',
+    '#6E52FF',
+    '#FC71FF',
+    '#FFBB2B',
+    '#1FD7C1',
+    '#FF5EB3',
+    '#00BEE8',
+    '#1FC71F',
+    '#FF745E',
+    '#FFA35E',
+    '#FC71FF',
   ];
   return colors[Math.floor(Math.random() * colors.length)];
 }
-
-
 
 
 initSignup();

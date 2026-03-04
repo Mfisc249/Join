@@ -28,7 +28,7 @@
 .sidebar-logo {
   width: 100px;
   height: auto;
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
 }
 
 .sidebar-logo:hover {
@@ -42,15 +42,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 8px 56px;
   margin-top: 120px;
-
   color: #CDCDCD;
   text-decoration: none;
   font-size: 16px;
-
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.1s ease, color 0.1s ease;
 }
 
 .sidebar-login:hover {
@@ -75,18 +72,13 @@
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-
   padding: 8px 56px;
   border-radius: 0;
-
   color: #CDCDCD;
   text-decoration: none;
   font-size: 16px;
-
-  /* wichtig: volle Breite, kein pill-cut */
   margin-right: 0;
-
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.1s ease, color 0.1s ease;
 }
 
 /* raus mit der "linken leiste" und slide-effekten */
@@ -148,6 +140,7 @@
   padding: 8px;
   width: fit-content;
   border-radius: 4px;
+  transition: background 0.1s ease;
 }
 
 .sidebar-link:hover {
@@ -180,7 +173,7 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.1s ease;
 }
 
 .sidebar-toggle:hover {

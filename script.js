@@ -85,4 +85,12 @@ function initLandscapeOverlay() {
   document.body.insertBefore(overlay, document.body.firstChild);
 }
 
+
+async function fetchLoginData() {
+    let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
+    let loginData = await response.json();
+    return loginData;
+}
+
+
 initLandscapeOverlay();
