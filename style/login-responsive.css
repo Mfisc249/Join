@@ -69,9 +69,10 @@
     line-height: 75%;
   }
 
-  /* Signup Button: breiter auf Mobile */
+  /* Signup Button: breiter + höher auf Mobile */
   .signupButtonWrapper .ButtonBlueFilled {
     min-width: 180px;
+    min-height: 50px;
   }
 
   /* Signup Pfeil: Position an kleineres Card-Padding anpassen */
@@ -92,7 +93,16 @@
   .loginButtonsWrapper .ButtonWhiteBlueOutline,
   .loginButtonsWrapper .ButtonWhiteDarkBlueOutline {
     min-width: 180px;
+    min-height: 50px;
     font-size: 16px;
+  }
+
+  /* Privacy-Link: min 120x36 laut Figma (Touch-Target) */
+  .signupPrivacyLink {
+    display: inline-block;
+    min-width: 120px;
+    min-height: 36px;
+    line-height: 36px;
   }
 
   /* ===== LOGIN LOGO: Animation-Overlay wird normales Element ===== */
@@ -183,6 +193,7 @@
     padding: 12px;
     font-size: 16px;
     min-width: 104px;
+    min-height: 50px;
     text-align: center;
   }
 
