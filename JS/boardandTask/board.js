@@ -222,8 +222,8 @@ function startTheSearch(refSearchInput) {
     emtyFieldContent();
     TASKKEYS[0].forEach(task => {
         let refTaskTitle = TASK[0][`${task}`].title;
-        let refTskContent = TASK[0][`${task}`].content;
-        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTskContent.toUpperCase().indexOf(filter) > - 1) {
+        let refTaskContent = TASK[0][`${task}`].content;
+        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTaskContent.toUpperCase().indexOf(filter) > - 1) {
             loadTaskTamplate(TASK[0][`${task}`]);
             checkFieldIsEmpty();
             searchCount++;
@@ -257,7 +257,6 @@ function calculateSubtaskCompletionPercentage(taskID) {
     let completedSubtaskCount = 0;
     let subTasksReview = TASK[0][`Task${taskID}`].subTasksReview;
     let subTasksString = TASK[0][`Task${taskID}`].subTasks;
-    // let subTaskCount = (subTasksString.match(/,/g) || []).length + 1;
     for (let index = 0; index <= subTasksString.length; index++) {
         let subTaskStatus = subTasksReview[0].split(',')[index];
         if (subTaskStatus === 'C') {
