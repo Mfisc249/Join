@@ -66,7 +66,7 @@ function createTaskTemplate(taskName, taskDescription) {
               <img class="eventImg" src="./assets/img/event.svg" alt="" />
 
               <!-- requiredField stays inside label -->
-              <p class="requiredField reuqiredDate">This field is required</p>
+              <p class="requiredField requiredDate">This field is required</p>
             </div>
           </label>
 
@@ -147,7 +147,7 @@ function createTaskTemplate(taskName, taskDescription) {
   </div>
    <div class="buttonRequiredField">
     <div class="headlineTextArea requiredBottomLeft">
-      <p class="star">*</p>
+      <p class="star subTaskStar">*</p>
       <p class="requiredField SubTaskField">this field is required</p>
     </div>
     <div class="taskButton">

@@ -41,9 +41,12 @@ select::-ms-expand {
 }
 
 .eventImg {
-  position: relative;
-  right: 40px;
-  top: 3px;
+  position: absolute;
+  right: 15px;
+  top: 44%;
+  /* vertikal zentriert */
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .star {
@@ -62,4 +65,8 @@ select::-ms-expand {
 
 textarea {
   resize: none;
+}
+
+.requiredDate {
+  margin-top: -19px;
 }

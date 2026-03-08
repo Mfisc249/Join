@@ -235,9 +235,6 @@ h1 {
   .inputField {
     width: 679px;
   }
-  .SubTaskField {
-    display: none;
-  }
   .buttonRequiredField {
     width: 717px;
   }
@@ -270,12 +267,6 @@ h1 {
   .descriptionImg {
     display: none;
   }
-  .eventImg {
-    position: absolute;
-    top: 83%;
-    transform: translateY(50%);
-    right: 22px;
-  }
   .subTaskList {
     width: 72%;
   }
@@ -284,7 +275,7 @@ h1 {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1063px) {
   .priority {
     gap: 90px;
   }
@@ -309,9 +300,6 @@ h1 {
   }
   .inputField {
     width: 560px;
-  }
-  .SubTaskField {
-    display: none;
   }
   .buttonRequiredField {
     width: 595px;
@@ -350,13 +338,8 @@ h1 {
     bottom: 29px;
     left: 563px;
   }
-  .eventImg {
-    position: relative;
-    bottom: 35px;
-    left: 550px;
-  }
 }
-@media (max-width: 900px) {
+@media (max-width: 901px) {
   .taskNameContainer textarea {
     width: 680px;
   }
@@ -395,21 +378,15 @@ h1 {
     margin-bottom: 22px;
   }
   .buttonRequiredField {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 775px;
-    padding: 20px 20px;
     display: flex;
     justify-content: space-between;
+    margin-top: 70px;
+    width: 775px;
     align-items: center;
-    z-index: 1000;
-    box-sizing: border-box;
-    background: rgba(246, 247, 248, 1);
   }
   h1 {
     position: sticky;
-    top: 80px; /* Höhe vom Header */
+    top: 80px;
     background: rgba(246, 247, 248, 1);
     padding: 20px;
     z-index: 500;
@@ -417,17 +394,31 @@ h1 {
   main {
     margin-left: 40px;
     margin-top: 170px;
-    padding-bottom: 120px;
+    padding-bottom: 80px;
   }
   .descriptionImg {
     position: relative;
     bottom: 29px;
     left: 674px;
   }
+  .taskButton {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 731px;
+    background: rgba(246, 247, 248, 1);
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    z-index: 1000;
+  }
   .eventImg {
-    position: relative;
-    left: 650px;
-    bottom: 28px;
+    position: absolute;
+    right: 19px;
+    top: 37%;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 }
 
@@ -482,16 +473,23 @@ h1 {
     width: 541px;
   }
   .taskButton {
-    gap: 26px;
+    gap: 14px;
   }
   .buttonRequiredField {
     width: 620px;
   }
+  .taskButton {
+    width: 576px;
+  }
 }
 
 @media (max-width: 610px) {
+  .mainTitle {
+    font-size: 55px;
+    padding: 20px 0px;
+  }
   main {
-    margin-left: 15px;
+    margin-left: 26px;
   }
   .taskname {
     font-size: 16px;
@@ -500,6 +498,8 @@ h1 {
   .taskNameContainer textarea {
     width: 370px;
     padding-top: 10px;
+    font-size: 16px;
+    height: 27px;
   }
   h2 {
     font-size: 16px;
@@ -567,9 +567,9 @@ h1 {
     width: 183px;
   }
   .clearButton {
-    font-size: 18px;
-    height: 56px;
-    width: 110px;
+    font-size: 17px;
+    height: 49px;
+    width: 95px;
   }
   .inputField {
     width: 360px;
@@ -596,5 +596,74 @@ h1 {
   }
   .buttonRequiredField {
     width: 434px;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .requiredBottomLeft {
+    display: flex;
+    align-items: start;
+    padding-bottom: 41px;
+    padding-right: 257px;
+  }
+  .subTaskStar {
+    display: flex;
+  }
+}
+
+@media (max-width: 610px) {
+  h1 {
+    font-size: 47px;
+  }
+  .taskNameContainer textarea {
+    width: 260px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 260px;
+    height: 80px;
+  }
+  .addTaskDateContainer input {
+    width: 260px;
+    font-size: 16px;
+    height: 40px;
+  }
+  .priority {
+    gap: 7px;
+    margin-top: 25px;
+    width: 277px;
+  }
+  .priorityButton {
+    gap: 5px;
+  }
+  .assignedToInput {
+    width: 275px;
+  }
+  .ChoiceOption {
+    width: 272px;
+  }
+  .inputField {
+    width: 246px;
+  }
+  .createButton {
+    font-size: 18px;
+    height: 49px;
+    width: 147px;
+  }
+  .requiredBottomLeft {
+    padding-right: 297px;
+  }
+  .assignedDropdown {
+    width: 270px;
+  }
+  .subTaskContent {
+    width: 230px;
+  }
+  .subTaskItem {
+    width: 235px;
+  }
+  .subTaskEditContainer {
+    width: 264px;
+  }
+  .taskButton {
+    width: 291px;
   }
 }

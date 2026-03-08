@@ -37,24 +37,28 @@ function renderTemplate() {
 
 async function saveTask(task) {
   try {
-    // 1. Alle vorhandenen Tasks holen
     const existingTasks = (await DataGET("Tasks")) || {};
     const taskKeys = Object.keys(existingTasks);
 
-    // 2. Neue Task-ID berechnen: vorhandene Tasks + count
     const taskID = taskKeys.length + count;
-    const taskKey = `Task${taskID}`; // Task0, Task1, ...
+    const taskKey = `Task${taskID}`;
 
-    // 3. Task in Firebase speichern (PUT an eindeutigen Key)
     await DataPUT(`Tasks/${taskKey}`, {
       ...task,
       id: taskID,
-      field: "field1", // default field
+
+      field: {
+        field: "field1",
+      },
+
+      subTasks: task.subtasks.join(","),
+
+      subTasksReview: [new Array(task.subtasks.length).fill("O").join(",")],
     });
 
-    console.log("Task saved with ID:", taskKey);
+    console.log("Task saved:", taskKey);
 
-    count++; // lokaler Zähler hochsetzen
+    count++;
     return taskKey;
   } catch (error) {
     console.error("Fehler beim Speichern:", error);
@@ -76,14 +80,14 @@ async function createTask() {
   errorMessage();
   if (!task.title || !task.description || !task.dueDate) return;
 
-  // Task speichern → bekommt Key wie Task0, Task1 …
   const taskKey = await saveTask(task);
 
   if (taskKey) {
+    // 🔹 HIER speichern
+    await DataPUT(`subtaskReview/${taskKey}`, task.subtasks);
+
     showToast();
     clearForm();
-
-    // Optional direkt ins UI rendern (wie loadTaskTamplate)
     renderNewTask(taskKey, task);
   }
 }
