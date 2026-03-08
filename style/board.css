@@ -192,6 +192,13 @@ body {
     display: none;
 }
 
+.loadingscreenBoard{
+    padding-top: 150px;
+    padding-left: 450px;
+    height: 70px;
+
+}
+
 @media(max-width:1350px) {
 
     .tablecontainer tr {

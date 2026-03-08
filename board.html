@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="style/add-Task.css" />
+    <!-- <link rel="stylesheet" href="style/add-Task.css" /> -->
     <link rel="stylesheet" href="./style/standard.css" />
     <link rel="stylesheet" href="./style/sidebar.css" />
     <link rel="stylesheet" href="./style/header.css" />
@@ -32,7 +32,7 @@
                         <!-- <form onsubmit="formIsSubmittet(); return false"> -->
                         <!-- <input id="titleId" type="text" required placeholder="Titel">
                             <input id="contentId" type="text" required placeholder="Beschreibung"> -->
-                        <button onclick="opendialog('boardAddTask');init()" class="ButtonBlueFilled" type="button">Add
+                        <button onclick="opendialog('boardAddTask')" class="ButtonBlueFilled" type="button">Add
                             Task <img src="./assets/img/add_white.svg" alt="+"></button>
                         <!-- </form> -->
                     </div>
@@ -54,17 +54,15 @@
             </div>
         </main>
     </div>
-
     <script src="./JS/sidebar.js"></script>
     <script src="./JS/header.js"></script>
     <script src="./JS/taskDetailsandBoardTemplate.js"></script>
     <script src="./JS/taskDetail.js"></script>
     <script src="./JS/board.js"></script>
-    <script src="./assets/templates/AddTaskTemplate.js"></script>
-    <script src="./JS/addTask.js"></script>
-
-
-
+    <script src="./script.js"></script>
+    <script src="./JS/boardLoadingScreen.js"></script>
+    <!-- <script src="./assets/templates/AddTaskTemplate.js"></script> -->
+    <!-- <script src="./JS/addTask.js"></script> -->
 </body>
 
 </html>

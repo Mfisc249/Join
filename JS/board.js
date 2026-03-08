@@ -12,22 +12,24 @@ let myMediaQuery = window.matchMedia('(max-width: 1350px)');
 async function boardInit() {
     if (myMediaQuery.matches) {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+        startLoadingScreenMobile();
     } else {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+        startLoadingScreen();
     }
     await render();
 }
 
 /** Fetches tasks from Firebase and stores them in TASK. */
-async function DataGET(path = "") {
-    let response = await fetch(BOARDURLBASE + path + '.json');
-    let responseASJson = await response.json();
-    return responseASJson;
+async function DataGET(path = "") {   
+         let response = await fetch(BOARDURLBASE + path + '.json');
+         let responseASJson = await response.json();
+         return responseASJson;
 }
 
 /** Writes/updates a task at the specified Firebase path. */
 async function DataPUT(path = "", data = {}) {
-    let response = await fetch(BOARDURLBASE + path + '.json', {
+        let response = await fetch(BOARDURLBASE + path + '.json', {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -255,26 +257,25 @@ function calculateSubtaskCompletionPercentage(taskID) {
     let completedSubtaskCount = 0;
     let subTasksReview = TASK[0][`Task${taskID}`].subTasksReview;
     let subTasksString = TASK[0][`Task${taskID}`].subTasks;
-    let subTaskCount = (subTasksString.match(/,/g) || []).length + 1;
-    for (let index = 0; index < subTaskCount; index++) {
+    // let subTaskCount = (subTasksString.match(/,/g) || []).length + 1;
+    for (let index = 0; index <= subTasksString.length; index++) {
         let subTaskStatus = subTasksReview[0].split(',')[index];
         if (subTaskStatus === 'C') {
             completedSubtaskCount++;
         }
     }
 
-    return Math.round((completedSubtaskCount / subTaskCount) * 100);
+    return Math.round((completedSubtaskCount / subTasksString.length) * 100);
 
 }
 
 /** Contacts section logic. */
 /** Loads and renders all contacts assigned to the given task. */
 function getTaskDetailsContacts(taskID, renderFunctionSelector) {
-    let refAssignedTo = TASK[0][`Task${taskID}`].assignedTo;//await DataGET(`Tasks/Task${taskID}/assignedTo`);
-    let assignedToCount = (refAssignedTo.match(/,/g) || []).length + 1;
-    for (let index = 0; index <= assignedToCount; index++) {
-        if (refAssignedTo.split(',')[index] != undefined || null) {
-            let contact = refAssignedTo.split(',')[index];
+    let refAssignedTo = TASK[0][`Task${taskID}`].assignedTo;
+    for (let index = 0; index < refAssignedTo.length; index++) {
+        if (refAssignedTo != undefined || null && refAssignedTo != 0 ) {
+            let contact = refAssignedTo[`${index}`]
             if (renderFunctionSelector == 0) {
                 renderTaskContacts(allContactDetails[`${contact}`], taskID);
             } else {
@@ -366,12 +367,14 @@ function removeHighlightBoardTaskFields() {
 async function widthChangeCallback(myMediaQuery) {
     if (myMediaQuery.matches) {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+        startLoadingScreenMobile();
         TASK = [];
         TASKKEYS = [];
         count = 0;
         await render();
     } else {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+        startLoadingScreen();
         TASK = [];
         TASKKEYS = [];
         count = 0;
