@@ -10,10 +10,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding-top: 64px;
-    padding-left: 96px;
-    padding-right: 96px;
-    margin-bottom: 10px; */
+    width: var(--boardWith);
 }
 
 .addTaskContainer h1 {
@@ -64,7 +61,7 @@ body {
 
 .tablecontainer tr {
     display: flex;
-    height: 430px;
+    height: 250px;
 }
 
 .tableCategories {
@@ -206,12 +203,12 @@ body {
     display: none;
 }
 
-.addTaskContainerMobile{
+.addTaskContainerMobile {
     display: unset;
 }
 
 
-@media(max-width:1350px) {
+@media(max-width:1535px) {
 
     .tablecontainer tr {
         display: flex;
@@ -257,9 +254,7 @@ body {
     :root {
         --boardWith: 600px;
     }
-}
 
-@media(max-width:1175px) {
     .boardAddTaskButton {
         display: none;
     }
@@ -267,26 +262,90 @@ body {
     .boardAddTaskButtonMobile {
         display: unset;
     }
-}
 
-@media(max-width:1070px) {
-    
-     .whenMobile{
+    .whenMobile {
         display: none;
     }
-    
+
     .searchBarMobile {
         display: unset;
     }
 
-    .searchBar{
-        width: var(--boardWith);;
+    .searchBar {
+        width: var(--boardWith);
     }
 
-    .searchBar input{
-        
-        width: calc(var(--boardWith) - 20px);;
-    
+    .searchBar input {
+
+        width: calc(var(--boardWith) - 20px);
+
+    }
+
+}
+
+@media(max-width: 995px) {
+    .canvas-area {
+        padding: 64px 30px;
+    }
+}
+
+@media (max-width: 900px) {
+    :root {
+        --boardWith: 400px;
+    }
+}
+
+@media (max-width: 769px) {
+    :root {
+        --boardWith: 600px;
+    }
+
+    .canvas-area {
+        padding: 64px 96px;
+    }
+}
+
+@media (max-width: 750px) {
+    .canvas-area {
+        padding: 64px 60px;
+    }
+}
+
+@media (max-width: 700px) {
+    :root {
+        --boardWith: 500px;
+    }
+
+}
+
+@media (max-width: 610px) {
+    :root {
+        --boardWith: 400px;
+    }
+}
+
+@media (max-width: 500px){
+     :root {
+        --boardWith: 300px;
+    }
+
+    .searchBar input {
+
+        width: calc(var(--boardWith) - 90px);
+
+    }
+}
+
+@media (max-width: 390px){
+   .canvas-area {
+        padding: 64px 30px;
+    }
+
+}
+
+@media (max-width: 350px){
+     :root {
+        --boardWith: 270px;
     }
 
 }

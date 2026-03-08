@@ -6,7 +6,7 @@ let count = 0;
 let highlightTaskCount = 0;
 let curentTraggedElement;
 let allContactDetails = [];
-let myMediaQuery = window.matchMedia('(max-width: 1350px)');
+let myMediaQuery = window.matchMedia('(max-width: 1535px)');
 
 /** Initializes the board and renders tasks. */
 async function boardInit() {
@@ -41,11 +41,11 @@ async function DataPUT(path = "", data = {}) {
 /** Loads tasks and renders board columns by category. */
 async function render() {
     TASK = [];
-    TASK.push(await DataGET('Tasks'));
+    TASK.push(await DataGET('Tasks') || {});
     allContactDetails = await DataGET(`Contacts`);
     emtyFieldContent();
     TASKKEYS = [];
-    TASKKEYS.push(Object.keys(TASK[0]));
+    TASKKEYS.push(Object.keys(TASK[0] || {}));
     TASKKEYS[0].forEach(task => {
         loadTaskTamplate(TASK[0][`${task}`])
     });
