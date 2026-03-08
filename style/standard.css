@@ -60,7 +60,9 @@ body.guest-mode .nav {
     background: var(--GlobalBackgroundWhite);
 }
 
-
+.canvas-area {
+    padding: 64px 96px;
+}
 
 /*
  * Font: Inter

@@ -21,20 +21,34 @@
 
         <main class="main">
             <div id="app-canvas" class="canvas-area">
-                <section class="addTaskContainer">
-                    <h1>Board</h1>
-                    <div class=" displayFLEX gap32px">
+                <section>
+                    <div class="addTaskContainer">
+                        <h1>Board</h1>
+                        <div class=" displayFLEX gap32px">
+                            <div class="searchBar whenMobile">
+                                <input id="searchInput" onkeyup="searchTask()" name="Search" placeholder="Find Task"
+                                    rows="1"></input>
+                                <img src="./assets/img/Search.svg" alt="Search">
+                            </div>
+                            <!-- <form onsubmit="formIsSubmittet(); return false"> -->
+                            <!-- <input id="titleId" type="text" required placeholder="Titel">
+                            <input id="contentId" type="text" required placeholder="Beschreibung"> -->
+                            <button onclick="opendialog('boardAddTask')" class="ButtonBlueFilled boardAddTaskButton"
+                                type="button">Add
+                                Task <img src="./assets/img/add_white.svg" alt="+"></button>
+
+                            <button onclick="opendialog('boardAddTask')"
+                                class="ButtonBlueFilled boardAddTaskButtonMobile" type="button">
+                                <img src="./assets/img/add_white.svg" alt="+"></button>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                    <div class="searchBarMobile">
                         <div class="searchBar">
                             <input id="searchInput" onkeyup="searchTask()" name="Search" placeholder="Find Task"
                                 rows="1"></input>
                             <img src="./assets/img/Search.svg" alt="Search">
                         </div>
-                        <!-- <form onsubmit="formIsSubmittet(); return false"> -->
-                        <!-- <input id="titleId" type="text" required placeholder="Titel">
-                            <input id="contentId" type="text" required placeholder="Beschreibung"> -->
-                        <button onclick="opendialog('boardAddTask')" class="ButtonBlueFilled" type="button">Add
-                            Task <img src="./assets/img/add_white.svg" alt="+"></button>
-                        <!-- </form> -->
                     </div>
                 </section>
                 <section class="tablecontainer">
