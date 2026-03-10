@@ -6,12 +6,12 @@ function createTaskTemplate(taskName, taskDescription) {
 
       <!-- LEFT -->
       <div class="leftContent">
-        <form id="taskForm">
+        <form id="taskForm" class="taskForm">
 
           <!-- TITLE -->
           <label class="addTaskLabel" for="taskName">
             <div class="headlineTextArea">
-              <h2>Title</h2>
+              <h2 class="h2AddTask">Title</h2>
               <p class="star">*</p>
             </div>
 
@@ -30,7 +30,7 @@ function createTaskTemplate(taskName, taskDescription) {
 
           <!-- DESCRIPTION -->
           <label class="addTaskLabelDescription" for="taskDesc">
-            <h2>Description</h2>
+            <h2 class="h2AddTask">Description</h2>
 
             <div class="taskDescriptionContainer">
               <textarea
@@ -49,7 +49,7 @@ function createTaskTemplate(taskName, taskDescription) {
           <!-- DUE DATE -->
           <label class="addTaskLabelDate" for="DueDate">
             <div class="headlineTextArea">
-              <h2>Due Date</h2>
+              <h2 class="h2AddTask">Due Date</h2>
               <p class="star">*</p>
             </div>
 
@@ -79,7 +79,7 @@ function createTaskTemplate(taskName, taskDescription) {
 <div class="rightContent">
 
   <!-- PRIORITY -->
-  <h2>Priority</h2>
+  <h2 class="h2AddTask">Priority</h2>
   <div class="priority">
     <div class="priorityButton urgent">
       <span>Urgent</span>
