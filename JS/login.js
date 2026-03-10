@@ -17,12 +17,17 @@ async function login() {
 }
 
 
+/**
+ * Transmits the user key and starts the session. 
+ * @param {string} userKey - corresponds to key in login-data json
+ */
 async function startUserSession(userKey) {
     await saveLoggedInUser(userKey);
     window.location.href = 'summary.html';
 }
 
 
+/** shows login-Error with red borders and show message, disables button */
 function showLoginError() {
     document.getElementById('loginEmail').classList.add('InputFieldError');
     document.getElementById('loginPassword').classList.add('InputFieldError');
@@ -32,6 +37,10 @@ function showLoginError() {
 }
 
 
+/**
+ * saves user in session storage
+ * @param {string} userKey - same as contacts/login key in firebase
+ */
 async function saveLoggedInUser(userKey) {
   let user = await fetchContactData(userKey);
   let name = user.name;
@@ -47,6 +56,11 @@ async function saveLoggedInUser(userKey) {
 }
 
 
+/**
+ * Fetches contact data for a user from Firebase
+ * @param {string} userKey - The contact ID in Firebase
+ * @returns {Object} the contact object with name, initials, color, email etc.
+ */
 async function fetchContactData(userKey) {
   let response = await fetch(
     `https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/Contacts/${userKey}.json`,
@@ -56,7 +70,13 @@ async function fetchContactData(userKey) {
 }
 
 
-/** @returns {string|false} */
+/** 
+ * Checks the login input values vs. database.
+ * @param {Object} loginData - all login entries from Firebase
+ * @param {string} email - the entered email address
+ * @param {string} password - the entered password
+ * @returns {string|false} the user key if match found, false otherwise
+ */
 function checkLoginData(loginData, email, password) {
   let users = Object.keys(loginData);
   for (let i = 0; i < users.length; i++) {
@@ -80,6 +100,7 @@ document.getElementById('guestButton').addEventListener('click', function () {
 });
 
 
+/** saves guestlogin in sessionStorage */
 function setGuest() {
   sessionStorage.setItem('contactId', '');
   sessionStorage.setItem('userName', '');
@@ -88,13 +109,14 @@ function setGuest() {
   sessionStorage.setItem('isGuest', 'true');
 }
 
-
+/** eventlistner removes error-message at new input */
 document.getElementById('loginEmail').addEventListener('input', function (event) {
   event.target.classList.remove('InputFieldError');
   document.getElementById('loginPassword').classList.remove('InputFieldError');
 });
 
 
+/** checks sessionStorage if the animation already played and removes the skipAnimation if necessary */
 function checkSessionForAnimation() {
   if (!sessionStorage.getItem('animationPlayed')) {
     document.getElementById('logoAnimation').classList.remove('skipAnimation');

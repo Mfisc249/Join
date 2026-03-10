@@ -75,7 +75,9 @@ function togglePasswordVisibility(input, icon) {
 }
 
 
-/** Injects landscape overlay into body (global, no HTML copy-paste needed) */
+/** 
+ * creates overlay in DOM before body
+ */
 function initLandscapeOverlay() {
   let overlay = document.createElement('div');
   overlay.className = 'landscapeOverlay';
@@ -86,6 +88,10 @@ function initLandscapeOverlay() {
 }
 
 
+/**
+ * fetches the login-Data from firebase
+ * @returns {Object} complete list of login-data (emails and password)
+ */
 async function fetchLoginData() {
     let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
     let loginData = await response.json();
