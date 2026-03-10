@@ -1,22 +1,14 @@
-/* =========================
-   Responsive: Login & Sign-up
-   Breakpoint 1: 768px (Tablet/Mobile)
-   Breakpoint 2: 450px (kleine Smartphones)
-   ========================= */
+/* Responsive: Login & Sign-up */
 
-
-/* ----- Breakpoint 1: 768px ----- */
 
 @media (max-width: 768px) {
 
-  /* CRITICAL: Scrollen ermöglichen auf Auth-Seiten */
   html.auth-page,
   html.auth-page body {
     overflow: auto;
     height: auto;
   }
 
-  /* Card: weniger Padding, kompakterer Gap */
   .contentWrapper .loginCard {
     padding: 32px 24px;
     width: 90%;
@@ -24,12 +16,10 @@
     gap: 24px;
   }
 
-  /* Inputs: volle Card-Breite nutzen */
   .loginInputs {
     max-width: 100%;
   }
 
-  /* Form muss volle Breite nehmen */
   .loginCard form {
     width: 100%;
   }
@@ -38,7 +28,6 @@
     height: 48px;
   }
 
-  /* Layout: alles fließt kompakt von oben nach unten */
   .contentWrapper {
     display: flex;
     flex-direction: column;
@@ -47,7 +36,6 @@
     overflow: auto;
   }
 
-  /* Main-Bereich: Card vertikal zentriert im verfügbaren Raum */
   .loginMainContainer {
     flex: 1;
     padding: 0 16px;
@@ -55,7 +43,6 @@
     justify-content: center;
   }
 
-  /* Nav: absolute aufheben, normal im Flow */
   .loginNav {
     position: relative;
     justify-content: center;
@@ -63,25 +50,21 @@
     margin: 16px;
   }
 
-  /* h1: 48px laut Figma, line-height reduziert für weniger Abstand zum Separator */
   .loginCard h1 {
     font-size: 48px;
     line-height: 75%;
   }
 
-  /* Signup Button: breiter + höher auf Mobile */
   .signupButtonWrapper .ButtonBlueFilled {
     min-width: 180px;
     min-height: 50px;
   }
 
-  /* Signup Pfeil: Position an kleineres Card-Padding anpassen */
   .signupBackArrow {
     top: 36px;
     left: 16px;
   }
 
-  /* Buttons: untereinander, gleiche Breite, 16px Font */
   .loginButtonsWrapper {
     flex-direction: column;
     align-items: center;
@@ -97,7 +80,6 @@
     font-size: 16px;
   }
 
-  /* Privacy-Link: min 120x36 laut Figma (Touch-Target) */
   .signupPrivacyLink {
     display: inline-block;
     min-width: 120px;
@@ -105,7 +87,6 @@
     line-height: 36px;
   }
 
-  /* ===== LOGIN LOGO: Animation-Overlay wird normales Element ===== */
   .logoAnimation.skipAnimation {
     position: relative;
     inset: auto;
@@ -120,7 +101,6 @@
     translate: none;
   }
 
-  /* Wenn Animation noch läuft: bleibt fullscreen */
   .logoAnimation:not(.skipAnimation) .logoWrapper {
     animation: logoMoveMobile 900ms ease-in-out forwards;
   }
@@ -132,7 +112,6 @@
     }
   }
 
-  /* ===== SIGNUP LOGO: linksbündig ===== */
   .signupLogo {
     position: relative;
     top: auto;
@@ -142,7 +121,6 @@
     margin-right: auto;
   }
 
-  /* Footer: nach Nav (order 2), klebt unten */
   .loginFooter {
     position: relative;
     bottom: auto;
@@ -154,12 +132,8 @@
   }
 }
 
-
-/* ----- Breakpoint 2: 450px ----- */
-
 @media (max-width: 450px) {
 
-  /* Main: kein Flex-Centering mehr */
   .loginMainContainer {
     flex: unset;
     justify-content: flex-start;
@@ -167,23 +141,19 @@
     margin-top: 30px;
   }
 
-  /* Nur Login: margin-top kompensiert Logo (out of flow) */
   .logoAnimation ~ .loginMainContainer {
     margin-top: 156px;
   }
 
-  /* Card: noch weniger Padding */
   .contentWrapper .loginCard {
     padding: 36px 16px;
   }
 
-  /* h1 bleibt bei 48px laut Figma */
   .loginCard h1 {
     font-size: 48px;
     padding-top: 16px;
   }
 
-  /* Nav-Text: 20px laut Figma */
   .loginNewUserWrapper {
     font-size: 20px;
     gap: 24px;
@@ -197,29 +167,25 @@
     text-align: center;
   }
 
-  /* Buttons in Card etwas schmaler */
   .loginButtonsWrapper {
     gap: 24px;
   }
 
-  /* Nav: vertikal zentrieren im verbleibenden Platz */
   .loginNav {
     margin-top: auto;
     margin-bottom: auto;
   }
 
-  /* Footer: kein auto-margin mehr, Nav übernimmt Zentrierung */
   .loginFooter {
     margin-top: 0;
   }
 
-  /* Separator: 88px breit laut Figma */
   .Separator {
     width: 88px;
     margin-top: 0px;
   }
 
-  /* Login Logo: immer out of flow, Platz wird durch margin-top auf Main kompensiert */
+ 
   .logoAnimation.skipAnimation {
     inset: auto;
     position: absolute;
@@ -228,7 +194,6 @@
     margin: 24px;
   }
 
-  /* ===== MOBILE LOGO ANIMATION: Dunkelblau → Transparent, Weiß → Dunkel ===== */
   .logoAnimation:not(.skipAnimation) {
     background-color: #2A3647;
     animation: bgFadeMobile 900ms linear forwards;
@@ -249,7 +214,6 @@
     100% { opacity: 0; }
   }
 
-  /* Sign-up Logo noch kleiner */
   .signupLogo {
     height: 78px;
     margin: 24px;

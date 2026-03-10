@@ -1,5 +1,6 @@
 checkSessionForAnimation();
 
+
 /** Validates credentials and redirects on success */
 async function login() {
   document.getElementById('loginError').textContent = '';

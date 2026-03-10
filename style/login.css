@@ -1,6 +1,4 @@
-/* =========================
-   Login Page – Logo Animation
-   ========================= */
+/* Logo Animation */
 
 .logoAnimation {
   position: fixed;
@@ -56,9 +54,7 @@
   translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
 }
 
-/* =========================
-   Login Page – Layout
-   ========================= */
+/* Login Page – Layout */
 
 h1 {
   text-align: center;

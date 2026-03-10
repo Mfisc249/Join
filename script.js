@@ -13,6 +13,7 @@ function checkAuth() {
   }
 }
 
+
 checkAuth();
 
 
@@ -22,22 +23,19 @@ checkAuth();
  */
 function initPasswordToggles() {
   let wrappers = document.querySelectorAll(".InputWrapper");
-
   wrappers.forEach(function (wrapper) {
     let input = wrapper.querySelector('input[type="password"]');
     if (!input) return;
-
     let icon = wrapper.querySelector(".InputFieldIcon");
-
     input.addEventListener("input", function () {
       updatePasswordIcon(input, icon);
     });
-
     icon.addEventListener("click", function () {
       togglePasswordVisibility(input, icon);
     });
   });
 }
+
 
 /**
  * Updates the password field icon based on whether the input has content.
@@ -56,6 +54,7 @@ function updatePasswordIcon(input, icon) {
     icon.classList.remove("clickable");
   }
 }
+
 
 /**
  * Toggles password visibility between hidden and visible states.
