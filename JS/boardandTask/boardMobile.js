@@ -22,6 +22,7 @@ function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
     let refMobileArrowsMoveTaskID = document.getElementById(mobileArrowsMoveTaskID);
     let mobileArrowsMoveTaskPosition = refMobileArrowsMoveTaskID.getBoundingClientRect();
     let refDiv = document.createElement("div");
+    refDiv.id = "taskMobileMove";
     checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition);
     document.getElementById('app-canvas').appendChild(refDiv);
 }
@@ -53,7 +54,7 @@ function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
 }
 
 function removeMobileMoveTask() {
-    document.querySelector(".taskMobileMove").remove();
+    document.getElementById("taskMobileMove").remove();
 }
 
 function taskMoveUpMobile(taskID) {

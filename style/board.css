@@ -246,6 +246,30 @@ body {
 
     .taskMobileMove {
         border-radius: 0px 20px 20px 20px !important;
+        
+    }
+
+    .taskMobileMove span {
+        color: var(--GlobalWhite) !important; 
+        font-size: 20px !important;
+        text-align: center !important;
+    }
+
+    .submenu{
+        width: 120px;
+        height: 130px;
+        padding: 5px;
+        align-items: unset;
+        justify-content: center !important;
+    }
+
+    .submenu-item{
+        width: unset;
+        height: unset; 
+        padding: unset;
+        justify-content: center !important;
+        margin-block-start: unset !important;
+        margin-block-end: unset !important;
     }
 
 }
