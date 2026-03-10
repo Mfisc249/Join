@@ -1,0 +1,116 @@
+/* ===============================
+   CONTACTS - MOBILE MODAL OVERRIDES
+   Only active on screens <= 768px
+   =============================== */
+
+@media (max-width: 768px) {
+
+  /* Close button - inside contact-modal-left, top-right of blue area */
+  .contact-modal-close {
+    position: absolute !important;
+    top: 24px !important;
+    right: 24px !important;
+    width: 32px !important;
+    height: 32px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    z-index: 2000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 56px !important;
+  }
+
+  .contact-modal-close img {
+    width: 24px !important;
+    height: 24px !important;
+    filter: brightness(0) invert(1) !important;
+  }
+
+  .contact-modal-close:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* Avatar - negative margin to straddle blue/white boundary */
+  .contact-modal-avatar-wrap {
+    position: relative !important;
+    margin: -60px auto 24px !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 120px !important;
+    height: 120px !important;
+    z-index: 100 !important;
+  }
+
+  .contact-modal-avatar {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 70px !important;
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Body layout - no extra padding, avatar handles spacing */
+  .contact-modal-body {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    position: relative !important;
+  }
+
+  /* Right panel - overflow visible so avatar can extend above */
+  .contact-modal-right {
+    overflow: visible !important;
+  }
+
+  /* Form */
+  .contact-modal-form {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .contact-input {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Actions */
+  .contact-modal-actions {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 32px !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .btn-secondary-outline {
+    display: none !important;
+  }
+
+  .modal-error {
+    display: none !important;
+  }
+}

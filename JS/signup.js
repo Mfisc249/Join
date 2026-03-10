@@ -20,6 +20,10 @@ async function signUp() {
 }
 
 
+/**
+ * returns the DOM Elements from the signup Form
+ * @returns {Object} signup object
+ */
 function getSignupData() {
   return {
     name: document.getElementById('signupName'),
@@ -30,12 +34,18 @@ function getSignupData() {
 }
 
 
+/** Shows error if the email is already registered */
 function showSignupError() {
   document.getElementById('signupEmail').classList.add('InputFieldError');
   document.getElementById('signupError').textContent = 'This email is already registered.';
 }
 
 
+/**
+ * starts email check and returns logindata and email
+ * @param {string} email - the entered email
+ * @returns {boolean} True if email is already registered
+ */
 async function checkEmailExists(email) {
   let loginData = await fetchLoginData();
   return checkEmailData(loginData, email);
@@ -73,6 +83,11 @@ function checkSignupInputs(name, email, password, confirm) {
 }
 
 
+/**
+ * checks inputs and trims name, if first and last name are entered, shows error messages, and returns true if correct
+ * @param {HTMLInputElement} name - entered name from input
+ * @returns {boolean} return false if only one name or nothing is entered
+ */
 function validateName(name) {
   if (name.value.trim() === '') {
     showInputError(name, 'Please enter your name.');
@@ -93,6 +108,11 @@ function isValidEmail(email) {
 }
 
 
+/**
+ * renders error messages and adds red borders at inputs
+ * @param {HTMLInputElement} input - value of input
+ * @param {string} message - message recived from function validate name 
+ */
 function showInputError(input, message) {
   input.classList.add('InputFieldError');
   let errorSpan = document.getElementById('signupError');
@@ -102,6 +122,7 @@ function showInputError(input, message) {
 }
 
 
+/** clears the error messages and removes error css for all inputs */
 function clearSignupErrors() {
   document.getElementById('signupError').textContent = '';
   let inputs = document.querySelectorAll('.InputField');
@@ -111,6 +132,12 @@ function clearSignupErrors() {
 }
 
 
+/**
+ * collects all data from user
+ * @param {string} name - entered value 
+ * @param {string} email - entered value
+ * @param {string} password - entered value
+ */
 async function gatherUserInfo(name, email, password) {
   let id = await getNextContactId();
   let initials = generateInitials(name);
@@ -121,6 +148,15 @@ async function gatherUserInfo(name, email, password) {
 }
 
 
+/**
+ * Creates new user object in Contacts in Firebase
+ * @param {string} id - user id
+ * @param {string} color - user color
+ * @param {string} date - date of creation
+ * @param {string} email - entered value in input
+ * @param {string} initials - Created from user first and last name
+ * @param {string} name - entered value in input
+ */
 async function createNewUserContact(id, color, date, email, initials, name) {
   await fetch(FIREBASE_URL + `/Contacts/${id}.json`, {
     method: 'PUT',
@@ -139,6 +175,12 @@ async function createNewUserContact(id, color, date, email, initials, name) {
 }
 
 
+/**
+ * creates new login data for user in logindata in firebase
+ * @param {string} id - contact user id
+ * @param {string} email - entered value in input
+ * @param {string} password - entered value in input
+ */
 async function createNewUserLogin(id, email, password) {
   await fetch(FIREBASE_URL + `/LoginData/${id}.json`, {
     method: 'PUT',
@@ -151,6 +193,10 @@ async function createNewUserLogin(id, email, password) {
 }
 
 
+/**
+ * Creates toast element with success message after successful signup
+ * @param {string} message - the success message
+ */
 function showToast(message) {
   let toast = document.createElement('div');
   toast.className = 'Toast';
@@ -162,6 +208,7 @@ function showToast(message) {
 }
 
 
+/** Toggles the signup button by checking all inputs */
 function toggleSignupButton() {
   let name = getSignupUserName();
   let email = getSignupEmail();
@@ -173,24 +220,37 @@ function toggleSignupButton() {
 }
 
 
+/**
+ * Gets trimmed signup name
+ * @returns {string} Trimmed name
+ */
 function getSignupUserName() {
   let name = document.getElementById('signupName').value.trim();
   return name;
 }
 
 
+/**
+ * Gets trimmed email from signup
+ * @returns {string} Trimmed email
+ */
 function getSignupEmail() {
   let email = document.getElementById('signupEmail').value.trim();
   return email;
 }
 
 
+/**
+ * gets password from signup
+ * @returns {string} returns password
+ */
 function getSignupPassword() {
   let password = document.getElementById('signupPassword').value;
   return password;
 }
 
 
+/** Initializes signup: prevents refresh, places event listeners on inputs to toggle signup button and change eye icon */
 function initSignup() {
   let form = document.querySelector('form');
   form.addEventListener('submit', function (event) {
@@ -209,6 +269,10 @@ function initSignup() {
 }
 
 
+/**
+ * fetches complete database contacts and extracts next highest free number for new user id
+ * @returns {string} new user id
+ */
 async function getNextContactId() {
   let response = await fetch(FIREBASE_URL + '/Contacts.json');
   let contacts = await response.json();
@@ -225,6 +289,11 @@ async function getNextContactId() {
 }
 
 
+/**
+ * generates initals from user first and last name
+ * @param {string} name - user first and last name
+ * @returns {string} Uppercase initials (e.g. 'SM')
+ */
 function generateInitials(name) {
   let parts = name.split(' ');
   let initials = parts[0][0] + parts[1][0];
@@ -232,6 +301,10 @@ function generateInitials(name) {
 }
 
 
+/**
+ * Assigns random color to new user
+ * @returns {string} user color
+ */
 function generateRandomColor() {
   let colors = [
     '#FF7A00',
