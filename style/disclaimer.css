@@ -1,4 +1,4 @@
-/* disclaimer.css for legal_notice.html, privacy_policy.html and help.html */
+/* disclaimer.css incl. responsive for legal_notice.html, privacy_policy.html and help.html */
 
 .canvas-area.disclaimer-text {
   box-sizing: border-box;
@@ -55,5 +55,34 @@
   .header {
     left: 0;
     width: 100vw;
+  }
+}
+
+.canvas-area.disclaimer-text {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .canvas-area.disclaimer-text {
+    padding: 32px 24px 48px;
+  }
+
+  .canvas-area.disclaimer-text h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 400px) {
+  .canvas-area.disclaimer-text {
+    padding: 24px 16px 48px;
+  }
+
+  .canvas-area.disclaimer-text ul {
+    margin-left: 8px;
+  }
+
+  .canvas-area.disclaimer-text ul ul {
+    margin-left: 4px;
   }
 }
