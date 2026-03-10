@@ -167,8 +167,7 @@
   }
 
   .details-actions {
-    flex-direction: row;
-    gap: 16px;
+    display: none;
   }
 
   /* Mobile back button in details */
@@ -178,7 +177,7 @@
     justify-content: center;
     position: fixed;
     top: 16px;
-    left: 16px;
+    right: 16px;
     width: 40px;
     height: 40px;
     background: #2A3647;
