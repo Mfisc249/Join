@@ -23,8 +23,10 @@ function closedialog(ID) {
 function openTaskDetails(taskID) {
     let reftaskDetails = document.getElementById('allTaskDetails');
     reftaskDetails.innerHTML = taskDetailsTamplate(taskID);
-    renderSubtasks(taskID);
+    taskCatagory(taskID, document.getElementById('taskDetailsCatagory'));
+    renderSubtasksTaskDetails(taskID);
     getTaskDetailsContacts(taskID, 1);
+    taskCheckPriority(taskID, document.getElementById(`taskDetailsPriorityContainer${taskID}`));
 }
 
 /** Hides one element and shows another. */
@@ -69,14 +71,13 @@ function toggleSubtaskCheckboxVisibility(uncheckedCheckboxId, checkedCheckboxId)
 }
 
 /** Renders all subtasks for a task and initializes their status. */
-function renderSubtasks(taskID) {
-    let subTaskReviewStatus = TASK[0][`Task${taskID}`].subTasksReview; //await DataGET(`Tasks/Task${taskID}/subTasksReview`);
+function renderSubtasksTaskDetails(taskID) {
+    let subTaskReviewStatus = TASK[0][`Task${taskID}`].subTasksReview; 
     subtaskStatusList = [];
-    let subTasksString = TASK[0][`Task${taskID}`].subTasks; //await DataGET(`Tasks/Task${taskID}/subTasks`);
-    let subTaskCount = (subTasksString.match(/,/g)||[]).length +1;
+    let subTasksString = TASK[0][`Task${taskID}`].subTasks; 
     document.getElementById('subTasks').innerHTML = "";
-    for (let subtaskID = 0; subtaskID < subTaskCount; subtaskID++) {
-        let subTask = subTasksString.split(',')[subtaskID];
+    for (let subtaskID = 0; subtaskID < subTasksString.length; subtaskID++) {
+        let subTask = subTasksString[`${subtaskID}`];
         subtaskStatusList.push(subTaskReviewStatus[0].split(',')[subtaskID]);
         document.getElementById('subTasks').innerHTML += subtaskTamplate(subtaskID, subTask);
         updateSubtaskCheckboxDisplay(subtaskID);
@@ -119,3 +120,4 @@ async function storeSubtask() {
 
     updateSubtaskProgressbar(currentTaskId);
 }
+

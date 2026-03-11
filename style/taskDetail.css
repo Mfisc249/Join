@@ -41,7 +41,6 @@ dialog.closed::backdrop {
 }
 
 .taskCatagory{
-    background-color: var( --taskLightBlue);
     color: var(--GlobalWhite);
     padding: 4px 24px 4px 24px;
     border-radius: 8px;
@@ -55,13 +54,12 @@ dialog.closed::backdrop {
 
 
 .allTaskDetails h2{
-    font-size: 24px;
     color: var(--GlobalBlue);
     margin: 0;
 }
 
 .allTaskDetails td{
-    font-size: 24px;
+    font-size: 20px;
     padding-bottom: 25px;
 }
 
@@ -114,4 +112,16 @@ dialog.closed::backdrop {
 .taskDetailsATContainer{
     display: flex;
     align-items: center;
+}
+
+.taskDetailsATContainer span:not(:first-child){
+    font-size: 20px;
+}
+
+.maxWith525{
+    max-width: 525px;
+}
+
+.minWith350{
+    min-width: 350px;
 }

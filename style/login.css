@@ -1,6 +1,4 @@
-/* =========================
-   Login Page – Logo Animation
-   ========================= */
+/* Logo Animation */
 
 .logoAnimation {
   position: fixed;
@@ -14,9 +12,22 @@
   z-index: 100;
 }
 
-.logoAnimation img {
+.logoWrapper {
+  position: relative;
   height: 330px;
   animation: logoMove 900ms ease-in-out forwards;
+}
+
+.logoWrapper .logoDark,
+.logoWrapper .logoWhite {
+  height: 100%;
+}
+
+.logoWrapper .logoWhite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
 }
 
 @keyframes bgFade {
@@ -28,20 +39,31 @@
 @keyframes logoMove {
   to {
     height: 120px;
-     translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+    translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
   }
 }
 
+.logoAnimation.skipAnimation {
+  animation: none;
+  background-color: transparent;
+}
 
-/* =========================
-   Login Page – Layout
-   ========================= */
+.logoAnimation.skipAnimation .logoWrapper {
+  animation: none;
+  height: 120px;
+  translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+}
+
+/* Login Page – Layout */
 
 h1 {
   text-align: center;
 }
 
 .loginNav {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: flex;
   justify-content: flex-end;
   padding: 48px;
@@ -59,6 +81,7 @@ h1 {
 
 .loginNewUserWrapper .ButtonBlueFilled {
   padding: 16px;
+  text-decoration: none;
 }
 
 .loginButtonsWrapper {

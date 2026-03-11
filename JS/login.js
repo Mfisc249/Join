@@ -1,94 +1,129 @@
-getLoginHtml(); 
+checkSessionForAnimation();
 
 
-/**
- * Loads and displays the login HTML content in the content container
- */
-function getLoginHtml() {
-   document.getElementById('content').innerHTML = loginHtml();
-   initPasswordToggles();
+/** Validates credentials and redirects on success */
+async function login() {
+  document.getElementById('loginError').textContent = '';
+  let email = document.getElementById('loginEmail').value;
+  let password = document.getElementById('loginPassword').value;
+  document.getElementById('loginButton').disabled = true;
+  let loginData = await fetchLoginData();
+  let userKey = checkLoginData(loginData, email, password);
+
+  if (userKey) {
+    await startUserSession(userKey);
+  } else {
+    showLoginError();
+  }
 }
 
 
 /**
- * Handles the login process by validating user credentials
- * Displays error messages if login fails, redirects to summary page on success
- * @async
+ * Transmits the user key and starts the session. 
+ * @param {string} userKey - corresponds to key in login-data json
  */
-async function login() {
-    document.getElementById('loginError').textContent = '';
-    let email = document.getElementById('loginEmail').value;
-    let password = document.getElementById('loginPassword').value;
-    document.getElementById('loginButton').disabled = true;
-    let loginData = await getLoginData();
-    let isValid = checkLoginData(loginData, email, password);
-    
-    if (isValid) {
+async function startUserSession(userKey) {
+    await saveLoggedInUser(userKey);
     window.location.href = 'summary.html';
-    document.getElementById('loginButton').disabled = false;
-    } else {
+}
+
+
+/** shows login-Error with red borders and show message, disables button */
+function showLoginError() {
     document.getElementById('loginEmail').classList.add('InputFieldError');
     document.getElementById('loginPassword').classList.add('InputFieldError');
-    document.getElementById('loginError').textContent = 'Check your email and password. Please try again.';
+    document.getElementById('loginError').textContent =
+      'Check your email and password. Please try again.';
     document.getElementById('loginButton').disabled = false;
-    }
 }
 
 
 /**
- * Fetches login data from Firebase database
- * @async
- * @returns {Promise<Object>} Object containing user login data
+ * saves user in session storage
+ * @param {string} userKey - same as contacts/login key in firebase
  */
-async function getLoginData() {
-    let response = await fetch('https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/LoginData.json');
-    let data = await response.json();
-    return data;
+async function saveLoggedInUser(userKey) {
+  let user = await fetchContactData(userKey);
+  let name = user.name;
+  let initials = user.initials;
+  let color = user.color;
+
+  sessionStorage.setItem('contactId', userKey);
+  sessionStorage.setItem('userName', name);
+  sessionStorage.setItem('userInitials', initials);
+  sessionStorage.setItem('userColor', color);
+
+  sessionStorage.setItem('isGuest', 'false');
 }
 
 
 /**
- * Validates user credentials against stored login data
- * @param {Object} loginData - Object containing all user login credentials
- * @param {string} email - Email address entered by the user
- * @param {string} password - Password entered by the user
- * @returns {boolean} True if credentials are valid, false otherwise
+ * Fetches contact data for a user from Firebase
+ * @param {string} userKey - The contact ID in Firebase
+ * @returns {Object} the contact object with name, initials, color, email etc.
+ */
+async function fetchContactData(userKey) {
+  let response = await fetch(
+    `https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/Contacts/${userKey}.json`,
+  );
+  let contactData = await response.json();
+  return contactData;
+}
+
+
+/** 
+ * Checks the login input values vs. database.
+ * @param {Object} loginData - all login entries from Firebase
+ * @param {string} email - the entered email address
+ * @param {string} password - the entered password
+ * @returns {string|false} the user key if match found, false otherwise
  */
 function checkLoginData(loginData, email, password) {
-    let users = Object.values(loginData);
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].password === password) {
-            return true;
-        }
+  let users = Object.keys(loginData);
+  for (let i = 0; i < users.length; i++) {
+    if (loginData[users[i]].email === email && loginData[users[i]].password === password) {
+      return users[i];
     }
-    return false;
+  }
+  return false;
 }
 
 
-/**
- * Event listener for login button
- * Prevents default form submission and triggers login function
- */
-document.getElementById('loginButton').addEventListener('click', function(event) {
-    event.preventDefault();
-    login();
+document.getElementById('loginButton').addEventListener('click', function (event) {
+  event.preventDefault();
+  login();
 });
 
 
-/**
- * Event listener for guest login button
- * Redirects directly to summary page without authentication
- */
-document.getElementById('guestButton').addEventListener('click', function() {
-    window.location.href = 'summary.html';
+document.getElementById('guestButton').addEventListener('click', function () {
+  setGuest();
+  window.location.href = 'summary.html';
 });
 
-/**
- * Event listener for email input field
- * Removes error styling from both email and password fields when user types
- */
-document.getElementById('loginEmail').addEventListener('input', function(event) {
-    event.target.classList.remove('InputFieldError');
-    document.getElementById('loginPassword').classList.remove('InputFieldError');
+
+/** saves guestlogin in sessionStorage */
+function setGuest() {
+  sessionStorage.setItem('contactId', '');
+  sessionStorage.setItem('userName', '');
+  sessionStorage.setItem('userInitials', 'G');
+  sessionStorage.setItem('userColor', '#2A3647');
+  sessionStorage.setItem('isGuest', 'true');
+}
+
+/** eventlistner removes error-message at new input */
+document.getElementById('loginEmail').addEventListener('input', function (event) {
+  event.target.classList.remove('InputFieldError');
+  document.getElementById('loginPassword').classList.remove('InputFieldError');
 });
 
+
+/** checks sessionStorage if the animation already played and removes the skipAnimation if necessary */
+function checkSessionForAnimation() {
+  if (!sessionStorage.getItem('animationPlayed')) {
+    document.getElementById('logoAnimation').classList.remove('skipAnimation');
+    sessionStorage.setItem('animationPlayed', 'true');
+  }
+}
+
+
+initPasswordToggles();

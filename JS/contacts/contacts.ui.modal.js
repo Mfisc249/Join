@@ -2,7 +2,11 @@
 
 window.ContactsApp = window.ContactsApp || {};
 
+/** @namespace ContactsApp.uiModal */
 ContactsApp.uiModal = {
+  /**
+   * Registers click, overlay-dismiss, submit, and Escape-key listeners for the modal.
+   */
   initModalListeners() {
     const overlay = document.getElementById('contactOverlay');
     const closeBtn = document.getElementById('contactModalClose');
@@ -35,6 +39,11 @@ ContactsApp.uiModal = {
     }
   },
 
+  /**
+   * Opens the contact modal in add or edit mode.
+   * @param {'add'|'edit'} mode - Whether to add a new or edit an existing contact.
+   * @param {Object|null} [contact=null] - The contact to edit (null for add).
+   */
   open(mode, contact = null) {
     ContactsApp.state.modal.mode = mode;
     ContactsApp.state.modal.contactId = contact ? contact.id : null;
@@ -58,7 +67,11 @@ ContactsApp.uiModal = {
       title.textContent = 'Add contact';
       subtitle.classList.remove('d-none');
 
-      deleteBtn.classList.remove('d-none');
+      if (window.innerWidth <= 768) {
+        deleteBtn.classList.add('d-none');
+      } else {
+        deleteBtn.classList.remove('d-none');
+      }
       deleteBtn.innerHTML = 'Cancel <img src="./assets/img/iconoir_cancel.svg" alt="" class="btn-cancel-x">';
       deleteBtn.onclick = () => this.close();
 
@@ -88,19 +101,24 @@ ContactsApp.uiModal = {
       initialsEl.textContent = ContactsApp.validation.generateInitials(contact?.name || '');
       initialsEl.classList.remove('d-none');
       avatarIcon.classList.add('d-none');
-      avatar.style.background = contact?.color || ContactsApp.validation.generateRandomColor();
+      avatar.style.background = contact?.color || '#2A3647';
     }
 
     document.getElementById('contactOverlay').classList.remove('d-none');
     setTimeout(() => nameEl.focus(), 0);
   },
 
+  /** Closes the modal and resets internal state. */
   close() {
     document.getElementById('contactOverlay').classList.add('d-none');
     ContactsApp.state.modal.mode = 'edit';
     ContactsApp.state.modal.contactId = null;
   },
 
+  /**
+   * Handles form submission — validates, persists, and refreshes the list.
+   * @param {SubmitEvent} e - The form submit event.
+   */
   async onSubmit(e) {
     e.preventDefault();
 
@@ -126,14 +144,14 @@ ContactsApp.uiModal = {
 
       this.close();
     } catch (err) {
-      console.error(err);
-      alert('Speichern fehlgeschlagen (siehe Console).');
+      alert('Speichern fehlgeschlagen.');
     } finally {
       saveBtn.disabled = false;
       delBtn.disabled = false;
     }
   },
 
+  /** Deletes the currently opened contact after user confirmation. */
   async onDelete() {
     const id = ContactsApp.state.modal.contactId;
     if (!id) return;
@@ -147,10 +165,19 @@ ContactsApp.uiModal = {
     const delBtn = document.getElementById('contactModalDeleteBtn');
     saveBtn.disabled = true;
     delBtn.disabled = true;
-
     try {
+      const myId = sessionStorage.getItem('contactId');
+      const isMe = contact.id === myId;
+
       await ContactsApp.firebase.deleteContact(contact.id);
       await ContactsApp.tasks.removeContactFromAllTasks(contact.id);
+
+      if (isMe) {
+        // clear session and redirect out if user deleted their own account
+        sessionStorage.clear();
+        window.location.href = './index.html';
+        return;
+      }
 
       ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
       ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
@@ -161,14 +188,17 @@ ContactsApp.uiModal = {
 
       this.close();
     } catch (err) {
-      console.error(err);
-      alert('Löschen fehlgeschlagen (siehe Console).');
+      alert('Löschen fehlgeschlagen.');
     } finally {
       saveBtn.disabled = false;
       delBtn.disabled = false;
     }
   },
 
+  /**
+   * Reads the current form values into a draft object.
+   * @returns {{name: string, email: string, phone: string}} Draft data.
+   */
   _readDraft() {
     return {
       name: document.getElementById('modalName').value.trim(),
@@ -177,6 +207,10 @@ ContactsApp.uiModal = {
     };
   },
 
+  /**
+   * Saves or updates a contact in Firebase.
+   * @param {{name: string, email: string, phone: string}} draft - The contact data to persist.
+   */
   async _persistDraft(draft) {
     const now = new Date().toISOString();
     const initials = ContactsApp.validation.generateInitials(draft.name);
@@ -196,6 +230,7 @@ ContactsApp.uiModal = {
     });
   },
 
+  /** Re-selects the edited contact in the list after a successful save. */
   _reselectAfterEdit() {
     const id = ContactsApp.state.modal.contactId;
     const updated = ContactsApp.state.contacts.find(c => c.id === id);
@@ -203,12 +238,19 @@ ContactsApp.uiModal = {
     if (updated && item) ContactsApp.uiList.selectContact(updated, item);
   },
 
+  /** Clears all validation error messages in the modal. */
   _clearErrors() {
     document.getElementById('modalErrName').textContent = '';
     document.getElementById('modalErrEmail').textContent = '';
     document.getElementById('modalErrPhone').textContent = '';
   },
 
+  /**
+   * Displays validation errors next to the corresponding fields.
+   * @param {string[]} errors - Array of error messages.
+   * @param {HTMLButtonElement} saveBtn - Save button to re-enable.
+   * @param {HTMLButtonElement} delBtn - Delete/Cancel button to re-enable.
+   */
   _showErrors(errors, saveBtn, delBtn) {
     errors.forEach(msg => {
       const low = msg.toLowerCase();

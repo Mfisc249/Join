@@ -1,0 +1,77 @@
+/* disclaimer.css incl. responsive for legal_notice.html, privacy_policy.html and help.html */
+
+.canvas-area.disclaimer-text {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 96px 64px;
+  text-align: left;
+}
+
+.canvas-area.disclaimer-text h1,
+.canvas-area.disclaimer-text h2,
+.canvas-area.disclaimer-text h3 {
+  text-align: left;
+}
+
+.canvas-area.disclaimer-text h1 {
+  margin: 0 0 16px;
+}
+
+.canvas-area.disclaimer-text h2 {
+  margin: 28px 0 10px;
+}
+
+.canvas-area.disclaimer-text p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.canvas-area.disclaimer-text ul {
+  margin: 0 0 12px 18px;
+}
+
+.legal-highlight {
+  color: var(--GlobalLightBlue);
+  font-weight: 400;
+  text-decoration: none;
+  cursor: default;
+}
+
+.page-help .header-help-btn{
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+/* Responsive */
+/* .main und .header left:0 wird in standard.css bei 768px gesetzt (sync mit sidebar display:none) */
+
+.canvas-area.disclaimer-text {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .canvas-area.disclaimer-text {
+    padding: 32px 24px 48px;
+  }
+
+  .canvas-area.disclaimer-text h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 400px) {
+  .canvas-area.disclaimer-text {
+    padding: 24px 16px 48px;
+  }
+
+  .canvas-area.disclaimer-text ul {
+    margin-left: 8px;
+  }
+
+  .canvas-area.disclaimer-text ul ul {
+    margin-left: 4px;
+  }
+}
