@@ -58,7 +58,11 @@ ContactsApp.uiModal = {
       title.textContent = 'Add contact';
       subtitle.classList.remove('d-none');
 
-      deleteBtn.classList.remove('d-none');
+      if (window.innerWidth <= 768) {
+        deleteBtn.classList.add('d-none');
+      } else {
+        deleteBtn.classList.remove('d-none');
+      }
       deleteBtn.innerHTML = 'Cancel <img src="./assets/img/iconoir_cancel.svg" alt="" class="btn-cancel-x">';
       deleteBtn.onclick = () => this.close();
 
@@ -88,7 +92,7 @@ ContactsApp.uiModal = {
       initialsEl.textContent = ContactsApp.validation.generateInitials(contact?.name || '');
       initialsEl.classList.remove('d-none');
       avatarIcon.classList.add('d-none');
-      avatar.style.background = contact?.color || ContactsApp.validation.generateRandomColor();
+      avatar.style.background = contact?.color || '#2A3647';
     }
 
     document.getElementById('contactOverlay').classList.remove('d-none');

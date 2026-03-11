@@ -503,6 +503,8 @@ h3 {
   .main {
     left: 0;
     width: 100vw;
+    top: 80px;
+    height: calc(100vh - 80px);
     padding-bottom: 100px; /* Space for bottom nav */
   }
 }

@@ -81,6 +81,12 @@ ContactsApp.mobile = {
     
     if (content) content.classList.remove('mobile-details-open');
     if (mobileBackBtn) mobileBackBtn.classList.add('hidden');
+
+    document.querySelectorAll('.contact-item').forEach(i => {
+      i.classList.remove('active');
+      i.setAttribute('aria-selected', 'false');
+    });
+    ContactsApp.state.selectedContactId = null;
     
     this._updateFabVisibility();
   },

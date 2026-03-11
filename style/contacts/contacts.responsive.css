@@ -10,11 +10,25 @@
 
 @media (max-width: 900px) {
   .content {
-    grid-template-columns: 1fr;
+    grid-template-columns: 280px 1fr;
   }
-  
-  .details {
-    display: none;
+
+  .details-card {
+    width: 100%;
+  }
+
+  .details-card-top {
+    width: 100%;
+    gap: 24px;
+  }
+
+  .details-name {
+    font-size: 28px;
+    width: auto;
+  }
+
+  .details-name-actions {
+    width: auto;
   }
 }
 
@@ -120,6 +134,10 @@
     border-right: none;
   }
 
+  .contacts-panel-header {
+    display: none;
+  }
+
   /* Details: hidden by default, shown when contact is selected */
   .details {
     display: none;
@@ -145,15 +163,41 @@
 
   /* Details card adjustments */
   .details-card {
-    padding: 24px 16px;
+    padding: 24px 0;
   }
 
   .details-headline {
-    margin-bottom: 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 16px;
   }
 
   .details-headline h1 {
     font-size: 48px;
+  }
+
+  .details-sub {
+    order: 1;
+  }
+
+  .details-divider {
+    order: 2;
+    width: 100px;
+    height: 3px;
+  }
+
+  .details-card {
+    margin-top: 16px;
+    gap: 12px;
+    height: auto;
+    width: 100%;
+  }
+
+  .details-card-top {
+    gap: 20px;
+    width: 100%;
+    height: auto;
   }
 
   .badge-large {
@@ -163,7 +207,28 @@
   }
 
   .details-name {
-    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    width: auto;
+  }
+
+  .details-name-actions {
+    width: auto;
+    height: auto;
+  }
+
+  .details-section-title {
+    height: auto;
+    margin-top: 4px;
+  }
+
+  .details-info {
+    height: auto;
+    width: auto;
   }
 
   .details-actions {
@@ -175,16 +240,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    top: 16px;
+    position: absolute;
+    top: 24px;
     right: 16px;
     width: 40px;
     height: 40px;
-    background: #2A3647;
-    border-radius: 50%;
+    background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 5001;
+    z-index: 10;
   }
 
   .mobile-back.hidden {
@@ -192,14 +256,13 @@
   }
 
   .mobile-back img {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1);
+    width: 32px;
+    height: 32px;
   }
 
-  /* Success notification mobile position - HIDDEN ON MOBILE */
+  /* Success notification mobile position */
   .contact-success-notification {
-    display: none; /* Hide success notification on mobile */
+    display: block; /* Show success notification on mobile */
   }
 
   /* ===========================
@@ -448,7 +511,6 @@
     border-radius: 70px !important;
     border: 3px solid #FFFFFF !important;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
-    background: #D1D1D1 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
