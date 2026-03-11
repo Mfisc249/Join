@@ -159,9 +159,8 @@ function createTaskTemplate(taskName, taskDescription) {
         Create Task
         <img class="createButtonIcon" src="assets/img/check-2.svg" />
       </button>
-    </main>
-    <footer>
-    </footer>
+      </div>
+      </div>
   `;
 }
 
@@ -224,8 +223,8 @@ function assignedToOptionTemplate(contact) {
   `;
 }
 
-function contactInitialsCircleTemplate(contact) {
-  const isSelected = task.assignedTo.includes(contact.name);
+function contactInitialsCircleTemplate(contact, key) {
+  const isSelected = task.assignedTo.includes(key);
   const selectedClass = isSelected ? "selected" : "";
   const checkboxImg = isSelected
     ? "./assets/img/checkButton.svg"
@@ -233,7 +232,7 @@ function contactInitialsCircleTemplate(contact) {
 
   return `
   <div class="assignedOption ${selectedClass}" 
-       onclick="toggleContact('${contact.name}', this)">
+       onclick="toggleContact('${key}', this)">
     <div class="contactLeft">
       <span class="contactInitialsCircle" 
             style="background-color: ${contact.color}">

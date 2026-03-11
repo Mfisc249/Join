@@ -63,11 +63,9 @@ function setDefaultPriority() {
 
 function formatDueDateInput(input) {
   input.addEventListener("input", () => {
-    // Nur Zahlen erlauben
     let val = input.value.replace(/[^\d]/g, "");
     if (val.length > 8) val = val.slice(0, 8);
 
-    // Automatisch Slashes setzen
     let formatted = "";
     if (val.length > 4) {
       formatted = val.slice(0, 2) + "/" + val.slice(2, 4) + "/" + val.slice(4);
@@ -83,14 +81,12 @@ function formatDueDateInput(input) {
 
 function validateDueDateInput(input) {
   input.addEventListener("blur", () => {
-    // Prüfen, ob Format DD/MM/YYYY korrekt ist
     const regex = /^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$/;
     if (!regex.test(input.value)) {
       input.value = "";
       return;
     }
 
-    // Prüfen, ob Datum in der Zukunft liegt
     const [d, m, y] = input.value.split("/").map(Number);
     const chosenDate = new Date(y, m - 1, d);
     const today = new Date();

@@ -12,7 +12,7 @@
   gap: 10px;
   width: 136px;
   height: 51px;
-  background-color: white; /* default */
+  background-color: white;
   border-radius: 10px;
   font-size: 20px;
   font-weight: 400;
@@ -20,7 +20,7 @@
   cursor: pointer;
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
   border: unset;
-  color: black; /* default Textfarbe */
+  color: black;
 }
 
 .priorityButton:hover {
@@ -43,10 +43,64 @@
 }
 
 .priorityButton .priorityIcon {
-  filter: none; /* normal */
+  filter: none;
 }
 
-/* Wenn Button aktiv: Icon wird weiß */
 .priorityButton.active .priorityIcon {
   filter: brightness(0) invert(1);
+}
+
+@media (max-width: 1392px) {
+  .priority {
+    gap: 237px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .priority {
+    gap: 147px;
+  }
+}
+
+@media (max-width: 1063px) {
+  .priority {
+    gap: 90px;
+  }
+}
+
+@media (max-width: 901px) {
+  .priority {
+    gap: 145px;
+    margin-top: 15px;
+  }
+}
+@media (max-width: 750px) {
+  .priority {
+    gap: 77px;
+    margin-top: 25px;
+  }
+  .priorityButton {
+    width: 130px;
+    height: 46px;
+    font-size: 18px;
+  }
+}
+@media (max-width: 610px) {
+  .priority {
+    gap: 12px;
+    margin-top: 25px;
+  }
+  .priorityButton {
+    width: 121px;
+    height: 43px;
+    font-size: 16px;
+  }
+  .priority {
+    gap: 7px;
+    margin-top: 25px;
+    width: 277px;
+  }
+  .priorityButton {
+    gap: 5px;
+  }
 }

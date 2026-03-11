@@ -65,8 +65,8 @@ function handleEditKey(event, index, value) {
 
 function handleSubtaskKeydown(event) {
   if (event.key === "Enter") {
-    event.preventDefault(); // 🚨 verhindert Form Submit
-    confirmSubtask(); // erstellt NUR den Subtask
+    event.preventDefault();
+    confirmSubtask();
   }
 }
 
@@ -80,8 +80,8 @@ function setupSubtaskEnter() {
 
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
-      event.preventDefault(); // verhindert Form Submit (Haupttask)
-      confirmSubtask(); // erstellt Subtask
+      event.preventDefault();
+      confirmSubtask();
     }
   });
 }

@@ -23,7 +23,7 @@ let task = {
 async function init() {
   renderTemplate();
   setupSubtaskEnter();
-  setupAssignedDropdownClose(); // <<< HIER
+  setupAssignedDropdownClose();
   setupLiveValidation();
   setupPriorityButtons();
   setDefaultPriority();
@@ -38,32 +38,42 @@ function renderTemplate() {
 async function saveTask(task) {
   try {
     const existingTasks = (await DataGET("Tasks")) || {};
-    const taskKeys = Object.keys(existingTasks);
+    const { taskID, taskKey } = generateTaskKey(existingTasks);
 
-    const taskID = taskKeys.length + count;
-    const taskKey = `Task${taskID}`;
-
-    await DataPUT(`Tasks/${taskKey}`, {
-      ...task,
-      id: taskID,
-
-      field: {
-        field: "field1",
-      },
-
-      subTasks: task.subtasks.join(","),
-
-      subTasksReview: [new Array(task.subtasks.length).fill("O").join(",")],
-    });
-
-    console.log("Task saved:", taskKey);
-
-    count++;
-    return taskKey;
+    return await saveTaskToFirebase(task, taskID, taskKey);
   } catch (error) {
     console.error("Fehler beim Speichern:", error);
     return null;
   }
+}
+
+async function saveTaskToFirebase(task, taskID, taskKey) {
+  const payload = {
+    ...task,
+    id: taskID,
+    field: { field: "field1" }, // Standard-Spalte
+    assignedTo: task.assignedTo, // ✅ als Array
+    subtasks: task.subtasks, // ✅ als Array
+    subTasksReview: {
+      0: task.subtasks.map(() => "U").join(","), // Subtask Status als String okay
+    },
+  };
+
+  await DataPUT(`Tasks/${taskKey}`, payload);
+  console.log("Task saved:", taskKey);
+  count++;
+  return taskKey;
+}
+
+function generateTaskKey(existingTasks) {
+  const keys = Object.keys(existingTasks || {}); // alle vorhandenen Tasks
+  const lastIndex =
+    keys.length > 0
+      ? Math.max(...keys.map((k) => parseInt(k.replace("Task", ""))))
+      : 0;
+  const taskID = lastIndex + 1;
+  const taskKey = "Task" + taskID;
+  return { taskID, taskKey };
 }
 
 async function createTask() {
@@ -74,7 +84,6 @@ async function createTask() {
   task.title = titleInput.value;
   task.description = descInput.value;
   task.dueDate = dateInput.value;
-
   task.category = selectedCategory;
 
   errorMessage();
@@ -83,20 +92,15 @@ async function createTask() {
   const taskKey = await saveTask(task);
 
   if (taskKey) {
-    // 🔹 HIER speichern
-    await DataPUT(`subtaskReview/${taskKey}`, task.subtasks);
-
     showToast();
     clearForm();
     renderNewTask(taskKey, task);
   }
 }
 
-function clearForm() {
-  // Formular zurücksetzen
+function resetTaskData() {
   document.getElementById("taskForm").reset();
 
-  // Task-Objekt auf Standardwerte zurücksetzen
   task = {
     title: "",
     description: "",
@@ -108,25 +112,32 @@ function clearForm() {
     field: "1",
     createdAt: null,
   };
+}
 
-  // Subtasks + Vorschau leeren
+function resetSubtasksAndCategory() {
   document.getElementById("subtaskInput").value = "";
   renderSubtasks();
 
-  // Kategorie zurücksetzen
   selectedCategory = "";
   document.getElementById("categoryLabel").textContent = "Select category";
+}
 
-  // Ausgewählte Kontakte zurücksetzen
+function resetAssignedContactsAndPriority() {
   document.getElementById("assignedPreviewContainer").innerHTML = "";
   renderSelectedContactsBelowInput();
 
-  // Alle Priorität-Buttons zurücksetzen und Standard setzen
   document
     .querySelectorAll(".priorityButton")
     .forEach((b) => b.classList.remove("active"));
   setDefaultPriority();
 }
+
+function clearForm() {
+  resetTaskData();
+  resetSubtasksAndCategory();
+  resetAssignedContactsAndPriority();
+}
+
 function showToast() {
   const toast = document.getElementById("toast");
   toast.classList.add("show");
