@@ -5,13 +5,16 @@
  */
 window.ContactsApp = window.ContactsApp || {};
 
+/** @namespace ContactsApp.mobile */
 ContactsApp.mobile = {
+  /** Initialises mobile-specific button bindings and resize handling. */
   init() {
     this._bindMobileButtons();
     this._handleMobileResize();
     window.addEventListener('resize', () => this._handleMobileResize());
   },
 
+  /** Binds listeners for back button, FABs, edit/delete, and outside-click dismiss. */
   _bindMobileButtons() {
     // Mobile back button
     const mobileBackBtn = document.getElementById('mobileBackBtn');
@@ -62,6 +65,7 @@ ContactsApp.mobile = {
     });
   },
 
+  /** Switches the mobile view to the contact details panel. */
   openMobileDetails() {
     const isMobile = window.innerWidth <= 768;
     if (!isMobile) return;
@@ -75,6 +79,7 @@ ContactsApp.mobile = {
     this._updateFabVisibility();
   },
 
+  /** Returns from the details panel to the contacts list on mobile. */
   closeMobileDetails() {
     const content = document.querySelector('.content');
     const mobileBackBtn = document.getElementById('mobileBackBtn');
@@ -91,6 +96,7 @@ ContactsApp.mobile = {
     this._updateFabVisibility();
   },
 
+  /** Toggles the mobile options (edit/delete) popup menu. */
   toggleMobileOptionsMenu() {
     const menu = document.getElementById('contactOptionsMenu');
     if (menu) {
@@ -98,6 +104,7 @@ ContactsApp.mobile = {
     }
   },
 
+  /** Closes the mobile options popup menu. */
   closeMobileOptionsMenu() {
     const menu = document.getElementById('contactOptionsMenu');
     if (menu) {
@@ -105,6 +112,7 @@ ContactsApp.mobile = {
     }
   },
 
+  /** Updates FAB visibility based on viewport width and current view state. */
   _updateFabVisibility() {
     const isMobile = window.innerWidth <= 768;
     if (!isMobile) {
@@ -133,6 +141,7 @@ ContactsApp.mobile = {
     }
   },
 
+  /** Resets mobile-specific state when the viewport exceeds the mobile breakpoint. */
   _handleMobileResize() {
     const isMobile = window.innerWidth <= 768;
     

@@ -2,7 +2,9 @@
 
 window.ContactsApp = window.ContactsApp || {};
 
+/** @namespace ContactsApp.page */
 ContactsApp.page = {
+  /** Initialises the contacts page — loads data, renders list, binds buttons. */
   async init() {
     if (ContactsApp.state.isInitialized) return;
 
@@ -19,11 +21,11 @@ ContactsApp.page = {
 
       ContactsApp.state.isInitialized = true;
     } catch (err) {
-      console.error('Fehler beim Initialisieren der Kontakte:', err);
       this._showListError('Kontakte konnten nicht geladen werden.');
     }
   },
 
+  /** Adds the logged-in user's own contact to the list if missing. */
   async _ensureCurrentUserContactInList() {
     const isGuest = sessionStorage.getItem('isGuest') === 'true';
     const myId = sessionStorage.getItem('contactId');
@@ -40,6 +42,7 @@ ContactsApp.page = {
     ContactsApp.state.contacts.unshift(me);
   },
 
+  /** Binds click listeners to add, edit, and delete buttons. */
   _bindButtons() {
     const addBtn = document.getElementById('addContactBtn');
     const editBtn = document.getElementById('editBtn');
@@ -61,6 +64,7 @@ ContactsApp.page = {
     }
   },
 
+  /** Opens the edit modal for the currently selected contact. */
   _openEdit() {
     const id = ContactsApp.state.selectedContactId;
     if (!id) return this._showListError('Kein Kontakt ausgewählt.');
@@ -71,6 +75,7 @@ ContactsApp.page = {
     ContactsApp.uiModal.open('edit', contact);
   },
 
+  /** Deletes the selected contact after confirmation and refreshes the list. */
   async _deleteSelected() {
     const id = ContactsApp.state.selectedContactId;
     if (!id) return this._showListError('Kein Kontakt ausgewählt.');
@@ -91,16 +96,20 @@ ContactsApp.page = {
       const detailsCard = document.getElementById('detailsCard');
       if (detailsCard) detailsCard.classList.add('hidden');
     } catch (err) {
-      console.error(err);
       alert('Kontakt konnte nicht gelöscht werden.');
     }
   },
 
+  /**
+   * Displays an error message inside the contacts list container.
+   * @param {string} message - The error text to show.
+   */
   _showListError(message) {
     const list = document.getElementById('contactsList');
     if (list) list.innerHTML = `<div class="error-message">${message}</div>`;
   },
 
+  /** Shows a brief "Contact created" success notification. */
   showContactCreatedNotification() {
     const n = document.getElementById('contactSuccessNotification');
     if (!n) return;

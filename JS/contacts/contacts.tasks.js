@@ -2,7 +2,12 @@
 
 window.ContactsApp = window.ContactsApp || {};
 
+/** @namespace ContactsApp.tasks */
 ContactsApp.tasks = {
+  /**
+   * Removes a contact from all tasks that reference it.
+   * @param {string} contactId - The contact ID to remove.
+   */
   async removeContactFromAllTasks(contactId) {
     const { TASKS_PATH } = ContactsApp.config;
     const tasksObj = await ContactsApp.api.get(TASKS_PATH);
@@ -19,6 +24,12 @@ ContactsApp.tasks = {
     await ContactsApp.api.patch(TASKS_PATH, updates);
   },
 
+  /**
+   * Removes a contact ID from a single task's assigned fields.
+   * @param {Object} task - The task object to check.
+   * @param {string} contactId - The contact ID to remove.
+   * @returns {Object|null} Patched task clone, or null if unchanged.
+   */
   _removeFromTask(task, contactId) {
     if (!task) return null;
 

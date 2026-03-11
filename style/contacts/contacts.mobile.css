@@ -5,7 +5,102 @@
 
 @media (max-width: 768px) {
 
-  /* Close button - inside contact-modal-left, top-right of blue area */
+  /* Overlay centering */
+  .contact-overlay {
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Modal container */
+  .contact-modal {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    width: 396px !important;
+    height: 760px !important;
+    background: #FFFFFF !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 30px !important;
+    max-width: calc(100% - 24px) !important;
+    max-height: calc(100vh - 24px) !important;
+  }
+
+  /* Left panel (blue header) */
+  .contact-modal-left {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 352px !important;
+    height: 352px !important;
+    background: #2A3647 !important;
+    padding: 66px 24px 80px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    gap: 16px !important;
+    border-radius: 30px 30px 0 0 !important;
+    flex-shrink: 0 !important;
+    z-index: 1 !important;
+  }
+
+  .contact-modal-brand {
+    display: none !important;
+  }
+
+  .contact-modal-logo {
+    display: none !important;
+  }
+
+  .contact-modal-left-content {
+    width: 282px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .contact-modal-title {
+    font-size: 47px !important;
+    font-weight: 700 !important;
+    line-height: 120% !important;
+    color: #FFFFFF !important;
+    width: 282px !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  .contact-modal-subtitle {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    line-height: 120% !important;
+    color: #FFFFFF !important;
+    width: 275px !important;
+    height: auto !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .contact-modal-divider {
+    width: 90px !important;
+    height: 0 !important;
+    border: none !important;
+    border-bottom: 3px solid #29ABE2 !important;
+    margin: 8px 0 0 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Right panel */
+  .contact-modal-right {
+    position: relative !important;
+    flex: 1 !important;
+    background: #FFFFFF !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border-radius: 0 0 30px 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Close button */
   .contact-modal-close {
     position: absolute !important;
     top: 24px !important;
@@ -33,7 +128,19 @@
     background: rgba(255, 255, 255, 0.15) !important;
   }
 
-  /* Avatar - negative margin to straddle blue/white boundary */
+  /* Body layout */
+  .contact-modal-body {
+    position: relative !important;
+    width: 100% !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* Avatar */
   .contact-modal-avatar-wrap {
     position: relative !important;
     margin: -60px auto 24px !important;
@@ -42,6 +149,9 @@
     transform: none !important;
     width: 120px !important;
     height: 120px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     z-index: 100 !important;
   }
 
@@ -53,20 +163,10 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
   }
 
-  /* Body layout - no extra padding, avatar handles spacing */
-  .contact-modal-body {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    padding: 0 !important;
-    padding-top: 0 !important;
-    position: relative !important;
-  }
-
-  /* Right panel - overflow visible so avatar can extend above */
-  .contact-modal-right {
-    overflow: visible !important;
+  .contact-modal-avatar span {
+    font-weight: 500 !important;
+    font-size: 47px !important;
+    color: #fff !important;
   }
 
   /* Form */
@@ -88,7 +188,44 @@
   .contact-input {
     width: 100% !important;
     max-width: none !important;
+    height: 41px !important;
+    position: relative !important;
     box-sizing: border-box !important;
+  }
+
+  .contact-input .InputField {
+    width: 100% !important;
+    height: 100% !important;
+    background: #FFFFFF !important;
+    border: 1px solid #D1D1D1 !important;
+    border-radius: 10px !important;
+    padding: 13px 21px !important;
+    box-sizing: border-box !important;
+    font-size: 20px !important;
+    color: #2A3647 !important;
+    font-family: 'Inter' !important;
+    font-weight: 400 !important;
+  }
+
+  .contact-input .InputField::placeholder {
+    color: #D1D1D1 !important;
+    font-weight: 400 !important;
+  }
+
+  .contact-input .InputField:focus {
+    outline: none !important;
+    border: 1px solid #29ABE2 !important;
+  }
+
+  .contact-input-icon {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 12px !important;
+    width: 24px !important;
+    height: 24px !important;
+    opacity: 0.5 !important;
+    pointer-events: none !important;
   }
 
   /* Actions */
@@ -102,6 +239,7 @@
     display: flex !important;
     justify-content: center !important;
     margin-top: 32px !important;
+    margin-bottom: 32px !important;
     padding: 0 16px !important;
     box-sizing: border-box !important;
   }
@@ -119,6 +257,23 @@
     min-width: 113px !important;
     height: 55px !important;
     padding: 15px 24px !important;
+    background: #2A3647 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    font-size: 21px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    box-sizing: border-box !important;
+  }
+
+  .btn-check {
+    width: 20px !important;
+    height: 20px !important;
   }
 
   .modal-error {

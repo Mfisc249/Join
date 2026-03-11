@@ -62,6 +62,7 @@ body.guest-mode .nav {
 
 .canvas-area {
     padding: 64px 96px;
+    max-width: 1920px;
 }
 
 /*

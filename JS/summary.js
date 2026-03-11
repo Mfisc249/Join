@@ -6,12 +6,18 @@
  * - Shows greeting by time + username
  */
 
+/** @type {string} Firebase Realtime Database base URL */
 const SUMMARYURLBASE = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/';
 
 document.addEventListener('DOMContentLoaded', async () => {
   await initSummary();
 });
 
+
+/**
+ * Initializes the summary page by loading tasks, rendering counts,
+ * deadline, greeting, and navigation wiring.
+ */
 async function initSummary() {
   const tasksObj = await DataGET('Tasks');
   const tasks = tasksObj ? Object.values(tasksObj) : [];
@@ -41,11 +47,23 @@ async function initSummary() {
   showMobileGreetingIfNeeded();
 }
 
+
+/**
+ * Fetches JSON data from Firebase Realtime Database.
+ * @param {string} path - The database path to query.
+ * @returns {Promise<Object|null>} The parsed JSON response.
+ */
 async function DataGET(path = '') {
   const res = await fetch(SUMMARYURLBASE + path + '.json');
   return await res.json();
 }
 
+
+/**
+ * Counts tasks by status and priority.
+ * @param {Array<Object>} tasks - Array of task objects from Firebase.
+ * @returns {{todo:number, inprogress:number, feedback:number, done:number, board:number, urgent:number}}
+ */
 function countTasks(tasks) {
   const c = { todo: 0, inprogress: 0, feedback: 0, done: 0, board: 0, urgent: 0 };
 
@@ -62,7 +80,11 @@ function countTasks(tasks) {
   return c;
 }
 
-/** dueDate ist bei euch dd/mm/yyyy (z.B. "27/01/2026") */
+/**
+ * Finds the closest upcoming deadline from all tasks.
+ * @param {Array<Object>} tasks - Array of task objects.
+ * @returns {Date|null} The nearest future due date, or null.
+ */
 function getUpcomingDeadline(tasks) {
   const today = startOfDay(new Date());
   const dates = [];
@@ -76,6 +98,12 @@ function getUpcomingDeadline(tasks) {
   return dates[0] || null;
 }
 
+
+/**
+ * Parses a dd/mm/yyyy date string into a Date object.
+ * @param {string|null} value - Date string in dd/mm/yyyy format.
+ * @returns {Date|null} Parsed date at start of day, or null if invalid.
+ */
 function parseJoinDate(value) {
   if (!value) return null;
   const m = String(value).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
@@ -90,19 +118,41 @@ function parseJoinDate(value) {
   return startOfDay(d);
 }
 
+
+/**
+ * Strips time from a Date, returning midnight of that day.
+ * @param {Date} d - The date to normalize.
+ * @returns {Date} A new Date set to 00:00:00.
+ */
 function startOfDay(d) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
+
+/**
+ * Formats a Date as a long English string (e.g. "January 27, 2026").
+ * @param {Date} d - The date to format.
+ * @returns {string} Formatted date string.
+ */
 function formatDateLong(d) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
+
+/**
+ * Sets the text content of an element by its ID.
+ * @param {string} id - The DOM element ID.
+ * @param {string|number} value - The value to display.
+ */
 function setText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = String(value);
 }
 
+
+/**
+ * Displays a time-based greeting and the logged-in username.
+ */
 function initGreeting() {
   const greetLine = document.getElementById("greet-line");
   const greetName = document.getElementById("greet-name");
@@ -127,12 +177,17 @@ function initGreeting() {
   }
 }
 
-// For other uses, prefer sessionStorage for the user name
+/**
+ * Returns the current user's name from session storage.
+ * @returns {string} The username, or empty string if not set.
+ */
 function getUserName() {
   return sessionStorage.getItem('userName') || '';
 }
 
-/** Summary-Karten -> Board navigieren */
+/**
+ * Wires click handlers on summary cards to navigate to the board page.
+ */
 function wireSummaryNavigation() {
   document.querySelectorAll('[data-nav]').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -142,7 +197,8 @@ function wireSummaryNavigation() {
 }
 
 /**
- * Show mobile greeting overlay after login (only on mobile, only once)
+ * Shows a full-screen greeting overlay on mobile after the first login.
+ * Fades out automatically after 2 seconds.
  */
 function showMobileGreetingIfNeeded() {
   // Only on mobile (max-width: 768px)

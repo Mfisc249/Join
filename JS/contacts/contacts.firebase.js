@@ -2,7 +2,12 @@
 
 window.ContactsApp = window.ContactsApp || {};
 
+/** @namespace ContactsApp.firebase */
 ContactsApp.firebase = {
+  /**
+   * Loads all contacts from Firebase and returns them as an array.
+   * @returns {Promise<Array<Object>>} Array of contact objects with IDs.
+   */
   async loadContacts() {
     const { CONTACTS_PATH } = ContactsApp.config;
     const data = await ContactsApp.api.get(CONTACTS_PATH);
@@ -15,7 +20,11 @@ ContactsApp.firebase = {
     }));
   },
 
-  // Load a single contact by id
+  /**
+   * Loads a single contact by its Firebase ID.
+   * @param {string} contactId - The contact ID to look up.
+   * @returns {Promise<Object|null>} The contact object, or null.
+   */
   async loadContactById(contactId) {
     const { CONTACTS_PATH } = ContactsApp.config;
     const c = await ContactsApp.api.get(`${CONTACTS_PATH}/${contactId}`);
@@ -28,16 +37,31 @@ ContactsApp.firebase = {
     };
   },
 
+  /**
+   * Updates an existing contact with a partial patch.
+   * @param {string} contactId - The contact ID to update.
+   * @param {Object} patch - Key-value pairs to merge.
+   * @returns {Promise<Object>} Updated contact data.
+   */
   async updateContact(contactId, patch) {
     const { CONTACTS_PATH } = ContactsApp.config;
     return await ContactsApp.api.patch(`${CONTACTS_PATH}/${contactId}`, patch);
   },
 
+  /**
+   * Deletes a contact from Firebase.
+   * @param {string} contactId - The contact ID to delete.
+   * @returns {Promise<boolean>} True on success.
+   */
   async deleteContact(contactId) {
     const { CONTACTS_PATH } = ContactsApp.config;
     return await ContactsApp.api.del(`${CONTACTS_PATH}/${contactId}`);
   },
 
+  /**
+   * Calculates the next sequential contact ID (e.g. "c5").
+   * @returns {Promise<string>} The next available contact ID.
+   */
   async getNextContactId() {
     const { CONTACTS_PATH } = ContactsApp.config;
     const data = (await ContactsApp.api.get(CONTACTS_PATH)) || {};
@@ -51,6 +75,11 @@ ContactsApp.firebase = {
     return `c${next}`;
   },
 
+  /**
+   * Saves a new contact to Firebase with an auto-generated ID.
+   * @param {Object} contact - The contact data to save.
+   * @returns {Promise<string>} The generated contact ID.
+   */
   async saveNewContact(contact) {
     const { CONTACTS_PATH } = ContactsApp.config;
     const contactId = await this.getNextContactId();

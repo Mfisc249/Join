@@ -2,7 +2,12 @@
 
 window.ContactsApp = window.ContactsApp || {};
 
+/** @namespace ContactsApp.uiList */
 ContactsApp.uiList = {
+  /**
+   * Renders the full contacts list grouped by first letter.
+   * @param {Array<Object>} contactsData - Array of contact objects.
+   */
   renderContactsList(contactsData) {
     const list = document.getElementById('contactsList');
     if (!list) return;
@@ -18,6 +23,11 @@ ContactsApp.uiList = {
     });
   },
 
+  /**
+   * Selects a contact, highlights its list item, and renders details.
+   * @param {Object} contact - The contact object to select.
+   * @param {HTMLElement} element - The clicked list item element.
+   */
   selectContact(contact, element) {
     document.querySelectorAll('.contact-item').forEach(i => {
       i.classList.remove('active');
@@ -31,6 +41,10 @@ ContactsApp.uiList = {
     this._renderDetails(contact);
   },
 
+  /**
+   * Renders the selected contact's details in the details panel.
+   * @param {Object} contact - The contact to display.
+   */
   _renderDetails(contact) {
     const detailsCard = document.getElementById('detailsCard');
     if (detailsCard) detailsCard.classList.remove('hidden');
@@ -54,6 +68,11 @@ ContactsApp.uiList = {
     if (phone) phone.textContent = contact.phone || 'Keine Telefonnummer';
   },
 
+  /**
+   * Groups contacts alphabetically by first letter of name.
+   * @param {Array<Object>} list - Unsorted contacts array.
+   * @returns {Object} Contacts grouped by uppercase letter.
+   */
   _groupByFirstLetter(list) {
     const sorted = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
     return sorted.reduce((acc, c) => {
@@ -65,6 +84,11 @@ ContactsApp.uiList = {
     }, {});
   },
 
+  /**
+   * Creates a clickable contact list item DOM element.
+   * @param {Object} contact - The contact data.
+   * @returns {HTMLElement} The contact item element.
+   */
   _contactItem(contact) {
     const el = document.createElement('div');
     if (!contact || !contact.id) return el;
@@ -112,6 +136,11 @@ ContactsApp.uiList = {
     return el;
   },
 
+  /**
+   * Creates a letter group header element.
+   * @param {string} letter - The group letter.
+   * @returns {HTMLElement} The header element.
+   */
   _groupHeader(letter) {
     const el = document.createElement('div');
     el.className = 'group-header';
@@ -119,12 +148,19 @@ ContactsApp.uiList = {
     return el;
   },
 
+  /**
+   * Creates a horizontal divider element.
+   * @returns {HTMLElement} The divider element.
+   */
   _divider() {
     const el = document.createElement('div');
     el.className = 'group-divider';
     return el;
   },
 
+  /**
+   * Displays an empty state message in the contacts list.
+   */
   _showEmptyState() {
     const list = document.getElementById('contactsList');
     if (list) list.innerHTML = '<div class="empty-contacts">Keine Kontakte vorhanden.</div>';
