@@ -44,7 +44,7 @@ body.guest-mode .nav {
   position: relative;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* DIESE FLÄCHE ist ab jetzt auf jeder Seite der "Canvas" */
@@ -54,7 +54,7 @@ body.guest-mode .nav {
     top: var(--header-h);
     width: calc(100vw - var(--sidebar-w));
     height: calc(100vh - var(--header-h));
-    overflow-y: auto;      /* 🔥 DAS IST DER WICHTIGE FIX */
+    overflow-y: auto;
     overflow-x: hidden;
     box-sizing: border-box;
     background: var(--GlobalBackgroundWhite);
@@ -96,13 +96,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+  overflow: hidden;
   height: 100vh;
   background-color: var(--GlobalBackgroundWhite);
 }
 
 html {
-  overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+  overflow: hidden;
   height: 100%;
 }
 

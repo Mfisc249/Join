@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadTemplate('./templates/sidebar.html', '#sidebar-slot');
   markActiveNav();
   handleSidebarAuth();
+  handleGuestMobileNav();
 });
 
 
@@ -78,4 +79,28 @@ function markActiveNav() {
     const linkPage = link.getAttribute('href').split('/').pop();
     link.classList.toggle('active', linkPage === currentPage);
   });
+
+  // Mark active for guest mobile bottom nav
+  document.querySelectorAll('.mobile-nav-guest-item').forEach(link => {
+    const linkPage = link.getAttribute('href').split('/').pop();
+    link.classList.toggle('active', linkPage === currentPage);
+  });
+}
+
+
+/**
+ * Shows or hides the guest mobile bottom navigation
+ * based on login state. Only visible for non-logged-in, non-guest users.
+ */
+function handleGuestMobileNav() {
+  const isGuest = sessionStorage.getItem("isGuest") === "true";
+  const isLoggedIn = !!sessionStorage.getItem("contactId");
+  const guestNav = document.getElementById("mobileNavGuest");
+  const mainNav = document.getElementById("mobileNav");
+
+  if (!isLoggedIn && !isGuest) {
+    if (mainNav) mainNav.style.display = "none";
+  } else {
+    if (guestNav) guestNav.style.display = "none";
+  }
 }
