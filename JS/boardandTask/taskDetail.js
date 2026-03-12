@@ -43,7 +43,10 @@ function removeDisplayNone(ID1, ID2) {
 
 /** Deletes a task from the DOM and backend. */
 function deleteTask(ID){
-    document.getElementById(ID).remove();
+    let taskElement = document.getElementById(ID);
+    if (taskElement) {
+        taskElement.remove();
+    }
     checkFieldIsEmpty();
     DataDELETE(`Task${ID}`);
 }
@@ -59,7 +62,10 @@ async function DataDELETE(path = "") {
 /** Renders all loaded contact details into the container. */
 function renderTaskDetailsContacts(contactDetails) {
    let reftaskDetailsATContainer = document.getElementById('taskDetailsAT');
-   reftaskDetailsATContainer.innerHTML += taskDetailContactsTamplate(contactDetails.initials, contactDetails.name, contactDetails.color);
+    if (!reftaskDetailsATContainer || !contactDetails) {
+          return;
+    }
+    reftaskDetailsATContainer.innerHTML += taskDetailContactsTamplate(contactDetails.initials, contactDetails.name, contactDetails.color);
     
 }
 
@@ -72,13 +78,19 @@ function toggleSubtaskCheckboxVisibility(uncheckedCheckboxId, checkedCheckboxId)
 
 /** Renders all subtasks for a task and initializes their status. */
 function renderSubtasksTaskDetails(taskID) {
-    let subTaskReviewStatus = TASK[0][`Task${taskID}`].subTasksReview; 
+    let task = getTaskById(taskID);
+    let subTaskReviewStatus = safeText(task?.subTasksReview?.[0], '').split(',');
     subtaskStatusList = [];
-    let subTasksString = TASK[0][`Task${taskID}`].subTasks; 
-    document.getElementById('subTasks').innerHTML = "";
+    let subTasksString = safeArray(task.subTasks);
+    let subTasksContainer = document.getElementById('subTasks');
+    if (!subTasksContainer) {
+        return;
+    }
+
+    subTasksContainer.innerHTML = "";
     for (let subtaskID = 0; subtaskID < subTasksString.length; subtaskID++) {
         let subTask = subTasksString[`${subtaskID}`];
-        subtaskStatusList.push(subTaskReviewStatus[0].split(',')[subtaskID]);
+        subtaskStatusList.push(subTaskReviewStatus[subtaskID] === 'C' ? 'C' : 'U');
         document.getElementById('subTasks').innerHTML += subtaskTamplate(subtaskID, subTask);
         updateSubtaskCheckboxDisplay(subtaskID);
     }
@@ -90,6 +102,10 @@ function renderSubtasksTaskDetails(taskID) {
 function updateSubtaskCheckboxDisplay(subtaskID) {
    let checkedCheckbox = document.getElementById(`stCheckboxC${subtaskID}`);
    let uncheckedCheckbox = document.getElementById(`stCheckboxU${subtaskID}`);
+    if (!checkedCheckbox || !uncheckedCheckbox) {
+        return;
+    }
+
     if (subtaskStatusList[subtaskID] === 'U') {
         checkedCheckbox.classList.add("displayNone");
         uncheckedCheckbox.classList.remove("displayNone");
@@ -111,8 +127,17 @@ function toggleSubtaskStatus(checkboxId, subtaskId) {
 
 /** Saves the current subtask status list and updates the progress bar. */
 async function storeSubtask() {
+    if (currentTaskId === undefined || currentTaskId === null) {
+        return;
+    }
+
     let checkboxString = subtaskStatusList.toString();
-    TASK[0][`Task${currentTaskId}`].subTasksReview = {0: checkboxString};
+    let task = getTaskById(currentTaskId);
+    if (Object.keys(task).length === 0) {
+        return;
+    }
+
+    task.subTasksReview = {0: checkboxString};
     await DataPUT(`Tasks/Task${currentTaskId}/subTasksReview`,{
           0 : `${checkboxString}`
         }
