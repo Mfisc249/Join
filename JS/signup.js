@@ -1,6 +1,7 @@
 /** Firebase base URL */
 const FIREBASE_URL = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app';
 
+
 /** Validates form and creates user account */
 async function signUp() {
   clearSignupErrors();

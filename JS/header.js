@@ -1,3 +1,7 @@
+/**
+ * Checks whether a user is currently logged in via session storage.
+ * @returns {boolean} True if contactId is stored in session.
+ */
 function isLoggedIn() {
   return !!sessionStorage.getItem("contactId");
 }
@@ -7,6 +11,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   handleHeaderAuth();
 });
 
+
+/**
+ * Applies or removes the guest-mode class on the body
+ * depending on the user's login and guest status.
+ */
 function handleHeaderAuth() {
   const isLoggedIn_now = !!sessionStorage.getItem("contactId");
   const isGuest = sessionStorage.getItem("isGuest") === "true";
@@ -19,12 +28,18 @@ function handleHeaderAuth() {
   }
 }
 
+
+/**
+ * Loads an HTML template file and injects it into the target element.
+ * @param {string} url - Path to the HTML template file.
+ * @param {string} targetSelector - CSS selector of the container element.
+ */
 async function loadTemplate(url, targetSelector) {
   const target = document.querySelector(targetSelector);
-  if (!target) return console.error('Target not found:', targetSelector);
+  if (!target) return;
 
   const res = await fetch(url);
-  if (!res.ok) return console.error('Template failed:', url, res.status);
+  if (!res.ok) return;
 
   target.innerHTML = await res.text();
   
@@ -34,6 +49,11 @@ async function loadTemplate(url, targetSelector) {
   initHeaderUser();
 }
 
+
+/**
+ * Initializes the header submenu toggle, outside-click close,
+ * and Escape key handling.
+ */
 function setupSubmenu() {
   const badge = document.getElementById("circleBadge");
   const menu = document.getElementById("submenu");
@@ -71,13 +91,22 @@ function setupSubmenu() {
   });
 }
 
+
+/**
+ * Logs the user out by clearing session and local storage,
+ * then redirects to the login page.
+ */
 function logout() {
   sessionStorage.clear();
   localStorage.clear();
   window.location.href = "./index.html"; // oder "./login.html"
 }
 
-// Set user initials and color in header badge from sessionStorage
+
+/**
+ * Sets the user's initials in the header badge from session storage.
+ * Displays "G" for guest users.
+ */
 function initHeaderUser() {
   const initials = sessionStorage.getItem('userInitials');
   const color = sessionStorage.getItem('userColor');

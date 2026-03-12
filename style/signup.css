@@ -1,6 +1,4 @@
-/* =========================
-   Sign-up Page
-   ========================= */
+/* Sign-up Page */
 
 .signupCardHeader h1 {
   flex: 1;
@@ -53,7 +51,7 @@
   cursor: pointer;
 }
 
-/* Custom Checkbox: verstecktes Input + visuelle Box mit Figma-SVGs */
+/* Custom Checkbox mit Figma-SVGs */
 .signupCheckbox {
   position: absolute;
   opacity: 0;
@@ -101,7 +99,6 @@
   display: flex;
   justify-content: center;
 }
-
 
 .signupButtonWrapper .ButtonBlueFilled {
   padding: 12px 24px;

@@ -1,0 +1,252 @@
+/* ===============================
+   SUMMARY MOBILE RESPONSIVE
+   Figma Mobile Specs: 428px x 926px
+   =============================== */
+@media (max-width: 768px) {
+  .canvas-area {
+    padding: 32px 16px 20px 16px;
+    overflow-y: auto;
+  }
+
+  /* ===== HEADLINE ===== */
+  .summaryHeadline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 396px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .summaryHeadline h1 {
+    font-size: 47px;
+    line-height: 120%;
+    margin: 0 0 0 0;
+    width: 100%;
+    order: 1;
+  }
+
+  .summarySubheadline {
+    font-size: 20px;
+    line-height: 120%;
+    color: #2A3647;
+    order: 2;
+  }
+
+  .summaryDivider {
+    display: block;
+    width: 90px;
+    height: 3px;
+    background: #29ABE2;
+    margin: 0;
+    padding: 0;
+    order: 3;
+  }
+
+  /* ===== GRID LAYOUT ===== */
+  .summaryGrid {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .summaryCards {
+    width: 100%;
+    max-width: 396px;
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    margin-bottom: 60px;
+  }
+
+  /* ===== ROWS & CARDS ===== */
+  .summaryRow {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .summaryRow--3 {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  /* Cards mobile size: 116x116 for squares */
+  .summaryCard {
+    border-radius: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .summaryCard--wide {
+    width: 186px;
+    height: 110px;
+    gap: 10px;
+    padding: 38px 19px;
+    flex: 1;
+  }
+
+  .summaryCard--full {
+    width: 100%;
+    max-width: 396px;
+    height: 110px;
+    padding: 28px 20px;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .summaryCard--square {
+    width: 116px;
+    height: 116px;
+    padding: 25px 0;
+    flex: 0 0 116px;
+  }
+
+  /* Icon sizes */
+  .summaryIconCircle {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+  }
+
+  .summaryIconCircle img {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Numbers & labels mobile sizes */
+  .summaryNumber {
+    font-size: 47px;
+    font-weight: 600;
+    line-height: 120%;
+  }
+
+  .summaryLabel {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #2A3647;
+  }
+
+  .summaryCardText {
+    gap: 10px;
+  }
+
+  /* Urgent Card Mobile */
+  .urgentLeft {
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .urgentBlock {
+    gap: 18px;
+  }
+
+  .urgentCircle {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+  }
+
+  .urgentCircle img {
+    width: 22.79px;
+    height: 16.74px;
+  }
+
+  .urgentText {
+    gap: 0;
+  }
+
+  .urgentLabel {
+    font-size: 16px;
+    line-height: 120%;
+    color: #2A3647;
+  }
+
+  .urgentDivider {
+    width: 2px;
+    height: 68px;
+    border-left: 2px solid #D1D1D1;
+    margin: 0 10px;
+  }
+
+  .deadlineText {
+    gap: 8px;
+  }
+
+  .deadlineDate {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 120%;
+    color: #2A3647;
+  }
+
+  .deadlineLabel {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #2A3647;
+  }
+
+  /* Square inner */
+  .summarySquareInner {
+    gap: 13px;
+  }
+
+  /* Greeting - repositioned mobile */
+  .summaryGreeting {
+    display: none;
+  }
+
+  /* Mobile Greeting Overlay (full screen animation after login) */
+  .greeting-overlay {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 80px - 80px);
+    background: var(--GlobalBackgroundWhite);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  }
+
+  .greeting-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .greeting-overlay .greetLine {
+    display: block;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 120%;
+    color: var(--GlobalDarkBlue);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .greeting-overlay .greetName {
+    display: block;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 120%;
+    color: var(--GlobalLightBlue);
+    text-align: center;
+  }
+}

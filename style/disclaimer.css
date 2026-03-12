@@ -45,18 +45,7 @@
 
 
 /* Responsive */
-
-@media (max-width: 900px) {
-  .main {
-    left: 0;
-    width: 100vw;
-  }
-
-  .header {
-    left: 0;
-    width: 100vw;
-  }
-}
+/* .main und .header left:0 wird in standard.css bei 768px gesetzt (sync mit sidebar display:none) */
 
 .canvas-area.disclaimer-text {
   overflow-wrap: break-word;

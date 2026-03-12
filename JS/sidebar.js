@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   handleSidebarAuth();
 });
 
+
+/**
+ * Handles sidebar visibility based on login state.
+ * Hides navigation and shows a login button when not authenticated.
+ */
 function handleSidebarAuth() {
   const nav = document.querySelector(".nav");
   const sidebarTop = document.querySelector(".sidebar-top");
@@ -32,16 +37,27 @@ function handleSidebarAuth() {
   }
 }
 
+
+/**
+ * Loads an HTML template file and injects it into the target element.
+ * @param {string} url - Path to the HTML template file.
+ * @param {string} targetSelector - CSS selector of the container element.
+ */
 async function loadTemplate(url, targetSelector) {
   const target = document.querySelector(targetSelector);
-  if (!target) return console.error('Target not found:', targetSelector);
+  if (!target) return;
 
   const res = await fetch(url);
-  if (!res.ok) return console.error('Template failed:', url, res.status);
+  if (!res.ok) return;
 
   target.innerHTML = await res.text();
 }
 
+
+/**
+ * Highlights the active navigation item in desktop sidebar,
+ * mobile bottom nav, and sidebar footer links based on the current URL.
+ */
 function markActiveNav() {
   const currentPage = location.pathname.split('/').pop();
 
