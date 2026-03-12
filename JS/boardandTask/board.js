@@ -107,7 +107,6 @@ function renderMovedTask(field, taskID = curentTraggedElement) {
     if (task.id === undefined || task.id === null) {
         return;
     }
-
     let refMovedTask = document.getElementById(`${task.id}`);
     if (refMovedTask && refMovedTask.parentNode) {
         refMovedTask.parentNode.removeChild(refMovedTask);
@@ -302,6 +301,7 @@ function getTaskDetailsContacts(taskID, renderFunctionSelector) {
     }
 }
 
+/** Renders assigned contact badges on a board task card. */
 function renderTaskContacts(contactDetails, taskID) {
     let refContactsContainer = document.getElementById(`taskContactsContainer${taskID}`);
     if (!refContactsContainer || !contactDetails) {
@@ -310,6 +310,7 @@ function renderTaskContacts(contactDetails, taskID) {
     refContactsContainer.insertAdjacentHTML('beforeend', taskContactsTamplate(contactDetails.initials, contactDetails.color));
 }
 
+/** Renders the matching priority icon for a task. */
 function taskCheckPriority(taskID, refTaskPriorityContainer) {
     if (!refTaskPriorityContainer) {
         return;
@@ -333,6 +334,7 @@ function taskCheckPriority(taskID, refTaskPriorityContainer) {
     }
 }
 
+/** Applies the category color style based on the task category. */
 function taskCatagory(taskID, refTaskCatagory) {
     if (!refTaskCatagory) {
         return;
@@ -354,6 +356,7 @@ function taskCatagory(taskID, refTaskCatagory) {
 
 }
 
+/** Shows valid drop target highlights for the currently dragged task. */
 function highlightBoardTaskFields() {
     let currentField = getTaskById(curentTraggedElement)?.field?.field;
     if (currentField == 'field1' && curentTraggedElement != null && curentTraggedElement != undefined) {
@@ -379,6 +382,7 @@ function highlightBoardTaskFields() {
 
 }
 
+/** Removes all drag-and-drop highlight placeholders from the board. */
 function removeHighlightBoardTaskFields() {
     if (document.getElementById('highlightTask1') != null) {
         document.getElementById('highlightTask1').remove();
