@@ -16,7 +16,7 @@
   left: 0;
   top: 0;
   height: 100vh;
-  z-index: 3000;                /* UNTER Header */
+  z-index: 3000;
   transition: transform 0.3s ease;
 }
 
@@ -62,7 +62,7 @@
   flex-direction: column;
   gap: 15px;
   margin-top: 150px;
-  flex: 1;   /* 🔑 schiebt Footer zuverlässig nach unten */
+  flex: 1;
 }
 
 .nav-item {
@@ -106,7 +106,6 @@
   display: block;
 }
 
-/* Hover: leicht heller + Text/Icon weiß (schülerfreundlich) */
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.06);
   color: var(--GlobalWhite);
