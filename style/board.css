@@ -246,30 +246,46 @@ body {
 
     .taskMobileMove {
         border-radius: 0px 20px 20px 20px !important;
-        
+
     }
 
     .taskMobileMove span {
-        color: var(--GlobalWhite) !important; 
+        color: var(--GlobalWhite) !important;
         font-size: 20px !important;
         text-align: center !important;
     }
 
-    .submenu{
+    .taskMobileMenu {
         width: 120px;
         height: 130px;
         padding: 5px;
-        align-items: unset;
-        justify-content: center !important;
+        gap: 20px;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        background: var(--GlobalBlue);
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 20px 0px 20px 20px;
+        z-index: 25000;
+
     }
 
-    .submenu-item{
-        width: unset;
-        height: unset; 
-        padding: unset;
-        justify-content: center !important;
+    .taskMobileSubmenuItem {
+        padding-left: 10px !important;
         margin-block-start: unset !important;
         margin-block-end: unset !important;
+        border-radius: 8px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 120%;
+        color: var(--GlobalLinkGray);
+        text-decoration: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.1s ease;
     }
 
 }
@@ -348,8 +364,8 @@ body {
     }
 }
 
-@media (max-width: 500px){
-     :root {
+@media (max-width: 500px) {
+    :root {
         --boardWith: 300px;
     }
 
@@ -360,15 +376,15 @@ body {
     }
 }
 
-@media (max-width: 390px){
-   .canvas-area {
+@media (max-width: 390px) {
+    .canvas-area {
         padding: 64px 30px;
     }
 
 }
 
-@media (max-width: 350px){
-     :root {
+@media (max-width: 350px) {
+    :root {
         --boardWith: 270px;
     }
 
