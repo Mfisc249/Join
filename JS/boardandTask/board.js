@@ -22,9 +22,16 @@ async function boardInit() {
 
 /** Fetches tasks from Firebase and stores them in TASK. */
 async function DataGET(path = "") {   
-         let response = await fetch(BOARDURLBASE + path + '.json');
-         let responseASJson = await response.json();
-         return responseASJson;
+    try {
+        let response = await fetch(BOARDURLBASE + path + '.json');
+        if (!response.ok) {
+            return null;
+        }
+        let responseASJson = await response.json();
+        return responseASJson;
+    } catch (error) {
+        return null;
+    }
 }
 
 /** Writes/updates a task at the specified Firebase path. */
@@ -42,7 +49,7 @@ async function DataPUT(path = "", data = {}) {
 async function render() {
     TASK = [];
     TASK.push(await DataGET('Tasks') || {});
-    allContactDetails = await DataGET(`Contacts`);
+    allContactDetails = await DataGET(`Contacts`) || {};
     emtyFieldContent();
     TASKKEYS = [];
     TASKKEYS.push(Object.keys(TASK[0] || {}));
@@ -55,21 +62,31 @@ async function render() {
 
 /** Appends the task template to the appropriate column. */
 async function loadTaskTamplate(refTask) {
-    if (refTask.field.field == 'field1') {
+    if (!refTask || refTask.id === undefined || refTask.id === null) {
+        return;
+    }
+
+    let targetField = refTask?.field?.field;
+    if (targetField == 'field1') {
         document.getElementById('field1').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
 
-    if (refTask.field.field == 'field2') {
+    if (targetField == 'field2') {
         document.getElementById('field2').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
 
-    if (refTask.field.field == 'field3') {
+    if (targetField == 'field3') {
         document.getElementById('field3').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
 
-    if (refTask.field.field == 'field4') {
+    if (targetField == 'field4') {
         document.getElementById('field4').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
     }
+
+    if (!['field1', 'field2', 'field3', 'field4'].includes(targetField)) {
+        document.getElementById('field1').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
+    }
+
     taskCatagory(refTask.id, document.getElementById(`boardTaskCatagory${refTask.id}`));
     updateSubtaskProgressbar(refTask.id);
     getTaskDetailsContacts(refTask.id, 0);
@@ -84,28 +101,19 @@ function emtyFieldContent() {
     document.getElementById('field4').innerHTML = "";
 }
 
-/** Saves a new task and renders it in 'field1'. */
-// async function renderaddedTask(taskID, refTitel, refContent) {
-//     await DataPUT(`Tasks/Task${taskID}`, {
-//         'title': `${refTitel.value}`,
-//         'id': taskID,
-//         'field': 'field1',
-//         'content': `${refContent.value}`,
-//         'assignedTo': "c1,c5",
-//         'priority': "Medium",
-//         'category': "User Story",
-//         'dueDate': "27/01/2026",
-//         'subTasks': "Implement Recipe Recommendation,Start Page Layout"
-//     });
-//     document.getElementById('field1').insertAdjacentHTML('beforeend', taskTamplate(taskID));
-//     checkFieldIsEmpty();
-// }
-
 /** Renders the moved task in the target column and removes the old one. */
 function renderMovedTask(field, taskID = curentTraggedElement) {
-    let refMovedTask = document.getElementById(`${TASK[0][`Task${taskID}`].id}`);
-    refMovedTask.parentNode.removeChild(refMovedTask);
-    document.getElementById(`${field}`).insertAdjacentHTML('beforeend', taskTamplate(TASK[0][`Task${taskID}`].id));
+    let task = getTaskById(taskID);
+    if (task.id === undefined || task.id === null) {
+        return;
+    }
+
+    let refMovedTask = document.getElementById(`${task.id}`);
+    if (refMovedTask && refMovedTask.parentNode) {
+        refMovedTask.parentNode.removeChild(refMovedTask);
+    }
+
+    document.getElementById(`${field}`).insertAdjacentHTML('beforeend', taskTamplate(task.id));
     removeHighlightBoardTaskFields();
     taskCatagory(taskID, document.getElementById(`boardTaskCatagory${taskID}`));
     updateSubtaskProgressbar(taskID);
@@ -129,35 +137,20 @@ function dragoverHandler(ev) {
 
 /** Moves the dragged task to the column and persists it. */
 async function moveTo(field) {
-    TASK[0][`Task${curentTraggedElement}`].field.field = `${field}`;
+    let task = getTaskById(curentTraggedElement);
+    if (Object.keys(task).length === 0) {
+        return;
+    }
+
+    task.field = task.field || {};
+    task.field.field = `${field}`;
+
     document.getElementById(`${field}`).classList.remove("highlight");
     renderMovedTask(field);
     await DataPUT(`Tasks/Task${curentTraggedElement}/field`, {
         'field': `${field}`,
     });
 }
-
-/** Creates a new task from the form and renders it. */
-// async function formIsSubmittet() {
-//     let taskID = TASKKEYS[0].length + count;
-//     let taskVar = "Task" + taskID;
-//     let refTitel = document.getElementById('titleId');
-//     let refContent = document.getElementById('contentId');
-//     TASK[0][taskVar] = {
-//         'id': taskID,
-//         'title': `${refTitel.value}`,
-//         'field': 'field1',
-//         'content': `${refContent.value}`,
-//         'assignedTo': "c1,c5",
-//         'priority': "Medium",
-//         'category': "User Story",
-//         'dueDate': "27/01/2026",
-//         'subTasks': "Implement Recipe Recommendation,Start Page Layout"
-//     }
-//     count++;
-//     await renderaddedTask(taskID, refTitel, refContent);
-
-// }
 
 /** Shows hints when columns are empty (checks for real task elements). */
 function checkFieldIsEmpty() {
@@ -221,10 +214,11 @@ function startTheSearch(refSearchInput) {
     let searchCount = 0;
     emtyFieldContent();
     TASKKEYS[0].forEach(task => {
-        let refTaskTitle = TASK[0][`${task}`].title;
-        let refTaskContent = TASK[0][`${task}`].content;
+        let taskRef = TASK[0][`${task}`] || {};
+        let refTaskTitle = safeText(taskRef.title, '');
+        let refTaskContent = safeText(taskRef.content, '');
         if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTaskContent.toUpperCase().indexOf(filter) > - 1) {
-            loadTaskTamplate(TASK[0][`${task}`]);
+            loadTaskTamplate(taskRef);
             checkFieldIsEmpty();
             searchCount++;
         }
@@ -239,6 +233,10 @@ function startTheSearch(refSearchInput) {
 function updateSubtaskProgressbar(taskID) {
     let completedPercentage = calculateSubtaskCompletionPercentage(taskID);
     let progressbarElement = document.getElementById(`subtaskProgressbar${taskID}`);
+    if (!progressbarElement) {
+        return;
+    }
+
     let width = 0;
     let intervalId = setInterval(frame, 2);
     progressbarElement.style.width = width + "%";
@@ -254,17 +252,33 @@ function updateSubtaskProgressbar(taskID) {
 
 /** Calculates the completion percentage of all subtasks for a task. */
 function calculateSubtaskCompletionPercentage(taskID) {
+    let task = getTaskById(taskID);
+    let subTasks = safeArray(task.subTasks);
+    let subtaskCheckedCountElement = document.getElementById(`subtaskCheckedCount${taskID}`);
+
+    if (subTasks.length === 0) {
+        if (subtaskCheckedCountElement) {
+            subtaskCheckedCountElement.innerHTML = '0';
+        }
+        return 0;
+    }
+
     let completedSubtaskCount = 0;
-    let subTasksReview = TASK[0][`Task${taskID}`].subTasksReview;
-    let subTasksString = TASK[0][`Task${taskID}`].subTasks;
-    for (let index = 0; index <= subTasksString.length; index++) {
-        let subTaskStatus = subTasksReview[0].split(',')[index];
+    let subTasksReviewString = safeText(task?.subTasksReview?.[0], '');
+    let subTaskReviewList = subTasksReviewString.length ? subTasksReviewString.split(',') : [];
+
+    for (let index = 0; index < subTasks.length; index++) {
+        let subTaskStatus = subTaskReviewList[index];
         if (subTaskStatus === 'C') {
             completedSubtaskCount++;
         }
     }
-    document.getElementById(`subtaskCheckedCount${taskID}`).innerHTML = completedSubtaskCount;
-    return Math.round((completedSubtaskCount / subTasksString.length) * 100);
+
+    if (subtaskCheckedCountElement) {
+        subtaskCheckedCountElement.innerHTML = completedSubtaskCount;
+    }
+
+    return Math.round((completedSubtaskCount / subTasks.length) * 100);
 
 }
 
@@ -272,27 +286,36 @@ function calculateSubtaskCompletionPercentage(taskID) {
 /** Contacts section logic. */
 /** Loads and renders all contacts assigned to the given task. */
 function getTaskDetailsContacts(taskID, renderFunctionSelector) {
-    let refAssignedTo = TASK[0][`Task${taskID}`].assignedTo;
+    let refAssignedTo = safeArray(getTaskById(taskID).assignedTo);
     for (let index = 0; index < refAssignedTo.length; index++) {
-        if (refAssignedTo != undefined || null && refAssignedTo != 0 ) {
-            let contact = refAssignedTo[`${index}`]
-            if (renderFunctionSelector == 0) {
-                renderTaskContacts(allContactDetails[`${contact}`], taskID);
-            } else {
-                renderTaskDetailsContacts(allContactDetails[`${contact}`])
-            }
+        let contact = refAssignedTo[`${index}`];
+        let contactDetails = allContactDetails?.[`${contact}`];
+        if (!contactDetails) {
+            continue;
+        }
 
+        if (renderFunctionSelector == 0) {
+            renderTaskContacts(contactDetails, taskID);
+        } else {
+            renderTaskDetailsContacts(contactDetails)
         }
     }
 }
 
 function renderTaskContacts(contactDetails, taskID) {
     let refContactsContainer = document.getElementById(`taskContactsContainer${taskID}`);
+    if (!refContactsContainer || !contactDetails) {
+        return;
+    }
     refContactsContainer.insertAdjacentHTML('beforeend', taskContactsTamplate(contactDetails.initials, contactDetails.color));
 }
 
 function taskCheckPriority(taskID, refTaskPriorityContainer) {
-    switch (TASK[0][`Task${taskID}`].priority) {
+    if (!refTaskPriorityContainer) {
+        return;
+    }
+
+    switch (normalizePriority(getTaskById(taskID).priority)) {
         case 'Low':
             refTaskPriorityContainer.innerHTML = '<img src="./assets/img/low_priority.svg" alt="Low Priority"></img>';
             break;
@@ -305,18 +328,24 @@ function taskCheckPriority(taskID, refTaskPriorityContainer) {
             refTaskPriorityContainer.innerHTML = '<img src="./assets/img/high_priority.svg" alt="High Priority"></img>';
             break;
         default:
+            refTaskPriorityContainer.innerHTML = '';
             break;
     }
 }
 
 function taskCatagory(taskID, refTaskCatagory) {
-    switch (TASK[0][`Task${taskID}`].category) {
+    if (!refTaskCatagory) {
+        return;
+    }
+
+    refTaskCatagory.classList.remove("boardTaskCatagoryBlue");
+    refTaskCatagory.classList.remove("boardTaskCatagoryGreen");
+
+    switch (normalizeCategory(getTaskById(taskID).category)) {
         case 'User Story':
-            refTaskCatagory.classList.remove("boardTaskCatagoryGreen");
             refTaskCatagory.classList.add("boardTaskCatagoryBlue");
             break;
         case 'Technical Task':
-            refTaskCatagory.classList.remove("boardTaskCatagoryBlue");
             refTaskCatagory.classList.add("boardTaskCatagoryGreen");
             break;
         default:
@@ -326,22 +355,23 @@ function taskCatagory(taskID, refTaskCatagory) {
 }
 
 function highlightBoardTaskFields() {
-    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field1' && curentTraggedElement != null && curentTraggedElement != undefined) {
+    let currentField = getTaskById(curentTraggedElement)?.field?.field;
+    if (currentField == 'field1' && curentTraggedElement != null && curentTraggedElement != undefined) {
         document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
         document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
         document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
     }
-    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field2' && curentTraggedElement != null && curentTraggedElement != undefined) {
+    if (currentField == 'field2' && curentTraggedElement != null && curentTraggedElement != undefined) {
         document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
         document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
         document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
     }
-    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field3' && curentTraggedElement != null && curentTraggedElement != undefined) {
+    if (currentField == 'field3' && curentTraggedElement != null && curentTraggedElement != undefined) {
         document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
         document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
         document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
     }
-    if (TASK[0][`Task${curentTraggedElement}`].field.field == 'field4' && curentTraggedElement != null && curentTraggedElement != undefined) {
+    if (currentField == 'field4' && curentTraggedElement != null && curentTraggedElement != undefined) {
         document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
         document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
         document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
