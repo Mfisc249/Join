@@ -263,10 +263,11 @@ function calculateSubtaskCompletionPercentage(taskID) {
             completedSubtaskCount++;
         }
     }
-
+    document.getElementById(`subtaskCheckedCount${taskID}`).innerHTML = completedSubtaskCount;
     return Math.round((completedSubtaskCount / subTasksString.length) * 100);
 
 }
+
 
 /** Contacts section logic. */
 /** Loads and renders all contacts assigned to the given task. */

@@ -8,8 +8,11 @@ function taskTamplate(taskID) {
                 <section>
                 <h2 class="marginleft10px paddingBottom5">${TASK[0][`Task${taskID}`].title}<h2>
                 <h2 class="marginleft10px boardTaskContent paddingBottom15">${TASK[0][`Task${taskID}`].content}<h2>
-                <div class="subtaskProgressbarC marginleft10px">
-                    <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
+                <div class ="displayFLEX allsubtaskProgressbar">
+                    <div class="subtaskProgressbarC marginleft10px">
+                        <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
+                    </div>
+                    <span class ="displayFLEX allSubtaskCheckedCount"> <p id = "subtaskCheckedCount${taskID}"></p>/<p>${TASK[0][`Task${taskID}`].subTasks.length}</p>  Subtasks</span>
                 </div>
                 <div class = "displayFLEX paddingBottom5 paddingTop15">
                     <div id = "taskContactsContainer${taskID}" class="taskContactsContainer paddingBottom5">

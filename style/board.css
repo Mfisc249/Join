@@ -50,8 +50,6 @@ body {
 .tablecontainer {
     margin-top: 20px;
     display: flex;
-    /* align-items: center;
-    justify-content: center; */
 }
 
 .tablecontainer table {
@@ -205,6 +203,22 @@ body {
 
 .addTaskContainerMobile {
     display: unset;
+}
+
+.allSubtaskCheckedCount{
+    font-size: 16px;
+    font-weight: unset !important;
+    gap: 3px;
+    min-width: 90px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+}
+
+.allsubtaskProgressbar:hover .allSubtaskCheckedCount{
+    opacity: 1;
+    visibility: visible;
 }
 
 
