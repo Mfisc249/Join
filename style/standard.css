@@ -11,12 +11,11 @@
   --GlobalDarkblue: #091931;
   --CircleBadgeGray: #0c2e621f;
   --GlobalBorderColorGray: #a8a8a8;
-  --GlobalInputGray: #D1D1D1;
+  --GlobalInputGray: #d1d1d1;
   --GlobalBlack: #000000;
-  --GlobalErrorRed: #E60026;
-  --GlobalLinkGray: #CDCDCD;
-  --GlobalBlueHover: #2A3D59;
-
+  --GlobalErrorRed: #e60026;
+  --GlobalLinkGray: #cdcdcd;
+  --GlobalBlueHover: #2a3d59;
 
   /* Task*/
   --taskLightBlue: #0038ff;
@@ -44,25 +43,24 @@ body.guest-mode .nav {
   position: relative;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
 }
 
 /* DIESE FLÄCHE ist ab jetzt auf jeder Seite der "Canvas" */
-.main{
-    position: fixed;
-    left: var(--sidebar-w);
-    top: var(--header-h);
-    width: calc(100vw - var(--sidebar-w));
-    height: calc(100vh - var(--header-h));
-    overflow-y: auto;      /* 🔥 DAS IST DER WICHTIGE FIX */
-    overflow-x: hidden;
-    box-sizing: border-box;
-    background: var(--GlobalBackgroundWhite);
+.main {
+  position: fixed;
+  left: var(--sidebar-w);
+  top: var(--header-h);
+  width: calc(100vw - var(--sidebar-w));
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto; /* 🔥 DAS IST DER WICHTIGE FIX */
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background: var(--GlobalBackgroundWhite);
 }
 
 .canvas-area {
-    padding: 64px 96px;
-    max-width: 1920px;
+  padding: 64px 96px;
+  max-width: 1920px;
 }
 
 /*
@@ -71,14 +69,16 @@ body.guest-mode .nav {
  * Note: Multiple format entries for broad browser support.
  */
 @font-face {
-  font-family: 'Inter';
-  src: url('../assets/fonts/Inter/static/Inter_18pt-Regular.ttf') format('truetype');
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter/static/Inter_18pt-Regular.ttf")
+    format("truetype");
 }
 
 @font-face {
   font-family: inter;
   font-weight: 700;
-  src: url('../assets/fonts/Inter/static/Inter_18pt-Bold.ttf') format('truetype');
+  src: url("../assets/fonts/Inter/static/Inter_18pt-Bold.ttf")
+    format("truetype");
 }
 
 /*
@@ -88,10 +88,10 @@ body.guest-mode .nav {
 
 body {
   font-family:
-    'Inter',
+    "Inter",
     -apple-system,
     BlinkMacSystemFont,
-    'Segoe UI',
+    "Segoe UI",
     sans-serif;
   margin: 0;
   padding: 0;
@@ -111,7 +111,7 @@ html {
  * Description: Sets the primary font family for containers.
  */
 .mainFont {
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 /**font sizes */
@@ -143,7 +143,6 @@ h3 {
   border-top: 3px solid var(--GlobalLightBlue);
 }
 
-
 /** InputFields Icons, Error Message**/
 
 .InputWrapper {
@@ -174,7 +173,7 @@ h3 {
 .InputField:focus {
   outline: none;
   border: 1px solid var(--GlobalLightBlue);
-} 
+}
 
 .InputFieldIcon {
   position: absolute;
@@ -274,11 +273,9 @@ h3 {
 
 .ButtonBlueFilled:disabled {
   opacity: 0.5;
-  cursor: not-allowed; 
+  cursor: not-allowed;
   pointer-events: none;
 }
-
-
 
 /*
  * Component: Circle Badge (Avatar/Initials)
@@ -318,7 +315,7 @@ h3 {
   align-items: center;
   justify-content: center;
 
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 120%;
@@ -344,7 +341,6 @@ h3 {
   width: 1px;
 }
 
-
 /* =========================
    Toast Notification
    ========================= */
@@ -369,7 +365,6 @@ h3 {
   bottom: 50%;
   transform: translate(-50%, 50%);
 }
-
 
 /* =========================
    Auth Pages Layout (Login / Sign-up)
@@ -432,34 +427,34 @@ h3 {
   color: var(--GlobalLightBlue);
 }
 
-.displayFLEX{
+.displayFLEX {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.paddingBottom5{
-    padding-bottom: 5px;
+.paddingBottom5 {
+  padding-bottom: 5px;
 }
 
-.paddingBottom15{
-    padding-bottom: 15px;
+.paddingBottom15 {
+  padding-bottom: 15px;
 }
 
-.paddingTop15{
-    padding-top: 15px;
+.paddingTop15 {
+  padding-top: 15px;
 }
 
 .displayNone {
-    display: none !important;
+  display: none !important;
 }
 
 .rotate5deg {
-    transform: rotate(5deg);
+  transform: rotate(5deg);
 }
 
-.marginleft10px{
-    margin-left: 10px;
+.marginleft10px {
+  margin-left: 10px;
 }
 
 /* =========================

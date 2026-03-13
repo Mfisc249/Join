@@ -70,11 +70,11 @@
 
 @media (max-width: 901px) {
   .priority {
-    gap: 145px;
+    gap: 43px;
     margin-top: 15px;
   }
 }
-@media (max-width: 750px) {
+@media (max-width: 769px) {
   .priority {
     gap: 77px;
     margin-top: 25px;
@@ -98,7 +98,7 @@
   .priority {
     gap: 7px;
     margin-top: 25px;
-    width: 277px;
+    width: 280px;
   }
   .priorityButton {
     gap: 5px;

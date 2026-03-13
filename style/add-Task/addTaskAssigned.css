@@ -163,14 +163,14 @@
 }
 @media (max-width: 901px) {
   .assignedToInput {
-    width: 701px;
+    width: 495px;
   }
   .assignedDropdown {
-    width: 700px;
+    width: 496px;
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 769px) {
   .assignedToInput {
     width: 545px;
   }
@@ -195,7 +195,7 @@
     height: 34px;
   }
   .assignedToInput {
-    width: 275px;
+    width: 277px;
     height: 42px;
   }
   .assignedDropdown {

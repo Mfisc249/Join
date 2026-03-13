@@ -193,13 +193,13 @@
 
 @media (max-width: 901px) {
   .subTaskItem {
-    width: 653px;
+    width: 455px;
   }
   .subTaskContent {
-    width: 653px;
+    width: 450px;
   }
   .subTaskEditContainer {
-    width: 694px;
+    width: 490px;
   }
 }
 

@@ -1,7 +1,6 @@
 const BASE_URL =
   "https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let subtasks = [];
 let contacts = [];
 let editingSubtaskIndex = null;
 let assignedPreviewMode = false;
@@ -16,7 +15,7 @@ let task = {
   priority: "",
   assignedTo: [],
   category: "",
-  subtasks: [],
+  subTasks: [],
   field: "1",
 };
 
@@ -48,18 +47,21 @@ async function saveTask(task) {
 }
 
 async function saveTaskToFirebase(task, taskID, taskKey) {
+  let checkboxString = task.subTasks.map(() => "U").toString();
+
   const payload = {
     ...task,
     id: taskID,
-    field: { field: "field1" }, // Standard-Spalte
-    assignedTo: task.assignedTo, // ✅ als Array
-    subtasks: task.subtasks, // ✅ als Array
+    field: { field: "field1" },
+    assignedTo: task.assignedTo,
+    subTasks: task.subTasks,
     subTasksReview: {
-      0: task.subtasks.map(() => "U").join(","), // Subtask Status als String okay
+      0: checkboxString,
     },
   };
 
   await DataPUT(`Tasks/${taskKey}`, payload);
+
   console.log("Task saved:", taskKey);
   count++;
   return taskKey;
@@ -108,15 +110,15 @@ function resetTaskData() {
     priority: "",
     assignedTo: [],
     category: "",
-    subtasks: [],
+    subTasks: [],
     field: "1",
     createdAt: null,
   };
 }
 
-function resetSubtasksAndCategory() {
+function resetSubTasksAndCategory() {
   document.getElementById("subtaskInput").value = "";
-  renderSubtasks();
+  renderSubTasks();
 
   selectedCategory = "";
   document.getElementById("categoryLabel").textContent = "Select category";
@@ -134,7 +136,7 @@ function resetAssignedContactsAndPriority() {
 
 function clearForm() {
   resetTaskData();
-  resetSubtasksAndCategory();
+  resetSubTasksAndCategory();
   resetAssignedContactsAndPriority();
 }
 

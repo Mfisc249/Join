@@ -270,20 +270,20 @@
 
 @media (max-width: 901px) {
   .taskNameContainer textarea {
-    width: 680px;
+    width: 475px;
   }
   .taskDescriptionContainer textarea {
-    width: 680px;
+    width: 475px;
   }
   .addTaskDateContainer input {
-    width: 680px;
+    width: 475px;
   }
   .ChoiceOption {
-    width: 700px;
+    width: 497px;
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 769px) {
   .taskNameContainer textarea {
     width: 530px;
     padding-top: 10px;
@@ -309,7 +309,7 @@
     height: 29px;
   }
   .taskNameContainer textarea {
-    width: 260px;
+    width: 263px;
     padding-top: 10px;
     font-size: 16px;
     height: 27px;
@@ -321,18 +321,18 @@
     font-size: 16px;
   }
   .ChoiceOption {
-    width: 272px;
+    width: 274px;
     font-size: 16px;
   }
   .categoryOption {
     font-size: 16px;
   }
   .taskDescriptionContainer textarea {
-    width: 260px;
+    width: 263px;
     height: 80px;
   }
   .addTaskDateContainer input {
-    width: 260px;
+    width: 263px;
     font-size: 16px;
     height: 40px;
   }
