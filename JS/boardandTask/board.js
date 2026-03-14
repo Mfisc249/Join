@@ -215,8 +215,8 @@ function startTheSearch(refSearchInput) {
     TASKKEYS[0].forEach(task => {
         let taskRef = TASK[0][`${task}`] || {};
         let refTaskTitle = safeText(taskRef.title, '');
-        let refTaskContent = safeText(taskRef.content, '');
-        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTaskContent.toUpperCase().indexOf(filter) > - 1) {
+        let refTaskDescription = safeText(taskRef.description, '');
+        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTaskDescription.toUpperCase().indexOf(filter) > - 1) {
             loadTaskTamplate(taskRef);
             checkFieldIsEmpty();
             searchCount++;

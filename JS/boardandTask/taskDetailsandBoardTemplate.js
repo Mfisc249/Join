@@ -12,7 +12,7 @@ function taskTamplate(taskID) {
                 </section>
                 <section>
                 <h2 class="marginleft10px paddingBottom5">${safeText(task.title, 'Untitled task')}<h2>
-                <h2 class="marginleft10px boardTaskContent paddingBottom15">${safeText(task.content, '')}<h2>
+                <h2 class="marginleft10px boardTaskContent paddingBottom15">${safeText(task.description, '')}<h2>
                 <div class ="displayFLEX allsubtaskProgressbar">
                     <div class="subtaskProgressbarC marginleft10px">
                         <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
@@ -95,7 +95,7 @@ function taskDetailsTamplate(taskID) {
         </header>
         <main>
             <section>
-                <p>${safeText(task.content, 'No description')}</p>
+                <p>${safeText(task.description, 'No description')}</p>
                 <table>
                     <tr>
                         <td><h2>Due date:</h2></td>

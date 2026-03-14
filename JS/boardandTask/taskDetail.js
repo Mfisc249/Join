@@ -48,7 +48,7 @@ function deleteTask(ID){
         taskElement.remove();
     }
     checkFieldIsEmpty();
-    DataDELETE(`Task${ID}`);
+    DataDELETE(`Tasks/Task${ID}`);
 }
 
 /** Sends a DELETE request to remove data at the given path. */
