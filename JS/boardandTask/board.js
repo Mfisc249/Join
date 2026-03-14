@@ -255,12 +255,10 @@ function calculateSubtaskCompletionPercentage(taskID) {
     let subTasks = safeArray(task.subTasks);
     let subtaskCheckedCountElement = document.getElementById(`subtaskCheckedCount${taskID}`);
 
-    if (subTasks.length === 0) {
-        if (subtaskCheckedCountElement) {
-            subtaskCheckedCountElement.innerHTML = '0';
-        }
+     if (subTasks.length === 0) {
+        document.getElementById(`allsubtaskProgressbar${taskID}`).classList.add("displayNone");
         return 0;
-    }
+    } 
 
     let completedSubtaskCount = 0;
     let subTasksReviewString = safeText(task?.subTasksReview?.[0], '');

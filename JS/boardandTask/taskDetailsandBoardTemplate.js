@@ -13,7 +13,7 @@ function taskTamplate(taskID) {
                 <section>
                 <h2 class="marginleft10px paddingBottom5">${safeText(task.title, 'Untitled task')}<h2>
                 <h2 class="marginleft10px boardTaskContent paddingBottom15">${safeText(task.description, '')}<h2>
-                <div class ="displayFLEX allsubtaskProgressbar">
+                <div id ="allsubtaskProgressbar${taskID}" class ="displayFLEX allsubtaskProgressbar">
                     <div class="subtaskProgressbarC marginleft10px">
                         <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
                     </div>
@@ -112,7 +112,7 @@ function taskDetailsTamplate(taskID) {
                 </table>
                 <h2 class = "taskDetailsAT">Assigned To:</h2>
                     <div id = "taskDetailsAT"></div>
-                <h2 class = "taskDetailsST">Subtasks</h2>
+                <h2 id = "subTasksHeadline" class = "taskDetailsST">Subtasks</h2>
                     <div id = "subTasks" class = "subTasks"></div>
              </div>
             </section>

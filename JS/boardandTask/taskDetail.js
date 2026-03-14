@@ -79,10 +79,16 @@ function toggleSubtaskCheckboxVisibility(uncheckedCheckboxId, checkedCheckboxId)
 /** Renders all subtasks for a task and initializes their status. */
 function renderSubtasksTaskDetails(taskID) {
     let task = getTaskById(taskID);
+    let subTasks = safeArray(task.subTasks);
     let subTaskReviewStatus = safeText(task?.subTasksReview?.[0], '').split(',');
     subtaskStatusList = [];
     let subTasksString = safeArray(task.subTasks);
     let subTasksContainer = document.getElementById('subTasks');
+    if (subTasks.length === 0) {
+       document.getElementById('subTasksHeadline').classList.add('displayNone');
+        return ;
+    } 
+    
     if (!subTasksContainer) {
         return;
     }
@@ -95,7 +101,6 @@ function renderSubtasksTaskDetails(taskID) {
         updateSubtaskCheckboxDisplay(subtaskID);
     }
     currentTaskId = taskID;
-    
 }
 
 /** Updates checkbox icons for a subtask based on its status. */
