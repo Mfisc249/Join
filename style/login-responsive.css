@@ -164,7 +164,9 @@
     font-size: 16px;
     min-width: 104px;
     min-height: 50px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .loginButtonsWrapper {
