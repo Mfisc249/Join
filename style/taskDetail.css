@@ -1,7 +1,8 @@
 /* dialog open/close*/
-dialog{
+dialog {
     transform: translateX(calc(100vh + 800px));
 }
+
 dialog.opend {
     transform: translateX(0px);
     transition: all 0.1s ease-in;
@@ -29,57 +30,63 @@ dialog.closed::backdrop {
     transition: all 0.5s ease-in;
 }
 
-.allTaskDetails{
+.allTaskDetails {
     border-radius: 30px;
-    
+
 }
 
-.allTaskDetails header section{
+.allTaskDetails header section {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.taskCatagory{
+.taskCatagory {
     color: var(--GlobalWhite);
     padding: 4px 24px 4px 24px;
     border-radius: 8px;
 }
 
-.allTaskDetails h1{
+.allTaskDetails h1 {
     font-size: 61px;
     margin: 0;
     margin-top: 20px;
 }
 
 
-.allTaskDetails h2{
+.allTaskDetails h2 {
     color: var(--GlobalBlue);
     margin: 0;
 }
 
-.allTaskDetails td{
+.allTaskDetails td {
     font-size: 20px;
     padding-bottom: 25px;
 }
 
-.closeDialogX{
+.allTaskDetails p,
+.allTaskDetails h1 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.closeDialogX {
     cursor: pointer;
     width: 20px;
     text-align: center;
 }
 
-.closeDialogX:hover{
+.closeDialogX:hover {
     background-color: var(--CircleBadgeGray);
     border-radius: 50%;
     width: 20px;
 }
 
-.taskDetailsST{
+.taskDetailsST {
     margin-bottom: 4px !important;
 }
 
-.taskDetailsIcons{
+.taskDetailsIcons {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -88,20 +95,20 @@ dialog.closed::backdrop {
     font-size: 19px;
 }
 
-.taskDetailsIcons:hover{
+.taskDetailsIcons:hover {
     color: var(--GlobalLightBlue);
     cursor: pointer;
 }
 
-.taskDetailsIcons img{
+.taskDetailsIcons img {
     height: 19px;
 }
 
-.taskDetailsIcons .edit{
+.taskDetailsIcons .edit {
     border-left: 1px #D1D1D1 solid;
 }
 
-.subTasks{
+.subTasks {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -109,23 +116,63 @@ dialog.closed::backdrop {
     margin-bottom: 20px;
 }
 
-.taskDetailsATContainer{
+.taskDetailsATContainer {
     display: flex;
     align-items: center;
 }
 
-.taskDetailsATContainer span:not(:first-child){
+.taskDetailsATContainer span:not(:first-child) {
     font-size: 20px;
 }
 
-.maxWith525{
+.maxWith525 {
     max-width: 525px;
 }
 
-.minWith350{
+.minWith350 {
     min-width: 350px;
 }
 
-.allPriority{
+.allPriority {
     justify-content: unset;
+}
+
+@media(max-width:750px){
+    
+    .allTaskDetails h1 {
+        font-size: 40px;
+    }
+}
+
+@media(max-width:599px) {
+    dialog {
+        max-width: 400px;
+    }
+}
+
+@media(max-width:460px) {
+
+    dialog {
+        max-width: 300px;
+    }
+
+    .maxWith525 {
+        max-width: 100%;
+    }
+
+    .minWith350 {
+        min-width: 0;
+    }
+
+    .allTaskDetails h1 {
+        font-size: 30px;
+    }
+
+}
+
+@media(max-width:380px) {
+     
+    dialog {
+        max-width: 250px;
+    }
 }
