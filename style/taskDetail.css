@@ -125,3 +125,7 @@ dialog.closed::backdrop {
 .minWith350{
     min-width: 350px;
 }
+
+.allPriority{
+    justify-content: unset;
+}

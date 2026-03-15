@@ -396,3 +396,11 @@ function removeHighlightBoardTaskFields() {
     }
 }
 
+function shortenDescription(description) {
+    if(description.length >= 40){
+        let refdescription = description.slice(0, 40);
+        return refdescription + "..."
+    }
+    return description;
+}
+

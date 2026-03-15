@@ -33,7 +33,7 @@ function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
             refDiv.innerHTML = `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
                      <table>
-                        <tr>
+                        <tr class = "allTaskMobileSubmenuItem">
                             <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_downward_TaskMobile.svg" alt="Arrow Down"></td> 
                             <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">Review</td>
                         </tr>
@@ -44,7 +44,7 @@ function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
             refDiv.innerHTML = `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
                      <table>
-                        <tr>
+                        <tr class = "allTaskMobileSubmenuItem">
                             <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_upward_TaskMobile.svg" alt="Arrow UP"></td>
                             <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">To-do</td>
                         </tr>
@@ -55,11 +55,11 @@ function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
             refDiv.innerHTML = `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
                      <table>
-                        <tr>
+                        <tr class = "allTaskMobileSubmenuItem">
                             <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_upward_TaskMobile.svg" alt="Arrow UP"></td>
                             <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">To-do</td>
                         </tr>
-                        <tr>
+                        <tr class = "allTaskMobileSubmenuItem">
                             <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_downward_TaskMobile.svg" alt="Arrow Down"></td>
                             <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">Review</td>
                      </table>

@@ -12,7 +12,7 @@ function taskTamplate(taskID) {
                 </section>
                 <section>
                 <h2 class="marginleft10px paddingBottom5">${safeText(task.title, 'Untitled task')}<h2>
-                <h2 class="marginleft10px boardTaskContent paddingBottom15">${safeText(task.description, '')}<h2>
+                <h2 class="marginleft10px boardTaskContent paddingBottom15">${safeText(shortenDescription(task.description), '')}<h2>
                 <div id ="allsubtaskProgressbar${taskID}" class ="displayFLEX allsubtaskProgressbar">
                     <div class="subtaskProgressbarC marginleft10px">
                         <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
@@ -103,7 +103,7 @@ function taskDetailsTamplate(taskID) {
                     </tr>
                     <tr>
                         <td><h2>Priority:</h2></td>
-                        <td class = "displayFLEX">
+                        <td class = "displayFLEX allPriority">
                             ${normalizePriority(task.priority)}
                             <div id = "taskDetailsPriorityContainer${taskID}">
                             </div>
