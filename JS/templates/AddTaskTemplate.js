@@ -164,7 +164,7 @@ function createTaskTemplate(taskName, taskDescription) {
   `;
 }
 
-function subtaskTemplate(text, index) {
+function subTaskTemplate(text, index) {
   const isEditing = editingSubtaskIndex === index;
 
   if (isEditing) {

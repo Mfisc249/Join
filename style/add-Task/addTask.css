@@ -8,7 +8,7 @@
   max-width: 1200px;
   margin: 208px auto 0 auto;
   margin-left: 328px;
-  padding-bottom: 80px;
+  padding-bottom: 130px;
 }
 
 .taskForm {
@@ -225,8 +225,12 @@
 }
 
 @media (max-width: 901px) {
+  .addTaskMain {
+    margin-left: 243px;
+    margin-top: 150px;
+  }
   .inputField {
-    width: 677px;
+    width: 472px;
   }
   .requiredField {
     margin-bottom: 22px;
@@ -245,14 +249,9 @@
     padding: 20px;
     z-index: 500;
   }
-  .addTaskMain {
-    margin-left: 40px;
-    margin-top: 170px;
-    padding-bottom: 80px;
-  }
   .taskButton {
     position: fixed;
-    bottom: 0;
+    bottom: 80px;
     left: 0;
     width: 718px;
     background: rgba(246, 247, 248, 1);
@@ -264,7 +263,7 @@
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 769px) {
   .addTaskMain {
     margin-top: 130px;
     margin-left: 30px;
@@ -313,7 +312,7 @@
     padding: 20px 0px;
   }
   .inputField {
-    width: 246px;
+    width: 248px;
     height: 39px;
     font-size: 16px;
   }
@@ -323,7 +322,7 @@
     width: 147px;
   }
   .taskButton {
-    width: 253px;
+    width: 262px;
   }
   .requiredBottomLeft {
     padding-right: 297px;

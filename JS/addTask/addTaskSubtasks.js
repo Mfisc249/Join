@@ -1,10 +1,10 @@
-function renderSubtasks() {
+function renderSubTasks() {
   var list = document.getElementById("subtaskList");
   list.innerHTML = "";
 
   var i;
-  for (i = 0; i < task.subtasks.length; i++) {
-    list.innerHTML += subtaskTemplate(task.subtasks[i], i);
+  for (i = 0; i < task.subTasks.length; i++) {
+    list.innerHTML += subTaskTemplate(task.subTasks[i], i);
   }
 }
 
@@ -13,9 +13,9 @@ function confirmSubtask() {
   const value = input.value.trim();
   if (!value) return;
 
-  task.subtasks.push(value);
+  task.subTasks.push(value);
   editingSubtaskIndex = null;
-  renderSubtasks();
+  renderSubTasks();
   input.value = "";
   input.focus();
 }
@@ -27,13 +27,13 @@ function cancelSubtask() {
 }
 
 function deleteSubtask(index) {
-  task.subtasks.splice(index, 1);
-  renderSubtasks();
+  task.subTasks.splice(index, 1);
+  renderSubTasks();
 }
 
 function startEditSubtask(index) {
   editingSubtaskIndex = index;
-  renderSubtasks();
+  renderSubTasks();
 }
 
 function saveEditedSubtask(index) {
@@ -43,13 +43,13 @@ function saveEditedSubtask(index) {
 
   if (!value) {
     editingSubtaskIndex = null;
-    renderSubtasks();
+    renderSubTasks();
     return;
   }
 
-  task.subtasks[index] = value;
+  task.subTasks[index] = value;
   editingSubtaskIndex = null;
-  renderSubtasks();
+  renderSubTasks();
 }
 
 function handleEditKey(event, index, value) {
@@ -59,7 +59,7 @@ function handleEditKey(event, index, value) {
 
   if (event.key === "Escape") {
     editingSubtaskIndex = null;
-    renderSubtasks();
+    renderSubTasks();
   }
 }
 
