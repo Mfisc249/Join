@@ -228,6 +228,7 @@
   .addTaskMain {
     margin-left: 243px;
     margin-top: 150px;
+    padding-bottom: 170px;
   }
   .inputField {
     width: 472px;
@@ -267,6 +268,7 @@
   .addTaskMain {
     margin-top: 130px;
     margin-left: 30px;
+    padding-bottom: 200px;
   }
   .inputField {
     width: 521px;
