@@ -40,9 +40,9 @@ function highlightTaskTamplate(ID) {
 /** Builds the HTML markup for the four task board columns. */
 function taskBoardTamplate() {
     return `        <tr class="tableCategories">
-                        <td>To do <button>+</button></td>
-                        <td>In progress <button>+</button></td>
-                        <td>Await feedback <button>+</button></td>
+                        <td>To do <button onclick="opendialog('boardAddTask');init()">+</button></td>
+                        <td>In progress <button onclick="opendialog('boardAddTask');init()">+</button></td>
+                        <td>Await feedback <button onclick="opendialog('boardAddTask');init()">+</button></td>
                         <td>Done</td>
                     </tr>
                     <tr id="fields">
@@ -55,19 +55,19 @@ function taskBoardTamplate() {
 
 function taskBoardTamplateMobile() {
     return `            <tr>
-                            <td class="tableCategories">To do <button>+</button></th>
+                            <td class="tableCategories">To do <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
                             <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
                         </tr>
                         <tr>
-                            <td class="tableCategories">In progress <button>+</button></th>
+                            <td class="tableCategories">In progress <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
                             <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
                         </tr>
                         <tr>
-                            <td class="tableCategories">Await feedback <button>+</button></th>
+                            <td class="tableCategories">Await feedback <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
                             <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
