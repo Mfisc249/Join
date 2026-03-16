@@ -72,22 +72,20 @@
 }
 
 .addTaskDateContainer input {
+  position: relative;
   border-radius: 10px;
   width: 440px;
-  top: 12px;
-  right: 16px;
-  bottom: 12px;
-  left: 16px;
   height: 48px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
   border: unset;
   box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
-  margin-bottom: 3px;
 }
-
+.addTaskDateContainer {
+  position: relative;
+}
 .addTaskDateContainer input:focus {
-  box-shadow: 0 0 0 2px #88e9fa; /* Fokus "Border" */
+  box-shadow: 0 0 0 2px #88e9fa;
   outline: none;
 }
 .taskDateInput {
@@ -97,7 +95,7 @@
   line-height: 1.2;
   height: 24px;
   width: 119px;
-  color: rgba(0, 0, 0, 1); /* Textfarbe wenn was eingegeben wird */
+  color: rgba(0, 0, 0, 1);
   padding-left: 18px;
   border: unset;
   box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
@@ -113,7 +111,7 @@
 }
 .requiredField {
   color: rgba(230, 0, 38, 0);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400;
   font-family: poppins;
   margin-top: 0px;
@@ -121,7 +119,7 @@
 }
 
 .requiredField.visible {
-  color: rgba(230, 0, 38, 1); /* sichtbar wenn Klasse .visible */
+  color: rgba(230, 0, 38, 1);
 }
 
 .input-error {
@@ -144,7 +142,7 @@
 }
 
 .ChoiceOption:focus {
-  border: 1px solid #88e9fa; /* kräftiges Blau */
+  border: 1px solid #88e9fa;
 }
 
 .choiceContact {
@@ -158,9 +156,9 @@
 .addTask textarea,
 .addTask input,
 .addTask select {
-  border: unset; /* entfernt alles vom Standard */
-  border-radius: 10px; /* eigene Form */
-  border: 1px solid rgba(209, 209, 209, 1); /* deine eigene Farbe */
+  border: unset;
+  border-radius: 10px;
+  border: 1px solid rgba(209, 209, 209, 1);
 }
 
 .leftContent {
@@ -178,10 +176,10 @@
 }
 
 .categoryDropdown {
-  position: absolute; /* absolut relativ zum Wrapper */
-  top: 100%; /* direkt unter dem Input */
-  left: 0; /* linksbündig */
-  width: 100%; /* gleiche Breite wie Wrapper */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
   max-height: 200px;
   overflow-y: auto;
   border: 1px solid #d1d1d1;
@@ -219,4 +217,123 @@
 
 .categoryOption:hover {
   background-color: #bfbfbf33;
+}
+
+@media (max-width: 1392px) {
+  .taskDescriptionContainer textarea {
+    width: 860px;
+  }
+  .taskNameContainer textarea {
+    width: 860px;
+  }
+  .addTaskDateContainer input {
+    width: 860px;
+  }
+  .rightContent {
+    margin-left: 0px;
+  }
+  .ChoiceOption {
+    width: 883px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .taskDescriptionContainer textarea {
+    width: 680px;
+  }
+  .taskNameContainer textarea {
+    width: 680px;
+  }
+  .addTaskDateContainer input {
+    width: 680px;
+  }
+  .ChoiceOption {
+    width: 701px;
+  }
+}
+
+@media (max-width: 1063px) {
+  .taskDescriptionContainer textarea {
+    width: 570px;
+  }
+  .taskNameContainer textarea {
+    width: 570px;
+  }
+  .addTaskDateContainer input {
+    width: 570px;
+  }
+  .ChoiceOption {
+    width: 586px;
+  }
+}
+
+@media (max-width: 901px) {
+  .taskNameContainer textarea {
+    width: 475px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 475px;
+  }
+  .addTaskDateContainer input {
+    width: 475px;
+  }
+  .ChoiceOption {
+    width: 497px;
+  }
+}
+
+@media (max-width: 769px) {
+  .taskNameContainer textarea {
+    width: 530px;
+    padding-top: 10px;
+  }
+  .taskname {
+    height: 31px;
+    font-size: 18px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 530px;
+    height: 110px;
+  }
+  .addTaskDateContainer input {
+    width: 530px;
+  }
+  .ChoiceOption {
+    width: 545px;
+  }
+}
+@media (max-width: 610px) {
+  .taskname {
+    font-size: 16px;
+    height: 29px;
+  }
+  .taskNameContainer textarea {
+    width: 263px;
+    padding-top: 10px;
+    font-size: 16px;
+    height: 27px;
+  }
+  .taskDescription {
+    font-size: 16px;
+  }
+  .choiceContact {
+    font-size: 16px;
+  }
+  .ChoiceOption {
+    width: 274px;
+    font-size: 16px;
+  }
+  .categoryOption {
+    font-size: 16px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 263px;
+    height: 80px;
+  }
+  .addTaskDateContainer input {
+    width: 263px;
+    font-size: 16px;
+    height: 40px;
+  }
 }

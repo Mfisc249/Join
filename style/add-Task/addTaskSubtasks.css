@@ -141,3 +141,109 @@
   align-items: center;
   min-height: 32px;
 }
+
+@media (max-width: 1392px) {
+  .subTaskContent {
+    width: 840px;
+  }
+  .subTaskEditContainer {
+    width: 880px;
+  }
+  .subTaskItem {
+    width: 845px;
+  }
+  .subTaskEditIcons {
+    right: 17px;
+  }
+}
+@media (max-width: 1300px) {
+  .subTaskItem {
+    width: 100%;
+  }
+  .subTaskEditContainer {
+    width: 700px;
+  }
+  .subTaskContent {
+    width: 653px;
+  }
+  .descriptionImg {
+    display: none;
+  }
+  .subTaskList {
+    width: 72%;
+  }
+  .subTaskEditIcons {
+    right: 24px;
+  }
+}
+@media (max-width: 1063px) {
+  .subTaskItem {
+    width: 548px;
+  }
+  .subTaskEditContainer {
+    width: 580px;
+  }
+  .subTaskContent {
+    width: 540px;
+  }
+  .subTaskEditIcons {
+    right: 16px;
+  }
+}
+
+@media (max-width: 901px) {
+  .subTaskItem {
+    width: 455px;
+  }
+  .subTaskContent {
+    width: 450px;
+  }
+  .subTaskEditContainer {
+    width: 490px;
+  }
+}
+
+@media (max-width: 750px) {
+  .subTaskContent {
+    width: 503px;
+  }
+  .subTaskItem {
+    width: 511px;
+  }
+  .subTaskEditContainer {
+    width: 541px;
+  }
+}
+@media (max-width: 610px) {
+  .subTaskActions {
+    gap: 3px;
+  }
+  .subTaskEditIcons {
+    right: 10px;
+    gap: 3px;
+  }
+  .subTaskStar {
+    display: flex;
+  }
+  .subTaskContent {
+    width: 230px;
+  }
+  .subTaskItem {
+    width: 235px;
+  }
+  .subTaskEditContainer {
+    width: 264px;
+  }
+  .subTaskIcons {
+    height: 20px;
+  }
+  .subTaskIconsCheck {
+    height: 20px;
+  }
+  .subTaskIconsContainer {
+    gap: 3px;
+  }
+  .spacer {
+    margin-right: 3px;
+  }
+}

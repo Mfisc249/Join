@@ -7,32 +7,35 @@ async function loadContacts() {
 
     if (!data) return;
 
-    contacts = Object.values(data);
+    contacts = data; // ❗ KEY BEHALTEN
+
     renderAssignedTo();
   } catch (error) {
     console.error("Fehler beim Laden der Contacts:", error);
   }
 }
 
-async function renderAssignedTo() {
+function renderAssignedTo() {
   const container = document.getElementById("assignedDropdown");
   if (!container) return;
 
   let html = "";
 
-  contacts.forEach((contact) => {
-    html += contactInitialsCircleTemplate(contact);
-  });
+  for (let key in contacts) {
+    const contact = contacts[key];
+
+    html += contactInitialsCircleTemplate(contact, key);
+  }
 
   container.innerHTML = html;
 }
 
-function toggleContact(name, element) {
-  const index = task.assignedTo.indexOf(name);
+function toggleContact(contactKey, element) {
+  const index = task.assignedTo.indexOf(contactKey);
   const img = element.querySelector(".checkBox");
 
   if (index === -1) {
-    task.assignedTo.push(name);
+    task.assignedTo.push(contactKey);
     element.classList.add("selected");
     img.src = "./assets/img/checkButton.svg";
   } else {
@@ -76,11 +79,13 @@ function renderSelectedContactsInDropdown() {
   if (!container) return;
 
   let html = "";
-  contacts.forEach((contact) => {
-    if (task.assignedTo.includes(contact.name)) {
-      html += contactInitialsCircleTemplate(contact);
+  for (let key in contacts) {
+    const contact = contacts[key];
+
+    if (task.assignedTo.includes(key)) {
+      html += contactInitialsCircleTemplate(contact, key);
     }
-  });
+  }
 
   container.innerHTML = html;
 
@@ -103,12 +108,16 @@ function renderSelectedContactsBelowInput() {
     previewContainer.innerHTML = "";
     return;
   }
+
   let html = "";
-  contacts.forEach((contact) => {
-    if (task.assignedTo.includes(contact.name)) {
+
+  for (let key in contacts) {
+    const contact = contacts[key];
+
+    if (task.assignedTo.includes(key)) {
       html += contactInitialsPreviewTemplate(contact);
     }
-  });
+  }
 
   previewContainer.innerHTML = html;
 }
@@ -117,7 +126,6 @@ function openDropdown(dropdown, arrow, label) {
   const button = document.querySelector(".assignedToInput");
   const preview = document.getElementById("assignedPreviewContainer");
 
-  // 🔥 Preview verstecken wenn Dropdown offen ist
   preview.style.display = "none";
 
   dropdown.classList.remove("hidden");
@@ -177,21 +185,18 @@ function setupAssignedDropdownClose() {
   });
 }
 
-/////////// Kategorie Dropdown ///////////
 function toggleCategoryDropdown(event) {
   event.stopPropagation();
   const dropdown = document.getElementById("categoryDropdown");
   dropdown.classList.toggle("hidden");
 }
 
-// Kategorie auswählen
 function selectCategory(category) {
   selectedCategory = category;
   document.getElementById("categoryLabel").textContent = category;
   document.getElementById("categoryDropdown").classList.add("hidden");
 }
 
-// Klick außerhalb schließt das Dropdown
 document.addEventListener("click", (event) => {
   const dropdown = document.getElementById("categoryDropdown");
   const wrapper = document.querySelector(".categorySelectWrapper");

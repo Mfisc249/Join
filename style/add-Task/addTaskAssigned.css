@@ -113,7 +113,7 @@
 .contactLeft {
   display: flex;
   align-items: center;
-  gap: 12px; /* Abstand zwischen Kreis und Name */
+  gap: 12px;
 }
 
 .contactInitialsCircle {
@@ -134,4 +134,71 @@
   font-size: 20px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
+}
+
+@media (max-width: 1392px) {
+  .assignedDropdown {
+    width: 880px;
+  }
+  .assignedToInput {
+    width: 883px;
+  }
+  .assignedDropdown {
+    width: 700px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .assignedToInput {
+    width: 705px;
+  }
+}
+@media (max-width: 1063px) {
+  .assignedToInput {
+    width: 589px;
+  }
+  .assignedDropdown {
+    width: 580px;
+  }
+}
+@media (max-width: 901px) {
+  .assignedToInput {
+    width: 495px;
+  }
+  .assignedDropdown {
+    width: 496px;
+  }
+}
+
+@media (max-width: 769px) {
+  .assignedToInput {
+    width: 545px;
+  }
+  .assignedDropdown {
+    width: 542px;
+  }
+}
+@media (max-width: 610px) {
+  .assignedDropdownArrow {
+    height: 5px;
+  }
+  .assignedCircle {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+  .contactName {
+    font-size: 16px;
+  }
+  .contactInitialsCircle {
+    width: 34px;
+    height: 34px;
+  }
+  .assignedToInput {
+    width: 277px;
+    height: 42px;
+  }
+  .assignedDropdown {
+    width: 270px;
+  }
 }

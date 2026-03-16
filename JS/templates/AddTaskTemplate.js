@@ -6,12 +6,12 @@ function createTaskTemplate(taskName, taskDescription) {
 
       <!-- LEFT -->
       <div class="leftContent">
-        <form id="taskForm">
+        <form id="taskForm" class="taskForm">
 
           <!-- TITLE -->
           <label class="addTaskLabel" for="taskName">
             <div class="headlineTextArea">
-              <h2>Title</h2>
+              <h2 class="h2AddTask">Title</h2>
               <p class="star">*</p>
             </div>
 
@@ -30,7 +30,7 @@ function createTaskTemplate(taskName, taskDescription) {
 
           <!-- DESCRIPTION -->
           <label class="addTaskLabelDescription" for="taskDesc">
-            <h2>Description</h2>
+            <h2 class="h2AddTask">Description</h2>
 
             <div class="taskDescriptionContainer">
               <textarea
@@ -49,7 +49,7 @@ function createTaskTemplate(taskName, taskDescription) {
           <!-- DUE DATE -->
           <label class="addTaskLabelDate" for="DueDate">
             <div class="headlineTextArea">
-              <h2>Due Date</h2>
+              <h2 class="h2AddTask">Due Date</h2>
               <p class="star">*</p>
             </div>
 
@@ -66,7 +66,7 @@ function createTaskTemplate(taskName, taskDescription) {
               <img class="eventImg" src="./assets/img/event.svg" alt="" />
 
               <!-- requiredField stays inside label -->
-              <p class="requiredField reuqiredDate">This field is required</p>
+              <p class="requiredField requiredDate">This field is required</p>
             </div>
           </label>
 
@@ -79,7 +79,7 @@ function createTaskTemplate(taskName, taskDescription) {
 <div class="rightContent">
 
   <!-- PRIORITY -->
-  <h2>Priority</h2>
+  <h2 class="h2AddTask">Priority</h2>
   <div class="priority">
     <div class="priorityButton urgent">
       <span>Urgent</span>
@@ -147,7 +147,7 @@ function createTaskTemplate(taskName, taskDescription) {
   </div>
    <div class="buttonRequiredField">
     <div class="headlineTextArea requiredBottomLeft">
-      <p class="star">*</p>
+      <p class="star subTaskStar">*</p>
       <p class="requiredField SubTaskField">this field is required</p>
     </div>
     <div class="taskButton">
@@ -159,13 +159,12 @@ function createTaskTemplate(taskName, taskDescription) {
         Create Task
         <img class="createButtonIcon" src="assets/img/check-2.svg" />
       </button>
-    </main>
-    <footer>
-    </footer>
+      </div>
+      </div>
   `;
 }
 
-function subtaskTemplate(text, index) {
+function subTaskTemplate(text, index) {
   const isEditing = editingSubtaskIndex === index;
 
   if (isEditing) {
@@ -224,8 +223,8 @@ function assignedToOptionTemplate(contact) {
   `;
 }
 
-function contactInitialsCircleTemplate(contact) {
-  const isSelected = task.assignedTo.includes(contact.name);
+function contactInitialsCircleTemplate(contact, key) {
+  const isSelected = task.assignedTo.includes(key);
   const selectedClass = isSelected ? "selected" : "";
   const checkboxImg = isSelected
     ? "./assets/img/checkButton.svg"
@@ -233,7 +232,7 @@ function contactInitialsCircleTemplate(contact) {
 
   return `
   <div class="assignedOption ${selectedClass}" 
-       onclick="toggleContact('${contact.name}', this)">
+       onclick="toggleContact('${key}', this)">
     <div class="contactLeft">
       <span class="contactInitialsCircle" 
             style="background-color: ${contact.color}">

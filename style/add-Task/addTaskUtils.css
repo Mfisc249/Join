@@ -1,14 +1,28 @@
 .toast {
   position: fixed;
   left: 50%;
-  bottom: -100px; /* startet unsichtbar */
+  bottom: -100px;
   transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
   background-color: rgba(42, 54, 71, 1);
   color: white;
-  padding: 24px 32px;
+
+  padding: 20px 28px;
   border-radius: 12px;
+
   font-size: 20px;
   font-weight: 500;
+
+  width: max-content;
+  max-width: 90%;
+
+  text-align: center;
+
   opacity: 0;
   transition: all 0.4s ease;
   z-index: 9999;
@@ -41,9 +55,12 @@ select::-ms-expand {
 }
 
 .eventImg {
-  position: relative;
-  right: 40px;
-  top: 3px;
+  position: absolute;
+  right: 15px;
+  top: 44%;
+  /* vertikal zentriert */
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .star {
@@ -62,4 +79,58 @@ select::-ms-expand {
 
 textarea {
   resize: none;
+}
+
+.requiredDate {
+  margin-top: -19px;
+}
+
+@media (max-width: 1063px) {
+  .descriptionImg {
+    position: relative;
+    bottom: 29px;
+    left: 563px;
+  }
+}
+
+@media (max-width: 901px) {
+  .descriptionImg {
+    position: relative;
+    bottom: 29px;
+    left: 674px;
+  }
+  .eventImg {
+    position: absolute;
+    right: 19px;
+    top: 40%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 610px) {
+  .toast {
+    font-size: 16px;
+    padding: 16px 20px;
+    gap: 8px;
+    max-width: 85%;
+  }
+  .toastIcon {
+    width: 16px;
+    height: 16px;
+  }
+  .checkBox {
+    width: 20px;
+    height: 20px;
+  }
+  .checkEdit {
+    padding-left: 2px;
+  }
+}
+
+@media (max-width: 400px) {
+  .toast {
+    font-size: 14px;
+    padding: 14px 16px;
+  }
 }
