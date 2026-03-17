@@ -1,4 +1,4 @@
-function createTaskTemplate(taskName, taskDescription) {
+function createTaskTemplate(taskName, taskDescription, taskDueDate) {
   return `
     <h1 class="mainTitle">Add Task</h1>
 
@@ -61,6 +61,7 @@ function createTaskTemplate(taskName, taskDescription) {
                 name="DueDate"
                 placeholder="dd/mm/yyyy"
                 maxlength="10"
+                value ="${taskDueDate ?? ""}"
               />
 
               <img class="eventImg" src="./assets/img/event.svg" alt="" />
