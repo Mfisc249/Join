@@ -55,8 +55,8 @@ function setupPriorityButtons() {
   });
 }
 
-function setDefaultPriority() {
-  const defaultBtn = document.querySelector(".priorityButton.medium");
+function setDefaultPriority(standartSelect = ".priorityButton.medium") {
+  const defaultBtn = document.querySelector(standartSelect);
   defaultBtn.classList.add("active");
   task.priority = "Medium";
 }

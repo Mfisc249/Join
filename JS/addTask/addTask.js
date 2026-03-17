@@ -31,7 +31,7 @@ async function init() {
 }
 
 function renderTemplate() {
-  document.getElementById("mainContent").innerHTML = createTaskTemplate('test', 'test', '21/06/2026');
+  document.getElementById("mainContent").innerHTML = createTaskTemplate();
 }
 
 async function saveTask(task) {
