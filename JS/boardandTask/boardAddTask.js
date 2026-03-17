@@ -8,4 +8,6 @@ async function editPreparation(taskID) {
   setDefaultPriority(`.priorityButton.${refTask.priority.toLowerCase()}`);
   setupDueDateInput();
   await loadContacts();
+  task.assignedTo.push("c1");
+  renderSelectedContactsBelowInput();
 }
