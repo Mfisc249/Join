@@ -39,7 +39,6 @@
   display: none;
 }
 
-/* Chrome, Edge, Safari */
 select {
   appearance: none;
   -webkit-appearance: none;
@@ -49,7 +48,7 @@ select {
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
 }
-/* IE */
+
 select::-ms-expand {
   display: none;
 }
@@ -57,8 +56,7 @@ select::-ms-expand {
 .eventImg {
   position: absolute;
   right: 15px;
-  top: 44%;
-  /* vertikal zentriert */
+  top: 30%;
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -82,7 +80,7 @@ textarea {
 }
 
 .requiredDate {
-  margin-top: -19px;
+  margin-top: 6px;
 }
 
 @media (max-width: 1063px) {
@@ -102,7 +100,6 @@ textarea {
   .eventImg {
     position: absolute;
     right: 19px;
-    top: 40%;
     transform: translateY(-50%);
     pointer-events: none;
   }

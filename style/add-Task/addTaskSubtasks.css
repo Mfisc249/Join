@@ -1,7 +1,40 @@
 .subtaskInputContainer {
   position: relative;
-  width: fit-content; /* passt sich deiner festen Input-Breite an */
+  width: 440px;
 }
+.bottomInputContainer {
+  width: 100%;
+}
+
+.inputField.bottomInput {
+  overflow-y: hidden;
+  resize: none;
+  font-family: "Inter", sans-serif;
+  width: 440px;
+  height: 43px;
+  display: block;
+  box-sizing: border-box;
+  font-size: 20px;
+  outline: none;
+  padding: 8px 10px;
+  padding-right: 60px;
+  border-radius: 10px;
+  padding-top: 9px;
+  padding-left: 20px;
+  padding-right: 80px;
+  border: unset;
+  box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
+}
+
+.inputField.bottomInput::placeholder {
+  color: rgba(209, 209, 209, 1);
+}
+
+.inputField.bottomInput:focus {
+  box-shadow: 0 0 0 2px #88e9fa;
+  outline: none;
+}
+
 .subtaskIcon {
   cursor: pointer;
   font-size: 16px;
@@ -12,7 +45,7 @@
 
 .subTaskIconsContainer {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -39,14 +72,11 @@
   pointer-events: auto;
 }
 
-.subtaskIcon:hover {
-  opacity: 0;
-}
-
 .subTaskContent {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .subTaskItem {
@@ -71,7 +101,7 @@
 }
 
 .subTaskItem.editing::before {
-  display: none; /* Punkt verschwindet */
+  display: none;
 }
 
 .subTaskItem:not(.editing):hover {
@@ -79,7 +109,7 @@
 }
 
 .subTaskList {
-  padding-left: 0; /* entfernt Browser Default Einrückung */
+  padding-left: 0;
   margin: 0;
   padding-right: 20px;
   list-style: none;
@@ -103,34 +133,47 @@
 }
 
 .subTaskEditInput {
+  overflow-y: hidden;
+  resize: none;
   width: 100%;
   height: 32px;
   border: unset;
-  border-bottom: 1px solid rgba(0, 93, 255, 1);
+  border-bottom: 1px solid rgba(41, 171, 226, 1);
   outline: none;
   padding-left: 20px;
   font-size: 16px;
-  line-height: 32px;
   box-sizing: border-box;
+  resize: none;
+  flex: 1;
+  font-family: "Inter", sans-serif;
+  padding-top: 5px;
+
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  padding-right: 90px;
 }
+
 .checkEdit {
   height: 13px;
   object-fit: contain;
 }
 .subTaskEditIcons {
-  position: absolute; /* 🔥 KEY FIX */
-  right: 12px; /* sitzt im Input rechts */
+  right: 81px;
   display: flex;
   gap: 8px;
   align-items: center;
   cursor: pointer;
+  position: relative;
+  top: 4px;
 }
 
 .subTaskEditContainer {
   display: flex;
-  align-items: center;
-  width: 100%; /* statt 434px */
+  align-items: flex-start;
+  gap: 10px;
+  width: 510px;
   position: relative;
+  z-index: 2;
 }
 
 .SubTaskField {
@@ -140,6 +183,10 @@
   display: flex;
   align-items: center;
   min-height: 32px;
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 295px;
 }
 
 @media (max-width: 1392px) {
@@ -147,21 +194,32 @@
     width: 840px;
   }
   .subTaskEditContainer {
-    width: 880px;
+    width: 945px;
   }
   .subTaskItem {
     width: 845px;
   }
   .subTaskEditIcons {
-    right: 17px;
+    right: 80px;
+  }
+  .inputField.bottomInput {
+    width: 880px;
+  }
+  .subtaskInputContainer {
+    width: 880px;
+  }
+
+  .subTaskList {
+    width: 880px;
   }
 }
 @media (max-width: 1300px) {
   .subTaskItem {
-    width: 100%;
+    padding-right: 80px;
+    width: 595px;
   }
   .subTaskEditContainer {
-    width: 700px;
+    width: 765px;
   }
   .subTaskContent {
     width: 653px;
@@ -173,33 +231,90 @@
     width: 72%;
   }
   .subTaskEditIcons {
-    right: 24px;
+    right: 89px;
+  }
+  .inputField.bottomInput {
+    width: 700px;
+  }
+  .subtaskInputContainer {
+    width: 700px;
+  }
+  .subTaskEditInput {
+    width: 880px;
+  }
+  .subTaskList {
+    width: 700px;
   }
 }
 @media (max-width: 1063px) {
   .subTaskItem {
-    width: 548px;
+    width: 475px;
   }
   .subTaskEditContainer {
-    width: 580px;
+    width: 646px;
   }
   .subTaskContent {
     width: 540px;
   }
   .subTaskEditIcons {
-    right: 16px;
+    right: 81px;
+  }
+  .inputField.bottomInput {
+    width: 580px;
+  }
+  .subtaskInputContainer {
+    width: 580px;
+  }
+  .subTaskEditInput {
+    width: 700px;
+  }
+  .subTaskList {
+    width: 580px;
   }
 }
 
 @media (max-width: 901px) {
   .subTaskItem {
-    width: 455px;
+    width: 380px;
   }
   .subTaskContent {
     width: 450px;
   }
   .subTaskEditContainer {
+    width: 555px;
+  }
+  .inputField.bottomInput {
     width: 490px;
+  }
+  .subtaskInputContainer {
+    width: 490px;
+  }
+  .subTaskEditInput {
+    width: 580px;
+  }
+  .subTaskEditInput {
+    width: 490px;
+  }
+  .subTaskList {
+    width: 490px;
+  }
+}
+
+@media (max-width: 769px) {
+  .inputField.bottomInput {
+    width: 538px;
+  }
+  .subTaskEditContainer {
+    width: 604px;
+  }
+  .subTaskContent {
+    width: 499px;
+  }
+  .subTaskItem {
+    width: 426px;
+  }
+  .subtaskInputContainer {
+    width: 530px;
   }
 }
 
@@ -208,9 +323,21 @@
     width: 503px;
   }
   .subTaskItem {
-    width: 511px;
+    width: 432px;
   }
   .subTaskEditContainer {
+    width: 605px;
+  }
+  .inputField.bottomInput {
+    width: 541px;
+  }
+  .subtaskInputContainer {
+    width: 541px;
+  }
+  .subTaskEditInput {
+    width: 541px;
+  }
+  .subTaskList {
     width: 541px;
   }
 }
@@ -219,7 +346,7 @@
     gap: 3px;
   }
   .subTaskEditIcons {
-    right: 10px;
+    right: 76px;
     gap: 3px;
   }
   .subTaskStar {
@@ -229,10 +356,10 @@
     width: 230px;
   }
   .subTaskItem {
-    width: 235px;
+    width: 157px;
   }
   .subTaskEditContainer {
-    width: 264px;
+    width: 333px;
   }
   .subTaskIcons {
     height: 20px;
@@ -242,8 +369,23 @@
   }
   .subTaskIconsContainer {
     gap: 3px;
+    right: 74px;
   }
   .spacer {
     margin-right: 3px;
+  }
+  .inputField.bottomInput,
+  .subtaskInputContainer,
+  .subTaskEditInput,
+  .subTaskList {
+    width: 271px;
+    padding-right: 62px;
+  }
+  .inputField.bottomInput {
+    max-width: 100%;
+    padding-left: 17px;
+    padding-right: 10px;
+    font-size: 16px;
+    padding-top: 11px;
   }
 }

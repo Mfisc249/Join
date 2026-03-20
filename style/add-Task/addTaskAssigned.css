@@ -18,13 +18,9 @@
   -webkit-appearance: none;
 }
 
-.assignedToInput:focus-visible {
+.assignedToInput:focus {
   border: 2px solid #88e9fa;
   outline: none;
-}
-
-.assignedToInput.activeFocus {
-  border: 2px solid #88e9fa;
 }
 
 .assignedDropdown {

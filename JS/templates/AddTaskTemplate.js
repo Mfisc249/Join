@@ -79,7 +79,7 @@ function createTaskTemplate(taskName, taskDescription) {
 <div class="rightContent">
 
   <!-- PRIORITY -->
-  <h2 class="h2AddTask">Priority</h2>
+  <h2 class="h2AddTask priorityHeadline">Priority</h2>
   <div class="priority">
     <div class="priorityButton urgent">
       <span>Urgent</span>
@@ -129,7 +129,7 @@ function createTaskTemplate(taskName, taskDescription) {
     <h2 class="ChoiceHeadline">Subtasks</h2>
     <div class="subtaskInputContainer">
       <div class="bottomInputContainer">
-        <input class="inputField bottomInput" id="subtaskInput" placeholder="Add new subtask" />
+        <textarea class="inputField bottomInput" id="subtaskInput" placeholder="Add  new  subtask"></textarea>
       </div>
       <div class="subTaskIconsContainer">
         <img onclick="cancelSubtask()" class="subtaskIcon check" id="cancelSubtask" src="./assets/img/Subtasks icons11-3.svg" alt="" />
@@ -171,12 +171,11 @@ function subTaskTemplate(text, index) {
     return `
       <li class="subTaskItem editing">
   <div class="subTaskEditContainer">
-    <input
-      class="subTaskEditInput"
-      value="${text}"
-      onkeydown="handleEditKey(event, ${index}, this.value)"
-      autofocus
-    />
+    <textarea
+  class="subTaskEditInput"
+  onkeydown="handleEditKey(event, ${index}, this.value)"
+  autofocus
+>${text}</textarea>
 
     <div class="subTaskEditIcons">
      <img class="subtaskEditNote" onclick="deleteSubtask(${index})" src="./assets/img/Subtasks icons11.svg" alt="" />

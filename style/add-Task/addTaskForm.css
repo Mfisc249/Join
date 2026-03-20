@@ -141,10 +141,6 @@
   cursor: pointer;
 }
 
-.ChoiceOption:focus {
-  border: 1px solid #88e9fa;
-}
-
 .choiceContact {
   padding-left: 9px;
   font-family: "Inter", sans-serif;
@@ -279,7 +275,7 @@
     width: 475px;
   }
   .ChoiceOption {
-    width: 497px;
+    width: 492px;
   }
 }
 
@@ -302,7 +298,14 @@
   .ChoiceOption {
     width: 545px;
   }
+  .addTaskLabel {
+    margin-bottom: 20px;
+  }
+  .addTaskLabelDescription {
+    margin-bottom: 20px;
+  }
 }
+
 @media (max-width: 610px) {
   .taskname {
     font-size: 16px;
