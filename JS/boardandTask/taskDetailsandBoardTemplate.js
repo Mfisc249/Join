@@ -40,9 +40,9 @@ function highlightTaskTamplate(ID) {
 /** Builds the HTML markup for the four task board columns. */
 function taskBoardTamplate() {
     return `        <tr class="tableCategories">
-                        <td>To do <button>+</button></td>
-                        <td>In progress <button>+</button></td>
-                        <td>Await feedback <button>+</button></td>
+                        <td>To do <button onclick="opendialog('boardAddTask');init()">+</button></td>
+                        <td>In progress <button onclick="opendialog('boardAddTask');init()">+</button></td>
+                        <td>Await feedback <button onclick="opendialog('boardAddTask');init()">+</button></td>
                         <td>Done</td>
                     </tr>
                     <tr id="fields">
@@ -55,19 +55,19 @@ function taskBoardTamplate() {
 
 function taskBoardTamplateMobile() {
     return `            <tr>
-                            <td class="tableCategories">To do <button>+</button></th>
+                            <td class="tableCategories">To do <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
                             <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
                         </tr>
                         <tr>
-                            <td class="tableCategories">In progress <button>+</button></th>
+                            <td class="tableCategories">In progress <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
                             <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
                         </tr>
                         <tr>
-                            <td class="tableCategories">Await feedback <button>+</button></th>
+                            <td class="tableCategories">Await feedback <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
                             <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
@@ -120,7 +120,7 @@ function taskDetailsTamplate(taskID) {
         <footer>
              <div class="taskDetailsIcons">
                 <span onmouseover="displayNone('trash','trashMousover')" onmouseout = "removeDisplayNone('trash','trashMousover')" onclick = "closedialog('allTaskDetails'); deleteTask(${taskID})" class="taskDetailsIcons"><img id ="trash" src="./assets/icons/trash_darkblue.svg" alt="trash"><img class ="displayNone" id="trashMousover" src="./assets/icons/trash_lightblue.svg" alt="trashMousover"> Delete</span>
-                <span onmouseover="displayNone('edit','editMousover')"  onmouseout = "removeDisplayNone('edit','editMousover')" class="taskDetailsIcons edit"><img id ="edit" onmouseover="" src="./assets/icons/pencil_darkblue.svg" alt="edit"><img class ="displayNone" id="editMousover" src="./assets/icons/pencil_lightblue.svg" alt="editMousover"> Edit</span>
+                <span onmouseover="displayNone('edit','editMousover')"  onmouseout = "removeDisplayNone('edit','editMousover')" onclick = "opendialog('boardAddTask');editPreparation(${taskID})" class="taskDetailsIcons edit"><img id ="edit" onmouseover="" src="./assets/icons/pencil_darkblue.svg" alt="edit"><img class ="displayNone" id="editMousover" src="./assets/icons/pencil_lightblue.svg" alt="editMousover"> Edit</span>
              </div>
         </footer>
     </div>`

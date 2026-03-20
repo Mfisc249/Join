@@ -7,12 +7,20 @@
     <title>Board</title>
     <link rel="icon" href="./assets/icons/favicon-lightmode.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="./assets/icons/favicon-darkmode.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
-    <!-- <link rel="stylesheet" href="style/add-Task.css" /> -->
     <link rel="stylesheet" href="./style/standard.css" />
     <link rel="stylesheet" href="./style/sidebar.css" />
     <link rel="stylesheet" href="./style/header.css" />
     <link rel="stylesheet" href="./style/board.css">
     <link rel="stylesheet" href="./style/taskDetail.css">
+
+    <link rel="stylesheet" href="./style/add-Task/addTask.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskForm.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskPriority.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskAssigned.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskSubtasks.css" />
+    <link rel="stylesheet" href="./style/add-Task/addTaskUtils.css" />
+
+    <link rel="stylesheet" href="./style/addTaskBoard.css">
 </head>
 
 <body onload="boardInit()">
@@ -31,11 +39,11 @@
                                     rows="1"></input>
                                 <img src="./assets/img/Search.svg" alt="Search">
                             </div>
-                            <button onclick="opendialog('boardAddTask')" class="ButtonBlueFilled boardAddTaskButton"
+                            <button onclick="opendialog('boardAddTask');init()" class="ButtonBlueFilled boardAddTaskButton"
                                 type="button">Add
                                 Task <img src="./assets/img/add_white.svg" alt="+"></button>
 
-                            <button onclick="opendialog('boardAddTask')"
+                            <button onclick="opendialog('boardAddTask');init()" 
                                 class="ButtonBlueFilled boardAddTaskButtonMobile" type="button">
                                 <img src="./assets/img/add_white.svg" alt="+"></button>
                         </div>
@@ -58,7 +66,7 @@
 
                 </dialog>
                 <dialog id="boardAddTask" onclick="closedialog('boardAddTask')">
-                    <main onclick="event.stopPropagation()">
+                    <main onclick="event.stopPropagation()" class="addTaskMain">
                         <div id="mainContent"></div>
                     </main>
                 </dialog>
@@ -74,5 +82,12 @@
     <script src="./JS/boardandTask/boardLoadingScreen.js"></script>
     <script src="./JS/boardandTask/boardMobile.js"></script>
     <script src="./JS/boardandTask/boardSaftyChecks.js"></script>
+    <script src="./JS/boardandTask/boardEditTask.js"></script>
+
+    <script src="./JS/templates/AddTaskTemplate.js" defer></script>
+    <script src="./JS/addTask/addTaskAssigned.js" defer></script>
+    <script src="./JS/addTask/addTaskSubtasks.js" defer></script>
+    <script src="./JS/addTask/addTaskForm.js" defer></script>
+    <script src="./JS/addTask/addTask.js" defer></script>
 </body>
 </html>

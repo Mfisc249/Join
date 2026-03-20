@@ -1,0 +1,259 @@
+#boardAddTask {
+    padding: 0;
+    border: none;
+    border-radius: 30px;
+    width: min(1200px, calc(100vw - 64px));
+    max-width: 1200px;
+    max-height: calc(100vh - 64px);
+    overflow: hidden;
+    background-color: var(--GlobalBackgroundWhite);
+}
+
+#boardAddTask .addTaskMain {
+    max-width: none;
+    width: 100%;
+    margin: 0 !important;
+    padding: 32px 40px 40px !important;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: calc(100vh - 64px);
+}
+
+#boardAddTask .buttonRequiredField {
+    width: 100%;
+}
+
+#boardAddTask .taskButton {
+    position: static;
+}
+
+#boardAddTask .requiredBottomLeft {
+    padding-right: 0;
+}
+
+@media (max-width: 1300px) {
+    #boardAddTask {
+        width: calc(100vw - 48px);
+        max-height: calc(100vh - 48px);
+    }
+
+    #boardAddTask .addTaskMain {
+        padding: 28px 32px 32px !important;
+        max-height: calc(100vh - 48px);
+    }
+
+    #boardAddTask .contentWrapperAddTask {
+        display: block;
+    }
+
+    #boardAddTask .divider {
+        display: none;
+    }
+
+    #boardAddTask .leftContent,
+    #boardAddTask .rightContent {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #boardAddTask .taskDescriptionContainer textarea,
+    #boardAddTask .taskNameContainer textarea,
+    #boardAddTask .addTaskDateContainer input,
+    #boardAddTask .assignedToInput,
+    #boardAddTask .assignedDropdown,
+    #boardAddTask .ChoiceOption,
+    #boardAddTask .inputField,
+    #boardAddTask .subTaskItem,
+    #boardAddTask .subTaskContent,
+    #boardAddTask .subTaskEditContainer {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    #boardAddTask .priority {
+        gap: 12px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    #boardAddTask {
+        width: calc(100vw - 32px);
+        max-height: calc(100vh - 32px);
+        border-radius: 24px;
+    }
+
+    #boardAddTask .addTaskMain {
+        padding: 24px 20px 28px !important;
+        max-height: calc(100vh - 32px);
+    }
+
+    #boardAddTask .mainTitle {
+        font-size: 48px;
+        padding: 0;
+    }
+
+    #boardAddTask .priority {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #boardAddTask .priorityButton {
+        flex: 1 1 calc(33.333% - 8px);
+        min-width: 0;
+        width: auto;
+        font-size: 16px;
+        gap: 6px;
+        padding: 0 8px;
+    }
+
+    #boardAddTask .buttonRequiredField {
+        margin-top: 24px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #boardAddTask .requiredBottomLeft {
+        width: 100%;
+        padding-bottom: 16px;
+    }
+
+    #boardAddTask .taskButton {
+        width: 100%;
+        padding: 0;
+        justify-content: stretch;
+    }
+
+    #boardAddTask .clearButton,
+    #boardAddTask .createButton {
+        flex: 1 1 0;
+        width: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    #boardAddTask {
+        width: calc(100vw - 24px);
+        max-height: calc(100vh - 24px);
+        border-radius: 20px;
+    }
+
+    #boardAddTask .addTaskMain {
+        padding: 20px 16px 24px !important;
+        max-height: calc(100vh - 24px);
+    }
+
+    #boardAddTask .mainTitle {
+        font-size: 40px;
+    }
+
+    #boardAddTask .ChoiceHeadline,
+    #boardAddTask .h2AddTask,
+    #boardAddTask .choiceContact,
+    #boardAddTask .categoryOption,
+    #boardAddTask .contactName,
+    #boardAddTask .taskDescription,
+    #boardAddTask .taskNameContainer textarea,
+    #boardAddTask .taskDescriptionContainer textarea,
+    #boardAddTask .addTaskDateContainer input {
+        font-size: 16px;
+    }
+
+    #boardAddTask .assignedCircle,
+    #boardAddTask .contactInitialsCircle {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    #boardAddTask .taskButton {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #boardAddTask .clearButton,
+    #boardAddTask .createButton {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    #boardAddTask .priorityButton {
+        font-size: 14px;
+        gap: 4px;
+        height: 42px;
+        padding: 0 6px;
+    }
+
+    #boardAddTask .priorityButton .priorityIcon {
+        width: 16px;
+        height: 16px;
+    }
+
+    #boardAddTask .subTaskActions {
+        gap: 4px;
+    }
+
+    #boardAddTask .subTaskEditIcons {
+        right: 10px;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 320px) {
+    #boardAddTask {
+        width: calc(100vw - 16px);
+        max-height: calc(100vh - 16px);
+        border-radius: 20px;
+    }
+
+    #boardAddTask .addTaskMain {
+        padding: 16px 12px 24px !important;
+        max-height: calc(100vh - 16px);
+    }
+
+    #boardAddTask .mainTitle {
+        font-size: 36px;
+        padding: 0;
+    }
+
+    #boardAddTask .priority {
+        width: 100%;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    #boardAddTask .priorityButton {
+        flex: 1 1 calc(33.333% - 6px);
+        min-width: 0;
+        width: auto;
+        font-size: 14px;
+        gap: 4px;
+        padding: 0 6px;
+    }
+
+    #boardAddTask .buttonRequiredField {
+        width: 100%;
+        margin-top: 24px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #boardAddTask .requiredBottomLeft {
+        width: 100%;
+        padding-bottom: 16px;
+    }
+
+    #boardAddTask .taskButton {
+        width: 100%;
+        padding: 0;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #boardAddTask .clearButton,
+    #boardAddTask .createButton {
+        width: 100%;
+    }
+}
