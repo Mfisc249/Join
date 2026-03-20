@@ -54,6 +54,10 @@
   .priority {
     gap: 237px;
   }
+  .priorityHeadline {
+    margin-top: 24px;
+    margin-bottom: 13px;
+  }
 }
 
 @media (max-width: 1300px) {
@@ -88,7 +92,7 @@
 @media (max-width: 610px) {
   .priority {
     gap: 12px;
-    margin-top: 25px;
+    margin-top: 18px;
   }
   .priorityButton {
     width: 121px;
@@ -102,5 +106,8 @@
   }
   .priorityButton {
     gap: 5px;
+  }
+  .priorityHeadline {
+    margin-top: 10px;
   }
 }

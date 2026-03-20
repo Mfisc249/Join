@@ -53,8 +53,9 @@ function saveEditedSubtask(index) {
 }
 
 function handleEditKey(event, index, value) {
-  if (event.key === "Enter") {
-    saveEditedSubtask(index, value);
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault(); // verhindert neue Zeile
+    saveEditedSubtask(index);
   }
 
   if (event.key === "Escape") {
@@ -72,15 +73,11 @@ function handleSubtaskKeydown(event) {
 
 function setupSubtaskEnter() {
   const input = document.getElementById("subtaskInput");
-
-  if (!input) {
-    console.log("subtaskInput not found");
-    return;
-  }
+  if (!input) return;
 
   input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // verhindert neue Zeile
       confirmSubtask();
     }
   });

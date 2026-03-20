@@ -68,7 +68,7 @@ async function saveTaskToFirebase(task, taskID, taskKey) {
 }
 
 function generateTaskKey(existingTasks) {
-  const keys = Object.keys(existingTasks || {}); // alle vorhandenen Tasks
+  const keys = Object.keys(existingTasks || {});
   const lastIndex =
     keys.length > 0
       ? Math.max(...keys.map((k) => parseInt(k.replace("Task", ""))))

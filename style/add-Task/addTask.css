@@ -8,7 +8,7 @@
   max-width: 1200px;
   margin: 208px auto 0 auto;
   margin-left: 328px;
-  padding-bottom: 130px;
+  padding-bottom: 110px;
 }
 
 .taskForm {
@@ -162,9 +162,6 @@
   .divider {
     display: none;
   }
-  .inputField {
-    width: 858px;
-  }
   .buttonRequiredField {
     margin-top: 70px;
     width: 880px;
@@ -253,7 +250,7 @@
     position: fixed;
     bottom: 80px;
     left: 0;
-    width: 718px;
+    width: 711px;
     background: rgba(246, 247, 248, 1);
     padding: 20px;
     display: flex;
@@ -282,7 +279,7 @@
 
 @media (max-width: 610px) {
   .addTaskMain {
-    margin-left: 9px;
+    margin-left: 17px;
   }
   .ChoiceHeadline {
     font-size: 16px;
@@ -322,7 +319,7 @@
     width: 147px;
   }
   .taskButton {
-    width: 262px;
+    width: 264px;
   }
   .requiredBottomLeft {
     padding-right: 297px;
