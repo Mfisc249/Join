@@ -1,41 +1,44 @@
-
 let curentTaskID = 0;
+
 async function editPreparation(taskID) {
-  let refTask = TASK[0][`Task${taskID}`];
-  document.getElementById("mainContent").innerHTML = createTaskTemplate(`${refTask.title}`,`${refTask.description}`, `${refTask.dueDate}`);
+  let refTaskEditTask = TASK[0][`Task${taskID}`];
+  document.getElementById("mainContent").innerHTML = createTaskTemplate(`${refTaskEditTask.title}`,`${refTaskEditTask.description}`, `${refTaskEditTask.dueDate}`);
+  task.title = refTaskEditTask.title;
+  task.description = refTaskEditTask.description;
+  task.dueDate = refTaskEditTask.dueDate;
   setupSubtaskEnter();
   setupAssignedDropdownClose();
   setupLiveValidation();
   setupPriorityButtons();
-  setDefaultPriority(`.priorityButton.${refTask.priority.toLowerCase()}`);
-  task.priority = refTask.priority;
+  setDefaultPriority(`.priorityButton.${refTaskEditTask.priority.toLowerCase()}`);
+  task.priority = refTaskEditTask.priority;
   setupDueDateInput();
   await loadContacts();
-  prepareAssignedToEditTask(refTask);
-  selectCategory(refTask.category);
-  prepareSubTasksEditTask(refTask);
+  prepareAssignedToEditTask(refTaskEditTask);
+  selectCategory(refTaskEditTask.category);
+  task.category = refTaskEditTask.category;
+  prepareSubTasksEditTask(refTaskEditTask);
 
   document.querySelector('.taskButton').remove();
   document.querySelector('.mainTitle').remove();
   
   createSaveDataEditTaskButton(taskID);
-
 }
 
-function prepareAssignedToEditTask(refTask) {
+function prepareAssignedToEditTask(refTaskEditTask) {
   task.assignedTo = [];
-  for (let index = 0; index < refTask.assignedTo.length; index++) {
-    task.assignedTo.push(`${refTask.assignedTo[index]}`);
+  for (let index = 0; index < refTaskEditTask.assignedTo.length; index++) {
+    task.assignedTo.push(`${refTaskEditTask.assignedTo[index]}`);
     
   }
   renderSelectedContactsBelowInput();
 }
 
-function prepareSubTasksEditTask(refTask){
-if(refTask.subTasks != [] && refTask.subTasks != undefined && refTask.subTasks != null && refTask.subTasks.length != 0){
+function prepareSubTasksEditTask(refTaskEditTask){
+if(refTaskEditTask.subTasks != [] && refTaskEditTask.subTasks != undefined && refTaskEditTask.subTasks != null && refTaskEditTask.subTasks.length != 0){
   task.subTasks = [];
-   for (let index = 0; index < refTask.subTasks.length; index++) {
-    task.subTasks.push(`${refTask.subTasks[index]}`);
+   for (let index = 0; index < refTaskEditTask.subTasks.length; index++) {
+    task.subTasks.push(`${refTaskEditTask.subTasks[index]}`);
     renderSubTasks();
    }
   }
@@ -45,13 +48,39 @@ if(refTask.subTasks != [] && refTask.subTasks != undefined && refTask.subTasks !
 function createSaveDataEditTaskButton(taskID) {
   curentTaskID = taskID;
   let refsaveButtonEditTask = document.createElement('div');
-  refsaveButtonEditTask.className = "ButtonBlueFilled";
-  refsaveButtonEditTask.innerHTML =`OK <img src="./assets/img/check-2.svg" alt="OK">`;
-  refsaveButtonEditTask.onclick = saveDataEditTask;
+  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); saveDataEditTask()" class ="ButtonBlueFilled">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
+  // refsaveButtonEditTask.className = "ButtonBlueFilled";
+  // refsaveButtonEditTask.innerHTML =`OK <img src="./assets/img/check-2.svg" alt="OK">`;
+  // refsaveButtonEditTask.onclick = saveDataEditTask;
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
 }
 
+function getDataEditTask() {
+  const titleInput = document.getElementById("taskName");
+  const descInput = document.getElementById("taskDesc");
+  const dateInput = document.getElementById("DueDate");
+
+  task.title = titleInput.value;
+  task.description = descInput.value;
+  task.dueDate = dateInput.value;
+  task.category = selectedCategory;
+}
+
 async function saveDataEditTask(){
-  let refTaskKey = `Task${curentTaskID}`;
-  await saveTaskToFirebase(task, curentTaskID, refTaskKey)
+  let checkboxString = task.subTasks.map(() => "U").toString();
+  let refTaskEditTask = TASK[0][`Task${curentTaskID}`];
+
+  await DataPUT(`/Tasks/Task${curentTaskID}`, {
+    'title': task.title,
+    'id': curentTaskID,
+    'dueDate':  task.dueDate,
+    'priority': task.priority,
+    'category': task.category,
+    'description': task.description,
+    'field': refTaskEditTask.field,
+    'assignedTo': task.assignedTo,
+    'subTasks': task.subTasks,
+    'subTasksReview': {
+      0: checkboxString,
+    }})
 }
