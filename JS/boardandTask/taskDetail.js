@@ -137,12 +137,12 @@ async function storeSubtask() {
     }
 
     let checkboxString = subtaskStatusList.toString();
-    let task = getTaskById(currentTaskId);
-    if (Object.keys(task).length === 0) {
+    let refTaskStoreSubtask = getTaskById(currentTaskId);
+    if (Object.keys(refTaskStoreSubtask).length === 0) {
         return;
     }
 
-    task.subTasksReview = {0: checkboxString};
+    refTaskStoreSubtask.subTasksReview = {0: checkboxString};
     await DataPUT(`Tasks/Task${currentTaskId}/subTasksReview`,{
           0 : `${checkboxString}`
         }

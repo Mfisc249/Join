@@ -1,8 +1,15 @@
 let curentTaskID = 0;
+let isEditTaskMode = false;
+let editSubTaskReview = [];
 
 async function editPreparation(taskID) {
   let refTaskEditTask = TASK[0][`Task${taskID}`];
+  isEditTaskMode = true;
+  editSubTaskReview = [];
   document.getElementById("mainContent").innerHTML = createTaskTemplate(`${refTaskEditTask.title}`,`${refTaskEditTask.description}`, `${refTaskEditTask.dueDate}`);
+  document.querySelector('.taskButton').remove();
+  document.querySelector('.mainTitle').remove();
+  createSaveDataEditTaskButton(taskID);
   task.title = refTaskEditTask.title;
   task.description = refTaskEditTask.description;
   task.dueDate = refTaskEditTask.dueDate;
@@ -18,14 +25,12 @@ async function editPreparation(taskID) {
   selectCategory(refTaskEditTask.category);
   task.category = refTaskEditTask.category;
   prepareSubTasksEditTask(refTaskEditTask);
-
-  document.querySelector('.taskButton').remove();
-  document.querySelector('.mainTitle').remove();
-  
-  createSaveDataEditTaskButton(taskID);
 }
 
 function prepareAssignedToEditTask(refTaskEditTask) {
+  if (refTaskEditTask.assignedTo == [] || refTaskEditTask.assignedTo == undefined || refTaskEditTask.assignedTo == null) {
+    return;
+  }
   task.assignedTo = [];
   for (let index = 0; index < refTaskEditTask.assignedTo.length; index++) {
     task.assignedTo.push(`${refTaskEditTask.assignedTo[index]}`);
@@ -35,23 +40,18 @@ function prepareAssignedToEditTask(refTaskEditTask) {
 }
 
 function prepareSubTasksEditTask(refTaskEditTask){
-if(refTaskEditTask.subTasks != [] && refTaskEditTask.subTasks != undefined && refTaskEditTask.subTasks != null && refTaskEditTask.subTasks.length != 0){
-  task.subTasks = [];
-   for (let index = 0; index < refTaskEditTask.subTasks.length; index++) {
-    task.subTasks.push(`${refTaskEditTask.subTasks[index]}`);
-    renderSubTasks();
-   }
-  }
-  
+  let existingSubTasks = safeArray(refTaskEditTask.subTasks);
+  let existingReview = safeText(refTaskEditTask?.subTasksReview?.[0], '').split(',');
+
+  task.subTasks = [...existingSubTasks];
+  editSubTaskReview = task.subTasks.map((_, index) => existingReview[index] === 'C' ? 'C' : 'U');
+  renderSubTasks();
 }
 
 function createSaveDataEditTaskButton(taskID) {
   curentTaskID = taskID;
   let refsaveButtonEditTask = document.createElement('div');
   refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); saveDataEditTask()" class ="ButtonBlueFilled">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
-  // refsaveButtonEditTask.className = "ButtonBlueFilled";
-  // refsaveButtonEditTask.innerHTML =`OK <img src="./assets/img/check-2.svg" alt="OK">`;
-  // refsaveButtonEditTask.onclick = saveDataEditTask;
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
 }
 
@@ -67,8 +67,8 @@ function getDataEditTask() {
 }
 
 async function saveDataEditTask(){
-  let checkboxString = task.subTasks.map(() => "U").toString();
   let refTaskEditTask = TASK[0][`Task${curentTaskID}`];
+  let checkboxString = getEditTaskSubtaskReviewString(task.subTasks, refTaskEditTask);
 
   await DataPUT(`/Tasks/Task${curentTaskID}`, {
     'title': task.title,
@@ -83,4 +83,41 @@ async function saveDataEditTask(){
     'subTasksReview': {
       0: checkboxString,
     }})
+}
+
+function getEditTaskSubtaskReviewString(subTasks, refTaskEditTask) {
+  if (!Array.isArray(subTasks) || subTasks.length === 0) {
+    return '';
+  }
+
+  let fallbackReview = safeText(refTaskEditTask?.subTasksReview?.[0], '').split(',');
+  let normalizedReview = [];
+
+  for (let index = 0; index < subTasks.length; index++) {
+    if (editSubTaskReview[index] === 'C') {
+      normalizedReview.push('C');
+    } else if (editSubTaskReview[index] === 'U') {
+      normalizedReview.push('U');
+    } else {
+      normalizedReview.push(fallbackReview[index] === 'C' ? 'C' : 'U');
+    }
+  }
+
+  return normalizedReview.toString();
+}
+
+function handleSubtaskAddedInEditMode() {
+  if (!isEditTaskMode) {
+    return;
+  }
+
+  editSubTaskReview.push('U');
+}
+
+function handleSubtaskDeletedInEditMode(index) {
+  if (!isEditTaskMode) {
+    return;
+  }
+
+  editSubTaskReview.splice(index, 1);
 }
