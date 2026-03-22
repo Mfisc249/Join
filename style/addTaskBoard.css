@@ -32,6 +32,10 @@
 }
 
 @media (max-width: 1300px) {
+    .mainTitle {
+        position: unset !important;
+    }
+
     #boardAddTask {
         width: calc(100vw - 48px);
         max-height: calc(100vh - 48px);
@@ -54,21 +58,6 @@
     #boardAddTask .rightContent {
         margin-left: 0;
         margin-right: 0;
-    }
-
-    #boardAddTask .taskDescriptionContainer textarea,
-    #boardAddTask .taskNameContainer textarea,
-    #boardAddTask .addTaskDateContainer input,
-    #boardAddTask .assignedToInput,
-    #boardAddTask .assignedDropdown,
-    #boardAddTask .ChoiceOption,
-    #boardAddTask .inputField,
-    #boardAddTask .subTaskItem,
-    #boardAddTask .subTaskContent,
-    #boardAddTask .subTaskEditContainer {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
     }
 
     #boardAddTask .priority {
@@ -99,14 +88,14 @@
         gap: 10px;
     }
 
-    #boardAddTask .priorityButton {
+    /* #boardAddTask .priorityButton {
         flex: 1 1 calc(33.333% - 8px);
         min-width: 0;
         width: auto;
         font-size: 16px;
         gap: 6px;
         padding: 0 8px;
-    }
+    } */
 
     #boardAddTask .buttonRequiredField {
         margin-top: 24px;
@@ -131,6 +120,96 @@
         width: auto;
     }
 }
+
+@media (max-width: 1288px) {
+
+    .addTaskLabel {
+        align-items: unset !important;
+    }
+
+    .addTaskLabelDescription {
+        align-items: unset !important;
+    }
+
+    .addTaskLabelDate {
+        align-items: unset !important;
+    }
+
+    .taskNameContainer {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .taskNameContainer textarea {
+        width: unset !important;
+    }
+
+    .ChoiceOption {
+        width: unset !important;
+    }
+
+    .taskDescriptionContainer {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .taskDescriptionContainer textarea {
+        width: unset !important;
+    }
+
+    .addTaskDateContainer {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .addTaskDateContainer input {
+        width: unset !important;
+    }
+
+    .OptionsContainer {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .OptionsContainer .assignedToInput {
+        width: unset !important;
+    }
+
+    .OptionsContainer .assignedDropdown {
+        width: unset !important;
+    }
+
+    .OptionsContainer .categorySelectWrapper {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .OptionsContainer .subtaskInputContainer {
+        width: unset !important;
+    }
+
+    .OptionsContainer .subtaskInputContainer .bottomInputContainer {
+        width: unset !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .inputField.bottomInput,
+    .subtaskInputContainer,
+    .subTaskEditInput,
+    .subTaskList {
+        padding-right: unset !important;
+    }
+
+    .subTaskIconsContainer {
+        right: 10px !important;
+    }
+
+    .OptionsContainer .bottomInputContainer .inputField {
+        width: unset !important;
+    }
+}
+
 
 @media (max-width: 500px) {
     #boardAddTask {
