@@ -42,7 +42,7 @@ function removeDisplayNone(ID1, ID2) {
 }
 
 /** Deletes a task from the DOM and backend. */
-function deleteTask(ID){
+function deleteTask(ID) {
     let taskElement = document.getElementById(ID);
     if (taskElement) {
         taskElement.remove();
@@ -61,12 +61,12 @@ async function DataDELETE(path = "") {
 
 /** Renders all loaded contact details into the container. */
 function renderTaskDetailsContacts(contactDetails) {
-   let reftaskDetailsATContainer = document.getElementById('taskDetailsAT');
+    let reftaskDetailsATContainer = document.getElementById('taskDetailsAT');
     if (!reftaskDetailsATContainer || !contactDetails) {
-          return;
+        return;
     }
     reftaskDetailsATContainer.innerHTML += taskDetailContactsTamplate(contactDetails.initials, contactDetails.name, contactDetails.color);
-    
+
 }
 
 /** Subtasks section logic. */
@@ -84,11 +84,12 @@ function renderSubtasksTaskDetails(taskID) {
     subtaskStatusList = [];
     let subTasksString = safeArray(task.subTasks);
     let subTasksContainer = document.getElementById('subTasks');
+   
     if (subTasks.length === 0) {
-       document.getElementById('subTasksHeadline').classList.add('displayNone');
-        return ;
-    } 
-    
+        document.getElementById('subTasksHeadline').classList.add('displayNone');
+        return;
+    }
+
     if (!subTasksContainer) {
         return;
     }
@@ -105,8 +106,8 @@ function renderSubtasksTaskDetails(taskID) {
 
 /** Updates checkbox icons for a subtask based on its status. */
 function updateSubtaskCheckboxDisplay(subtaskID) {
-   let checkedCheckbox = document.getElementById(`stCheckboxC${subtaskID}`);
-   let uncheckedCheckbox = document.getElementById(`stCheckboxU${subtaskID}`);
+    let checkedCheckbox = document.getElementById(`stCheckboxC${subtaskID}`);
+    let uncheckedCheckbox = document.getElementById(`stCheckboxU${subtaskID}`);
     if (!checkedCheckbox || !uncheckedCheckbox) {
         return;
     }
@@ -114,7 +115,7 @@ function updateSubtaskCheckboxDisplay(subtaskID) {
     if (subtaskStatusList[subtaskID] === 'U') {
         checkedCheckbox.classList.add("displayNone");
         uncheckedCheckbox.classList.remove("displayNone");
-    }else{
+    } else {
         checkedCheckbox.classList.remove("displayNone");
         uncheckedCheckbox.classList.add("displayNone");
     }
@@ -123,9 +124,9 @@ function updateSubtaskCheckboxDisplay(subtaskID) {
 /** Toggles the completion status of a subtask. */
 function toggleSubtaskStatus(checkboxId, subtaskId) {
     let firstClassOfElement = document.getElementById(checkboxId).classList.item(0);
-    if (firstClassOfElement != 'displayNone' ) {
+    if (firstClassOfElement != 'displayNone') {
         subtaskStatusList[subtaskId] = 'C';
-    }else{
+    } else {
         subtaskStatusList[subtaskId] = 'U';
     }
 }
@@ -142,11 +143,11 @@ async function storeSubtask() {
         return;
     }
 
-    refTaskStoreSubtask.subTasksReview = {0: checkboxString};
-    await DataPUT(`Tasks/Task${currentTaskId}/subTasksReview`,{
-          0 : `${checkboxString}`
-        }
-        );
+    refTaskStoreSubtask.subTasksReview = { 0: checkboxString };
+    await DataPUT(`Tasks/Task${currentTaskId}/subTasksReview`, {
+        0: `${checkboxString}`
+    }
+    );
 
     updateSubtaskProgressbar(currentTaskId);
 }

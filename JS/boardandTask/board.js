@@ -21,7 +21,7 @@ async function boardInit() {
 }
 
 /** Fetches tasks from Firebase and stores them in TASK. */
-async function DataGET(path = "") {   
+async function DataGET(path = "") {
     try {
         let response = await fetch(BOARDURLBASE + path + '.json');
         if (!response.ok) {
@@ -36,7 +36,7 @@ async function DataGET(path = "") {
 
 /** Writes/updates a task at the specified Firebase path. */
 async function DataPUT(path = "", data = {}) {
-        let response = await fetch(BOARDURLBASE + path + '.json', {
+    let response = await fetch(BOARDURLBASE + path + '.json', {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -255,10 +255,10 @@ function calculateSubtaskCompletionPercentage(taskID) {
     let subTasks = safeArray(task.subTasks);
     let subtaskCheckedCountElement = document.getElementById(`subtaskCheckedCount${taskID}`);
 
-     if (subTasks.length === 0) {
+    if (subTasks.length === 0) {
         document.getElementById(`allsubtaskProgressbar${taskID}`).classList.add("displayNone");
         return 0;
-    } 
+    }
 
     let completedSubtaskCount = 0;
     let subTasksReviewString = safeText(task?.subTasksReview?.[0], '');
@@ -296,6 +296,9 @@ function getTaskDetailsContacts(taskID, renderFunctionSelector) {
         } else {
             renderTaskDetailsContacts(contactDetails)
         }
+    }
+    if (refAssignedTo.length == 0 || refAssignedTo.length == undefined || refAssignedTo.length == null) {
+        document.getElementById('taskDetailsATHeadline').classList.add('displayNone');
     }
 }
 
@@ -397,7 +400,7 @@ function removeHighlightBoardTaskFields() {
 }
 
 function shortenDescription(description) {
-    if(description.length >= 40){
+    if (description.length >= 40) {
         let refdescription = description.slice(0, 40);
         return refdescription + "..."
     }

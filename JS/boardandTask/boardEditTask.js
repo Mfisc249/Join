@@ -51,7 +51,7 @@ function prepareSubTasksEditTask(refTaskEditTask){
 function createSaveDataEditTaskButton(taskID) {
   curentTaskID = taskID;
   let refsaveButtonEditTask = document.createElement('div');
-  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); saveDataEditTask()" class ="ButtonBlueFilled">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
+  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); closedialog('boardAddTask'); saveDataEditTask()" class ="ButtonBlueFilled">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
 }
 

@@ -110,7 +110,7 @@ function taskDetailsTamplate(taskID) {
                         </td>
                     </tr>
                 </table>
-                <h2 class = "taskDetailsAT">Assigned To:</h2>
+                <h2 id = "taskDetailsATHeadline" class = "taskDetailsAT">Assigned To:</h2>
                     <div id = "taskDetailsAT"></div>
                 <h2 id = "subTasksHeadline" class = "taskDetailsST">Subtasks</h2>
                     <div id = "subTasks" class = "subTasks"></div>
