@@ -143,3 +143,42 @@ function taskDetailContactsTamplate(initials, name, color) {
 function taskContactsTamplate(initials, color) {
     return `<span style="background-color: ${safeText(color, '#2A3647')};" class="badge taskContactsbadge">${safeText(initials, '?')}</span>`
 }
+
+function moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition){
+    return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+                     <span>Move to</span>
+                     <table>
+                        <tr class = "allTaskMobileSubmenuItem">
+                            <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_downward_TaskMobile.svg" alt="Arrow Down"></td> 
+                            <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">Review</td>
+                        </tr>
+                    </div>`;
+
+}
+
+function moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition) {
+    return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+                     <span>Move to</span>
+                     <table>
+                        <tr class = "allTaskMobileSubmenuItem">
+                            <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_upward_TaskMobile.svg" alt="Arrow UP"></td>
+                            <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">To-do</td>
+                        </tr>
+                    </div>`;
+}
+
+function moveTamplateTaskMobileField2_3(taskID, mobileArrowsMoveTaskPosition) {
+   return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+                     <span>Move to</span>
+                     <table>
+                        <tr class = "allTaskMobileSubmenuItem">
+                            <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_upward_TaskMobile.svg" alt="Arrow UP"></td>
+                            <td onclick = "removeMobileMoveTask(); taskMoveUpMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">To-do</td>
+                        </tr>
+                        <tr class = "allTaskMobileSubmenuItem">
+                            <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem"><img src="./assets/img/arrow_downward_TaskMobile.svg" alt="Arrow Down"></td>
+                            <td onclick = "removeMobileMoveTask(); taskMoveDownMobile(${taskID})" role="menuitem" class="taskMobileSubmenuItem">Review</td>
+                     </table>
+                    </div>`;
+    
+}

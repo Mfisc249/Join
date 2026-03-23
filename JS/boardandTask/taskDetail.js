@@ -84,23 +84,36 @@ function renderSubtasksTaskDetails(taskID) {
     subtaskStatusList = [];
     let subTasksString = safeArray(task.subTasks);
     let subTasksContainer = document.getElementById('subTasks');
-   
+
+    if (hasNoSubtasks(subTasks) || !subTasksContainer) {
+        return;
+    }
+    renderSubtasksIntoContainer(subTasksContainer, subTasksString, subTaskReviewStatus);
+    setCurrentTaskId(taskID);
+}
+
+function hasNoSubtasks(subTasks) {
     if (subTasks.length === 0) {
         document.getElementById('subTasksHeadline').classList.add('displayNone');
-        return;
+        return true;
     }
+    return false;
+}
 
-    if (!subTasksContainer) {
-        return;
-    }
-
+function renderSubtasksIntoContainer(subTasksContainer, subTasksString, subTaskReviewStatus) {
     subTasksContainer.innerHTML = "";
     for (let subtaskID = 0; subtaskID < subTasksString.length; subtaskID++) {
-        let subTask = subTasksString[`${subtaskID}`];
-        subtaskStatusList.push(subTaskReviewStatus[subtaskID] === 'C' ? 'C' : 'U');
-        document.getElementById('subTasks').innerHTML += subtaskTamplate(subtaskID, subTask);
-        updateSubtaskCheckboxDisplay(subtaskID);
+        renderSingleSubtask(subtaskID, subTasksString[`${subtaskID}`], subTaskReviewStatus);
     }
+}
+
+function renderSingleSubtask(subtaskID, subTask, subTaskReviewStatus) {
+    subtaskStatusList.push(subTaskReviewStatus[subtaskID] === 'C' ? 'C' : 'U');
+    document.getElementById('subTasks').innerHTML += subtaskTamplate(subtaskID, subTask);
+    updateSubtaskCheckboxDisplay(subtaskID);
+}
+
+function setCurrentTaskId(taskID) {
     currentTaskId = taskID;
 }
 
@@ -112,13 +125,13 @@ function updateSubtaskCheckboxDisplay(subtaskID) {
         return;
     }
 
-    if (subtaskStatusList[subtaskID] === 'U') {
-        checkedCheckbox.classList.add("displayNone");
-        uncheckedCheckbox.classList.remove("displayNone");
-    } else {
-        checkedCheckbox.classList.remove("displayNone");
-        uncheckedCheckbox.classList.add("displayNone");
-    }
+    let isUnchecked = subtaskStatusList[subtaskID] === 'U';
+    toggleSubtaskCheckboxClasses(checkedCheckbox, uncheckedCheckbox, isUnchecked);
+}
+
+function toggleSubtaskCheckboxClasses(checkedCheckbox, uncheckedCheckbox, isUnchecked) {
+    checkedCheckbox.classList.toggle("displayNone", isUnchecked);
+    uncheckedCheckbox.classList.toggle("displayNone", !isUnchecked);
 }
 
 /** Toggles the completion status of a subtask. */
@@ -133,7 +146,7 @@ function toggleSubtaskStatus(checkboxId, subtaskId) {
 
 /** Saves the current subtask status list and updates the progress bar. */
 async function storeSubtask() {
-    if (currentTaskId === undefined || currentTaskId === null) {
+    if (!hasValidCurrentTaskId()) {
         return;
     }
 
@@ -143,12 +156,26 @@ async function storeSubtask() {
         return;
     }
 
+    await saveSubtaskReviewAndUpdateProgress(refTaskStoreSubtask, checkboxString);
+}
+
+function hasValidCurrentTaskId() {
+    return currentTaskId !== undefined && currentTaskId !== null;
+}
+
+async function saveSubtaskReviewAndUpdateProgress(refTaskStoreSubtask, checkboxString) {
+    updateStoredSubtaskReview(refTaskStoreSubtask, checkboxString);
+    await persistSubtaskReview(checkboxString);
+    updateSubtaskProgressbar(currentTaskId);
+}
+
+function updateStoredSubtaskReview(refTaskStoreSubtask, checkboxString) {
     refTaskStoreSubtask.subTasksReview = { 0: checkboxString };
+}
+
+async function persistSubtaskReview(checkboxString) {
     await DataPUT(`Tasks/Task${currentTaskId}/subTasksReview`, {
         0: `${checkboxString}`
-    }
-    );
-
-    updateSubtaskProgressbar(currentTaskId);
+    });
 }
 

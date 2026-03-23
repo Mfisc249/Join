@@ -67,30 +67,28 @@ async function loadTaskTamplate(refTask) {
     }
 
     let targetField = refTask?.field?.field;
-    if (targetField == 'field1') {
-        document.getElementById('field1').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
-    }
+    appendTaskToField(targetField, refTask.id);
+    renderTaskCardDetails(refTask.id);
+}
 
-    if (targetField == 'field2') {
-        document.getElementById('field2').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
+function appendTaskToField(targetField, taskID) {
+    let allFields = ['field1', 'field2', 'field3', 'field4'];
+    if (allFields.includes(targetField)) {
+        insertTaskIntoField(targetField, taskID);
+        return;
     }
+    insertTaskIntoField('field1', taskID);
+}
 
-    if (targetField == 'field3') {
-        document.getElementById('field3').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
-    }
+function insertTaskIntoField(fieldID, taskID) {
+    document.getElementById(fieldID).insertAdjacentHTML('beforeend', taskTamplate(taskID));
+}
 
-    if (targetField == 'field4') {
-        document.getElementById('field4').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
-    }
-
-    if (!['field1', 'field2', 'field3', 'field4'].includes(targetField)) {
-        document.getElementById('field1').insertAdjacentHTML('beforeend', taskTamplate(refTask.id));
-    }
-
-    taskCatagory(refTask.id, document.getElementById(`boardTaskCatagory${refTask.id}`));
-    updateSubtaskProgressbar(refTask.id);
-    getTaskDetailsContacts(refTask.id, 0);
-    taskCheckPriority(refTask.id, document.getElementById(`taskPriorityContainer${refTask.id}`));
+function renderTaskCardDetails(taskID) {
+    taskCatagory(taskID, document.getElementById(`boardTaskCatagory${taskID}`));
+    updateSubtaskProgressbar(taskID);
+    getTaskDetailsContacts(taskID, 0);
+    taskCheckPriority(taskID, document.getElementById(`taskPriorityContainer${taskID}`));
 }
 
 /** Clears the content of all board columns. */
@@ -107,18 +105,19 @@ function renderMovedTask(field, taskID = curentTraggedElement) {
     if (task.id === undefined || task.id === null) {
         return;
     }
-    let refMovedTask = document.getElementById(`${task.id}`);
-    if (refMovedTask && refMovedTask.parentNode) {
-        refMovedTask.parentNode.removeChild(refMovedTask);
-    }
+    removeExistingTaskElement(task.id);
 
     document.getElementById(`${field}`).insertAdjacentHTML('beforeend', taskTamplate(task.id));
     removeHighlightBoardTaskFields();
-    taskCatagory(taskID, document.getElementById(`boardTaskCatagory${taskID}`));
-    updateSubtaskProgressbar(taskID);
-    getTaskDetailsContacts(taskID, 0);
-    taskCheckPriority(taskID, document.getElementById(`taskPriorityContainer${taskID}`));
+    renderTaskCardDetails(taskID);
     checkFieldIsEmpty();
+}
+
+function removeExistingTaskElement(taskID) {
+    let refMovedTask = document.getElementById(`${taskID}`);
+    if (refMovedTask && refMovedTask.parentNode) {
+        refMovedTask.parentNode.removeChild(refMovedTask);
+    }
 }
 
 /** Sets the currently dragged task and starts the animation. */
@@ -141,11 +140,18 @@ async function moveTo(field) {
         return;
     }
 
-    task.field = task.field || {};
-    task.field.field = `${field}`;
-
+    updateTaskFieldForMove(task, field);
     document.getElementById(`${field}`).classList.remove("highlight");
     renderMovedTask(field);
+    await persistMovedTaskField(field);
+}
+
+function updateTaskFieldForMove(task, field) {
+    task.field = task.field || {};
+    task.field.field = `${field}`;
+}
+
+async function persistMovedTaskField(field) {
     await DataPUT(`Tasks/Task${curentTraggedElement}/field`, {
         'field': `${field}`,
     });
@@ -166,13 +172,21 @@ function updateEmptyHintForField(fieldId, placeholderId, placeholderText) {
     let placeholder = document.getElementById(placeholderId);
 
     if (!hasTasks) {
-        if (!placeholder) {
-            field.innerHTML = `<div id="${placeholderId}" class="noTaskField taskContainer">${placeholderText}</div>`;
-        }
-    } else {
-        if (placeholder) {
-            placeholder.remove();
-        }
+        addEmptyFieldPlaceholder(field, placeholder, placeholderId, placeholderText);
+        return;
+    }
+    removeExistingPlaceholder(placeholder);
+}
+
+function addEmptyFieldPlaceholder(field, placeholder, placeholderId, placeholderText) {
+    if (!placeholder) {
+        field.innerHTML = `<div id="${placeholderId}" class="noTaskField taskContainer">${placeholderText}</div>`;
+    }
+}
+
+function removeExistingPlaceholder(placeholder) {
+    if (placeholder) {
+        placeholder.remove();
     }
 }
 
@@ -205,17 +219,28 @@ async function searchTask() {
     let refSearchInput = document.getElementById('searchInput');
     if (refSearchInput.value.length >= 1) {
         startTheSearch(refSearchInput);
-    } else if (refSearchInput.value.length == 0) {
-        if (myMediaQuery.matches) {
-            document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
-        } else {
-            document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
-        }
-        TASK = [];
-        TASKKEYS = [];
-        count = 0;
-        await render();
+        return;
     }
+
+    if (refSearchInput.value.length == 0) {
+        setTaskTableTemplateByViewport();
+        await resetTaskDataAndRender();
+    }
+}
+
+function setTaskTableTemplateByViewport() {
+    if (myMediaQuery.matches) {
+        document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
+        return;
+    }
+    document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
+}
+
+async function resetTaskDataAndRender() {
+    TASK = [];
+    TASKKEYS = [];
+    count = 0;
+    await render();
 }
 
 /** Filters tasks by title and renders the matches. */
@@ -224,19 +249,31 @@ function startTheSearch(refSearchInput) {
     let searchCount = 0;
     emtyFieldContent();
     TASKKEYS[0].forEach(task => {
-        let taskRef = TASK[0][`${task}`] || {};
-        let refTaskTitle = safeText(taskRef.title, '');
-        let refTaskDescription = safeText(taskRef.description, '');
-        if (refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTaskDescription.toUpperCase().indexOf(filter) > - 1) {
-            loadTaskTamplate(taskRef);
-            checkFieldIsEmpty();
-            searchCount++;
-        }
-    }
-    )
+        searchCount = addMatchingTaskToSearchResults(task, filter, searchCount);
+    });
     if (searchCount == 0) {
-        document.getElementById('fields').innerHTML = `<div class="noTaskFound">No Tasks Found</div>`;
+        showNoTaskFoundHint();
     }
+}
+
+function addMatchingTaskToSearchResults(task, filter, searchCount) {
+    let taskRef = TASK[0][`${task}`] || {};
+    if (!isTaskMatchingSearch(taskRef, filter)) {
+        return searchCount;
+    }
+    loadTaskTamplate(taskRef);
+    checkFieldIsEmpty();
+    return searchCount + 1;
+}
+
+function isTaskMatchingSearch(taskRef, filter) {
+    let refTaskTitle = safeText(taskRef.title, '');
+    let refTaskDescription = safeText(taskRef.description, '');
+    return refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTaskDescription.toUpperCase().indexOf(filter) > - 1;
+}
+
+function showNoTaskFoundHint() {
+    document.getElementById('fields').innerHTML = `<div class="noTaskFound">No Tasks Found</div>`;
 }
 
 /** Updates the animated progress bar width based on completed subtasks. */
@@ -247,17 +284,25 @@ function updateSubtaskProgressbar(taskID) {
         return;
     }
 
+    animateProgressbar(progressbarElement, completedPercentage);
+}
+
+function animateProgressbar(progressbarElement, completedPercentage) {
     let width = 0;
-    let intervalId = setInterval(frame, 2);
+    let intervalId = setInterval(() => {
+        width = updateProgressbarFrame(intervalId, width, completedPercentage, progressbarElement);
+    }, 2);
     progressbarElement.style.width = width + "%";
-    function frame() {
-        if (width > completedPercentage) {
-            clearInterval(intervalId);
-        } else {
-            width++;
-            progressbarElement.style.width = width + "%";
-        }
+}
+
+function updateProgressbarFrame(intervalId, width, completedPercentage, progressbarElement) {
+    if (width > completedPercentage) {
+        clearInterval(intervalId);
+        return width;
     }
+    let nextWidth = width + 1;
+    progressbarElement.style.width = nextWidth + "%";
+    return nextWidth;
 }
 
 /** Calculates the completion percentage of all subtasks for a task. */
@@ -267,27 +312,44 @@ function calculateSubtaskCompletionPercentage(taskID) {
     let subtaskCheckedCountElement = document.getElementById(`subtaskCheckedCount${taskID}`);
 
     if (subTasks.length === 0) {
-        document.getElementById(`allsubtaskProgressbar${taskID}`).classList.add("displayNone");
+        hideSubtaskProgressbar(taskID);
         return 0;
     }
 
-    let completedSubtaskCount = 0;
-    let subTasksReviewString = safeText(task?.subTasksReview?.[0], '');
-    let subTaskReviewList = subTasksReviewString.length ? subTasksReviewString.split(',') : [];
+    return calculateAndRenderSubtaskCompletion(task, subTasks, subtaskCheckedCountElement);
+}
 
+function hideSubtaskProgressbar(taskID) {
+    document.getElementById(`allsubtaskProgressbar${taskID}`).classList.add("displayNone");
+}
+
+function calculateAndRenderSubtaskCompletion(task, subTasks, subtaskCheckedCountElement) {
+    let subTaskReviewList = getSubTaskReviewList(task);
+    let completedSubtaskCount = countCompletedSubtasks(subTasks, subTaskReviewList);
+    renderCompletedSubtaskCount(subtaskCheckedCountElement, completedSubtaskCount);
+    return Math.round((completedSubtaskCount / subTasks.length) * 100);
+}
+
+function renderCompletedSubtaskCount(subtaskCheckedCountElement, completedSubtaskCount) {
+    if (subtaskCheckedCountElement) {
+        subtaskCheckedCountElement.innerHTML = completedSubtaskCount;
+    }
+}
+
+function getSubTaskReviewList(task) {
+    let subTasksReviewString = safeText(task?.subTasksReview?.[0], '');
+    return subTasksReviewString.length ? subTasksReviewString.split(',') : [];
+}
+
+function countCompletedSubtasks(subTasks, subTaskReviewList) {
+    let completedSubtaskCount = 0;
     for (let index = 0; index < subTasks.length; index++) {
         let subTaskStatus = subTaskReviewList[index];
         if (subTaskStatus === 'C') {
             completedSubtaskCount++;
         }
     }
-
-    if (subtaskCheckedCountElement) {
-        subtaskCheckedCountElement.innerHTML = completedSubtaskCount;
-    }
-
-    return Math.round((completedSubtaskCount / subTasks.length) * 100);
-
+    return completedSubtaskCount;
 }
 
 
@@ -295,22 +357,37 @@ function calculateSubtaskCompletionPercentage(taskID) {
 /** Loads and renders all contacts assigned to the given task. */
 function getTaskDetailsContacts(taskID, renderFunctionSelector) {
     let refAssignedTo = safeArray(getTaskById(taskID).assignedTo);
+    renderAssignedContacts(refAssignedTo, taskID, renderFunctionSelector);
+    if (shouldHideAssignedHeadline(refAssignedTo)) {
+        document.getElementById('taskDetailsATHeadline').classList.add('displayNone');
+    }
+}
+
+function renderAssignedContacts(refAssignedTo, taskID, renderFunctionSelector) {
     for (let index = 0; index < refAssignedTo.length; index++) {
         let contact = refAssignedTo[`${index}`];
-        let contactDetails = allContactDetails?.[`${contact}`];
+        let contactDetails = getContactDetailsByKey(contact);
         if (!contactDetails) {
             continue;
         }
+        renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelector);
+    }
+}
 
-        if (renderFunctionSelector == 0) {
-            renderTaskContacts(contactDetails, taskID);
-        } else {
-            renderTaskDetailsContacts(contactDetails)
-        }
+function renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelector) {
+    if (renderFunctionSelector == 0) {
+        renderTaskContacts(contactDetails, taskID);
+        return;
     }
-    if ((refAssignedTo.length == 0 || refAssignedTo.length == undefined || refAssignedTo.length == null) && document.getElementById('taskDetailsATHeadline') != undefined) {
-        document.getElementById('taskDetailsATHeadline').classList.add('displayNone');
-    }
+    renderTaskDetailsContacts(contactDetails);
+}
+
+function getContactDetailsByKey(contactKey) {
+    return allContactDetails?.[`${contactKey}`];
+}
+
+function shouldHideAssignedHeadline(refAssignedTo) {
+    return (refAssignedTo.length == 0 || refAssignedTo.length == undefined || refAssignedTo.length == null) && document.getElementById('taskDetailsATHeadline') != undefined;
 }
 
 /** Renders assigned contact badges on a board task card. */
@@ -328,21 +405,20 @@ function taskCheckPriority(taskID, refTaskPriorityContainer) {
         return;
     }
 
-    switch (normalizePriority(getTaskById(taskID).priority)) {
+    let priority = normalizePriority(getTaskById(taskID).priority);
+    refTaskPriorityContainer.innerHTML = getPriorityIcon(priority);
+}
+
+function getPriorityIcon(priority) {
+    switch (priority) {
         case 'Low':
-            refTaskPriorityContainer.innerHTML = '<img src="./assets/img/low_priority.svg" alt="Low Priority"></img>';
-            break;
-
+            return '<img src="./assets/img/low_priority.svg" alt="Low Priority"></img>';
         case 'Medium':
-            refTaskPriorityContainer.innerHTML = '<img src="./assets/img/medium_priority.svg" alt="Medium Priority"></img>';
-            break;
-
+            return '<img src="./assets/img/medium_priority.svg" alt="Medium Priority"></img>';
         case 'Urgent':
-            refTaskPriorityContainer.innerHTML = '<img src="./assets/img/high_priority.svg" alt="High Priority"></img>';
-            break;
+            return '<img src="./assets/img/high_priority.svg" alt="High Priority"></img>';
         default:
-            refTaskPriorityContainer.innerHTML = '';
-            break;
+            return '';
     }
 }
 
@@ -352,46 +428,52 @@ function taskCatagory(taskID, refTaskCatagory) {
         return;
     }
 
+    clearCategoryClasses(refTaskCatagory);
+    applyCategoryClass(taskID, refTaskCatagory);
+}
+
+function clearCategoryClasses(refTaskCatagory) {
     refTaskCatagory.classList.remove("boardTaskCatagoryBlue");
     refTaskCatagory.classList.remove("boardTaskCatagoryGreen");
+}
 
+function applyCategoryClass(taskID, refTaskCatagory) {
     switch (normalizeCategory(getTaskById(taskID).category)) {
         case 'User Story':
             refTaskCatagory.classList.add("boardTaskCatagoryBlue");
-            break;
+            return;
         case 'Technical Task':
             refTaskCatagory.classList.add("boardTaskCatagoryGreen");
-            break;
-        default:
-            break;
+            return;
     }
-
 }
 
 /** Shows valid drop target highlights for the currently dragged task. */
 function highlightBoardTaskFields() {
     let currentField = getTaskById(curentTraggedElement)?.field?.field;
-    if (currentField == 'field1' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
-        document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
-        document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
-    }
-    if (currentField == 'field2' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
-        document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
-        document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
-    }
-    if (currentField == 'field3' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
-        document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
-        document.getElementById('field4').insertAdjacentHTML('beforeend', highlightTaskTamplate(4));
-    }
-    if (currentField == 'field4' && curentTraggedElement != null && curentTraggedElement != undefined) {
-        document.getElementById('field1').insertAdjacentHTML('beforeend', highlightTaskTamplate(1));
-        document.getElementById('field2').insertAdjacentHTML('beforeend', highlightTaskTamplate(2));
-        document.getElementById('field3').insertAdjacentHTML('beforeend', highlightTaskTamplate(3));
+    if (curentTraggedElement == null || curentTraggedElement == undefined) {
+        return;
     }
 
+    appendHighlightToFields(getTargetHighlightFields(currentField));
+
+}
+
+function getTargetHighlightFields(currentField) {
+    let fieldMap = {
+        field1: [2, 3, 4],
+        field2: [1, 3, 4],
+        field3: [1, 2, 4],
+        field4: [1, 2, 3],
+    };
+    return fieldMap[currentField] || [];
+}
+
+function appendHighlightToFields(targetFields) {
+    for (let index = 0; index < targetFields.length; index++) {
+        let fieldNumber = targetFields[index];
+        document.getElementById(`field${fieldNumber}`).insertAdjacentHTML('beforeend', highlightTaskTamplate(fieldNumber));
+    }
 }
 
 /** Removes all drag-and-drop highlight placeholders from the board. */
