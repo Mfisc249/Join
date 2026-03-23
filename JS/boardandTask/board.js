@@ -189,6 +189,17 @@ function endTransformTask() {
     }, 100);
 }
 
+function createTaskBoard(){
+  const dialog = document.getElementById("boardAddTask");
+   if (!!dialog?.open) {
+       closedialog('boardAddTask');
+       setTimeout(() => {
+            boardInit();
+       }, 200);
+   }
+    
+}
+
 /** Searches tasks by title and updates the view. */
 async function searchTask() {
     let refSearchInput = document.getElementById('searchInput');
@@ -297,7 +308,7 @@ function getTaskDetailsContacts(taskID, renderFunctionSelector) {
             renderTaskDetailsContacts(contactDetails)
         }
     }
-    if (refAssignedTo.length == 0 || refAssignedTo.length == undefined || refAssignedTo.length == null) {
+    if ((refAssignedTo.length == 0 || refAssignedTo.length == undefined || refAssignedTo.length == null) && document.getElementById('taskDetailsATHeadline') != undefined) {
         document.getElementById('taskDetailsATHeadline').classList.add('displayNone');
     }
 }

@@ -1,0 +1,71 @@
+#boardAddTask.edit-task-dialog {
+    width: min(525px, calc(100vw - 32px));
+    max-width: 525px;
+    overflow-x: hidden;
+}
+
+#boardAddTask.edit-task-dialog .addTaskMain {
+    width: 100%;
+    max-width: 525px;
+}
+
+#boardAddTask.edit-task-dialog #mainContent {
+    width: 100%;
+    max-width: 525px;
+}
+
+#boardAddTask.edit-task-dialog .contentWrapperAddTask {
+    display: block;
+}
+
+#boardAddTask.edit-task-dialog .divider {
+    display: none;
+}
+
+#boardAddTask.edit-task-dialog .leftContent,
+#boardAddTask.edit-task-dialog .rightContent {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#boardAddTask.edit-task-dialog .inputField,
+#boardAddTask.edit-task-dialog .taskNameContainer textarea,
+#boardAddTask.edit-task-dialog .taskDescriptionContainer textarea,
+#boardAddTask.edit-task-dialog .addTaskDateContainer input,
+#boardAddTask.edit-task-dialog .ChoiceOption,
+#boardAddTask.edit-task-dialog .assignedToInput,
+#boardAddTask.edit-task-dialog .assignedDropdown,
+#boardAddTask.edit-task-dialog .subtaskInputContainer,
+#boardAddTask.edit-task-dialog .inputField.bottomInput,
+#boardAddTask.edit-task-dialog .subTaskList,
+#boardAddTask.edit-task-dialog .subTaskEditContainer,
+#boardAddTask.edit-task-dialog .buttonRequiredField {
+    max-width: 400px;
+}
+
+#boardAddTask.edit-task-dialog .OptionsContainer .subTaskList {
+    max-width: 400px;
+}
+
+#boardAddTask.edit-task-dialog .OptionsContainer .subTaskItem {
+    max-width: 400px;
+}
+
+#boardAddTask.edit-task-dialog .OptionsContainer .subTaskItem .subTaskContent {
+    max-width: 400px;
+}
+
+
+@media (max-width: 1392px) {
+    #boardAddTask.edit-task-dialog .priority {
+        gap: 5px !important;
+    }
+
+    @media (max-width: 1300px) {
+    #boardAddTask.edit-task-dialog .subTaskItem {
+        padding-right: unset;
+        width: unset;
+    }
+}
+
+}

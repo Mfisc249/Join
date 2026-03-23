@@ -4,6 +4,10 @@ let editSubTaskReview = [];
 
 async function editPreparation(taskID) {
   let refTaskEditTask = TASK[0][`Task${taskID}`];
+  const boardDialog = document.getElementById("boardAddTask");
+  if (boardDialog) {
+    boardDialog.classList.add("edit-task-dialog");
+  }
   isEditTaskMode = true;
   editSubTaskReview = [];
   document.getElementById("mainContent").innerHTML = createTaskTemplate(`${refTaskEditTask.title}`,`${refTaskEditTask.description}`, `${refTaskEditTask.dueDate}`);
@@ -83,6 +87,8 @@ async function saveDataEditTask(){
     'subTasksReview': {
       0: checkboxString,
     }})
+
+    boardInit();
 }
 
 function getEditTaskSubtaskReviewString(subTasks, refTaskEditTask) {

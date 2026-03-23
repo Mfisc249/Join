@@ -153,7 +153,7 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
           Clear
           <img class="cross" src="./assets/img/Subtasks icons11-3.svg" alt="" />
         </button>
-        <button onclick="createTask()" class="createButton">
+        <button onclick="createTaskAndRefreshBoard()" class="createButton">
           Create Task
           <img class="createButtonIcon" src="assets/img/check-2.svg" />
         </button>

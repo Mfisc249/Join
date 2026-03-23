@@ -88,15 +88,6 @@
         gap: 10px;
     }
 
-    /* #boardAddTask .priorityButton {
-        flex: 1 1 calc(33.333% - 8px);
-        min-width: 0;
-        width: auto;
-        font-size: 16px;
-        gap: 6px;
-        padding: 0 8px;
-    } */
-
     #boardAddTask .buttonRequiredField {
         margin-top: 24px;
         flex-direction: column;
@@ -278,7 +269,24 @@
         right: 10px;
         gap: 4px;
     }
+
+    .inputField.bottomInput,
+    .subtaskInputContainer,
+    .subTaskEditInput,
+    .subTaskList {
+        width: 180px !important;
+    }
+
+    .subTaskContent {
+        width: 180px !important;
+    }
+
+    .subTaskItem {
+        width: 100px;
+    }
 }
+
+
 
 @media (max-width: 320px) {
     #boardAddTask {

@@ -20,6 +20,13 @@ let task = {
 };
 
 async function init() {
+  const boardDialog = document.getElementById("boardAddTask");
+  if (boardDialog) {
+    boardDialog.classList.remove("edit-task-dialog");
+  }
+  if (typeof isEditTaskMode !== "undefined") {
+    isEditTaskMode = false;
+  }
   renderTemplate();
   setupSubtaskEnter();
   setupAssignedDropdownClose();
@@ -89,14 +96,23 @@ async function createTask() {
   task.category = selectedCategory;
 
   errorMessage();
-  if (!task.title || !task.description || !task.dueDate) return;
+  if (!task.title || !task.description || !task.dueDate) return null;
 
   const taskKey = await saveTask(task);
 
   if (taskKey) {
     showToast();
     clearForm();
-    renderNewTask(taskKey, task);
+    return taskKey;
+  }
+
+  return null;
+}
+
+async function createTaskAndRefreshBoard() {
+  const taskKey = await createTask();
+  if (taskKey) {
+    createTaskBoard();
   }
 }
 

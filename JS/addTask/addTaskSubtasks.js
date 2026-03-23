@@ -14,7 +14,10 @@ function confirmSubtask() {
   if (!value) return;
 
   task.subTasks.push(value);
-  handleSubtaskAddedInEditMode();
+  if (typeof handleSubtaskAddedInEditMode === "function") {
+    handleSubtaskAddedInEditMode();
+  }
+  
   editingSubtaskIndex = null;
   renderSubTasks();
   input.value = "";
@@ -28,7 +31,10 @@ function cancelSubtask() {
 }
 
 function deleteSubtask(index) {
-  handleSubtaskDeletedInEditMode(index);
+  if (typeof handleSubtaskDeletedInEditMode === "function") {
+    handleSubtaskDeletedInEditMode(index);
+  }
+  
   task.subTasks.splice(index, 1);
   renderSubTasks();
 }
