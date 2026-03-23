@@ -1,3 +1,4 @@
+/** Returns the full Add Task form template with optional prefilled values. */
 function createTaskTemplate(taskName, taskDescription, taskDueDate) {
   return `
     <h1 class="mainTitle">Add Task</h1>
@@ -162,6 +163,7 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
   `;
 }
 
+/** Returns the markup for a subtask item in display or edit mode. */
 function subTaskTemplate(text, index) {
   const isEditing = editingSubtaskIndex === index;
 
@@ -202,6 +204,7 @@ function subTaskTemplate(text, index) {
   `;
 }
 
+/** Builds the assigned-to select options markup from available contacts. */
 function assignedToTemplate() {
   let html = `<option value="" selected hidden>Select contacts to assign</option>`;
 
@@ -212,6 +215,7 @@ function assignedToTemplate() {
   return html;
 }
 
+/** Returns the option markup for a single contact entry. */
 function assignedToOptionTemplate(contact) {
   return `
     <option value="${contact.name}">
@@ -220,6 +224,7 @@ function assignedToOptionTemplate(contact) {
   `;
 }
 
+/** Returns a selectable assigned-contact row with initials and checkbox state. */
 function contactInitialsCircleTemplate(contact, key) {
   const isSelected = task.assignedTo.includes(key);
   const selectedClass = isSelected ? "selected" : "";
@@ -242,6 +247,7 @@ function contactInitialsCircleTemplate(contact, key) {
 `;
 }
 
+/** Returns the compact initials circle used in the assigned contacts preview. */
 function contactInitialsPreviewTemplate(contact) {
   return `
     <div class="assignedCircle" 
