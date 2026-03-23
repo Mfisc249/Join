@@ -1,9 +1,11 @@
+/** Validates required form fields and toggles their error indicators. */
 function errorMessage() {
   toggleRequired(document.getElementById("taskName"));
   toggleRequired(document.getElementById("taskDesc"));
   toggleRequired(document.getElementById("DueDate"));
 }
 
+/** Shows or hides required-field styling based on the input value. */
 function toggleRequired(inputElement) {
   if (!inputElement) return;
 
@@ -21,6 +23,7 @@ function toggleRequired(inputElement) {
   }
 }
 
+/** Attaches live input validation handlers to add-task form controls. */
 function setupLiveValidation() {
   const inputs = document.querySelectorAll(
     "#taskForm textarea, #taskForm input, #taskForm select",
@@ -33,6 +36,7 @@ function setupLiveValidation() {
   });
 }
 
+/** Initializes priority button behavior and updates task priority state. */
 function setupPriorityButtons() {
   const buttons = document.querySelectorAll(".priorityButton");
 
@@ -55,12 +59,14 @@ function setupPriorityButtons() {
   });
 }
 
+/** Sets the default active priority button and task priority value. */
 function setDefaultPriority(standartSelect = ".priorityButton.medium") {
   const defaultBtn = document.querySelector(standartSelect);
   defaultBtn.classList.add("active");
   task.priority = "Medium";
 }
 
+/** Formats due date input as DD/MM/YYYY while the user types. */
 function formatDueDateInput(input) {
   input.addEventListener("input", () => {
     let val = input.value.replace(/[^\d]/g, "");
@@ -79,6 +85,7 @@ function formatDueDateInput(input) {
   });
 }
 
+/** Validates due date format and blocks dates earlier than today. */
 function validateDueDateInput(input) {
   input.addEventListener("blur", () => {
     const regex = /^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$/;
@@ -98,6 +105,7 @@ function validateDueDateInput(input) {
   });
 }
 
+/** Wires formatting and validation handlers to the due date field. */
 function setupDueDateInput() {
   const input = document.getElementById("DueDate");
   if (!input) return;
@@ -106,6 +114,7 @@ function setupDueDateInput() {
   validateDueDateInput(input);
 }
 
+/** Toggles the category dropdown arrow rotation state. */
 function toggleCategoryArrow() {
   const arrow = document.getElementById("taskArrow");
   arrow.classList.toggle("rotate");

@@ -1,5 +1,6 @@
 let selectedCategory = "";
 
+/** Loads contacts from Firebase and renders assignment options. */
 async function loadContacts() {
   try {
     const response = await fetch(`${BASE_URL}Contacts.json`);
@@ -15,6 +16,7 @@ async function loadContacts() {
   }
 }
 
+/** Renders all contacts into the assigned-to dropdown list. */
 function renderAssignedTo() {
   const container = document.getElementById("assignedDropdown");
   if (!container) return;
@@ -30,6 +32,7 @@ function renderAssignedTo() {
   container.innerHTML = html;
 }
 
+/** Toggles a contact's assignment state and updates checkbox visuals. */
 function toggleContact(contactKey, element) {
   const index = task.assignedTo.indexOf(contactKey);
   const img = element.querySelector(".checkBox");
@@ -50,6 +53,7 @@ function toggleContact(contactKey, element) {
   }
 }
 
+/** Toggles the assigned-to dropdown between open, preview, and closed states. */
 function toggleAssignedDropdown(event) {
   event.stopPropagation(); // verhindert sofortiges Schließen
 
@@ -74,6 +78,7 @@ function toggleAssignedDropdown(event) {
   button.focus();
 }
 
+/** Renders only selected contacts inside the assignment dropdown. */
 function renderSelectedContactsInDropdown() {
   const container = document.getElementById("assignedDropdown");
   if (!container) return;
@@ -94,6 +99,7 @@ function renderSelectedContactsInDropdown() {
   }
 }
 
+/** Renders selected contact initials below the input when dropdown is closed. */
 function renderSelectedContactsBelowInput() {
   const previewContainer = document.getElementById("assignedPreviewContainer");
   const dropdown = document.getElementById("assignedDropdown");
@@ -122,6 +128,7 @@ function renderSelectedContactsBelowInput() {
   previewContainer.innerHTML = html;
 }
 
+/** Opens the assignment dropdown and prepares the full contact list view. */
 function openDropdown(dropdown, arrow, label) {
   const button = document.querySelector(".assignedToInput");
   const preview = document.getElementById("assignedPreviewContainer");
@@ -137,6 +144,7 @@ function openDropdown(dropdown, arrow, label) {
   button.classList.add("activeFocus");
 }
 
+/** Closes the assignment dropdown and restores the selected-contacts preview. */
 function closeDropdown(dropdown, arrow, label) {
   const button = document.querySelector(".assignedToInput");
   const preview = document.getElementById("assignedPreviewContainer");
@@ -152,6 +160,7 @@ function closeDropdown(dropdown, arrow, label) {
   button.classList.remove("activeFocus");
 }
 
+/** Switches the dropdown to preview mode for already selected contacts. */
 function openPreview(dropdown, arrow, label) {
   if (task.assignedTo.length > 0) {
     renderSelectedContactsInDropdown();
@@ -164,11 +173,13 @@ function openPreview(dropdown, arrow, label) {
   }
 }
 
+/** Resets the assigned-to label text to its default prompt. */
 function updateAssignedLabel() {
   const label = document.getElementById("clearContact");
   label.textContent = "Select contacts to assign";
 }
 
+/** Registers outside-click handling to close the assignment dropdown. */
 function setupAssignedDropdownClose() {
   document.addEventListener("click", (event) => {
     const dropdown = document.getElementById("assignedDropdown");
@@ -185,12 +196,14 @@ function setupAssignedDropdownClose() {
   });
 }
 
+/** Toggles visibility of the category dropdown menu. */
 function toggleCategoryDropdown(event) {
   event.stopPropagation();
   const dropdown = document.getElementById("categoryDropdown");
   dropdown.classList.toggle("hidden");
 }
 
+/** Stores the selected category and updates the category label. */
 function selectCategory(category) {
   selectedCategory = category;
   document.getElementById("categoryLabel").textContent = category;

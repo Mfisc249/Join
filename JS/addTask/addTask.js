@@ -19,6 +19,7 @@ let task = {
   field: "1",
 };
 
+/** Initializes the add-task view and loads required startup data. */
 async function init() {
   const boardDialog = document.getElementById("boardAddTask");
   if (boardDialog) {
@@ -37,10 +38,12 @@ async function init() {
   await loadContacts();
 }
 
+/** Renders the add-task template into the main content container. */
 function renderTemplate() {
   document.getElementById("mainContent").innerHTML = createTaskTemplate();
 }
 
+/** Saves a task by generating a key and delegating persistence to Firebase. */
 async function saveTask(task) {
   try {
     const existingTasks = (await DataGET("Tasks")) || {};
@@ -53,6 +56,7 @@ async function saveTask(task) {
   }
 }
 
+/** Persists the task payload to Firebase including subtask review defaults. */
 async function saveTaskToFirebase(task, taskID, taskKey) {
   let checkboxString = task.subTasks.map(() => "U").toString();
 
@@ -74,6 +78,7 @@ async function saveTaskToFirebase(task, taskID, taskKey) {
   return taskKey;
 }
 
+/** Generates the next sequential task ID and Firebase key from existing tasks. */
 function generateTaskKey(existingTasks) {
   const keys = Object.keys(existingTasks || {});
   const lastIndex =
@@ -85,6 +90,7 @@ function generateTaskKey(existingTasks) {
   return { taskID, taskKey };
 }
 
+/** Collects form values, validates input, and creates a new task entry. */
 async function createTask() {
   const titleInput = document.getElementById("taskName");
   const descInput = document.getElementById("taskDesc");
@@ -109,6 +115,7 @@ async function createTask() {
   return null;
 }
 
+/** Creates a task and refreshes the board when creation succeeds. */
 async function createTaskAndRefreshBoard() {
   const taskKey = await createTask();
   if (taskKey) {
@@ -116,6 +123,7 @@ async function createTaskAndRefreshBoard() {
   }
 }
 
+/** Resets the form and reinitializes the in-memory task object. */
 function resetTaskData() {
   document.getElementById("taskForm").reset();
 
@@ -132,6 +140,7 @@ function resetTaskData() {
   };
 }
 
+/** Clears subtasks UI and resets the selected category display. */
 function resetSubTasksAndCategory() {
   document.getElementById("subtaskInput").value = "";
   renderSubTasks();
@@ -140,6 +149,7 @@ function resetSubTasksAndCategory() {
   document.getElementById("categoryLabel").textContent = "Select category";
 }
 
+/** Resets assigned contacts preview and restores default priority selection. */
 function resetAssignedContactsAndPriority() {
   document.getElementById("assignedPreviewContainer").innerHTML = "";
   renderSelectedContactsBelowInput();
@@ -150,12 +160,14 @@ function resetAssignedContactsAndPriority() {
   setDefaultPriority();
 }
 
+/** Clears all add-task form sections and returns to default state. */
 function clearForm() {
   resetTaskData();
   resetSubTasksAndCategory();
   resetAssignedContactsAndPriority();
 }
 
+/** Shows a temporary success toast after task creation. */
 function showToast() {
   const toast = document.getElementById("toast");
   toast.classList.add("show");

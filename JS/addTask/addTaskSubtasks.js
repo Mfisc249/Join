@@ -1,3 +1,4 @@
+/** Renders the current subtask list into the subtask container. */
 function renderSubTasks() {
   var list = document.getElementById("subtaskList");
   list.innerHTML = "";
@@ -8,6 +9,7 @@ function renderSubTasks() {
   }
 }
 
+/** Adds the entered subtask, resets edit mode, and refreshes the list. */
 function confirmSubtask() {
   const input = document.getElementById("subtaskInput");
   const value = input.value.trim();
@@ -24,12 +26,14 @@ function confirmSubtask() {
   input.focus();
 }
 
+/** Clears the subtask input and restores focus to the input field. */
 function cancelSubtask() {
   const input = document.getElementById("subtaskInput");
   input.value = "";
   input.focus();
 }
 
+/** Removes a subtask by index and updates the rendered list. */
 function deleteSubtask(index) {
   if (typeof handleSubtaskDeletedInEditMode === "function") {
     handleSubtaskDeletedInEditMode(index);
@@ -39,11 +43,13 @@ function deleteSubtask(index) {
   renderSubTasks();
 }
 
+/** Enables edit mode for the subtask at the given index. */
 function startEditSubtask(index) {
   editingSubtaskIndex = index;
   renderSubTasks();
 }
 
+/** Saves an edited subtask value or cancels edit if input is empty. */
 function saveEditedSubtask(index) {
   const inputs = document.querySelectorAll(".subTaskEditInput");
   const input = inputs[0];
@@ -60,6 +66,7 @@ function saveEditedSubtask(index) {
   renderSubTasks();
 }
 
+/** Handles keyboard shortcuts for subtask edit commit and cancel actions. */
 function handleEditKey(event, index, value) {
   if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault(); // verhindert neue Zeile
@@ -72,6 +79,7 @@ function handleEditKey(event, index, value) {
   }
 }
 
+/** Handles Enter key submission for creating a new subtask. */
 function handleSubtaskKeydown(event) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -79,6 +87,7 @@ function handleSubtaskKeydown(event) {
   }
 }
 
+/** Registers Enter key behavior for the subtask input field. */
 function setupSubtaskEnter() {
   const input = document.getElementById("subtaskInput");
   if (!input) return;
