@@ -92,6 +92,7 @@ function renderSubtasksTaskDetails(taskID) {
     setCurrentTaskId(taskID);
 }
 
+/** Hides the subtasks heading when the current task has no subtasks. */
 function hasNoSubtasks(subTasks) {
     if (subTasks.length === 0) {
         document.getElementById('subTasksHeadline').classList.add('displayNone');
@@ -100,6 +101,7 @@ function hasNoSubtasks(subTasks) {
     return false;
 }
 
+/** Renders every subtask entry into the task details container. */
 function renderSubtasksIntoContainer(subTasksContainer, subTasksString, subTaskReviewStatus) {
     subTasksContainer.innerHTML = "";
     for (let subtaskID = 0; subtaskID < subTasksString.length; subtaskID++) {
@@ -107,12 +109,14 @@ function renderSubtasksIntoContainer(subTasksContainer, subTasksString, subTaskR
     }
 }
 
+/** Renders one subtask row and stores its current completion status. */
 function renderSingleSubtask(subtaskID, subTask, subTaskReviewStatus) {
     subtaskStatusList.push(subTaskReviewStatus[subtaskID] === 'C' ? 'C' : 'U');
     document.getElementById('subTasks').innerHTML += subtaskTamplate(subtaskID, subTask);
     updateSubtaskCheckboxDisplay(subtaskID);
 }
 
+/** Stores the currently opened task ID for later subtask updates. */
 function setCurrentTaskId(taskID) {
     currentTaskId = taskID;
 }
@@ -129,6 +133,7 @@ function updateSubtaskCheckboxDisplay(subtaskID) {
     toggleSubtaskCheckboxClasses(checkedCheckbox, uncheckedCheckbox, isUnchecked);
 }
 
+/** Applies the correct visible state to the checked and unchecked subtask icons. */
 function toggleSubtaskCheckboxClasses(checkedCheckbox, uncheckedCheckbox, isUnchecked) {
     checkedCheckbox.classList.toggle("displayNone", isUnchecked);
     uncheckedCheckbox.classList.toggle("displayNone", !isUnchecked);
@@ -159,20 +164,24 @@ async function storeSubtask() {
     await saveSubtaskReviewAndUpdateProgress(refTaskStoreSubtask, checkboxString);
 }
 
+/** Checks whether a valid task is currently selected in the task details dialog. */
 function hasValidCurrentTaskId() {
     return currentTaskId !== undefined && currentTaskId !== null;
 }
 
+/** Updates in-memory and persisted subtask states and refreshes the progress bar. */
 async function saveSubtaskReviewAndUpdateProgress(refTaskStoreSubtask, checkboxString) {
     updateStoredSubtaskReview(refTaskStoreSubtask, checkboxString);
     await persistSubtaskReview(checkboxString);
     updateSubtaskProgressbar(currentTaskId);
 }
 
+/** Writes the current subtask review string into the loaded task object. */
 function updateStoredSubtaskReview(refTaskStoreSubtask, checkboxString) {
     refTaskStoreSubtask.subTasksReview = { 0: checkboxString };
 }
 
+/** Persists the current subtask review string for the opened task. */
 async function persistSubtaskReview(checkboxString) {
     await DataPUT(`Tasks/Task${currentTaskId}/subTasksReview`, {
         0: `${checkboxString}`

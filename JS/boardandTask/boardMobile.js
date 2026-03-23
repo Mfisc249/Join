@@ -1,4 +1,5 @@
 
+/** Rebuilds the board layout when the viewport changes between desktop and mobile. */
 async function widthChangeCallback(myMediaQuery) {
     if (myMediaQuery.matches) {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
@@ -18,6 +19,7 @@ async function widthChangeCallback(myMediaQuery) {
 }
 myMediaQuery.addEventListener('change', widthChangeCallback);
 
+/** Opens the mobile move menu next to the selected task card. */
 function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
     let refMobileArrowsMoveTaskID = document.getElementById(mobileArrowsMoveTaskID);
     let mobileArrowsMoveTaskPosition = refMobileArrowsMoveTaskID.getBoundingClientRect();
@@ -27,6 +29,7 @@ function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
     document.getElementById('app-canvas').appendChild(refDiv);
 }
 
+/** Chooses the correct mobile move menu template for the task's current column. */
 function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
     switch (TASK[0][`Task${taskID}`].field.field) {
         case 'field1':
@@ -43,10 +46,12 @@ function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
     }
 }
 
+/** Removes the temporary mobile move menu from the DOM. */
 function removeMobileMoveTask() {
     document.getElementById("taskMobileMove").remove();
 }
 
+/** Moves a task one column upward in the mobile board flow when possible. */
 function taskMoveUpMobile(taskID) {
     let refField = TASK[0][`Task${taskID}`].field.field.slice(-1) * 1;
     if (refField > 1) {
@@ -54,6 +59,7 @@ function taskMoveUpMobile(taskID) {
     }
 }
 
+/** Moves a task one column downward in the mobile board flow when possible. */
 function taskMoveDownMobile(taskID) {
     let refField = TASK[0][`Task${taskID}`].field.field.slice(-1) * 1;
     if (refField < 4) {
@@ -61,6 +67,7 @@ function taskMoveDownMobile(taskID) {
     }
 }
 
+/** Updates a task's column from the mobile menu and persists the change. */
 async function moveToMobile(field, taskID) {
     TASK[0][`Task${taskID}`].field.field = `${field}`;
     renderMovedTask(field, taskID);

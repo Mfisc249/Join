@@ -53,6 +53,7 @@ function taskBoardTamplate() {
                     </tr>`
 }
 
+/** Builds the HTML markup for the stacked mobile board layout. */
 function taskBoardTamplateMobile() {
     return `            <tr>
                             <td class="tableCategories">To do <button onclick="opendialog('boardAddTask');init()">+</button></th>
@@ -140,10 +141,12 @@ function taskDetailContactsTamplate(initials, name, color) {
             </div>`
 }
 
+/** Builds the badge markup used for assigned contacts on a board task card. */
 function taskContactsTamplate(initials, color) {
     return `<span style="background-color: ${safeText(color, '#2A3647')};" class="badge taskContactsbadge">${safeText(initials, '?')}</span>`
 }
 
+/** Builds the mobile move menu for tasks currently in the first column. */
 function moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition){
     return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
@@ -156,6 +159,7 @@ function moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition){
 
 }
 
+/** Builds the mobile move menu for tasks currently in the last column. */
 function moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition) {
     return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
@@ -167,6 +171,7 @@ function moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition) {
                     </div>`;
 }
 
+/** Builds the mobile move menu for tasks currently in the middle columns. */
 function moveTamplateTaskMobileField2_3(taskID, mobileArrowsMoveTaskPosition) {
    return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>

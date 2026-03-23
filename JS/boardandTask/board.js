@@ -71,6 +71,7 @@ async function loadTaskTamplate(refTask) {
     renderTaskCardDetails(refTask.id);
 }
 
+/** Appends a task card to the requested board column or falls back to the first column. */
 function appendTaskToField(targetField, taskID) {
     let allFields = ['field1', 'field2', 'field3', 'field4'];
     if (allFields.includes(targetField)) {
@@ -80,10 +81,12 @@ function appendTaskToField(targetField, taskID) {
     insertTaskIntoField('field1', taskID);
 }
 
+/** Inserts a rendered task card into the given board column. */
 function insertTaskIntoField(fieldID, taskID) {
     document.getElementById(fieldID).insertAdjacentHTML('beforeend', taskTamplate(taskID));
 }
 
+/** Populates the visual details of a rendered task card. */
 function renderTaskCardDetails(taskID) {
     taskCatagory(taskID, document.getElementById(`boardTaskCatagory${taskID}`));
     updateSubtaskProgressbar(taskID);
@@ -113,6 +116,7 @@ function renderMovedTask(field, taskID = curentTraggedElement) {
     checkFieldIsEmpty();
 }
 
+/** Removes an already rendered task card element from the DOM before reinserting it. */
 function removeExistingTaskElement(taskID) {
     let refMovedTask = document.getElementById(`${taskID}`);
     if (refMovedTask && refMovedTask.parentNode) {
@@ -146,11 +150,13 @@ async function moveTo(field) {
     await persistMovedTaskField(field);
 }
 
+/** Updates the in-memory field value of the moved task. */
 function updateTaskFieldForMove(task, field) {
     task.field = task.field || {};
     task.field.field = `${field}`;
 }
 
+/** Persists the updated task column after a drag-and-drop move. */
 async function persistMovedTaskField(field) {
     await DataPUT(`Tasks/Task${curentTraggedElement}/field`, {
         'field': `${field}`,
@@ -178,12 +184,14 @@ function updateEmptyHintForField(fieldId, placeholderId, placeholderText) {
     removeExistingPlaceholder(placeholder);
 }
 
+/** Creates the empty-state placeholder inside a board column when no tasks exist. */
 function addEmptyFieldPlaceholder(field, placeholder, placeholderId, placeholderText) {
     if (!placeholder) {
         field.innerHTML = `<div id="${placeholderId}" class="noTaskField taskContainer">${placeholderText}</div>`;
     }
 }
 
+/** Removes an existing empty-state placeholder from a board column. */
 function removeExistingPlaceholder(placeholder) {
     if (placeholder) {
         placeholder.remove();
@@ -203,6 +211,7 @@ function endTransformTask() {
     }, 100);
 }
 
+/** Closes the add-task dialog and reinitializes the board when necessary. */
 function createTaskBoard(){
   const dialog = document.getElementById("boardAddTask");
    if (!!dialog?.open) {
@@ -228,6 +237,7 @@ async function searchTask() {
     }
 }
 
+/** Switches the board table template to the current desktop or mobile variant. */
 function setTaskTableTemplateByViewport() {
     if (myMediaQuery.matches) {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
@@ -236,6 +246,7 @@ function setTaskTableTemplateByViewport() {
     document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
 }
 
+/** Clears cached board data and renders the board again from the backend. */
 async function resetTaskDataAndRender() {
     TASK = [];
     TASKKEYS = [];
@@ -256,6 +267,7 @@ function startTheSearch(refSearchInput) {
     }
 }
 
+/** Adds a task to the search result view when it matches the current filter. */
 function addMatchingTaskToSearchResults(task, filter, searchCount) {
     let taskRef = TASK[0][`${task}`] || {};
     if (!isTaskMatchingSearch(taskRef, filter)) {
@@ -266,12 +278,14 @@ function addMatchingTaskToSearchResults(task, filter, searchCount) {
     return searchCount + 1;
 }
 
+/** Checks whether a task title or description matches the search text. */
 function isTaskMatchingSearch(taskRef, filter) {
     let refTaskTitle = safeText(taskRef.title, '');
     let refTaskDescription = safeText(taskRef.description, '');
     return refTaskTitle.toUpperCase().indexOf(filter) > - 1 || refTaskDescription.toUpperCase().indexOf(filter) > - 1;
 }
 
+/** Replaces the board columns with a no-results hint after an unsuccessful search. */
 function showNoTaskFoundHint() {
     document.getElementById('fields').innerHTML = `<div class="noTaskFound">No Tasks Found</div>`;
 }
@@ -287,6 +301,7 @@ function updateSubtaskProgressbar(taskID) {
     animateProgressbar(progressbarElement, completedPercentage);
 }
 
+/** Animates a subtask progress bar up to the computed completion percentage. */
 function animateProgressbar(progressbarElement, completedPercentage) {
     let width = 0;
     let intervalId = setInterval(() => {
@@ -295,6 +310,7 @@ function animateProgressbar(progressbarElement, completedPercentage) {
     progressbarElement.style.width = width + "%";
 }
 
+/** Advances the animated progress bar frame by frame until the target width is reached. */
 function updateProgressbarFrame(intervalId, width, completedPercentage, progressbarElement) {
     if (width > completedPercentage) {
         clearInterval(intervalId);
@@ -319,10 +335,12 @@ function calculateSubtaskCompletionPercentage(taskID) {
     return calculateAndRenderSubtaskCompletion(task, subTasks, subtaskCheckedCountElement);
 }
 
+/** Hides the subtask progress display when a task has no subtasks. */
 function hideSubtaskProgressbar(taskID) {
     document.getElementById(`allsubtaskProgressbar${taskID}`).classList.add("displayNone");
 }
 
+/** Calculates completed subtasks, updates the counter, and returns the completion percentage. */
 function calculateAndRenderSubtaskCompletion(task, subTasks, subtaskCheckedCountElement) {
     let subTaskReviewList = getSubTaskReviewList(task);
     let completedSubtaskCount = countCompletedSubtasks(subTasks, subTaskReviewList);
@@ -330,17 +348,20 @@ function calculateAndRenderSubtaskCompletion(task, subTasks, subtaskCheckedCount
     return Math.round((completedSubtaskCount / subTasks.length) * 100);
 }
 
+/** Writes the number of completed subtasks into the related counter element. */
 function renderCompletedSubtaskCount(subtaskCheckedCountElement, completedSubtaskCount) {
     if (subtaskCheckedCountElement) {
         subtaskCheckedCountElement.innerHTML = completedSubtaskCount;
     }
 }
 
+/** Reads the saved subtask review states and returns them as an array. */
 function getSubTaskReviewList(task) {
     let subTasksReviewString = safeText(task?.subTasksReview?.[0], '');
     return subTasksReviewString.length ? subTasksReviewString.split(',') : [];
 }
 
+/** Counts how many subtasks are marked as completed in the review list. */
 function countCompletedSubtasks(subTasks, subTaskReviewList) {
     let completedSubtaskCount = 0;
     for (let index = 0; index < subTasks.length; index++) {
@@ -363,6 +384,7 @@ function getTaskDetailsContacts(taskID, renderFunctionSelector) {
     }
 }
 
+/** Iterates over assigned contacts and renders each available contact entry. */
 function renderAssignedContacts(refAssignedTo, taskID, renderFunctionSelector) {
     for (let index = 0; index < refAssignedTo.length; index++) {
         let contact = refAssignedTo[`${index}`];
@@ -374,6 +396,7 @@ function renderAssignedContacts(refAssignedTo, taskID, renderFunctionSelector) {
     }
 }
 
+/** Routes contact rendering either to the board card or the task details dialog. */
 function renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelector) {
     if (renderFunctionSelector == 0) {
         renderTaskContacts(contactDetails, taskID);
@@ -382,10 +405,12 @@ function renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelec
     renderTaskDetailsContacts(contactDetails);
 }
 
+/** Returns the full contact object for a stored contact key. */
 function getContactDetailsByKey(contactKey) {
     return allContactDetails?.[`${contactKey}`];
 }
 
+/** Decides whether the assigned-to headline should be hidden in task details. */
 function shouldHideAssignedHeadline(refAssignedTo) {
     return (refAssignedTo.length == 0 || refAssignedTo.length == undefined || refAssignedTo.length == null) && document.getElementById('taskDetailsATHeadline') != undefined;
 }
@@ -409,6 +434,7 @@ function taskCheckPriority(taskID, refTaskPriorityContainer) {
     refTaskPriorityContainer.innerHTML = getPriorityIcon(priority);
 }
 
+/** Returns the matching priority icon markup for a normalized priority label. */
 function getPriorityIcon(priority) {
     switch (priority) {
         case 'Low':
@@ -432,11 +458,13 @@ function taskCatagory(taskID, refTaskCatagory) {
     applyCategoryClass(taskID, refTaskCatagory);
 }
 
+/** Removes all category-specific color classes from a task category badge. */
 function clearCategoryClasses(refTaskCatagory) {
     refTaskCatagory.classList.remove("boardTaskCatagoryBlue");
     refTaskCatagory.classList.remove("boardTaskCatagoryGreen");
 }
 
+/** Applies the correct category color class to a task category badge. */
 function applyCategoryClass(taskID, refTaskCatagory) {
     switch (normalizeCategory(getTaskById(taskID).category)) {
         case 'User Story':
@@ -459,6 +487,7 @@ function highlightBoardTaskFields() {
 
 }
 
+/** Returns the board columns that should be highlighted as valid drop targets. */
 function getTargetHighlightFields(currentField) {
     let fieldMap = {
         field1: [2, 3, 4],
@@ -469,6 +498,7 @@ function getTargetHighlightFields(currentField) {
     return fieldMap[currentField] || [];
 }
 
+/** Inserts highlight placeholders into every allowed drop target column. */
 function appendHighlightToFields(targetFields) {
     for (let index = 0; index < targetFields.length; index++) {
         let fieldNumber = targetFields[index];
@@ -492,6 +522,7 @@ function removeHighlightBoardTaskFields() {
     }
 }
 
+/** Truncates long task descriptions for compact display on board cards. */
 function shortenDescription(description) {
     if (description.length >= 40) {
         let refdescription = description.slice(0, 40);
