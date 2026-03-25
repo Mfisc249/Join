@@ -83,7 +83,8 @@ ContactsApp.page = {
     const contact = ContactsApp.state.contacts.find(c => c.id === id);
     if (!contact) return this._showListError('Kontakt nicht gefunden.');
 
-    if (!confirm(`Möchten Sie den Kontakt "${contact.name}" wirklich löschen?`)) return;
+    const confirmed = await ContactsApp.uiModal._confirmDelete(contact.name);
+    if (!confirmed) return;
 
     try {
       await ContactsApp.firebase.deleteContact(contact.id);
