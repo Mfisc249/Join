@@ -132,6 +132,9 @@
   .contacts-panel {
     width: 100%;
     border-right: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .contacts-panel-header {
@@ -354,6 +357,36 @@
   .contact-options-item img {
     width: 20px;
     height: 20px;
+  }
+
+  /* ===========================
+     MOBILE CONTACTS LIST FIXES
+     =========================== */
+
+  .contacts-list {
+    padding: 24px 12px;
+  }
+
+  .contacts-list > * {
+    width: 100%;
+    max-width: 352px;
+  }
+
+  .contact-item {
+    width: 100%;
+    max-width: 352px;
+    gap: 16px;
+    padding: 15px 12px;
+  }
+
+  .contact-name {
+    white-space: normal;
+    word-break: break-word;
+    font-size: 18px;
+  }
+
+  .contact-email {
+    font-size: 14px;
   }
 
 

@@ -65,6 +65,7 @@ ContactsApp.uiModal = {
 
     if (mode === 'add') {
       title.textContent = 'Add contact';
+      subtitle.textContent = 'Tasks are better with a team!';
       subtitle.classList.remove('d-none');
 
       if (window.innerWidth <= 768) {
