@@ -3,8 +3,13 @@
    Figma Mobile Specs: 428px x 926px
    =============================== */
 @media (max-width: 768px) {
+  .main {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .canvas-area {
-    padding: 32px 16px 20px 16px;
+    padding: 32px 16px 100px 16px;
     overflow-y: auto;
   }
 
