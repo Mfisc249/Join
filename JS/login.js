@@ -119,8 +119,10 @@ document.getElementById('loginEmail').addEventListener('input', function (event)
 
 /** checks sessionStorage if the animation already played and removes the skipAnimation if necessary */
 function checkSessionForAnimation() {
+  let logo = document.getElementById('logoAnimation');
   if (!sessionStorage.getItem('animationPlayed')) {
-    document.getElementById('logoAnimation').classList.remove('skipAnimation');
+    logo.classList.remove('skipAnimation');
+    logo.addEventListener('animationend', () => logo.classList.add('skipAnimation'));
     sessionStorage.setItem('animationPlayed', 'true');
   }
 }
