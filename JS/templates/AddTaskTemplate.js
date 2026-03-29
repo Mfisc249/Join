@@ -1,7 +1,7 @@
 /** Returns the full Add Task form template with optional prefilled values. */
 function createTaskTemplate(taskName, taskDescription, taskDueDate) {
   return `
-  <div class ="displayFLEX headerContent">
+  <div id = "addTaskHeaderContent" class ="displayFLEX headerContent">
     <h1 class="mainTitle">Add Task</h1>
     <div id ="boardTaskcloseDialogX" class= "closeDialogX displayNone" onclick = "closedialog('boardAddTask')">X</div>
   </div>

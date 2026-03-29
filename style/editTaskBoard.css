@@ -59,6 +59,9 @@
     max-width: 400px;
 }
 
+#boardAddTask.edit-task-dialog .headerContent{
+        justify-content: flex-end;
+}
 
 @media (max-width: 1392px) {
     #boardAddTask.edit-task-dialog .priority {
