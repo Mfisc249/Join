@@ -1,3 +1,29 @@
+@media (max-width: 400px) {
+  .details-name {
+    font-size: 25px !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    word-break: break-word !important;
+    display: block !important;
+  }
+  .details-card-top {
+    gap: 10px;
+  }
+}
+@media (max-width: 350px) {
+  .contacts-list > *,
+  .contact-item {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .contact-name {
+    font-size: 16px;
+    word-break: break-word;
+    white-space: normal;
+  }
+}
 /* ===============================
    CONTACTS – RESPONSIVE
    =============================== */
