@@ -65,6 +65,7 @@ ContactsApp.uiModal = {
 
     if (mode === 'add') {
       title.textContent = 'Add contact';
+      subtitle.textContent = 'Tasks are better with a team!';
       subtitle.classList.remove('d-none');
 
       if (window.innerWidth <= 768) {
@@ -151,6 +152,33 @@ ContactsApp.uiModal = {
     }
   },
 
+  /**
+   * Shows a custom delete confirmation popup.
+   * @param {string} name - Contact name to display.
+   * @returns {Promise<boolean>} Resolves true if user confirms, false if cancelled.
+   */
+  _confirmDelete(name) {
+    return new Promise(resolve => {
+      const overlay = document.createElement('div');
+      overlay.className = 'delete-confirm-overlay';
+      overlay.innerHTML = `
+        <div class="delete-confirm-popup">
+          <div class="delete-confirm-inner">
+            <p>Do you really want to delete<br><strong>${name}</strong>?</p>
+            <div class="delete-confirm-actions">
+              <button class="delete-confirm-cancel">Cancel</button>
+              <button class="delete-confirm-delete">Delete</button>
+            </div>
+          </div>
+        </div>`;
+      document.body.appendChild(overlay);
+      const close = result => { overlay.remove(); resolve(result); };
+      overlay.querySelector('.delete-confirm-cancel').addEventListener('click', () => close(false));
+      overlay.querySelector('.delete-confirm-delete').addEventListener('click', () => close(true));
+      overlay.addEventListener('click', e => { if (e.target === overlay) close(false); });
+    });
+  },
+
   /** Deletes the currently opened contact after user confirmation. */
   async onDelete() {
     const id = ContactsApp.state.modal.contactId;
@@ -159,7 +187,8 @@ ContactsApp.uiModal = {
     const contact = ContactsApp.state.contacts.find(c => c.id === id);
     if (!contact) return;
 
-    if (!confirm(`Kontakt "${contact.name}" wirklich löschen?`)) return;
+    const confirmed = await this._confirmDelete(contact.name);
+    if (!confirmed) return;
 
     const saveBtn = document.getElementById('contactModalSaveBtn');
     const delBtn = document.getElementById('contactModalDeleteBtn');

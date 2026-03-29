@@ -39,19 +39,25 @@
 @keyframes logoMove {
   to {
     height: 120px;
-    translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+    translate: max(calc(-50vw + 129px), -591px) calc(-50vh + 140px);
   }
 }
 
 .logoAnimation.skipAnimation {
   animation: none;
   background-color: transparent;
+  position: absolute;
+  inset: unset;
+  top: 80px;
+  left: 80px;
+  display: block;
+  z-index: 1;
 }
 
 .logoAnimation.skipAnimation .logoWrapper {
   animation: none;
   height: 120px;
-  translate: calc(-50vw + 80px + 49px) calc(-50vh + 80px + 60px);
+  translate: none;
 }
 
 /* Login Page – Layout */

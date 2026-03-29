@@ -3,8 +3,13 @@
    Figma Mobile Specs: 428px x 926px
    =============================== */
 @media (max-width: 768px) {
+  .main {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .canvas-area {
-    padding: 32px 16px 20px 16px;
+    padding: 32px 16px 100px 16px;
     overflow-y: auto;
   }
 
@@ -64,13 +69,14 @@
     flex-direction: column;
     gap: 38px;
     margin-bottom: 60px;
+    overflow: hidden;
   }
 
   /* ===== ROWS & CARDS ===== */
   .summaryRow {
     display: flex;
     flex-direction: row;
-    gap: 24px;
+    gap: 16px;
     justify-content: space-between;
     width: 100%;
   }
@@ -78,7 +84,7 @@
   .summaryRow--3 {
     flex-direction: row;
     justify-content: space-between;
-    gap: 24px;
+    gap: 16px;
   }
 
   /* Cards mobile size: 116x116 for squares */
@@ -89,11 +95,12 @@
   }
 
   .summaryCard--wide {
-    width: 186px;
+    width: auto;
+    min-width: 0;
     height: 110px;
     gap: 10px;
     padding: 38px 19px;
-    flex: 1;
+    flex: 1 1 0;
   }
 
   .summaryCard--full {
@@ -106,10 +113,11 @@
   }
 
   .summaryCard--square {
-    width: 116px;
+    width: auto;
+    min-width: 0;
     height: 116px;
     padding: 25px 0;
-    flex: 0 0 116px;
+    flex: 1 1 0;
   }
 
   /* Icon sizes */

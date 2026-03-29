@@ -70,13 +70,14 @@ function countTasks(tasks) {
   for (const t of tasks) {
     const col = t?.field?.field;
     if (col === 'field1') c.todo++;
-    if (col === 'field2') c.inprogress++;
-    if (col === 'field3') c.feedback++;
-    if (col === 'field4') c.done++;
+    else if (col === 'field2') c.inprogress++;
+    else if (col === 'field3') c.feedback++;
+    else if (col === 'field4') c.done++;
+    else continue;
 
     if (String(t?.priority).toLowerCase() === 'urgent') c.urgent++;
-    c.board++;
   }
+  c.board = c.todo + c.inprogress + c.feedback + c.done;
   return c;
 }
 
@@ -90,6 +91,7 @@ function getUpcomingDeadline(tasks) {
   const dates = [];
 
   for (const t of tasks) {
+    if (String(t?.priority).toLowerCase() !== 'urgent') continue;
     const d = parseJoinDate(t?.dueDate);
     if (d && d >= today) dates.push(d);
   }

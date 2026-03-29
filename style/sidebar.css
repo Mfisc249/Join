@@ -1,4 +1,20 @@
 /* Sidebar Component Styles */
+
+/* Reserve space for mobile bottom nav immediately to prevent flicker */
+@media (max-width: 768px) {
+  #sidebar-slot::before {
+    content: '';
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: var(--GlobalBlue);
+    z-index: 999;
+  }
+}
+
 .sidebar,
 .sidebar * {
   box-sizing: border-box;
@@ -244,6 +260,12 @@
     justify-content: space-around;
     align-items: center;
     padding: 0 8px;
+    animation: fadeInNav 0.15s ease-out;
+  }
+
+  @keyframes fadeInNav {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .mobile-nav-item {
@@ -252,13 +274,14 @@
     align-items: center;
     justify-content: center;
     gap: 4px;
-    flex: 1;
-    height: 64px;
+    width: 76px;
+    height: 76px;
+    flex: 0 0 76px;
     border-radius: 16px;
     color: var(--GlobalLinkGray);
     text-decoration: none;
     transition: background 0.2s ease, color 0.2s ease;
-    padding: 8px;
+    padding: 8px 0;
   }
 
   .mobile-nav-item:hover,
@@ -305,17 +328,21 @@
   .guest-mode .mobile-nav-guest {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    gap: 10px;
     padding: 0 16px;
     position: fixed;
     width: 100%;
     height: 80px;
     left: 0;
     bottom: 0;
-    background: var(--GlobalBlue);
+    background: #2A3647;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    box-sizing: border-box;
+    overflow: hidden;
+    animation: fadeInNav 0.15s ease-out;
   }
 
   /* Hide the regular mobile nav for guests */
@@ -330,9 +357,9 @@
     justify-content: center;
     gap: 4px;
     padding: 8px 12px;
-    flex: none;
+    flex: 0 0 auto;
     height: 76px;
-    border-radius: 8px;
+    border-radius: 16px;
     color: #CDCDCD;
     text-decoration: none;
     font-family: 'Open Sans', sans-serif;
@@ -342,10 +369,17 @@
     transition: background 0.2s ease, color 0.2s ease;
   }
 
+  .mobile-nav-guest-item:first-child {
+    margin-right: auto;
+  }
+
+  .mobile-nav-guest-item:nth-child(2) {
+    margin-right: 0;
+  }
+
   .mobile-nav-guest-item.active {
-    background: var(--GlobalDarkblue);
-    border-radius: 16px;
-    color: var(--GlobalWhite);
+    background: #091931;
+    color: #FFFFFF;
   }
 
   .mobile-nav-guest-item.active .mobile-nav-guest-icon {
