@@ -79,6 +79,7 @@ body {
     border-radius: 24px;
     margin-top: 5px;
     box-shadow: 1px 1px 8px -3px rgba(0, 0, 0, 0.28);
+    min-width: 252px;
 }
 
 .task:hover {
@@ -278,7 +279,7 @@ body {
 
     }
 
-    .taskMobileMove table{
+    .taskMobileMove table {
         border-collapse: collapse;
 
     }
@@ -301,16 +302,30 @@ body {
         transition: background 0.1s ease;
     }
 
-    .taskMobileSubmenuItem:nth-child(odd){
+    .taskMobileSubmenuItem:nth-child(odd) {
         border-radius: 8px 0px 0px 8px;
     }
 
-    .taskMobileSubmenuItem:nth-child(even){
+    .taskMobileSubmenuItem:nth-child(even) {
         border-radius: 0px 8px 8px 0px;
     }
 
     .allTaskMobileSubmenuItem:hover {
         background-color: var(--GlobalDarkblue);
+    }
+
+    .tablecontainer td {
+        flex-wrap: nowrap;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobileFieldProperties{
+        overflow: auto!important;
+        display: flex;  
+        max-width: var(--boardWith);
     }
 
 }

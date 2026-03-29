@@ -58,26 +58,28 @@ function taskBoardTamplateMobile() {
     return `            <tr>
                             <td class="tableCategories">To do <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
-                        <tr>
-                            <td id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)"></td>
+                        
+                        <tr>          
+                            <td><div id="field1" ondrop="moveTo('field1')" ondragover="dragoverHandler(event)" class= "mobileFieldProperties"></div></td>
                         </tr>
+                        
                         <tr>
                             <td class="tableCategories">In progress <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
-                            <td id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></td>
+                            <td <div class= "mobileFieldProperties" id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></div></td>
                         </tr>
                         <tr>
                             <td class="tableCategories">Await feedback <button onclick="opendialog('boardAddTask');init()">+</button></th>
                         </tr>
                         <tr>
-                            <td id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"></td>
+                            <td <div class= "mobileFieldProperties" id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"> </div></td>
                         </tr>
                         <tr>
                             <td class="tableCategories">Done</th>
                         </tr>
                         <tr>
-                            <td id="field4" ondrop="moveTo('field4')" ondragover="dragoverHandler(event)"></td>
+                            <td <div class= "mobileFieldProperties" id="field4" ondrop="moveTo('field4')" ondragover="dragoverHandler(event)"> </div></td>
                         </tr>`
 }
 
