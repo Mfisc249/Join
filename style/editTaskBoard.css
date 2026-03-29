@@ -18,6 +18,10 @@
     display: block;
 }
 
+.descriptionImg{
+    display: none;
+}
+
 #boardAddTask.edit-task-dialog .divider {
     display: none;
 }
@@ -60,12 +64,21 @@
     #boardAddTask.edit-task-dialog .priority {
         gap: 5px !important;
     }
+}
 
-    @media (max-width: 1300px) {
+@media (max-width: 1300px) {
     #boardAddTask.edit-task-dialog .subTaskItem {
         padding-right: unset;
         width: unset;
     }
-}
+
+    .boardEditTaskButton {
+        width: fit-content;
+    }
+
+    .boardEditTaskButtonContainer{
+        display: flex;
+        justify-content: flex-end;
+    }
 
 }

@@ -15,6 +15,7 @@ async function editPreparation(taskID) {
   document.querySelector('.taskButton').remove();
   document.querySelector('.mainTitle').remove();
   createSaveDataEditTaskButton(taskID);
+  // showExitButtonEditTask();
   task.title = refTaskEditTask.title;
   task.description = refTaskEditTask.description;
   task.dueDate = refTaskEditTask.dueDate;
@@ -64,8 +65,13 @@ function prepareSubTasksEditTask(refTaskEditTask){
 function createSaveDataEditTaskButton(taskID) {
   curentTaskID = taskID;
   let refsaveButtonEditTask = document.createElement('div');
-  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); closedialog('boardAddTask'); saveDataEditTask()" class ="ButtonBlueFilled">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
+  refsaveButtonEditTask.className = `boardEditTaskButtonContainer`;
+  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); closedialog('boardAddTask'); saveDataEditTask()" class ="ButtonBlueFilled boardEditTaskButton">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
+}
+
+function showExitButtonEditTask() {
+  document.getElementById('boardTaskcloseDialogX').classList.remove('displayNone');
 }
 
 /**Reads the current form inputs and writes title, description, due date, and category into the task state object. */

@@ -222,6 +222,10 @@ body {
     visibility: visible;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 
 @media(max-width:1535px) {
 
@@ -318,13 +322,9 @@ body {
         flex-wrap: nowrap;
     }
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
-    .mobileFieldProperties{
-        overflow: auto!important;
-        display: flex;  
+    .mobileFieldProperties {
+        overflow: auto !important;
+        display: flex;
         max-width: var(--boardWith);
     }
 
