@@ -260,6 +260,8 @@
     justify-content: space-around;
     align-items: stretch;
     padding: 0 8px;
+    box-sizing: border-box;
+    overflow: hidden;
     animation: fadeInNav 0.15s ease-out;
   }
 
