@@ -70,10 +70,12 @@ function createSaveDataEditTaskButton(taskID) {
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
 }
 
+/**Shows the existing close button in edit mode by removing the hidden state class. */
 function showExitButtonEditTask() {
   document.getElementById('boardTaskcloseDialogX').classList.remove('displayNone');
 }
 
+/**Creates the edit dialog close button and appends it to the add-task header area. */
 function createExitButtonEditTask() {
   let refExitButtonEditTask = document.createElement('div');
   refExitButtonEditTask.innerHTML = `<div class= "closeDialogX" onclick = "closedialog('boardAddTask')">X</div>`;
