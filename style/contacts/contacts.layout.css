@@ -40,5 +40,9 @@
 }
 
 /* Utilities */
-.hidden { display: none !important; }
-.d-none { display: none !important; }
+.hidden { display: none; }
+.d-none { display: none; }
+.contact-overlay.d-none, .contact-modal.d-none,
+.contact-overlay.hidden, .contact-modal.hidden {
+  display: none;
+}

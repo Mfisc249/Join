@@ -112,7 +112,7 @@ ContactsApp.uiModal = {
   /** Closes the modal and resets internal state. */
   close() {
     document.getElementById('contactOverlay').classList.add('d-none');
-    ContactsApp.state.modal.mode = 'edit';
+    ContactsApp.state.modal.mode = null;
     ContactsApp.state.modal.contactId = null;
   },
 

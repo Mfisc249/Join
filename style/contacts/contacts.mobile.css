@@ -13,295 +13,295 @@
 
   /* Modal container */
   .contact-modal {
-    display: flex !important;
-    flex-direction: column !important;
-    position: relative !important;
-    width: 396px !important;
-    height: 580px !important;
-    max-height: calc(100vh - 24px) !important;
-    background: #FFFFFF !important;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
-    border-radius: 30px !important;
-    max-width: calc(100% - 24px) !important;
-    overflow: visible !important;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 396px;
+    height: 580px;
+    max-height: calc(100vh - 24px);
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    max-width: calc(100% - 24px);
+    overflow: visible;
   }
 
   /* Left panel (blue header) */
   .contact-modal-left {
-    position: relative !important;
-    width: 100% !important;
-    min-height: 0 !important;
-    height: auto !important;
-    background: #2A3647 !important;
-    padding: 30px 24px 55px !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    gap: 8px !important;
-    border-radius: 30px 30px 0 0 !important;
-    flex: 1 !important;
-    z-index: auto !important;
+    position: relative;
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    background: #2A3647;
+    padding: 30px 24px 55px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    border-radius: 30px 30px 0 0;
+    flex: 1;
+    z-index: auto;
   }
 
   .contact-modal-brand {
-    display: none !important;
+    display: none;
   }
 
   .contact-modal-logo {
-    display: none !important;
+    display: none;
   }
 
   .contact-modal-left-content {
-    width: 282px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
+    width: 282px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .contact-modal-title {
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    line-height: 120% !important;
-    color: #FFFFFF !important;
-    width: auto !important;
-    max-width: 282px !important;
-    height: auto !important;
-    margin: 0 !important;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 120%;
+    color: #FFFFFF;
+    width: auto;
+    max-width: 282px;
+    height: auto;
+    margin: 0;
   }
 
   .contact-modal-subtitle {
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    line-height: 120% !important;
-    color: #FFFFFF !important;
-    width: auto !important;
-    max-width: 275px !important;
-    height: auto !important;
-    margin: 0 !important;
-    display: block !important;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #FFFFFF;
+    width: auto;
+    max-width: 275px;
+    height: auto;
+    margin: 0;
+    display: block;
   }
 
   .contact-modal-divider {
-    width: 90px !important;
-    height: 0 !important;
-    border: none !important;
-    border-bottom: 3px solid #29ABE2 !important;
-    margin: 8px 0 0 0 !important;
-    padding: 0 !important;
+    width: 90px;
+    height: 0;
+    border: none;
+    border-bottom: 3px solid #29ABE2;
+    margin: 8px 0 0 0;
+    padding: 0;
   }
 
   /* Right panel */
   .contact-modal-right {
-    position: relative !important;
-    flex: 1 !important;
-    background: #FFFFFF !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    border-radius: 0 0 30px 30px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    z-index: 2 !important;
+    position: relative;
+    flex: 1;
+    background: #FFFFFF;
+    padding: 0;
+    overflow: visible;
+    border-radius: 0 0 30px 30px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
   }
 
   /* Close button */
   .contact-modal-close {
-    position: absolute !important;
-    top: 24px !important;
-    right: 24px !important;
-    width: 32px !important;
-    height: 32px !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    z-index: 2000 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 56px !important;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 56px;
   }
 
   .contact-modal-close img {
-    width: 24px !important;
-    height: 24px !important;
-    filter: brightness(0) invert(1) !important;
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
   }
 
   .contact-modal-close:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.15);
   }
 
   /* Body layout */
   .contact-modal-body {
-    position: relative !important;
-    width: 100% !important;
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    padding: 0 !important;
-    padding-top: 0 !important;
+    position: relative;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    padding-top: 0;
   }
 
   /* Avatar */
   .contact-modal-avatar-wrap {
-    position: relative !important;
-    margin: -40px auto 10px !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-    width: 100px !important;
-    height: 100px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 100 !important;
+    position: relative;
+    margin: -40px auto 10px;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
   }
 
   .contact-modal-avatar {
-    width: 100px !important;
-    height: 100px !important;
-    border-radius: 50% !important;
-    border: 3px solid #FFFFFF !important;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   }
 
   .contact-modal-avatar span {
-    font-weight: 500 !important;
-    font-size: 38px !important;
-    color: #fff !important;
+    font-weight: 500;
+    font-size: 38px;
+    color: #fff;
   }
 
   /* Form */
   .contact-modal-form {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    padding: 0 16px !important;
-    box-sizing: border-box !important;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
   .contact-input {
-    width: 100% !important;
-    max-width: none !important;
-    height: 36px !important;
-    position: relative !important;
-    box-sizing: border-box !important;
+    width: 100%;
+    max-width: none;
+    height: 36px;
+    position: relative;
+    box-sizing: border-box;
   }
 
   .contact-input .InputField {
-    width: 100% !important;
-    height: 100% !important;
-    background: #FFFFFF !important;
-    border: 1px solid #D1D1D1 !important;
-    border-radius: 10px !important;
-    padding: 8px 16px !important;
-    box-sizing: border-box !important;
-    font-size: 16px !important;
-    color: #2A3647 !important;
-    font-family: 'Inter' !important;
-    font-weight: 400 !important;
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #2A3647;
+    font-family: 'Inter';
+    font-weight: 400;
   }
 
   .contact-input .InputField::placeholder {
-    color: #D1D1D1 !important;
-    font-weight: 400 !important;
+    color: #D1D1D1;
+    font-weight: 400;
   }
 
   .contact-input .InputField:focus {
-    outline: none !important;
-    border: 1px solid #29ABE2 !important;
+    outline: none;
+    border: 1px solid #29ABE2;
   }
 
   .contact-input-icon {
-    position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    right: 12px !important;
-    width: 24px !important;
-    height: 24px !important;
-    opacity: 0.5 !important;
-    pointer-events: none !important;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   /* Actions */
   .contact-modal-actions {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    margin-top: 16px !important;
-    margin-bottom: 20px !important;
-    padding: 0 16px !important;
-    box-sizing: border-box !important;
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
   .btn-secondary-outline {
-    display: flex !important;
-    width: auto !important;
-    min-width: 80px !important;
-    height: 36px !important;
-    padding: 6px 14px !important;
-    background: #FFFFFF !important;
-    border: 1px solid #2A3647 !important;
-    border-radius: 8px !important;
-    font-size: 14px !important;
-    font-weight: 400 !important;
-    color: #2A3647 !important;
-    cursor: pointer !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 4px !important;
-    box-sizing: border-box !important;
+    display: flex;
+    width: auto;
+    min-width: 80px;
+    height: 36px;
+    padding: 6px 14px;
+    background: #FFFFFF;
+    border: 1px solid #2A3647;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #2A3647;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-sizing: border-box;
   }
 
   .btn-secondary-outline.d-none {
-    display: none !important;
+    display: none;
   }
 
   .btn-primary-dark {
-    width: auto !important;
-    min-width: 80px !important;
-    height: 36px !important;
-    padding: 6px 14px !important;
-    background: #2A3647 !important;
-    border: none !important;
-    border-radius: 10px !important;
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-    font-size: 16px !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 4px !important;
-    box-sizing: border-box !important;
+    width: auto;
+    min-width: 80px;
+    height: 36px;
+    padding: 6px 14px;
+    background: #2A3647;
+    border: none;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-sizing: border-box;
   }
 
   .btn-check {
-    width: 16px !important;
-    height: 16px !important;
+    width: 16px;
+    height: 16px;
   }
 
   .btn-cancel-x {
-    width: 16px !important;
-    height: 16px !important;
+    width: 16px;
+    height: 16px;
   }
 
   .modal-error {
-    display: none !important;
+    display: none;
   }
 }

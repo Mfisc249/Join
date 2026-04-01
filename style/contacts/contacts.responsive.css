@@ -1,11 +1,11 @@
 @media (max-width: 400px) {
   .details-name {
-    font-size: 25px !important;
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-    word-break: break-word !important;
-    display: block !important;
+    font-size: 25px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: break-word;
+    display: block;
   }
   .details-card-top {
     gap: 10px;

@@ -18,7 +18,7 @@ ContactsApp.state = {
   selectedContactId: null,
   isInitialized: false,
   modal: {
-    mode: 'edit', // 'edit' | 'add'
+    mode: null, // 'edit' | 'add' | null
     contactId: null,
   },
 };
