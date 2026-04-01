@@ -97,7 +97,7 @@ ContactsApp.page = {
       const detailsCard = document.getElementById('detailsCard');
       if (detailsCard) detailsCard.classList.add('hidden');
     } catch (err) {
-      alert('Kontakt konnte nicht gelöscht werden.');
+      // Fehler beim Löschen – keine alert-Ausgabe mehr
     }
   },
 

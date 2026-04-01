@@ -145,7 +145,7 @@ ContactsApp.uiModal = {
 
       this.close();
     } catch (err) {
-      alert('Speichern fehlgeschlagen.');
+      // Fehler beim Speichern – keine alert-Ausgabe mehr
     } finally {
       saveBtn.disabled = false;
       delBtn.disabled = false;
@@ -217,7 +217,7 @@ ContactsApp.uiModal = {
 
       this.close();
     } catch (err) {
-      alert('Löschen fehlgeschlagen.');
+      // Fehler beim Löschen – keine alert-Ausgabe mehr
     } finally {
       saveBtn.disabled = false;
       delBtn.disabled = false;
