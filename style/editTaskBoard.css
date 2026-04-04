@@ -1,7 +1,6 @@
 #boardAddTask.edit-task-dialog {
     width: min(525px, calc(100vw - 32px));
     max-width: 525px;
-    overflow-x: hidden;
 }
 
 #boardAddTask.edit-task-dialog .addTaskMain {
@@ -65,7 +64,7 @@
 
 @media (max-width: 1392px) {
     #boardAddTask.edit-task-dialog .priority {
-        gap: 5px !important;
+        gap: 5px;
     }
 }
 
@@ -75,11 +74,11 @@
         width: unset;
     }
 
-    .boardEditTaskButton {
+    #boardAddTask.edit-task-dialog .boardEditTaskButton {
         width: fit-content;
     }
 
-    .boardEditTaskButtonContainer{
+    #boardAddTask.edit-task-dialog .boardEditTaskButtonContainer{
         display: flex;
         justify-content: flex-end;
     }
