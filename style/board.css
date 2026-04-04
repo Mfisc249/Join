@@ -109,13 +109,13 @@ body {
 
 .noTaskField {
     border-radius: 10px !important;
-    border: 1px dashed var(--GlobalBorderColorGray) !important;
-    height: 48px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background-color: #E7E7E7 !important;
-    color: var(--GlobalBorderColorGray) !important;
+    border: 1px dashed var(--GlobalBorderColorGray);
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E7E7E7;
+    color: var(--GlobalBorderColorGray);
 }
 
 .noTaskFound {
@@ -170,8 +170,8 @@ body {
 }
 
 .taskContactsbadge {
-    height: 32px !important;
-    width: 32px !important;
+    height: 32px /**!important*/;
+    width: 32px /**!important*/;
 }
 
 .taskContactsContainer span:not(:first-child) {
@@ -208,7 +208,7 @@ body {
 
 .allSubtaskCheckedCount {
     font-size: 16px;
-    font-weight: unset !important;
+    font-weight: unset /**!important*/;
     gap: 3px;
     min-width: 90px;
     opacity: 0;
@@ -263,9 +263,9 @@ body {
     }
 
     .taskMobileMove span {
-        color: var(--GlobalWhite) !important;
-        font-size: 20px !important;
-        text-align: center !important;
+        color: var(--GlobalWhite) /**!important*/;
+        font-size: 20px /**!important*/;
+        text-align: center /**!important*/;
     }
 
     .taskMobileMenu {
@@ -288,11 +288,10 @@ body {
 
     }
 
-
     .taskMobileSubmenuItem {
-        padding-left: 10px !important;
-        margin-block-start: unset !important;
-        margin-block-end: unset !important;
+        padding-left: 10px /**!important*/;
+        margin-block-start: unset /**!important*/;
+        margin-block-end: unset /**!important*/;
         font-family: 'Inter', sans-serif;
         font-weight: 400;
         font-size: 16px;
@@ -323,14 +322,11 @@ body {
     }
 
     .mobileFieldProperties {
-        overflow: auto !important;
+        overflow: auto /**!important*/;
         display: flex;
         max-width: var(--boardWith);
     }
-
 }
-
-
 
 @media(max-width:1230px) {
     :root {
@@ -416,10 +412,11 @@ body {
         width: calc(var(--boardWith) - 90px);
 
     }
+}
 
-    .taskMobileMenu {
-        border-radius: 20px 0px 20px 20px;
-        left: 183px !important;
+@media (max-width: 428px) {
+    .taskMobileMenu{
+         border-radius: 20px 0px 20px 20px;
     }
 }
 
@@ -427,11 +424,6 @@ body {
     .canvas-area {
         padding: 64px 30px;
     }
-
-    .taskMobileMenu {
-        left: 160px !important;
-    }
-
 }
 
 @media (max-width: 350px) {

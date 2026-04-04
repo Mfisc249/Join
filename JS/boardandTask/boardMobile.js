@@ -29,19 +29,30 @@ function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
     document.getElementById('app-canvas').appendChild(refDiv);
 }
 
+function chanchePositionMoveTaskMobile() {
+    let moveTaskPositionOffset = 0;
+    let mediaQuerymoveTaskMobile = window.matchMedia('(max-width: 428px)')
+    if (mediaQuerymoveTaskMobile.matches) {
+        return moveTaskPositionOffset = 100;
+    }else{
+        return moveTaskPositionOffset = 0;
+    }
+}
+
 /** Chooses the correct mobile move menu template for the task's current column. */
 function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
+    let moveTaskPositionCheckedOffset = chanchePositionMoveTaskMobile();
     switch (TASK[0][`Task${taskID}`].field.field) {
         case 'field1':
-            refDiv.innerHTML = moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition);
+            refDiv.innerHTML = moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionCheckedOffset);
             break;
 
         case 'field4':
-            refDiv.innerHTML =  moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition);
+            refDiv.innerHTML =  moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionCheckedOffset);
             break;
 
         default:
-            refDiv.innerHTML = moveTamplateTaskMobileField2_3(taskID, mobileArrowsMoveTaskPosition);
+            refDiv.innerHTML = moveTamplateTaskMobileField2_3(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionCheckedOffset);
             break;
     }
 }

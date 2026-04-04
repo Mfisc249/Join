@@ -149,8 +149,8 @@ function taskContactsTamplate(initials, color) {
 }
 
 /** Builds the mobile move menu for tasks currently in the first column. */
-function moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition){
-    return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+function moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionOffset){
+    return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left - moveTaskPositionOffset}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
                      <table>
                         <tr class = "allTaskMobileSubmenuItem">
@@ -162,8 +162,8 @@ function moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition){
 }
 
 /** Builds the mobile move menu for tasks currently in the last column. */
-function moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition) {
-    return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+function moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionOffset) {
+    return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left - moveTaskPositionOffset}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
                      <table>
                         <tr class = "allTaskMobileSubmenuItem">
@@ -174,8 +174,8 @@ function moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition) {
 }
 
 /** Builds the mobile move menu for tasks currently in the middle columns. */
-function moveTamplateTaskMobileField2_3(taskID, mobileArrowsMoveTaskPosition) {
-   return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left}px;" onmouseleave="removeMobileMoveTask()" >
+function moveTamplateTaskMobileField2_3(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionOffset) {
+   return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left - moveTaskPositionOffset}px;" onmouseleave="removeMobileMoveTask()" >
                      <span>Move to</span>
                      <table>
                         <tr class = "allTaskMobileSubmenuItem">

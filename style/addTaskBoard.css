@@ -118,7 +118,7 @@
     }
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1392px) {
 
     #boardAddTask .addTaskLabel {
         align-items: unset /**!important*/;
