@@ -231,19 +231,6 @@ function getActiveSearchInput() {
     if (activeElement?.id === 'searchInput' || activeElement?.id === 'searchInputMobile') {
         return activeElement;
     }
-
-    // let refSearchInput = document.getElementById('searchInput');
-    // let refSearchInputMobile = document.getElementById('searchInputMobile');
-
-    // if (refSearchInputMobile && refSearchInputMobile.offsetParent !== null) {
-    //     return refSearchInputMobile;
-    // }
-
-    // if (refSearchInput && refSearchInput.offsetParent !== null) {
-    //     return refSearchInput;
-    // }
-
-    // return refSearchInput || refSearchInputMobile;
 }
 
 async function searchTask() {
