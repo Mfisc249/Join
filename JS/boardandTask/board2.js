@@ -1,3 +1,5 @@
+let taskIDCount = 0;
+let taskIDStorage = 0;
 
 /** Contacts section logic. */
 /** Loads and renders all contacts assigned to the given task. */
@@ -46,7 +48,11 @@ function renderTaskContacts(contactDetails, taskID) {
     if (!refContactsContainer || !contactDetails) {
         return;
     }
-    refContactsContainer.insertAdjacentHTML('beforeend', taskContactsTamplate(contactDetails.initials, contactDetails.color));
+    if (refContactsContainer.childElementCount <=3) {
+        refContactsContainer.insertAdjacentHTML('beforeend', taskContactsTamplate(contactDetails.initials, contactDetails.color));
+    }else if(refContactsContainer.childElementCount <=4){
+         refContactsContainer.insertAdjacentHTML('beforeend', taskContactsFillerTamplate());
+    }
 }
 
 /** Renders the matching priority icon for a task. */

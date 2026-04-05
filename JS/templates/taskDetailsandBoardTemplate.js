@@ -148,6 +148,10 @@ function taskContactsTamplate(initials, color) {
     return `<span style="background-color: ${safeText(color, '#2A3647')};" class="badge taskContactsbadge">${safeText(initials, '?')}</span>`
 }
 
+function taskContactsFillerTamplate() {
+    return `<span style="background-color: #2A3647;"class="badge taskContactsbadge">...</span>`
+}
+
 /** Builds the mobile move menu for tasks currently in the first column. */
 function moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionOffset){
     return `<div class="taskMobileMenu taskMobileMove" role="menu" aria-label="taskMobileMove menu" style="top: ${mobileArrowsMoveTaskPosition.top}px; left: ${mobileArrowsMoveTaskPosition.left - moveTaskPositionOffset}px;" onmouseleave="removeMobileMoveTask()" >
