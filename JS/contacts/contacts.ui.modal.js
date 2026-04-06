@@ -83,8 +83,13 @@ ContactsApp.uiModal = {
       phoneEl.value = '';
 
       avatar.style.background = '#D1D1D1';
+      initialsEl.textContent = '';
       initialsEl.classList.add('d-none');
+      initialsEl.hidden = true;
+      initialsEl.style.display = 'none';
       avatarIcon.classList.remove('d-none');
+      avatarIcon.hidden = false;
+      avatarIcon.style.display = 'block';
     } else {
       title.textContent = 'Edit contact';
       subtitle.classList.add('d-none');
@@ -101,7 +106,11 @@ ContactsApp.uiModal = {
 
       initialsEl.textContent = ContactsApp.validation.generateInitials(contact?.name || '');
       initialsEl.classList.remove('d-none');
+      initialsEl.hidden = false;
+      initialsEl.style.display = '';
       avatarIcon.classList.add('d-none');
+      avatarIcon.hidden = true;
+      avatarIcon.style.display = 'none';
       avatar.style.background = contact?.color || '#2A3647';
     }
 

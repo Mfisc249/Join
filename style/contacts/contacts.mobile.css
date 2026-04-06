@@ -184,7 +184,7 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0;
     padding: 0 16px;
     box-sizing: border-box;
   }
@@ -195,6 +195,7 @@
     height: 36px;
     position: relative;
     box-sizing: border-box;
+    margin-bottom: 2px;
   }
 
   .contact-input .InputField {
@@ -302,6 +303,11 @@
   }
 
   .modal-error {
-    display: none;
+    display: block;
+    min-height: 12px;
+    margin: 0 0 4px 0;
+    font-size: 11px;
+    line-height: 12px;
+    color: #d11;
   }
 }
