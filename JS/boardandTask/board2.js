@@ -1,5 +1,3 @@
-let taskIDCount = 0;
-let taskIDStorage = 0;
 
 /** Contacts section logic. */
 /** Loads and renders all contacts assigned to the given task. */
