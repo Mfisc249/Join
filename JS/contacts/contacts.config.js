@@ -10,6 +10,8 @@ ContactsApp.config = {
   CONTACTS_PATH: '/Contacts',
   /** @type {string} Database path for tasks */
   TASKS_PATH: '/Tasks',
+  /** @type {number} Width at which contacts switch to the compact layout */
+  COMPACT_BREAKPOINT: 1024,
 };
 
 /** @type {Object} Global application state */

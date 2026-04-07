@@ -68,7 +68,7 @@ ContactsApp.uiModal = {
       subtitle.textContent = 'Tasks are better with a team!';
       subtitle.classList.remove('d-none');
 
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024)) {
         deleteBtn.classList.add('d-none');
       } else {
         deleteBtn.classList.remove('d-none');

@@ -1,9 +1,9 @@
 /* ===============================
    CONTACTS - MOBILE MODAL OVERRIDES
-   Only active on screens <= 768px
+   Active on compact screens <= 1024px
    =============================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Overlay centering */
   .contact-overlay {
