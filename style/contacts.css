@@ -11,7 +11,7 @@
   height: 100%;
   display: grid;
   grid-template-columns: 456px 1fr;
-  overflow: hidden;
+  overflow: auto;
   background: #F6F7F8;
 }
 
@@ -197,9 +197,9 @@
   line-height: 120%;
   color: #000000;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-email {
@@ -209,9 +209,9 @@
   line-height: 120%;
   color: #007CEE;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* active colors */
@@ -262,7 +262,7 @@
   padding-right: 96px;
   padding-bottom: 40px;
 
-  overflow: hidden;
+  overflow: auto;
 }
 
 .details-headline {
@@ -302,7 +302,7 @@
   font-size: 16px;
 }
 
-.hidden { display: none !important; }
+.hidden { display: none; }
 
 /* ===============================
    Responsive
@@ -390,7 +390,7 @@
 .btn-secondary { background: #F6F7F8; color: #2A3647; border: 1px solid #D1D1D1; }
 
 /* ===== Overlay (Edit/Add Contact) ===== */
-.d-none { display: none !important; }
+.d-none { display: none; }
 
 .contact-overlay {
   position: fixed;
@@ -409,7 +409,7 @@
   max-height: calc(100% - 32px);
   background: #FFFFFF;
   border-radius: 30px;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   position: relative;
 }
@@ -784,7 +784,7 @@
   }
 
   .contact-modal-right {
-    overflow: hidden; /* verhindert hässliche Scrollbars */
+    overflow: visible;
   }
 
   .contact-modal-form,
@@ -904,9 +904,9 @@
   flex: none;
   order: 0;
   flex-grow: 0;
-  white-space: nowrap;    /* Verhindert Zeilenumbruch */
-  overflow: hidden;       /* Falls Text zu lang */
-  text-overflow: ellipsis; /* Zeigt ... bei langem Text */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Frame 204 - Edit/Delete Actions */

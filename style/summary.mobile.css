@@ -2,6 +2,90 @@
    SUMMARY MOBILE RESPONSIVE
    Figma Mobile Specs: 428px x 926px
    =============================== */
+@media (max-width: 1024px) {
+  .main {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .canvas-area {
+    padding: 40px 24px 48px 24px;
+    overflow: visible;
+    box-sizing: border-box;
+  }
+
+  .summaryGreeting {
+    display: none;
+  }
+
+  .greeting-overlay {
+    position: fixed;
+    top: var(--header-h);
+    left: var(--sidebar-w);
+    width: calc(100vw - var(--sidebar-w));
+    height: calc(100vh - var(--header-h));
+    background: var(--GlobalBackgroundWhite);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  }
+
+  .greeting-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .greeting-overlay .greetLine {
+    display: block;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 120%;
+    color: var(--GlobalDarkBlue);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .greeting-overlay .greetName {
+    display: block;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 120%;
+    color: var(--GlobalLightBlue);
+    text-align: center;
+  }
+
+  .summaryCard:is(:hover, :active, :focus-visible, .is-pressed) {
+    transform: translateY(-1px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    background: var(--GlobalDarkblue);
+    color: #fff;
+  }
+
+  .summaryCard:is(:hover, :active, :focus-visible, .is-pressed) .summaryNumber,
+  .summaryCard:is(:hover, :active, :focus-visible, .is-pressed) .summaryLabel,
+  .summaryCard:is(:hover, :active, :focus-visible, .is-pressed) .urgentLabel,
+  .summaryCard:is(:hover, :active, :focus-visible, .is-pressed) .deadlineDate,
+  .summaryCard:is(:hover, :active, :focus-visible, .is-pressed) .deadlineLabel {
+    color: #fff;
+  }
+
+  .summaryCard:is(:hover, :active, :focus-visible, .is-pressed) .summaryIconCircle {
+    background: #fff;
+  }
+
+  .summaryCard--wide:is(:hover, :active, :focus-visible, .is-pressed) .summaryIconCircle img[src$="pen.svg"] {
+    content: url("../assets/icons/pen-hover.svg");
+  }
+
+  .summaryCard--wide:is(:hover, :active, :focus-visible, .is-pressed) .summaryIconCircle img[src$="check.svg"] {
+    content: url("../assets/icons/check-hover.svg");
+  }
+}
+
 @media (max-width: 768px) {
   .main {
     overflow-y: auto;
@@ -10,7 +94,8 @@
 
   .canvas-area {
     padding: 32px 16px 100px 16px;
-    overflow-y: auto;
+    overflow: visible;
+    box-sizing: border-box;
   }
 
   /* ===== HEADLINE ===== */
@@ -69,7 +154,7 @@
     flex-direction: column;
     gap: 38px;
     margin-bottom: 60px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   /* ===== ROWS & CARDS ===== */
@@ -212,49 +297,10 @@
     gap: 13px;
   }
 
-  /* Greeting - repositioned mobile */
-  .summaryGreeting {
-    display: none;
-  }
-
-  /* Mobile Greeting Overlay (full screen animation after login) */
   .greeting-overlay {
-    position: fixed;
     top: 80px;
     left: 0;
     width: 100vw;
     height: calc(100vh - 80px - 80px);
-    background: var(--GlobalBackgroundWhite);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
-  }
-
-  .greeting-overlay.fade-out {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .greeting-overlay .greetLine {
-    display: block;
-    font-size: 47px;
-    font-weight: 500;
-    line-height: 120%;
-    color: var(--GlobalDarkBlue);
-    margin-bottom: 8px;
-    text-align: center;
-  }
-
-  .greeting-overlay .greetName {
-    display: block;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 120%;
-    color: var(--GlobalLightBlue);
-    text-align: center;
   }
 }

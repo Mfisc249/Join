@@ -1,11 +1,12 @@
 /* Canvas padding nach Figma-Spacing (ohne fixe Positionen) */
 .main {
-  overflow: hidden; /* Keine Scrollbar auf Summary-Seite */
+  overflow-y: clip;
 }
 
 .canvas-area {
   padding: 64px 96px;
-  overflow: hidden;
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 /* Headline */

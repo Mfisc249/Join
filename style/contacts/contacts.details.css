@@ -10,7 +10,7 @@
   padding-left: 120px;
   padding-right: 96px;
   padding-bottom: 40px;
-  overflow: auto;
+  overflow: visible;
   min-width: 0;
 }
 
@@ -132,9 +132,9 @@
   flex: none;
   order: 0;
   flex-grow: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .details-actions {

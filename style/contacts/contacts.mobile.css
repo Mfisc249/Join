@@ -24,6 +24,7 @@
     border-radius: 30px;
     max-width: calc(100% - 24px);
     overflow: visible;
+    clip-path: none;
   }
 
   /* Left panel (blue header) */
