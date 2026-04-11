@@ -103,6 +103,7 @@ function renderSelectedContactsInDropdown() {
 function renderSelectedContactsBelowInput() {
   const previewContainer = document.getElementById("assignedPreviewContainer");
   const dropdown = document.getElementById("assignedDropdown");
+  const maxVisibleContacts = 5;
   if (!previewContainer) return;
 
   if (!dropdown.classList.contains("hidden")) {
@@ -115,14 +116,24 @@ function renderSelectedContactsBelowInput() {
     return;
   }
 
+  const selectedContacts = task.assignedTo
+    .map((key) => contacts[key])
+    .filter(Boolean);
+
+  const visibleContacts = selectedContacts.slice(0, maxVisibleContacts);
+  const hiddenContactsCount = selectedContacts.length - visibleContacts.length;
+
   let html = "";
+  visibleContacts.forEach((contact) => {
+    html += contactInitialsPreviewTemplate(contact);
+  });
 
-  for (let key in contacts) {
-    const contact = contacts[key];
-
-    if (task.assignedTo.includes(key)) {
-      html += contactInitialsPreviewTemplate(contact);
-    }
+  if (hiddenContactsCount > 0) {
+    html += `
+      <div class="assignedCircle" style="background-color: var(--GlobalBlue)">
+        +${hiddenContactsCount}
+      </div>
+    `;
   }
 
   previewContainer.innerHTML = html;
