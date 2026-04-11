@@ -1,9 +1,9 @@
 /* ===============================
    CONTACTS - MOBILE MODAL OVERRIDES
-   Only active on screens <= 768px
+   Active on compact screens <= 1024px
    =============================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Overlay centering */
   .contact-overlay {
@@ -24,6 +24,7 @@
     border-radius: 30px;
     max-width: calc(100% - 24px);
     overflow: visible;
+    clip-path: none;
   }
 
   /* Left panel (blue header) */
@@ -184,7 +185,7 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0;
     padding: 0 16px;
     box-sizing: border-box;
   }
@@ -195,6 +196,7 @@
     height: 36px;
     position: relative;
     box-sizing: border-box;
+    margin-bottom: 2px;
   }
 
   .contact-input .InputField {
@@ -302,6 +304,11 @@
   }
 
   .modal-error {
-    display: none;
+    display: block;
+    min-height: 12px;
+    margin: 0 0 4px 0;
+    font-size: 11px;
+    line-height: 12px;
+    color: #d11;
   }
 }

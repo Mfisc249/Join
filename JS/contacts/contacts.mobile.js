@@ -67,7 +67,7 @@ ContactsApp.mobile = {
 
   /** Switches the mobile view to the contact details panel. */
   openMobileDetails() {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024);
     if (!isMobile) return;
 
     const content = document.querySelector('.content');
@@ -114,7 +114,7 @@ ContactsApp.mobile = {
 
   /** Updates FAB visibility based on viewport width and current view state. */
   _updateFabVisibility() {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024);
     if (!isMobile) {
       // Hide FABs on desktop
       const fabAdd = document.getElementById('fabAdd');
@@ -143,7 +143,7 @@ ContactsApp.mobile = {
 
   /** Resets mobile-specific state when the viewport exceeds the mobile breakpoint. */
   _handleMobileResize() {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024);
     
     if (!isMobile) {
       // Reset mobile-specific states on desktop
@@ -161,7 +161,7 @@ ContactsApp.uiList.selectContact = function(contact, element) {
   originalSelectContact.call(this, contact, element);
   
   // Open mobile details view when contact is selected on mobile
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024)) {
     ContactsApp.mobile.openMobileDetails();
   }
 };

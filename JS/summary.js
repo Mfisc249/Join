@@ -8,6 +8,7 @@
 
 /** @type {string} Firebase Realtime Database base URL */
 const SUMMARYURLBASE = 'https://join-6f9cc-default-rtdb.europe-west1.firebasedatabase.app/';
+const SUMMARY_COMPACT_BREAKPOINT = 1024;
 
 document.addEventListener('DOMContentLoaded', async () => {
   await initSummary();
@@ -192,7 +193,28 @@ function getUserName() {
  */
 function wireSummaryNavigation() {
   document.querySelectorAll('[data-nav]').forEach((btn) => {
+    const clearPressedState = () => btn.classList.remove('is-pressed');
+
+    btn.addEventListener('pointerdown', () => {
+      if (window.innerWidth <= SUMMARY_COMPACT_BREAKPOINT) {
+        btn.classList.add('is-pressed');
+      }
+    });
+
+    btn.addEventListener('pointerup', clearPressedState);
+    btn.addEventListener('pointerleave', clearPressedState);
+    btn.addEventListener('pointercancel', clearPressedState);
+    btn.addEventListener('blur', clearPressedState);
+
     btn.addEventListener('click', () => {
+      if (window.innerWidth <= SUMMARY_COMPACT_BREAKPOINT) {
+        btn.classList.add('is-pressed');
+        setTimeout(() => {
+          window.location.href = 'board.html';
+        }, 140);
+        return;
+      }
+
       window.location.href = 'board.html';
     });
   });
@@ -203,8 +225,8 @@ function wireSummaryNavigation() {
  * Fades out automatically after 2 seconds.
  */
 function showMobileGreetingIfNeeded() {
-  // Only on mobile (max-width: 768px)
-  if (window.innerWidth > 768) return;
+  // Only on compact layouts (mobile + tablets)
+  if (window.innerWidth > SUMMARY_COMPACT_BREAKPOINT) return;
   
   // Check if this is the first visit to summary after login
   const summaryVisited = sessionStorage.getItem('summaryVisited');

@@ -119,9 +119,9 @@
   font-size: 20px;
   font-weight: 400;
   color: #000;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-email {
@@ -129,9 +129,9 @@
   font-size: 16px;
   font-weight: 400;
   color: #007CEE;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-item.active .contact-name,
