@@ -148,8 +148,8 @@ function taskContactsTamplate(initials, color) {
     return `<span style="background-color: ${safeText(color, '#2A3647')};" class="badge taskContactsbadge">${safeText(initials, '?')}</span>`
 }
 
-function taskContactsFillerTamplate() {
-    return `<span style="background-color: #2A3647;"class="badge taskContactsbadge">...</span>`
+function taskContactsFillerTamplate(refContactsContainer) {
+    return `<span style="background-color: #2A3647;"class="badge taskContactsbadge">+${refContactsContainer - 4}</span>`
 }
 
 /** Builds the mobile move menu for tasks currently in the first column. */

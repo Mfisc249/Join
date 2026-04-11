@@ -48,8 +48,8 @@ function renderTaskContacts(contactDetails, taskID) {
     }
     if (refContactsContainer.childElementCount <=3) {
         refContactsContainer.insertAdjacentHTML('beforeend', taskContactsTamplate(contactDetails.initials, contactDetails.color));
-    }else if(refContactsContainer.childElementCount <=4){
-         refContactsContainer.insertAdjacentHTML('beforeend', taskContactsFillerTamplate());
+    }else if(refContactsContainer.childElementCount <= 4){
+         refContactsContainer.insertAdjacentHTML('beforeend', taskContactsFillerTamplate(refContactsContainer.childElementCount));
     }
 }
 
