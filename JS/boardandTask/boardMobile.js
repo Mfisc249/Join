@@ -31,7 +31,7 @@ function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
 
 function chanchePositionMoveTaskMobile() {
     let moveTaskPositionOffset = 0;
-    let mediaQuerymoveTaskMobile = window.matchMedia('(max-width: 428px)')
+    let mediaQuerymoveTaskMobile = window.matchMedia('(max-width: 670px)')
     if (mediaQuerymoveTaskMobile.matches) {
         return moveTaskPositionOffset = 100;
     }else{

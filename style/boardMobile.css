@@ -169,6 +169,12 @@
 
 }
 
+@media (max-width: 670px) {
+    .taskMobileMenu{
+         border-radius: 20px 0px 20px 20px;
+    }
+}
+
 @media (max-width: 610px) {
     :root {
         --boardWith: 400px;
@@ -184,12 +190,6 @@
 
         width: calc(var(--boardWith) - 90px);
 
-    }
-}
-
-@media (max-width: 428px) {
-    .taskMobileMenu{
-         border-radius: 20px 0px 20px 20px;
     }
 }
 
