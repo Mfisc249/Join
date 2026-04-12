@@ -125,15 +125,15 @@ body {
     width: var(--boardWith);
 }
 
+/* inline: Width/height ignored;
+Only content determines the space. block: Occupies the entire line;
+starts on a new line. inline-block: Stays on the line, but you can set the width/height. */
 .boardTaskCatagory {
     color: var(--GlobalWhite);
     padding: 4px 16px 4px 16px;
     border-radius: 8px;
     margin-block-start: 0px;
     margin-block-end: 0px;
-    /* inline: Breite/Höhe ignoriert;
-    nur Inhalt bestimmt den Platz. block: Belegt die ganze Zeile;
-    beginnt auf neuer Zeile. inline-block: Bleibt in der Zeile, aber du kannst Breite/Höhe setzen.  */
     display: inline-block;
     width: fit-content;
     margin: 10px 10px 10px;
