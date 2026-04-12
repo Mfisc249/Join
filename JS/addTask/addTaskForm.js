@@ -1,8 +1,8 @@
 /** Validates required form fields and toggles their error indicators. */
 function errorMessage() {
   toggleRequired(document.getElementById("taskName"));
-  toggleRequired(document.getElementById("taskDesc"));
   toggleRequired(document.getElementById("DueDate"));
+  validateCategory();
 }
 
 /** Shows or hides required-field styling based on the input value. */
@@ -66,56 +66,95 @@ function setDefaultPriority(standartSelect = ".priorityButton.medium") {
   task.priority = "Medium";
 }
 
-/** Formats due date input as DD/MM/YYYY while the user types. */
-function formatDueDateInput(input) {
-  input.addEventListener("input", () => {
-    let val = input.value.replace(/[^\d]/g, "");
-    if (val.length > 8) val = val.slice(0, 8);
-
-    let formatted = "";
-    if (val.length > 4) {
-      formatted = val.slice(0, 2) + "/" + val.slice(2, 4) + "/" + val.slice(4);
-    } else if (val.length > 2) {
-      formatted = val.slice(0, 2) + "/" + val.slice(2);
-    } else {
-      formatted = val;
-    }
-
-    input.value = formatted;
-  });
-}
-
-/** Validates due date format and blocks dates earlier than today. */
-function validateDueDateInput(input) {
-  input.addEventListener("blur", () => {
-    const regex = /^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$/;
-    if (!regex.test(input.value)) {
-      input.value = "";
-      return;
-    }
-
-    const [d, m, y] = input.value.split("/").map(Number);
-    const chosenDate = new Date(y, m - 1, d);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    if (chosenDate < today) {
-      input.value = "";
-    }
-  });
-}
-
 /** Wires formatting and validation handlers to the due date field. */
 function setupDueDateInput() {
   const input = document.getElementById("DueDate");
   if (!input) return;
 
-  formatDueDateInput(input);
-  validateDueDateInput(input);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // verhindert Auswahl im Kalender
+  input.min = today.toISOString().split("T")[0];
+
+  input.addEventListener("blur", () => {
+    if (!input.value) return;
+
+    const selected = new Date(input.value);
+    selected.setHours(0, 0, 0, 0);
+
+    // nur prüfen wenn Datum vollständig ist
+    if (isNaN(selected.getTime())) return;
+
+    if (selected < today) {
+      input.value = "";
+    }
+  });
 }
 
 /** Toggles the category dropdown arrow rotation state. */
-function toggleCategoryArrow() {
-  const arrow = document.getElementById("taskArrow");
+function toggleCategoryDropdown(event) {
+  event.stopPropagation(); // verhindert, dass andere Click-Handler feuern
+
+  const dropdown = document.getElementById("categoryDropdown");
+  const arrow = document.getElementById("categoryDropdownArrow");
+
+  dropdown.classList.toggle("hidden");
   arrow.classList.toggle("rotate");
+}
+
+function validateCategory() {
+  const categoryLabel = document.getElementById("categoryLabel");
+  const error = document.getElementById("categoryError"); // 👈 FIX
+  const button = document.querySelector(".TaskCategoryInput");
+
+  if (!categoryLabel || !error || !button) return;
+
+  const isEmpty = categoryLabel.textContent === "Select task category";
+
+  if (isEmpty) {
+    error.classList.add("visible");
+    button.classList.add("input-error");
+  } else {
+    error.classList.remove("visible");
+    button.classList.remove("input-error");
+  }
+}
+
+function closeCategoryDropdown(event) {
+  const dropdown = document.getElementById("categoryDropdown");
+  const button = document.querySelector(".TaskCategoryInput");
+  const arrow = document.getElementById("categoryDropdownArrow");
+
+  if (!dropdown || !button) return;
+
+  // 👉 Wenn Klick NICHT auf Button oder Dropdown
+  if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+    dropdown.classList.add("hidden");
+    arrow.classList.remove("rotate");
+  }
+}
+
+function resetValidation() {
+  // Fehlermeldungen ausblenden
+  document.querySelectorAll(".requiredField").forEach((el) => {
+    el.classList.remove("visible");
+  });
+
+  // Rote Rahmen entfernen
+  document.querySelectorAll(".input-error").forEach((el) => {
+    el.classList.remove("input-error");
+  });
+}
+
+function resetValidation() {
+  // Fehlermeldungen ausblenden
+  document.querySelectorAll(".requiredField").forEach((el) => {
+    el.classList.remove("visible");
+  });
+
+  // Rote Rahmen entfernen
+  document.querySelectorAll(".input-error").forEach((el) => {
+    el.classList.remove("input-error");
+  });
 }

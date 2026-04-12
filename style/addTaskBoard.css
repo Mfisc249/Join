@@ -1,352 +1,346 @@
 #boardAddTask {
-    padding: 0;
-    border: none;
-    border-radius: 30px;
-    width: min(1200px, calc(100vw - 64px));
-    max-width: 1200px;
-    max-height: calc(100vh - 64px);
-    background-color: var(--GlobalBackgroundWhite);
-    overflow: unset;
+  padding: 0;
+  border: none;
+  border-radius: 30px;
+  width: min(1200px, calc(100vw - 64px));
+  max-width: 1200px;
+  max-height: calc(100vh - 64px);
+  background-color: var(--GlobalBackgroundWhite);
+  overflow: unset;
 }
 
 #boardAddTask .addTaskMain {
-    max-width: none;
-    width: 100%;
-    margin: 0 /**!important*/;
-    padding: 32px 40px 40px /**!important*/;
-    box-sizing: border-box;
-    overflow-y: auto;
-    max-height: calc(100vh - 64px);
+  max-width: none;
+  width: 100%;
+  margin: 0 /**!important*/;
+  padding: 32px 40px 40px /**!important*/;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
 }
 
 #boardAddTask .buttonRequiredField {
-    width: 100%;
+  width: 100%;
 }
 
 #boardAddTask .taskButton {
-    position: static;
+  position: static;
 }
 
 #boardAddTask .requiredBottomLeft {
-    padding-right: 0;
+  padding-right: 0;
 }
 
-.headerContent{
-    align-items: flex-start /**!important*/;
+.headerContent {
+  align-items: flex-start /**!important*/;
 }
-
 
 @media (max-width: 1300px) {
-    #boardAddTask .mainTitle {
-        position: unset /**!important*/;
-    }
+  #boardAddTask .mainTitle {
+    position: unset /**!important*/;
+  }
 
-    #boardAddTask {
-        width: calc(100vw - 48px);
-        max-height: calc(100vh - 48px);
-    }
+  #boardAddTask {
+    width: calc(100vw - 48px);
+    max-height: calc(100vh - 48px);
+  }
 
-    #boardAddTask .addTaskMain {
-        padding: 28px 32px 32px /**!important*/;
-        max-height: calc(100vh - 48px);
-    }
+  #boardAddTask .addTaskMain {
+    padding: 28px 32px 32px /**!important*/;
+    max-height: calc(100vh - 48px);
+  }
 
-    #boardAddTask .contentWrapperAddTask {
-        display: block;
-    }
+  #boardAddTask .contentWrapperAddTask {
+    display: block;
+  }
 
-    #boardAddTask .divider {
-        display: none;
-    }
+  #boardAddTask .divider {
+    display: none;
+  }
 
-    #boardAddTask .leftContent,
-    #boardAddTask .rightContent {
-        margin-left: 0;
-        margin-right: 0;
-    }
+  #boardAddTask .leftContent,
+  #boardAddTask .rightContent {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-    #boardAddTask .priority {
-        gap: 12px;
-        width: 100%;
-    }
+  #boardAddTask .priority {
+    gap: 12px;
+    width: 100%;
+  }
 }
 
-
 @media (max-width: 700px) {
-    #boardAddTask {
-        width: calc(100vw - 32px);
-        max-height: calc(100vh - 32px);
-        border-radius: 24px;
-    }
+  #boardAddTask {
+    width: calc(100vw - 32px);
+    max-height: calc(100vh - 32px);
+    border-radius: 24px;
+  }
 
-    #boardAddTask .addTaskMain {
-        padding: 24px 20px 28px /**!important*/;
-        max-height: calc(100vh - 32px);
-    }
+  #boardAddTask .addTaskMain {
+    padding: 24px 20px 28px /**!important*/;
+    max-height: calc(100vh - 32px);
+  }
 
-    #boardAddTask .mainTitle {
-        font-size: 48px;
-        padding: 0;
-    }
+  #boardAddTask .mainTitle {
+    font-size: 48px;
+    padding: 0;
+  }
 
-    #boardAddTask .priority {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
+  #boardAddTask .priority {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 
-    #boardAddTask .buttonRequiredField {
-        margin-top: 24px;
-        flex-direction: column;
-        align-items: stretch;
-    }
+  #boardAddTask .buttonRequiredField {
+    margin-top: 24px;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    #boardAddTask .requiredBottomLeft {
-        width: 100%;
-        padding-bottom: 16px;
-    }
+  #boardAddTask .requiredBottomLeft {
+    width: 100%;
+    padding-bottom: 16px;
+  }
 
-    #boardAddTask .taskButton {
-        width: 100%;
-        padding: 0;
-        justify-content: stretch;
-    }
+  #boardAddTask .taskButton {
+    width: 100%;
+    padding: 0;
+    justify-content: stretch;
+  }
 
-    #boardAddTask .clearButton,
-    #boardAddTask .createButton {
-        flex: 1 1 0;
-        width: auto;
-    }
+  #boardAddTask .clearButton,
+  #boardAddTask .createButton {
+    flex: 1 1 0;
+    width: auto;
+  }
 }
 
 @media (max-width: 1392px) {
+  #boardAddTask .addTaskLabel {
+    align-items: unset /**!important*/;
+  }
 
-    #boardAddTask .addTaskLabel {
-        align-items: unset /**!important*/;
-    }
+  #boardAddTask .addTaskLabelDescription {
+    align-items: unset /**!important*/;
+  }
 
-    #boardAddTask .addTaskLabelDescription {
-        align-items: unset /**!important*/;
-    }
+  #boardAddTask .addTaskLabelDate {
+    align-items: unset /**!important*/;
+  }
 
-    #boardAddTask .addTaskLabelDate {
-        align-items: unset /**!important*/;
-    }
+  #boardAddTask .taskNameContainer {
+    display: flex /**!important*/;
+    flex-direction: column /**!important*/;
+  }
 
-    #boardAddTask .taskNameContainer {
-        display: flex /**!important*/;
-        flex-direction: column /**!important*/;
-    }
+  #boardAddTask .taskNameContainer textarea {
+    width: unset /**!important*/;
+  }
 
-    #boardAddTask .taskNameContainer textarea {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .ChoiceOption {
+    width: unset /**!important*/;
+  }
 
-    #boardAddTask .ChoiceOption {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .taskDescriptionContainer {
+    display: flex /**!important*/;
+    flex-direction: column /**!important*/;
+  }
 
-    #boardAddTask .taskDescriptionContainer {
-        display: flex /**!important*/;
-        flex-direction: column /**!important*/;
-    }
+  #boardAddTask .taskDescriptionContainer textarea {
+    width: unset /**!important*/;
+  }
 
-    #boardAddTask .taskDescriptionContainer textarea {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .addTaskDateContainer {
+    display: flex /**!important*/;
+    flex-direction: column /**!important*/;
+  }
 
-    #boardAddTask .addTaskDateContainer {
-        display: flex /**!important*/;
-        flex-direction: column /**!important*/;
-    }
+  #boardAddTask .addTaskDateContainer input {
+    width: unset /**!important*/;
+  }
 
-    #boardAddTask .addTaskDateContainer input {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .OptionsContainer {
+    display: flex /**!important*/;
+    flex-direction: column /**!important*/;
+  }
 
-    #boardAddTask .OptionsContainer {
-        display: flex /**!important*/;
-        flex-direction: column /**!important*/;
-    }
+  #boardAddTask .OptionsContainer .assignedToInput {
+    width: unset /**!important*/;
+  }
 
-    #boardAddTask .OptionsContainer .assignedToInput {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .OptionsContainer .assignedDropdown {
+    width: unset /**!important*/;
+  }
 
-    #boardAddTask .OptionsContainer .assignedDropdown {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .OptionsContainer .categorySelectWrapper {
+    display: flex /**!important*/;
+    flex-direction: column /**!important*/;
+  }
 
-    #boardAddTask .OptionsContainer .categorySelectWrapper {
-        display: flex /**!important*/;
-        flex-direction: column /**!important*/;
-    }
+  #boardAddTask .OptionsContainer .subtaskInputContainer {
+    width: unset /**!important*/;
+  }
 
-    #boardAddTask .OptionsContainer .subtaskInputContainer {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .OptionsContainer .subtaskInputContainer .bottomInputContainer {
+    width: unset /**!important*/;
+    display: flex /**!important*/;
+    flex-direction: column /**!important*/;
+  }
 
-    #boardAddTask .OptionsContainer .subtaskInputContainer .bottomInputContainer {
-        width: unset /**!important*/;
-        display: flex /**!important*/;
-        flex-direction: column /**!important*/;
-    }
+  #boardAddTask .inputField .bottomInput,
+  #boardAddTask .subtaskInputContainer,
+  #boardAddTask .subTaskEditInput,
+  #boardAddTask .subTaskList {
+    padding-right: unset /**!important*/;
+  }
 
-    #boardAddTask .inputField .bottomInput,
-    #boardAddTask .subtaskInputContainer,
-    #boardAddTask .subTaskEditInput,
-    #boardAddTask .subTaskList {
-        padding-right: unset /**!important*/;
-    }
+  #boardAddTask .subTaskIconsContainer {
+    right: 10px /**!important*/;
+  }
 
-    #boardAddTask .subTaskIconsContainer {
-        right: 10px /**!important*/;
-    }
-
-    #boardAddTask .OptionsContainer .bottomInputContainer .inputField {
-        width: unset /**!important*/;
-    }
+  #boardAddTask .OptionsContainer .bottomInputContainer .inputField {
+    width: unset /**!important*/;
+  }
 }
 
-
 @media (max-width: 500px) {
-    #boardAddTask {
-        width: calc(100vw - 24px);
-        max-height: calc(100vh - 24px);
-        border-radius: 20px;
-    }
+  #boardAddTask {
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+    border-radius: 20px;
+  }
 
-    #boardAddTask .addTaskMain {
-        padding: 20px 16px 24px /**!important*/;
-        max-height: calc(100vh - 24px);
-    }
+  #boardAddTask .addTaskMain {
+    padding: 20px 16px 24px /**!important*/;
+    max-height: calc(100vh - 24px);
+  }
 
-    #boardAddTask .mainTitle {
-        font-size: 40px;
-    }
+  #boardAddTask .mainTitle {
+    font-size: 40px;
+  }
 
-    #boardAddTask .ChoiceHeadline,
-    #boardAddTask .h2AddTask,
-    #boardAddTask .choiceContact,
-    #boardAddTask .categoryOption,
-    #boardAddTask .contactName,
-    #boardAddTask .taskDescription,
-    #boardAddTask .taskNameContainer textarea,
-    #boardAddTask .taskDescriptionContainer textarea,
-    #boardAddTask .addTaskDateContainer input {
-        font-size: 16px;
-    }
+  #boardAddTask .ChoiceHeadline,
+  #boardAddTask .h2AddTask,
+  #boardAddTask .choiceContact,
+  #boardAddTask .categoryOption,
+  #boardAddTask .contactName,
+  #boardAddTask .taskDescription,
+  #boardAddTask .taskNameContainer textarea,
+  #boardAddTask .taskDescriptionContainer textarea,
+  #boardAddTask .addTaskDateContainer input {
+    font-size: 16px;
+  }
 
-    #boardAddTask .assignedCircle,
-    #boardAddTask .contactInitialsCircle {
-        width: 34px;
-        height: 34px;
-        font-size: 14px;
-    }
+  #boardAddTask .assignedCircle,
+  #boardAddTask .contactInitialsCircle {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
 
-    #boardAddTask .taskButton {
-        flex-direction: column;
-        gap: 12px;
-    }
+  #boardAddTask .taskButton {
+    flex-direction: column;
+    gap: 12px;
+  }
 
-    #boardAddTask .clearButton,
-    #boardAddTask .createButton {
-        width: 100%;
-    }
+  #boardAddTask .clearButton,
+  #boardAddTask .createButton {
+    width: 100%;
+  }
 }
 
 @media (max-width: 400px) {
-    #boardAddTask .priorityButton {
-        font-size: 14px;
-        gap: 4px;
-        height: 42px;
-        padding: 0 6px;
-    }
+  #boardAddTask .priorityButton {
+    font-size: 14px;
+    gap: 4px;
+    height: 42px;
+    padding: 0 6px;
+  }
 
-    #boardAddTask .priorityButton .priorityIcon {
-        width: 16px;
-        height: 16px;
-    }
+  #boardAddTask .priorityButton .priorityIcon {
+    width: 16px;
+    height: 16px;
+  }
 
-    #boardAddTask .subTaskActions {
-        gap: 4px;
-    }
+  #boardAddTask .subTaskActions {
+    gap: 4px;
+  }
 
-    #boardAddTask .subTaskEditIcons {
-        right: 10px;
-        gap: 4px;
-    }
+  #boardAddTask .subTaskEditIcons {
+    right: 10px;
+    gap: 4px;
+  }
 
-    #boardAddTask .inputField .bottomInput,
-    #boardAddTask .subtaskInputContainer,
-    #boardAddTask .subTaskEditInput,
-    #boardAddTask .subTaskList {
-        width: 180px /**!important*/;
-    }
+  #boardAddTask .inputField .bottomInput,
+  #boardAddTask .subtaskInputContainer,
+  #boardAddTask .subTaskEditInput,
+  #boardAddTask .subTaskList {
+    width: 180px /**!important*/;
+  }
 
-    .subTaskContent {
-        width: 180px /**!important*/;
-    }
+  .subTaskContent {
+    width: 180px /**!important*/;
+  }
 
-    .subTaskItem {
-        width: 100px;
-    }
+  .subTaskItem {
+    width: 100px;
+  }
 }
 
-
-
 @media (max-width: 320px) {
-    #boardAddTask {
-        width: calc(100vw - 16px);
-        max-height: calc(100vh - 16px);
-        border-radius: 20px;
-    }
+  #boardAddTask {
+    width: calc(100vw - 16px);
+    max-height: calc(100vh - 16px);
+    border-radius: 20px;
+  }
 
-    #boardAddTask .addTaskMain {
-        padding: 16px 12px 24px /**!important*/;
-        max-height: calc(100vh - 16px);
-    }
+  #boardAddTask .addTaskMain {
+    padding: 16px 12px 24px /**!important*/;
+    max-height: calc(100vh - 16px);
+  }
 
-    #boardAddTask .mainTitle {
-        font-size: 36px;
-        padding: 0;
-    }
+  #boardAddTask .mainTitle {
+    font-size: 36px;
+    padding: 0;
+  }
 
-    #boardAddTask .priority {
-        width: 100%;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
+  #boardAddTask .priority {
+    width: 100%;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
 
-    #boardAddTask .priorityButton {
-        flex: 1 1 calc(33.333% - 6px);
-        min-width: 0;
-        width: auto;
-        font-size: 14px;
-        gap: 4px;
-        padding: 0 6px;
-    }
+  #boardAddTask .priorityButton {
+    flex: 1 1 calc(33.333% - 6px);
+    min-width: 0;
+    width: auto;
+    font-size: 14px;
+    gap: 4px;
+    padding: 0 6px;
+  }
 
-    #boardAddTask .buttonRequiredField {
-        width: 100%;
-        margin-top: 24px;
-        flex-direction: column;
-        align-items: stretch;
-    }
+  #boardAddTask .buttonRequiredField {
+    width: 100%;
+    margin-top: 24px;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    #boardAddTask .requiredBottomLeft {
-        width: 100%;
-        padding-bottom: 16px;
-    }
+  #boardAddTask .requiredBottomLeft {
+    width: 100%;
+    padding-bottom: 16px;
+  }
 
-    #boardAddTask .taskButton {
-        width: 100%;
-        padding: 0;
-        flex-direction: column;
-        gap: 12px;
-    }
+  #boardAddTask .taskButton {
+    width: 100%;
+    padding: 0;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-    #boardAddTask .clearButton,
-    #boardAddTask .createButton {
-        width: 100%;
-    }
+  #boardAddTask .clearButton,
+  #boardAddTask .createButton {
+    width: 100%;
+  }
 }

@@ -76,7 +76,7 @@
 }
 
 .OptionsContainer {
-  margin-bottom: 24px;
+  margin-bottom: 13px;
   position: relative;
 }
 
@@ -225,6 +225,7 @@
   .addTaskMain {
     margin-left: 243px;
     margin-top: 150px;
+    padding-bottom: 0px;
   }
   .inputField {
     width: 472px;
@@ -248,7 +249,7 @@
   }
   .taskButton {
     position: fixed;
-    bottom: 80px;
+    bottom: 0px;
     left: 0;
     width: 711px;
     background: rgba(246, 247, 248, 1);
@@ -271,6 +272,7 @@
   .taskButton {
     gap: 14px;
     width: 552px;
+    bottom: 80px;
   }
   .buttonRequiredField {
     width: 620px;
@@ -320,6 +322,7 @@
   }
   .taskButton {
     width: 264px;
+    bottom: 80px;
   }
   .requiredBottomLeft {
     padding-right: 297px;

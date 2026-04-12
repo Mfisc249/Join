@@ -114,6 +114,18 @@
   padding-right: 20px;
   list-style: none;
   width: 440px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 200px;
+}
+
+.subTaskList::-webkit-scrollbar {
+  width: 2px;
+}
+
+.subTaskList::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
 }
 
 .subTaskItem.editing {
@@ -297,6 +309,7 @@
   }
   .subTaskList {
     width: 490px;
+    padding-right: 14px;
   }
 }
 
@@ -379,7 +392,7 @@
   .subTaskEditInput,
   .subTaskList {
     width: 271px;
-    padding-right: 62px;
+    padding-right: 0px;
   }
   .inputField.bottomInput {
     max-width: 100%;

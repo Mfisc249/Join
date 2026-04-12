@@ -36,6 +36,8 @@ async function init() {
   setDefaultPriority();
   setupDueDateInput();
   await loadContacts();
+
+  document.addEventListener("click", closeCategoryDropdown);
 }
 
 /** Renders the add-task template into the main content container. */
@@ -99,10 +101,10 @@ async function createTask() {
   task.title = titleInput.value;
   task.description = descInput.value;
   task.dueDate = dateInput.value;
-  task.category = selectedCategory;
+  let selectedCategory = "";
 
   errorMessage();
-  if (!task.title || !task.description || !task.dueDate) return null;
+  if (!task.title || !task.dueDate || !task.category) return null;
 
   const taskKey = await saveTask(task);
 
@@ -117,10 +119,19 @@ async function createTask() {
 
 /** Creates a task and refreshes the board when creation succeeds. */
 async function createTaskAndRefreshBoard() {
-  const taskKey = await createTask();
-  if (taskKey) {
-    createTaskBoard();
+  errorMessage(); // 👈 IMMER zuerst
+
+  const task = {
+    title: document.getElementById("taskName").value,
+    dueDate: document.getElementById("DueDate").value,
+    category: selectedCategory,
+  };
+
+  if (!task.title || !task.dueDate || !task.category) {
+    return; // ❌ stop wenn Fehler
   }
+
+  await createTask();
 }
 
 /** Resets the form and reinitializes the in-memory task object. */
@@ -138,6 +149,7 @@ function resetTaskData() {
     field: "1",
     createdAt: null,
   };
+  resetValidation();
 }
 
 /** Clears subtasks UI and resets the selected category display. */
@@ -146,7 +158,20 @@ function resetSubTasksAndCategory() {
   renderSubTasks();
 
   selectedCategory = "";
-  document.getElementById("categoryLabel").textContent = "Select category";
+  document.getElementById("categoryLabel").textContent = "Select task category";
+
+  const button = document.querySelector(".TaskCategoryInput");
+  if (button) button.classList.remove("input-error");
+
+  const error = document.getElementById("categoryError");
+  if (error) error.classList.remove("visible");
+
+  // ✅ NEU:
+  const dropdown = document.getElementById("categoryDropdown");
+  const arrow = document.getElementById("categoryDropdownArrow");
+
+  if (dropdown) dropdown.classList.add("hidden");
+  if (arrow) arrow.classList.remove("rotate");
 }
 
 /** Resets assigned contacts preview and restores default priority selection. */
@@ -165,6 +190,13 @@ function clearForm() {
   resetTaskData();
   resetSubTasksAndCategory();
   resetAssignedContactsAndPriority();
+
+  // Pfeile zurücksetzen
+  const assignedArrow = document.getElementById("assignedDropdownArrow");
+  const categoryArrow = document.getElementById("categoryDropdownArrow"); // oder den richtigen Id-Namen
+
+  if (assignedArrow) assignedArrow.classList.remove("rotate");
+  if (categoryArrow) categoryArrow.classList.remove("rotate");
 }
 
 /** Shows a temporary success toast after task creation. */

@@ -214,19 +214,23 @@ function toggleCategoryDropdown(event) {
   dropdown.classList.toggle("hidden");
 }
 
-/** Stores the selected category and updates the category label. */
 function selectCategory(category) {
   selectedCategory = category;
+  task.category = category; // ❗ WICHTIG für Validation
+
   document.getElementById("categoryLabel").textContent = category;
-  document.getElementById("categoryDropdown").classList.add("hidden");
-}
 
-document.addEventListener("click", (event) => {
+  const error = document.getElementById("categoryError");
+  const button = document.querySelector(".TaskCategoryInput");
   const dropdown = document.getElementById("categoryDropdown");
-  const wrapper = document.querySelector(".categorySelectWrapper");
+  const arrow = document.getElementById("categoryDropdownArrow");
 
-  if (!dropdown || !wrapper) return;
-  if (!dropdown.contains(event.target) && !wrapper.contains(event.target)) {
-    dropdown.classList.add("hidden");
-  }
-});
+  if (error) error.classList.remove("visible");
+  if (button) button.classList.remove("input-error");
+
+  // ✅ Dropdown schließen
+  if (dropdown) dropdown.classList.add("hidden");
+
+  // ✅ Pfeil zurückdrehen
+  if (arrow) arrow.classList.remove("rotate");
+}

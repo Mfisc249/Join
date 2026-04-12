@@ -43,7 +43,7 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
               >${taskDescription ?? ""}</textarea>
               <img class="descriptionImg" src="./assets/icons/Capa 2.svg" alt="" />
 
-              <p class="requiredField">This field is required</p>
+              
             </div>
           </label>
 
@@ -57,14 +57,9 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
             <div class="addTaskDateContainer">
               <input
                 class="taskDateInput"
-                type="text"
+                type="date"
                 id="DueDate"
-                name="DueDate"
-                placeholder="dd/mm/yyyy"
-                maxlength="10"
-                value="${taskDueDate ?? ""}"
               />
-              <img class="eventImg" src="./assets/img/event.svg" alt="" />
               <p class="requiredField requiredDate">This field is required</p>
             </div>
           </label>
@@ -113,13 +108,15 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
           <div class="categorySelectWrapper">
             <button type="button" class="ChoiceOption TaskCategoryInput" onclick="toggleCategoryDropdown(event)">
               <span id="categoryLabel">Select task category</span>
-              <img class="dropDownArrow" id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+              <img class="dropDownArrow" id="categoryDropdownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
             </button>
+
             <div id="categoryDropdown" class="assignedDropdown hidden">
               <div class="categoryOption" onclick="selectCategory('Technical Task')">Technical Task</div>
               <div class="categoryOption" onclick="selectCategory('User Story')">User Story</div>
             </div>
           </div>
+          <p id="categoryError" class="requiredField">This field is required</p>
         </div>
 
         <!-- SUBTASKS -->
