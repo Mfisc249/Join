@@ -114,6 +114,13 @@ dialog.closed::backdrop {
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 20px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+#taskDetailsAT{
+    max-height: 200px;
+    overflow: auto;
 }
 
 .taskDetailsATContainer {
