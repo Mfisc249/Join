@@ -17,14 +17,15 @@ function renderAssignedContacts(refAssignedTo, taskID, renderFunctionSelector) {
         if (!contactDetails) {
             continue;
         }
-        renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelector);
+        renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelector, refAssignedTo);
+        
     }
 }
 
 /** Routes contact rendering either to the board card or the task details dialog. */
-function renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelector) {
+function renderSingleAssignedContact(contactDetails, taskID, renderFunctionSelector, refAssignedTo) {
     if (renderFunctionSelector == 0) {
-        renderTaskContacts(contactDetails, taskID);
+        renderTaskContacts(contactDetails, taskID, refAssignedTo);
         return;
     }
     renderTaskDetailsContacts(contactDetails);
@@ -41,16 +42,16 @@ function shouldHideAssignedHeadline(refAssignedTo) {
 }
 
 /** Renders assigned contact badges on a board task card. */
-function renderTaskContacts(contactDetails, taskID) {
+function renderTaskContacts(contactDetails, taskID, refAssignedTo) {
     let refContactsContainer = document.getElementById(`taskContactsContainer${taskID}`);
     if (!refContactsContainer || !contactDetails) {
         return;
     }
     if (refContactsContainer.childElementCount <=3) {
         refContactsContainer.insertAdjacentHTML('beforeend', taskContactsTamplate(contactDetails.initials, contactDetails.color));
-    }else if(refContactsContainer.childElementCount <= 4){
-         refContactsContainer.insertAdjacentHTML('beforeend', taskContactsFillerTamplate(refContactsContainer.childElementCount));
-    }
+    }else if(refAssignedTo.length >= 4 && refContactsContainer.childElementCount <=4){
+     refContactsContainer.insertAdjacentHTML('beforeend', taskContactsFillerTamplate(refAssignedTo.length));
+   }
 }
 
 /** Renders the matching priority icon for a task. */
