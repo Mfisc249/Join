@@ -12,8 +12,8 @@
 #boardAddTask .addTaskMain {
   max-width: none;
   width: 100%;
-  margin: 0 /**!important*/;
-  padding: 32px 40px 40px /**!important*/;
+  margin: 0 ;
+  padding: 32px 40px 40px ;
   box-sizing: border-box;
   overflow-y: auto;
   max-height: calc(100vh - 64px);
@@ -32,12 +32,12 @@
 }
 
 .headerContent {
-  align-items: flex-start /**!important*/;
+  align-items: flex-start ;
 }
 
 @media (max-width: 1300px) {
   #boardAddTask .mainTitle {
-    position: unset /**!important*/;
+    position: unset ;
   }
 
   #boardAddTask {
@@ -46,7 +46,7 @@
   }
 
   #boardAddTask .addTaskMain {
-    padding: 28px 32px 32px /**!important*/;
+    padding: 28px 32px 32px ;
     max-height: calc(100vh - 48px);
   }
 
@@ -78,7 +78,7 @@
   }
 
   #boardAddTask .addTaskMain {
-    padding: 24px 20px 28px /**!important*/;
+    padding: 24px 20px 28px ;
     max-height: calc(100vh - 32px);
   }
 
@@ -118,89 +118,89 @@
 
 @media (max-width: 1392px) {
   #boardAddTask .addTaskLabel {
-    align-items: unset /**!important*/;
+    align-items: unset ;
   }
 
   #boardAddTask .addTaskLabelDescription {
-    align-items: unset /**!important*/;
+    align-items: unset ;
   }
 
   #boardAddTask .addTaskLabelDate {
-    align-items: unset /**!important*/;
+    align-items: unset ;
   }
 
   #boardAddTask .taskNameContainer {
-    display: flex /**!important*/;
-    flex-direction: column /**!important*/;
+    display: flex ;
+    flex-direction: column ;
   }
 
   #boardAddTask .taskNameContainer textarea {
-    width: unset /**!important*/;
+    width: unset ;
   }
 
   #boardAddTask .ChoiceOption {
-    width: unset /**!important*/;
+    width: unset ;
   }
 
   #boardAddTask .taskDescriptionContainer {
-    display: flex /**!important*/;
-    flex-direction: column /**!important*/;
+    display: flex ;
+    flex-direction: column ;
   }
 
   #boardAddTask .taskDescriptionContainer textarea {
-    width: unset /**!important*/;
+    width: unset ;
   }
 
   #boardAddTask .addTaskDateContainer {
-    display: flex /**!important*/;
-    flex-direction: column /**!important*/;
+    display: flex ;
+    flex-direction: column ;
   }
 
   #boardAddTask .addTaskDateContainer input {
-    width: unset /**!important*/;
+    width: unset ;
   }
 
   #boardAddTask .OptionsContainer {
-    display: flex /**!important*/;
-    flex-direction: column /**!important*/;
+    display: flex ;
+    flex-direction: column ;
   }
 
   #boardAddTask .OptionsContainer .assignedToInput {
-    width: unset /**!important*/;
+    width: unset ;
   }
 
   #boardAddTask .OptionsContainer .assignedDropdown {
-    width: unset /**!important*/;
+    width: unset ;
   }
 
   #boardAddTask .OptionsContainer .categorySelectWrapper {
-    display: flex /**!important*/;
-    flex-direction: column /**!important*/;
+    display: flex ;
+    flex-direction: column ;
   }
 
   #boardAddTask .OptionsContainer .subtaskInputContainer {
-    width: unset /**!important*/;
+    width: unset ;
   }
 
   #boardAddTask .OptionsContainer .subtaskInputContainer .bottomInputContainer {
-    width: unset /**!important*/;
-    display: flex /**!important*/;
-    flex-direction: column /**!important*/;
+    width: unset ;
+    display: flex ;
+    flex-direction: column ;
   }
 
   #boardAddTask .inputField .bottomInput,
   #boardAddTask .subtaskInputContainer,
   #boardAddTask .subTaskEditInput,
   #boardAddTask .subTaskList {
-    padding-right: unset /**!important*/;
+    padding-right: unset ;
   }
 
   #boardAddTask .subTaskIconsContainer {
-    right: 10px /**!important*/;
+    right: 10px ;
   }
 
   #boardAddTask .OptionsContainer .bottomInputContainer .inputField {
-    width: unset /**!important*/;
+    width: unset ;
   }
 }
 
@@ -212,7 +212,7 @@
   }
 
   #boardAddTask .addTaskMain {
-    padding: 20px 16px 24px /**!important*/;
+    padding: 20px 16px 24px ;
     max-height: calc(100vh - 24px);
   }
 
@@ -276,11 +276,11 @@
   #boardAddTask .subtaskInputContainer,
   #boardAddTask .subTaskEditInput,
   #boardAddTask .subTaskList {
-    width: 180px /**!important*/;
+    width: 180px ;
   }
 
   .subTaskContent {
-    width: 180px /**!important*/;
+    width: 180px ;
   }
 
   .subTaskItem {
@@ -296,7 +296,7 @@
   }
 
   #boardAddTask .addTaskMain {
-    padding: 16px 12px 24px /**!important*/;
+    padding: 16px 12px 24px ;
     max-height: calc(100vh - 16px);
   }
 
