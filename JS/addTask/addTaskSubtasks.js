@@ -19,7 +19,7 @@ function confirmSubtask() {
   if (typeof handleSubtaskAddedInEditMode === "function") {
     handleSubtaskAddedInEditMode();
   }
-  
+
   editingSubtaskIndex = null;
   renderSubTasks();
   input.value = "";
@@ -38,7 +38,7 @@ function deleteSubtask(index) {
   if (typeof handleSubtaskDeletedInEditMode === "function") {
     handleSubtaskDeletedInEditMode(index);
   }
-  
+
   task.subTasks.splice(index, 1);
   renderSubTasks();
 }
@@ -94,7 +94,7 @@ function setupSubtaskEnter() {
 
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault(); // verhindert neue Zeile
+      event.preventDefault();
       confirmSubtask();
     }
   });

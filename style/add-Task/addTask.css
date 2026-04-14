@@ -221,7 +221,7 @@
   }
 }
 
-@media (max-width: 901px) {
+@media (max-width: 910px) {
   .addTaskMain {
     margin-left: 243px;
     margin-top: 150px;
@@ -237,7 +237,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 70px;
-    width: 775px;
+    width: 465px;
     align-items: center;
   }
   .mainTitle {
@@ -275,13 +275,15 @@
     bottom: 80px;
   }
   .buttonRequiredField {
-    width: 620px;
+    width: 525px;
+    padding-bottom: 30px;
+    margin-top: 40px;
   }
 }
 
 @media (max-width: 610px) {
   .addTaskMain {
-    margin-left: 17px;
+    margin-left: 14px;
   }
   .ChoiceHeadline {
     font-size: 16px;
@@ -296,8 +298,7 @@
   }
 
   .buttonRequiredField {
-    width: 434px;
-    flex-direction: column;
+    width: 160px;
     margin-top: 10px;
   }
   .requiredBottomLeft {
@@ -325,6 +326,6 @@
     bottom: 80px;
   }
   .requiredBottomLeft {
-    padding-right: 297px;
+    padding-right: 0px;
   }
 }

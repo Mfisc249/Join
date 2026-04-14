@@ -166,7 +166,6 @@ function resetSubTasksAndCategory() {
   const error = document.getElementById("categoryError");
   if (error) error.classList.remove("visible");
 
-  // ✅ NEU:
   const dropdown = document.getElementById("categoryDropdown");
   const arrow = document.getElementById("categoryDropdownArrow");
 

@@ -104,39 +104,40 @@ function renderSelectedContactsBelowInput() {
   const previewContainer = document.getElementById("assignedPreviewContainer");
   const dropdown = document.getElementById("assignedDropdown");
   const maxVisibleContacts = 5;
+
   if (!previewContainer) return;
 
-  if (!dropdown.classList.contains("hidden")) {
+  if (!dropdown.classList.contains("hidden") || task.assignedTo.length === 0) {
     previewContainer.innerHTML = "";
     return;
   }
 
-  if (task.assignedTo.length === 0) {
-    previewContainer.innerHTML = "";
-    return;
+  previewContainer.innerHTML = buildAssignedContactsHTML(maxVisibleContacts);
+}
+
+function buildAssignedContactsHTML(maxVisibleContacts) {
+  let selectedContacts = [];
+
+  for (let i = 0; i < task.assignedTo.length; i++) {
+    let key = task.assignedTo[i];
+    if (contacts[key]) {
+      selectedContacts.push(contacts[key]);
+    }
   }
-
-  const selectedContacts = task.assignedTo
-    .map((key) => contacts[key])
-    .filter(Boolean);
-
-  const visibleContacts = selectedContacts.slice(0, maxVisibleContacts);
-  const hiddenContactsCount = selectedContacts.length - visibleContacts.length;
 
   let html = "";
-  visibleContacts.forEach((contact) => {
-    html += contactInitialsPreviewTemplate(contact);
-  });
 
-  if (hiddenContactsCount > 0) {
-    html += `
-      <div class="assignedCircle" style="background-color: var(--GlobalBlue)">
-        +${hiddenContactsCount}
-      </div>
-    `;
+  for (let i = 0; i < selectedContacts.length && i < maxVisibleContacts; i++) {
+    html += contactInitialsPreviewTemplate(selectedContacts[i]);
   }
 
-  previewContainer.innerHTML = html;
+  let hiddenContactsCount = selectedContacts.length - maxVisibleContacts;
+
+  if (hiddenContactsCount > 0) {
+    html += hiddenContactsTemplate(hiddenContactsCount);
+  }
+
+  return html;
 }
 
 /** Opens the assignment dropdown and prepares the full contact list view. */

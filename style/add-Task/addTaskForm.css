@@ -81,8 +81,13 @@
   font-family: "Inter", sans-serif;
   border: unset;
   box-shadow: 0 0 0 1px rgba(209, 209, 209, 1);
+  color: black;
+}
+
+.addTaskDateContainer input:invalid {
   color: rgba(209, 209, 209, 1);
 }
+
 .addTaskDateContainer {
   position: relative;
 }
@@ -111,7 +116,7 @@
   font-size: 16px;
   font-weight: 400;
   font-family: poppins;
-  margin-top: 6px;
+  margin-top: 3px;
   margin-bottom: 9px;
 }
 
@@ -131,7 +136,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 1px 2px;
   background-color: transparent;
   cursor: pointer;
-  display: block !important;
+  display: block;
   margin-right: 10px;
 }
 
@@ -273,7 +278,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-@media (max-width: 901px) {
+@media (max-width: 910px) {
   .taskNameContainer textarea {
     width: 475px;
   }
@@ -321,7 +326,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 29px;
   }
   .taskNameContainer textarea {
-    width: 263px;
+    width: 258px;
     padding-top: 10px;
     font-size: 16px;
     height: 27px;
@@ -335,6 +340,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .ChoiceOption {
     width: 274px;
     font-size: 16px;
+    height: 46px;
   }
   .categoryOption {
     font-size: 16px;

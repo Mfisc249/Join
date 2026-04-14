@@ -111,21 +111,33 @@
 .subTaskList {
   padding-left: 0;
   margin: 0;
-  padding-right: 20px;
+  padding-right: 10px;
   list-style: none;
   width: 440px;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 200px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(116, 113, 113, 0.178) transparent;
 }
 
 .subTaskList::-webkit-scrollbar {
-  width: 2px;
+  width: 6px;
+}
+
+.subTaskList::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .subTaskList::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 10px;
+  background-color: rgba(120, 120, 120, 0.35);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+.subTaskList::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(120, 120, 120, 0.55);
 }
 
 .subTaskItem.editing {
@@ -285,7 +297,7 @@
   }
 }
 
-@media (max-width: 901px) {
+@media (max-width: 910px) {
   .subTaskItem {
     width: 380px;
   }
@@ -382,7 +394,7 @@
   }
   .subTaskIconsContainer {
     gap: 3px;
-    right: 74px;
+    right: 16px;
   }
   .spacer {
     margin-right: 3px;

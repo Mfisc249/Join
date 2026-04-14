@@ -59,6 +59,8 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
                 class="taskDateInput"
                 type="date"
                 id="DueDate"
+                max = "9999-12-31"
+                required
               />
               <p class="requiredField requiredDate">This field is required</p>
             </div>
@@ -252,6 +254,14 @@ function contactInitialsPreviewTemplate(contact) {
     <div class="assignedCircle" 
          style="background-color: ${contact.color}">
       ${contact.initials}
+    </div>
+  `;
+}
+
+function hiddenContactsTemplate(count) {
+  return `
+    <div class="assignedCircle" style="background-color: var(--GlobalBlue)">
+      +${count}
     </div>
   `;
 }
