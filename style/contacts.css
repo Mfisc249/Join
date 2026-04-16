@@ -27,7 +27,7 @@
   box-shadow: 0 0 14px rgba(0, 0, 0, 0.04);
   /* Panel is the scroll container -> scrollbar on the panel edge */
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: visible;
   
   /* Höherer z-index um über dem Header zu liegen */
   position: relative;
