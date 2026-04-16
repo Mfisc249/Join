@@ -70,13 +70,14 @@
   flex-direction: row;
   align-items: center;
   padding: 0;
-  gap: 54px;
+  gap: 32px;
   width: 100%;
-  max-width: 461px;
+  max-width: 100%;
   height: auto;
   flex: none;
   order: 0;
   flex-grow: 0;
+  flex-wrap: wrap;
 }
 
 .badge-large {
@@ -108,13 +109,12 @@
   align-items: flex-start;
   padding: 0;
   gap: 25px;
-  width: min(400px, calc(100% - 174px));
+  flex: 1;
+  width: auto;
   max-width: 100%;
-  min-width: 0;
+  min-width: 220px;
   height: auto;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  flex-grow: 1;
 }
 
 .details-name {
@@ -126,15 +126,14 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 120%;
-  display: flex;
-  align-items: center;
+  display: block;
   color: #000;
   flex: none;
   order: 0;
   flex-grow: 0;
   white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .details-actions {

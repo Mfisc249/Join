@@ -2,15 +2,15 @@
    CONTACTS – PAGE LAYOUT
    =============================== */
 
+
 .contacts-main {
-  overflow-x: clip;
-  overflow-y: clip;
+  overflow: visible;
 }
 
 html:has(.contacts-main),
 body:has(.contacts-main) {
-  overflow-x: clip;
-  overflow-y: clip;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .content {
@@ -18,7 +18,7 @@ body:has(.contacts-main) {
   height: 100%;
   display: grid;
   grid-template-columns: 456px 1fr;
-  overflow: clip;
+  overflow: visible;
   min-width: 0;
   background: #F6F7F8;
 }
