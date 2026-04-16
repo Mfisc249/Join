@@ -71,25 +71,28 @@ function setupDueDateInput() {
   const input = document.getElementById("DueDate");
   if (!input) return;
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = getTodayLocal();
 
-  // verhindert Auswahl im Kalender
-  input.min = today.toISOString().split("T")[0];
+  // ✅ verhindert Vergangenheit im Kalender
+  input.min = today;
 
   input.addEventListener("blur", () => {
     if (!input.value) return;
 
-    const selected = new Date(input.value);
-    selected.setHours(0, 0, 0, 0);
-
-    // nur prüfen wenn Datum vollständig ist
-    if (isNaN(selected.getTime())) return;
-
-    if (selected < today) {
+    // ✅ nur heute oder Zukunft erlaubt
+    if (input.value < today) {
       input.value = "";
     }
   });
+}
+
+function getTodayLocal() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
 
 /** Toggles the category dropdown arrow rotation state. */

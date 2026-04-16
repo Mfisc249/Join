@@ -89,25 +89,48 @@
     font-size: 18px;
   }
 }
-@media (max-width: 610px) {
+
+@media (max-width: 720px) {
+  .priority {
+    gap: 7px;
+  }
+}
+
+@media (max-width: 640px) {
   .priority {
     gap: 12px;
     margin-top: 18px;
   }
   .priorityButton {
-    width: 121px;
     height: 43px;
     font-size: 16px;
-  }
-  .priority {
-    gap: 7px;
-    margin-top: 25px;
-    width: 280px;
-  }
-  .priorityButton {
     gap: 5px;
   }
+  .priority {
+    gap: 57px;
+    margin-top: 25px;
+    width: 425px;
+  }
+
   .priorityHeadline {
     margin-top: 10px;
+  }
+}
+@media (max-width: 560px) {
+  .priority {
+    gap: 41px;
+    width: 362px;
+  }
+}
+@media (max-width: 480px) {
+  .priority {
+    gap: 19px;
+    width: 326px;
+  }
+}
+@media (max-width: 400px) {
+  .priority {
+    gap: 11px;
+    width: 273px;
   }
 }

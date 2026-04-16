@@ -22,6 +22,7 @@
   font-family: "Inter", sans-serif;
   line-height: 1.2;
   margin-bottom: 50px;
+  position: static;
 }
 
 .h2AddTask {
@@ -37,7 +38,6 @@
 
 .headlineTextArea {
   display: flex;
-  align-items: center;
 }
 
 .contentWrapperAddTask {
@@ -224,7 +224,7 @@
 @media (max-width: 910px) {
   .addTaskMain {
     margin-left: 243px;
-    margin-top: 150px;
+    margin-top: 255px;
     padding-bottom: 0px;
   }
   .inputField {
@@ -241,11 +241,15 @@
     align-items: center;
   }
   .mainTitle {
-    position: sticky;
-    top: 80px;
+    position: fixed;
+    top: 74px;
+    left: 223px;
+    right: 0;
+    z-index: 500;
     background: rgba(246, 247, 248, 1);
     padding: 20px;
-    z-index: 500;
+    padding-top: 70px;
+    font-size: 47px;
   }
   .taskButton {
     position: fixed;
@@ -264,14 +268,14 @@
 @media (max-width: 769px) {
   .addTaskMain {
     margin-top: 130px;
-    margin-left: 30px;
+    margin-left: 85px;
   }
   .inputField {
     width: 521px;
   }
   .taskButton {
     gap: 14px;
-    width: 552px;
+    width: 600px;
     bottom: 80px;
   }
   .buttonRequiredField {
@@ -279,11 +283,14 @@
     padding-bottom: 30px;
     margin-top: 40px;
   }
+  .mainTitle {
+    left: 57px;
+  }
 }
 
-@media (max-width: 610px) {
+@media (max-width: 720px) {
   .addTaskMain {
-    margin-left: 14px;
+    margin-left: 103px;
   }
   .ChoiceHeadline {
     font-size: 16px;
@@ -322,10 +329,58 @@
     width: 147px;
   }
   .taskButton {
-    width: 264px;
+    width: 485px;
     bottom: 80px;
   }
   .requiredBottomLeft {
     padding-right: 0px;
+  }
+  .mainTitle {
+    left: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .taskButton {
+    width: 449px;
+  }
+  .addTaskMain {
+    margin-left: 60px;
+  }
+  .mainTitle {
+    left: 59px;
+  }
+}
+@media (max-width: 560px) {
+  .addTaskMain {
+    margin-left: 40px;
+  }
+  .taskButton {
+    width: 373px;
+  }
+  .mainTitle {
+    left: 39px;
+  }
+}
+@media (max-width: 480px) {
+  .addTaskMain {
+    margin-left: 20px;
+  }
+  .taskButton {
+    width: 310px;
+  }
+  .mainTitle {
+    left: 19px;
+  }
+}
+@media (max-width: 400px) {
+  .addTaskMain {
+    margin-left: 10px;
+  }
+  .taskButton {
+    width: 260px;
+  }
+  .mainTitle {
+    left: 9px;
   }
 }

@@ -23,6 +23,7 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
                 class="taskName"
                 id="taskName"
                 name="taskName"
+                required
                 placeholder="Enter a title"
               >${taskName ?? ""}</textarea>
 
@@ -106,6 +107,7 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
         <div class="OptionsContainer">
           <div class="headlineTextArea">
             <h2 class="ChoiceHeadline">Category</h2>
+            <p class="star">*</p>
           </div>
           <div class="categorySelectWrapper">
             <button type="button" class="ChoiceOption TaskCategoryInput" onclick="toggleCategoryDropdown(event)">

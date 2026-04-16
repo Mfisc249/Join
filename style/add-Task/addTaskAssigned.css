@@ -180,7 +180,17 @@
     width: 542px;
   }
 }
-@media (max-width: 610px) {
+
+@media (max-width: 720px) {
+  .assignedToInput {
+    width: 400px;
+  }
+  .assignedDropdown {
+    width: 395px;
+  }
+}
+
+@media (max-width: 640px) {
   .assignedDropdownArrow {
     height: 5px;
   }
@@ -197,10 +207,34 @@
     height: 34px;
   }
   .assignedToInput {
-    width: 277px;
+    width: 423px;
     height: 44px;
   }
   .assignedDropdown {
-    width: 270px;
+    width: 410px;
+  }
+}
+@media (max-width: 560px) {
+  .assignedToInput {
+    width: 359px;
+  }
+  .assignedDropdown {
+    width: 350px;
+  }
+}
+@media (max-width: 480px) {
+  .assignedToInput {
+    width: 322px;
+  }
+  .assignedDropdown {
+    width: 310px;
+  }
+}
+@media (max-width: 400px) {
+  .assignedToInput {
+    width: 273px;
+  }
+  .assignedDropdown {
+    width: 265px;
   }
 }

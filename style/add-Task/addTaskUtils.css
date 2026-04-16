@@ -89,7 +89,10 @@ textarea {
   }
 }
 
-@media (max-width: 610px) {
+@media (max-width: 720px) {
+}
+
+@media (max-width: 640px) {
   .toast {
     font-size: 16px;
     padding: 16px 20px;

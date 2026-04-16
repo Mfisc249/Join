@@ -320,13 +320,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-@media (max-width: 610px) {
+@media (max-width: 720px) {
+  .taskNameContainer textarea {
+    width: 390px;
+    padding-top: 10px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 390px;
+  }
+  .addTaskDateContainer input {
+    width: 390px;
+  }
+  .ChoiceOption {
+    width: 400px;
+  }
+}
+
+@media (max-width: 640px) {
   .taskname {
     font-size: 16px;
     height: 29px;
   }
   .taskNameContainer textarea {
-    width: 258px;
+    width: 410px;
     padding-top: 10px;
     font-size: 16px;
     height: 27px;
@@ -338,7 +354,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 16px;
   }
   .ChoiceOption {
-    width: 274px;
+    width: 420px;
     font-size: 16px;
     height: 46px;
   }
@@ -346,12 +362,54 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 16px;
   }
   .taskDescriptionContainer textarea {
-    width: 263px;
+    width: 410px;
     height: 80px;
   }
   .addTaskDateContainer input {
-    width: 263px;
+    width: 410px;
     font-size: 16px;
     height: 40px;
+  }
+}
+@media (max-width: 560px) {
+  .taskNameContainer textarea {
+    width: 350px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 350px;
+  }
+  .addTaskDateContainer input {
+    width: 350px;
+  }
+  .ChoiceOption {
+    width: 358px;
+  }
+}
+@media (max-width: 480px) {
+  .taskNameContainer textarea {
+    width: 310px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 310px;
+  }
+  .addTaskDateContainer input {
+    width: 310px;
+  }
+  .ChoiceOption {
+    width: 320px;
+  }
+}
+@media (max-width: 400px) {
+  .taskNameContainer textarea {
+    width: 258px;
+  }
+  .taskDescriptionContainer textarea {
+    width: 258px;
+  }
+  .addTaskDateContainer input {
+    width: 258px;
+  }
+  .ChoiceOption {
+    width: 273px;
   }
 }

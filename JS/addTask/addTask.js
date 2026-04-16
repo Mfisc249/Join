@@ -119,7 +119,7 @@ async function createTask() {
 
 /** Creates a task and refreshes the board when creation succeeds. */
 async function createTaskAndRefreshBoard() {
-  errorMessage(); // 👈 IMMER zuerst
+  errorMessage();
 
   const task = {
     title: document.getElementById("taskName").value,
@@ -128,10 +128,16 @@ async function createTaskAndRefreshBoard() {
   };
 
   if (!task.title || !task.dueDate || !task.category) {
-    return; // ❌ stop wenn Fehler
+    return;
   }
 
   await createTask();
+
+  showToast(); // falls du sowas hast
+
+  setTimeout(() => {
+    window.location.href = "board.html";
+  }, 800);
 }
 
 /** Resets the form and reinitializes the in-memory task object. */
