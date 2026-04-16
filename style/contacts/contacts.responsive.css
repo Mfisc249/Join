@@ -32,17 +32,39 @@
    CONTACTS - RESPONSIVE
    =============================== */
 
-@media (max-width: 1100px) {
+@media (max-width: 1300px) and (min-width: 1151px) {
   .details {
-    padding: 90px 48px 40px 48px;
+    padding: 100px 56px 40px 56px;
   }
 }
 
-@media (max-width: 1100px) and (min-width: 1025px) {
+@media (max-width: 1150px) and (min-width: 1080px) {
+  .details {
+    padding: 90px 32px 32px 32px;
+  }
+}
+
+@media (max-width: 1300px) and (min-width: 1080px) {
   .details {
     min-height: 0;
-    overflow-y: auto;
-    overflow-x: auto;
+  }
+
+  .details-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .details-card-top {
+    gap: 24px;
+    max-width: 100%;
+  }
+
+  .details-name-actions {
+    min-width: 0;
+  }
+
+  .details-name {
+    font-size: 28px;
   }
 }
 
@@ -101,47 +123,52 @@
   }
 }
 
-@media (max-width: 1300px) {
-  .contact-modal-body {
-    padding-left: 120px;
-  }
-}
-
-@media (max-width: 1280px) {
-  .contact-modal-form {
-    left: 50%;
-    transform: translateX(-50%);
+@media (max-width: 1300px) and (min-width: 1025px) {
+  .contact-modal {
+    width: min(980px, calc(100vw - 24px));
+    min-height: 592px;
+    max-height: calc(100vh - 24px);
   }
 
-  .contact-modal-actions {
-    left: 50%;
-    transform: translateX(-50%);
+  .contact-modal-left {
+    flex-basis: 400px;
+    padding: 56px 36px;
   }
 
-  .contact-modal-avatar-wrap {
-    left: 120px;
+  .contact-modal-brand {
+    margin: 72px 0 56px 0;
+  }
+
+  .contact-modal-title {
+    font-size: 52px;
   }
 
   .contact-modal-right {
-    overflow: visible;
+    padding: 40px 32px 36px 40px;
+  }
+
+  .contact-modal-body {
+    grid-template-columns: 120px minmax(260px, 380px);
+    column-gap: 24px;
+    row-gap: 24px;
+    padding-top: 88px;
   }
 
   .contact-modal-form,
   .contact-input {
-    max-width: calc(100% - 48px);
-    width: min(422px, calc(100% - 48px));
+    max-width: 380px;
   }
 
-  .contact-input input {
-    min-width: 0;
+  .contact-modal-actions {
+    margin-top: 16px;
   }
 }
 
 @media (max-width: 1100px) {
   .contact-modal-body {
     grid-template-columns: 1fr;
-    padding-left: 48px;
     justify-items: center;
+    padding-left: 0;
   }
 
   .contact-modal-avatar-wrap {
@@ -151,7 +178,19 @@
 
   .contact-modal-form,
   .contact-input {
-    width: 422px;
+    width: min(422px, 100%);
+    max-width: 100%;
+  }
+
+  .contact-modal-actions {
+    grid-column: auto;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 1250px) and (min-width: 1025px) {
+  .content {
+    grid-template-columns: 400px 1fr;
   }
 }
 

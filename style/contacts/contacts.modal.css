@@ -13,10 +13,10 @@
 }
 
 .contact-modal {
-  width: 1212px;
-  max-width: calc(100% - 32px);
-  height: 592px;
-  max-height: calc(100% - 32px);
+  width: min(1212px, calc(100vw - 32px));
+  min-height: 592px;
+  max-height: calc(100vh - 32px);
+  height: auto;
   background: #fff;
   border-radius: 30px;
   overflow: visible;
@@ -27,22 +27,22 @@
 
 /* LEFT */
 .contact-modal-left {
-  width: 453px;
-  height: 100%;
+  flex: 0 0 467px;
+  min-height: 592px;
   background: #2A3647;
-  padding: 40px 46px 66px;
+  padding: 66px 46px;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 12px;
+  justify-content: flex-start;
+  gap: 0;
   border-radius: 30px 0 0 30px;
+  box-sizing: border-box;
 }
 
 .contact-modal-brand {
-  position: absolute;
-  top: 170px;
-  left: 46px;
+  position: static;
+  margin: 88px 0 72px 0;
 }
 
 .contact-modal-logo {
@@ -56,7 +56,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 361px;
+  width: min(100%, 371px);
 }
 
 .contact-modal-title {
@@ -66,14 +66,9 @@
   font-size: 61px;
   line-height: 120%;
   color: #fff;
-  width: 361px;
-  height: 89px;
-  gap: 16px;
-  display: flex;
-  flex: none;
-  align-items: flex-start;
-  order: 0;
-  flex-grow: 0;
+  width: auto;
+  height: auto;
+  display: block;
 }
 
 .contact-modal-divider {
@@ -98,12 +93,14 @@
   position: relative;
   background: #fff;
   border-radius: 0 30px 30px 0;
+  padding: 48px 48px 48px 60px;
+  box-sizing: border-box;
 }
 
 .contact-modal-close {
   position: absolute;
-  top: 48px;
-  right: 48px;
+  top: 40px;
+  right: 40px;
   width: 32px;
   height: 32px;
   border: none;
@@ -132,15 +129,25 @@
 .contact-modal-body {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 160px minmax(320px, 422px);
+  column-gap: 28px;
+  row-gap: 32px;
+  align-content: start;
+  padding-top: 102px;
+  box-sizing: border-box;
 }
 
 .contact-modal-avatar-wrap {
-  position: absolute;
-  top: 220px;
-  left: 60px;
+  position: static;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  width: 120px;
+  height: 120px;
+  margin-top: 8px;
 }
 
 .contact-modal-avatar {
@@ -180,11 +187,9 @@
 }
 
 .contact-modal-form {
-  position: absolute;
-  top: 140px;
-  left: 240px;
-  width: 380px;
-  max-width: 380px;
+  position: static;
+  width: 100%;
+  max-width: 422px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -193,7 +198,8 @@
 /* Modal input wrapper - extends global InputWrapper */
 .contact-input {
   position: relative;
-  width: 380px;
+  width: 100%;
+  max-width: 422px;
 }
 
 /* Modal input field - uses global InputField with modal-specific sizing */
@@ -224,11 +230,11 @@
 }
 
 .contact-modal-actions {
-  position: absolute;
-  bottom: 100px;
-  left: 240px;
+  position: static;
+  grid-column: 2;
   display: flex;
   gap: 25px;
+  margin-top: 20px;
 }
 
 .btn-secondary-outline {
