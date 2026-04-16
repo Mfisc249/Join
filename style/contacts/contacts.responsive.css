@@ -147,13 +147,21 @@
     padding: 40px 32px 36px 40px;
   }
 
-  .contact-modal-body {
-    grid-template-columns: 120px minmax(260px, 380px);
-    column-gap: 24px;
-    row-gap: 24px;
-    padding-top: 88px;
-  }
-
+ .contact-modal-body {
+  grid-template-columns: 120px minmax(260px, 380px);
+  column-gap: 24px;
+  row-gap: 24px;
+  align-items: start;
+  padding-top: 96px;
+}
+.contact-modal-avatar-wrap {
+  width: 120px;
+  height: 120px;
+  margin: 0;
+  align-self: start;
+  justify-self: center;
+  transform: translateY(65px);
+}
   .contact-modal-form,
   .contact-input {
     max-width: 380px;
@@ -163,7 +171,11 @@
     margin-top: 16px;
   }
 }
-
+@media (min-width: 1020px) and (max-width: 1100px) {
+  .contact-modal-avatar-wrap {
+    transform: translateY(2px);
+  }
+}
 @media (max-width: 1100px) {
   .contact-modal-body {
     grid-template-columns: 1fr;

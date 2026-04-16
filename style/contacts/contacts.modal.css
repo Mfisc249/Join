@@ -134,9 +134,10 @@
   display: grid;
   grid-template-columns: 160px minmax(320px, 422px);
   column-gap: 28px;
-  row-gap: 32px;
+  row-gap: 1px;
+  align-items: start;
   align-content: start;
-  padding-top: 102px;
+  padding-top: 96px;
   box-sizing: border-box;
 }
 
@@ -144,10 +145,13 @@
   position: static;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  justify-self: center;
+  align-self: start;
   width: 120px;
   height: 120px;
-  margin-top: 8px;
+  margin: 0;
+  transform: translateY(65px);
 }
 
 .contact-modal-avatar {
@@ -192,7 +196,7 @@
   max-width: 422px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
 /* Modal input wrapper - extends global InputWrapper */
