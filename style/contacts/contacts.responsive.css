@@ -434,8 +434,14 @@
   }
 
   .contacts-list {
-    padding: 24px 12px;
-  }
+  width: 100%;
+  max-width: 100%;
+  padding: 24px 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
   .contacts-list > * {
     width: 100%;

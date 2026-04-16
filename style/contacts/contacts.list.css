@@ -47,12 +47,28 @@
 }
 
 .contacts-list {
+  width: 100%;
+  max-width: 100%;
   padding: 24px;
+  box-sizing: border-box;
 }
 
 .contacts-list > * {
-  width: 352px;
-  margin: 0 auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-item {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-info,
+.contact-name,
+.contact-email {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Groups */
