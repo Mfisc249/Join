@@ -267,7 +267,7 @@
 
 @media (max-width: 769px) {
   .addTaskMain {
-    margin-top: 130px;
+    margin-top: 240px;
     margin-left: 85px;
   }
   .inputField {
@@ -291,6 +291,7 @@
 @media (max-width: 720px) {
   .addTaskMain {
     margin-left: 103px;
+    margin-top: 180px;
   }
   .ChoiceHeadline {
     font-size: 16px;
