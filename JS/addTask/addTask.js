@@ -21,13 +21,7 @@ let task = {
 
 /** Initializes the add-task view and loads required startup data. */
 async function init() {
-  const boardDialog = document.getElementById("boardAddTask");
-  if (boardDialog) {
-    boardDialog.classList.remove("edit-task-dialog");
-  }
-  if (typeof isEditTaskMode !== "undefined") {
-    isEditTaskMode = false;
-  }
+  setupBoardDialog();
   renderTemplate();
   setupSubtaskEnter();
   setupAssignedDropdownClose();
@@ -38,6 +32,17 @@ async function init() {
   await loadContacts();
 
   document.addEventListener("click", closeCategoryDropdown);
+}
+
+function setupBoardDialog() {
+  const boardDialog = document.getElementById("boardAddTask");
+  if (boardDialog) {
+    boardDialog.classList.remove("edit-task-dialog");
+  }
+
+  if (typeof isEditTaskMode !== "undefined") {
+    isEditTaskMode = false;
+  }
 }
 
 /** Renders the add-task template into the main content container. */
@@ -94,6 +99,16 @@ function generateTaskKey(existingTasks) {
 
 /** Collects form values, validates input, and creates a new task entry. */
 async function createTask() {
+  assignTaskValues();
+
+  let selectedCategory = "";
+
+  if (!handleTaskValidation()) return null;
+
+  return await handleTaskSaving();
+}
+
+function assignTaskValues() {
   const titleInput = document.getElementById("taskName");
   const descInput = document.getElementById("taskDesc");
   const dateInput = document.getElementById("DueDate");
@@ -101,11 +116,15 @@ async function createTask() {
   task.title = titleInput.value;
   task.description = descInput.value;
   task.dueDate = dateInput.value;
-  let selectedCategory = "";
+}
 
+function handleTaskValidation() {
   errorMessage();
-  if (!task.title || !task.dueDate || !task.category) return null;
+  if (!task.title || !task.dueDate || !task.category) return false;
+  return true;
+}
 
+async function handleTaskSaving() {
   const taskKey = await saveTask(task);
 
   if (taskKey) {
