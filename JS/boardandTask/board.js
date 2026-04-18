@@ -6,7 +6,7 @@ let count = 0;
 let highlightTaskCount = 0;
 let curentTraggedElement;
 let allContactDetails = [];
-let myMediaQuery = window.matchMedia('(max-width: 1535px)');
+let myMediaQuery = window.matchMedia('(max-width: 1723px)');
 
 /** Initializes the board and renders tasks. */
 async function boardInit() {

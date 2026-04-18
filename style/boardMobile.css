@@ -1,6 +1,4 @@
-
-
-@media(max-width:1535px) {
+@media(max-width:1723px) {
 
     .tablecontainer tr {
         display: flex;
@@ -13,6 +11,10 @@
 
     .taskContainer {
         margin-bottom: 20px;
+        padding-top: 10px;
+        padding-right: 24px;
+        padding-left: 24px;
+        padding-bottom: 10px;
     }
 
     :root {
@@ -36,9 +38,9 @@
     }
 
     .taskMobileMove span {
-        color: var(--GlobalWhite) ;
-        font-size: 20px ;
-        text-align: center ;
+        color: var(--GlobalWhite);
+        font-size: 20px;
+        text-align: center;
     }
 
     .taskMobileMenu {
@@ -62,9 +64,9 @@
     }
 
     .taskMobileSubmenuItem {
-        padding-left: 10px ;
-        margin-block-start: unset ;
-        margin-block-end: unset ;
+        padding-left: 10px;
+        margin-block-start: unset;
+        margin-block-end: unset;
         font-family: 'Inter', sans-serif;
         font-weight: 400;
         font-size: 16px;
@@ -98,6 +100,7 @@
         overflow: auto;
         display: flex;
         max-width: var(--boardWith);
+        gap: 20px;
     }
 }
 
@@ -170,8 +173,8 @@
 }
 
 @media (max-width: 670px) {
-    .taskMobileMenu{
-         border-radius: 20px 0px 20px 20px;
+    .taskMobileMenu {
+        border-radius: 20px 0px 20px 20px;
     }
 }
 
