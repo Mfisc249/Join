@@ -57,6 +57,7 @@ dialog.closed::backdrop {
 .allTaskDetails h2 {
     color: var(--GlobalBlue);
     margin: 0;
+    font-weight: 400;
 }
 
 .allTaskDetails td {
@@ -118,7 +119,16 @@ dialog.closed::backdrop {
     overflow: auto;
 }
 
+.subTasks span{
+    display: flex;
+    gap: 13px;
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+
 #taskDetailsAT{
+    margin-top: 8px;
+    margin-bottom: 15px;
     max-height: 200px;
     overflow: auto;
 }
@@ -126,6 +136,8 @@ dialog.closed::backdrop {
 .taskDetailsATContainer {
     display: flex;
     align-items: center;
+    gap: 13px;
+    padding-bottom: 15px;
 }
 
 .taskDetailsATContainer span:not(:first-child) {
