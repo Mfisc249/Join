@@ -1,0 +1,231 @@
+
+@media (max-width: 1392px) {
+  .contentWrapperAddTask {
+    display: block;
+  }
+  .divider {
+    display: none;
+  }
+  .buttonRequiredField {
+    margin-top: 70px;
+    width: 880px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .inputField {
+    width: 679px;
+  }
+  .mainTitle {
+    font-size: 55px;
+  }
+  .clearButton {
+    font-size: 18px;
+    height: 50px;
+    width: 92px;
+  }
+  .createButton {
+    font-size: 18px;
+    height: 50px;
+    width: 177px;
+  }
+  .addTaskMain {
+    margin-left: 295px;
+    margin-top: 170px;
+  }
+  .buttonRequiredField {
+    width: 700px;
+  }
+}
+
+@media (max-width: 1063px) {
+  .addTaskMain {
+    margin-left: 295px;
+    margin-top: 170px;
+  }
+  .inputField {
+    width: 560px;
+  }
+  .buttonRequiredField {
+    width: 581px;
+  }
+
+  .clearButton {
+    font-size: 18px;
+    height: 50px;
+    width: 92px;
+  }
+  .createButton {
+    font-size: 18px;
+    height: 50px;
+    width: 177px;
+  }
+  .mainTitle {
+    font-size: 55px;
+  }
+}
+
+@media (max-width: 910px) {
+  .addTaskMain {
+    margin-left: 243px;
+    margin-top: 255px;
+    padding-bottom: 0px;
+  }
+  .inputField {
+    width: 472px;
+  }
+  .requiredField {
+    margin-bottom: 22px;
+  }
+  .buttonRequiredField {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+    width: 465px;
+    align-items: center;
+  }
+  .mainTitle {
+    position: fixed;
+    top: 74px;
+    left: 223px;
+    right: 0;
+    z-index: 500;
+    background: rgba(246, 247, 248, 1);
+    padding: 20px;
+    padding-top: 70px;
+    font-size: 47px;
+  }
+  .taskButton {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 711px;
+    background: rgba(246, 247, 248, 1);
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    z-index: 1000;
+  }
+}
+
+@media (max-width: 769px) {
+  .addTaskMain {
+    margin-top: 240px;
+    margin-left: 85px;
+  }
+  .inputField {
+    width: 521px;
+  }
+  .taskButton {
+    gap: 14px;
+    width: 600px;
+    bottom: 80px;
+  }
+  .buttonRequiredField {
+    width: 525px;
+    padding-bottom: 30px;
+    margin-top: 40px;
+  }
+  .mainTitle {
+    left: 57px;
+  }
+}
+
+@media (max-width: 720px) {
+  .addTaskMain {
+    margin-left: 103px;
+    margin-top: 180px;
+  }
+  .ChoiceHeadline {
+    font-size: 16px;
+  }
+  .h2AddTask {
+    font-size: 16px;
+  }
+  .clearButton {
+    font-size: 17px;
+    height: 49px;
+    width: 95px;
+  }
+
+  .buttonRequiredField {
+    width: 160px;
+    margin-top: 10px;
+  }
+  .requiredBottomLeft {
+    display: flex;
+    align-items: start;
+    padding-bottom: 41px;
+    padding-right: 257px;
+  }
+  .mainTitle {
+    font-size: 47px;
+    padding: 20px 0px;
+  }
+  .inputField {
+    width: 248px;
+    height: 39px;
+    font-size: 16px;
+  }
+  .createButton {
+    font-size: 18px;
+    height: 49px;
+    width: 147px;
+  }
+  .taskButton {
+    width: 485px;
+    bottom: 80px;
+  }
+  .requiredBottomLeft {
+    padding-right: 0px;
+  }
+  .mainTitle {
+    left: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .taskButton {
+    width: 449px;
+  }
+  .addTaskMain {
+    margin-left: 60px;
+  }
+  .mainTitle {
+    left: 59px;
+  }
+}
+@media (max-width: 560px) {
+  .addTaskMain {
+    margin-left: 40px;
+  }
+  .taskButton {
+    width: 373px;
+  }
+  .mainTitle {
+    left: 39px;
+  }
+}
+@media (max-width: 480px) {
+  .addTaskMain {
+    margin-left: 20px;
+  }
+  .taskButton {
+    width: 310px;
+  }
+  .mainTitle {
+    left: 19px;
+  }
+}
+@media (max-width: 400px) {
+  .addTaskMain {
+    margin-left: 10px;
+  }
+  .taskButton {
+    width: 260px;
+  }
+  .mainTitle {
+    left: 9px;
+  }
+} 

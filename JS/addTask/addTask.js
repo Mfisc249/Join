@@ -35,10 +35,10 @@ async function init() {
 }
 
 function setupBoardDialog() {
-  const boardDialog = document.getElementById("boardAddTask");
-  if (boardDialog) {
-    boardDialog.classList.remove("edit-task-dialog");
-  }
+  // const boardDialog = document.getElementById("boardAddTask");
+  // if (boardDialog) {
+  //   boardDialog.classList.remove("edit-task-dialog");
+  // }
 
   if (typeof isEditTaskMode !== "undefined") {
     isEditTaskMode = false;

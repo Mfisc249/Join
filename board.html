@@ -40,10 +40,10 @@
                                     rows="1"></input>
                                 <img src="./assets/img/Search.svg" alt="Search">
                             </div>
-                            <div onclick="opendialog('boardAddTask');init(); showExitButtonEditTask()" class="ButtonBlueFilled boardAddTaskButton">Add
+                            <div onclick="selectEditOrAdd(0);opendialog('boardAddTask');init(); showExitButtonEditTask()" class="ButtonBlueFilled boardAddTaskButton">Add
                                 Task <img src="./assets/img/add_white.svg" alt="+"></div>
 
-                            <div onclick="opendialog('boardAddTask');init(); showExitButtonEditTask()" 
+                            <div onclick="selectEditOrAdd(0);opendialog('boardAddTask');init(); showExitButtonEditTask()" 
                                 class="ButtonBlueFilled boardAddTaskButtonMobile">
                                 <img src="./assets/img/add_white.svg" alt="+"></div>
                         </div>
@@ -66,8 +66,11 @@
 
                 </dialog>
                 <dialog id="boardAddTask" onclick="closedialog('boardAddTask')">
-                    <main onclick="event.stopPropagation()" class="addTaskMain">
-                        <div id="mainContent"></div>
+                    <main id ="boardAddTaskMain" onclick="event.stopPropagation()" class="addTaskMain">
+                    </main>
+                </dialog>
+                <dialog id="boardEditTask" onclick="closedialog('boardEditTask')">
+                    <main id="boardEditTaskMain" onclick="event.stopPropagation()" class="addTaskMain">
                     </main>
                 </dialog>
             </div>

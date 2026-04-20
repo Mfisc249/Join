@@ -5,10 +5,10 @@ let editSubTaskReview = [];
 /**Initializes edit mode for a task, fills the form with existing values, adjusts the dialog UI, and starts edit-specific setup.*/
 async function editPreparation(taskID) {
   let refTaskEditTask = TASK[0][`Task${taskID}`];
-  const boardDialog = document.getElementById("boardAddTask");
-  if (boardDialog) {
-    boardDialog.classList.add("edit-task-dialog");
-  }
+  // const boardDialog = document.getElementById("boardAddTask");
+  // if (boardDialog) {
+  //   boardDialog.classList.add("edit-task-dialog");
+  // }
   isEditTaskMode = true;
   editSubTaskReview = [];
   document.getElementById("mainContent").innerHTML = createTaskTemplate(`${refTaskEditTask.title}`,`${refTaskEditTask.description}`, `${refTaskEditTask.dueDate}`);

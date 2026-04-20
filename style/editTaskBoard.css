@@ -1,86 +1,124 @@
-#boardAddTask.edit-task-dialog {
+#boardEditTask {
+  padding: 0;
+  border: none;
+  border-radius: 30px;
+  width: min(1200px, calc(100vw - 64px));
+  max-width: 1200px;
+  max-height: calc(100vh - 64px);
+  background-color: var(--GlobalBackgroundWhite);
+  overflow: unset;
+}
+
+#boardEditTask .addTaskMain {
+  max-width: none;
+  width: 100%;
+  margin: 0 ;
+  padding: 32px 40px 40px ;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+}
+
+#boardEditTask .buttonRequiredField {
+  width: 100%;
+}
+
+#boardEditTask .taskButton {
+  position: static;
+}
+
+#boardEditTask .requiredBottomLeft {
+  padding-right: 0;
+}
+
+.headerContent {
+  align-items: flex-start ;
+}
+
+#boardEditTask {
     width: min(525px, calc(100vw - 32px));
     max-width: 525px;
 }
-
-#boardAddTask.edit-task-dialog .addTaskMain {
-    width: 100%;
-    max-width: 525px;
-}
-
-#boardAddTask.edit-task-dialog #mainContent {
-    width: 100%;
-    max-width: 525px;
-}
-
-#boardAddTask.edit-task-dialog .contentWrapperAddTask {
-    display: block;
-}
-
 .descriptionImg{
     display: none;
 }
 
-#boardAddTask.edit-task-dialog .divider {
+#boardEditTask .divider {
     display: none;
 }
 
-#boardAddTask.edit-task-dialog .leftContent,
-#boardAddTask.edit-task-dialog .rightContent {
+#boardEditTask .contentWrapperAddTask {
+    display: flex;
+    flex-direction: column;
+}
+
+#boardEditTask .leftContent,
+#boardEditTask .rightContent {
     margin-left: 0;
     margin-right: 0;
 }
 
-#boardAddTask.edit-task-dialog .inputField,
-#boardAddTask.edit-task-dialog .taskNameContainer textarea,
-#boardAddTask.edit-task-dialog .taskDescriptionContainer textarea,
-#boardAddTask.edit-task-dialog .addTaskDateContainer input,
-#boardAddTask.edit-task-dialog .ChoiceOption,
-#boardAddTask.edit-task-dialog .assignedToInput,
-#boardAddTask.edit-task-dialog .assignedDropdown,
-#boardAddTask.edit-task-dialog .subtaskInputContainer,
-#boardAddTask.edit-task-dialog .inputField.bottomInput,
-#boardAddTask.edit-task-dialog .subTaskList,
-#boardAddTask.edit-task-dialog .subTaskEditContainer,
-#boardAddTask.edit-task-dialog .buttonRequiredField {
-    max-width: 400px;
+#boardEditTask .addTaskMain {
+    width: 100%;
+    max-width: 525px;
 }
 
-#boardAddTask.edit-task-dialog .OptionsContainer .subTaskList {
-    max-width: 400px;
-}
+#boardEditTask #mainContent {
+    width: 100%;
+    max-width: 525px;
+} 
 
-#boardAddTask.edit-task-dialog .OptionsContainer .subTaskItem {
-    max-width: 400px;
-}
-
-#boardAddTask.edit-task-dialog .OptionsContainer .subTaskItem .subTaskContent {
-    max-width: 400px;
-}
-
-#boardAddTask.edit-task-dialog .headerContent{
+#boardEditTask .headerContent{
         justify-content: flex-end;
+} 
+/*  
+#boardEditTask .inputField,
+#boardEditTask .taskNameContainer textarea,
+#boardEditTask .taskDescriptionContainer textarea,
+#boardEditTask .addTaskDateContainer input,
+#boardEditTask .ChoiceOption,
+#boardEditTask .assignedToInput,
+#boardEditTask .assignedDropdown,
+#boardEditTask .subtaskInputContainer,
+#boardEditTask .inputField.bottomInput,
+#boardEditTask .subTaskList,
+#boardEditTask .subTaskEditContainer,
+#boardEditTask .buttonRequiredField {
+    max-width: 400px;
+} 
+ 
+#boardEditTask .OptionsContainer .subTaskList {
+    max-width: 400px;
 }
+
+#boardEditTask .OptionsContainer .subTaskItem {
+    max-width: 400px;
+}
+
+#boardEditTask .OptionsContainer .subTaskItem .subTaskContent {
+    max-width: 400px;
+}
+
 
 @media (max-width: 1392px) {
-    #boardAddTask.edit-task-dialog .priority {
+    #boardEditTask .priority {
         gap: 5px;
     }
 }
 
 @media (max-width: 1300px) {
-    #boardAddTask.edit-task-dialog .subTaskItem {
+    #boardEditTask .subTaskItem {
         padding-right: unset;
         width: unset;
     }
 
-    #boardAddTask.edit-task-dialog .boardEditTaskButton {
+    #boardEditTask .boardEditTaskButton {
         width: fit-content;
     }
 
-    #boardAddTask.edit-task-dialog .boardEditTaskButtonContainer{
+    #boardEditTask .boardEditTaskButtonContainer{
         display: flex;
         justify-content: flex-end;
     }
 
-}
+}    */

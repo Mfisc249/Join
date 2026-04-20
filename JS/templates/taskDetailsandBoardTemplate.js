@@ -123,7 +123,7 @@ function taskDetailsTamplate(taskID) {
         <footer>
              <div class="taskDetailsIcons">
                 <span onmouseover="displayNone('trash','trashMousover')" onmouseout = "removeDisplayNone('trash','trashMousover')" onclick = "closedialog('allTaskDetails'); deleteTask(${taskID})" class="taskDetailsIcons"><img id ="trash" src="./assets/icons/trash_darkblue.svg" alt="trash"><img class ="displayNone" id="trashMousover" src="./assets/icons/trash_lightblue.svg" alt="trashMousover"> Delete</span>
-                <span onmouseover="displayNone('edit','editMousover')"  onmouseout = "removeDisplayNone('edit','editMousover')" onclick = "opendialog('boardAddTask');editPreparation(${taskID})" class="taskDetailsIcons edit"><img id ="edit" onmouseover="" src="./assets/icons/pencil_darkblue.svg" alt="edit"><img class ="displayNone" id="editMousover" src="./assets/icons/pencil_lightblue.svg" alt="editMousover"> Edit</span>
+                <span onmouseover="displayNone('edit','editMousover')"  onmouseout = "removeDisplayNone('edit','editMousover')" onclick = "selectEditOrAdd(1);opendialog('boardEditTask');editPreparation(${taskID})" class="taskDetailsIcons edit"><img id ="edit" onmouseover="" src="./assets/icons/pencil_darkblue.svg" alt="edit"><img class ="displayNone" id="editMousover" src="./assets/icons/pencil_lightblue.svg" alt="editMousover"> Edit</span>
              </div>
         </footer>
     </div>`

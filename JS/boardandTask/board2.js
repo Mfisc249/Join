@@ -161,3 +161,13 @@ function shortenDescription(description) {
     return description;
 }
 
+function selectEditOrAdd(selector) {
+    if (document.getElementById('mainContent')) {
+        document.getElementById('mainContent').remove();
+    }
+    if (selector == 1) {
+        document.getElementById('boardEditTaskMain').innerHTML = '<div id="mainContent"></div>';
+    }else{
+        document.getElementById('boardAddTaskMain').innerHTML = '<div id="mainContent"></div>';
+    }
+}
