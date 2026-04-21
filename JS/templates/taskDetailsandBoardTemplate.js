@@ -40,9 +40,9 @@ function highlightTaskTamplate(ID) {
 /** Builds the HTML markup for the four task board columns. */
 function taskBoardTamplate() {
     return `        <tr class="tableCategories">
-                        <td>To do <button onclick="opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></td>
-                        <td>In progress <button onclick="opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></td>
-                        <td>Await feedback <button onclick="opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></td>
+                        <td>To do <button onclick="selectEditOrAdd(0);opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></td>
+                        <td>In progress <button onclick="selectEditOrAdd(0);opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></td>
+                        <td>Await feedback <button onclick="selectEditOrAdd(0);opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></td>
                         <td>Done</td>
                     </tr>
                     <tr id="fields">
@@ -56,7 +56,7 @@ function taskBoardTamplate() {
 /** Builds the HTML markup for the stacked mobile board layout. */
 function taskBoardTamplateMobile() {
     return `            <tr>
-                            <td class="tableCategories">To do <button onclick="opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></th>
+                            <td class="tableCategories">To do <button onclick="selectEditOrAdd(0);opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></th>
                         </tr>
                         
                         <tr>          
@@ -64,13 +64,13 @@ function taskBoardTamplateMobile() {
                         </tr>
                         
                         <tr>
-                            <td class="tableCategories">In progress <button onclick="opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></th>
+                            <td class="tableCategories">In progress <button onclick="selectEditOrAdd(0);opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></th>
                         </tr>
                         <tr>
                             <td <div class= "mobileFieldProperties" id="field2" ondrop="moveTo('field2')" ondragover="dragoverHandler(event)"></div></td>
                         </tr>
                         <tr>
-                            <td class="tableCategories">Await feedback <button onclick="opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></th>
+                            <td class="tableCategories">Await feedback <button onclick="selectEditOrAdd(0);opendialog('boardAddTask');init();showExitButtonEditTask()">+</button></th>
                         </tr>
                         <tr>
                             <td <div class= "mobileFieldProperties" id="field3" ondrop="moveTo('field3')" ondragover="dragoverHandler(event)"> </div></td>
@@ -122,8 +122,8 @@ function taskDetailsTamplate(taskID) {
         </main>
         <footer>
              <div class="taskDetailsIcons">
-                <span onmouseover="displayNone('trash','trashMousover')" onmouseout = "removeDisplayNone('trash','trashMousover')" onclick = "closedialog('allTaskDetails'); deleteTask(${taskID})" class="taskDetailsIcons"><img id ="trash" src="./assets/icons/trash_darkblue.svg" alt="trash"><img class ="displayNone" id="trashMousover" src="./assets/icons/trash_lightblue.svg" alt="trashMousover"> Delete</span>
-                <span onmouseover="displayNone('edit','editMousover')"  onmouseout = "removeDisplayNone('edit','editMousover')" onclick = "selectEditOrAdd(1);opendialog('boardEditTask');editPreparation(${taskID})" class="taskDetailsIcons edit"><img id ="edit" onmouseover="" src="./assets/icons/pencil_darkblue.svg" alt="edit"><img class ="displayNone" id="editMousover" src="./assets/icons/pencil_lightblue.svg" alt="editMousover"> Edit</span>
+                <span onmouseover="displayNone('trash','trashMousover')" onmouseout = "removeDisplayNone('trash','trashMousover')" onclick = "closedialog('allTaskDetails'); deleteTask(${taskID})" class="taskDetailsIcons"><img id ="trash" src="./assets/img/delete.svg" alt="trash"><img class ="displayNone" id="trashMousover" src="./assets/icons/trash_lightblue.svg" alt="trashMousover"> Delete</span>
+                <span onmouseover="displayNone('edit','editMousover')"  onmouseout = "removeDisplayNone('edit','editMousover')" onclick = "selectEditOrAdd(1);opendialog('boardEditTask');editPreparation(${taskID})" class="taskDetailsIcons edit"><img id ="edit" onmouseover="" src="./assets/img/edit.svg" alt="edit"><img class ="displayNone" id="editMousover" src="./assets/icons/pencil_lightblue.svg" alt="editMousover"> Edit</span>
              </div>
         </footer>
     </div>`

@@ -135,6 +135,9 @@
 
     }
 
+    .noTaskField{
+         width: calc(var(--boardWith) - 20px) !important;
+    }
 }
 
 @media(max-width: 995px) {

@@ -9,6 +9,11 @@
   overflow: unset;
 }
 
+#boardEditTask,
+#boardEditTask * {
+  box-sizing: border-box;
+}
+
 #boardEditTask .addTaskMain {
   max-width: none;
   width: 100%;
@@ -31,7 +36,7 @@
   padding-right: 0;
 }
 
-.headerContent {
+#boardEditTask .headerContent {
   align-items: flex-start ;
 }
 
@@ -39,7 +44,7 @@
     width: min(525px, calc(100vw - 32px));
     max-width: 525px;
 }
-.descriptionImg{
+#boardEditTask .descriptionImg{
     display: none;
 }
 
@@ -70,8 +75,21 @@
 
 #boardEditTask .headerContent{
         justify-content: flex-end;
-} 
-/*  
+}
+
+#boardEditTask #mainContent,
+#boardEditTask .contentWrapperAddTask,
+#boardEditTask .leftContent,
+#boardEditTask .rightContent,
+#boardEditTask .OptionsContainer,
+#boardEditTask .categorySelectWrapper,
+#boardEditTask .taskNameContainer,
+#boardEditTask .taskDescriptionContainer,
+#boardEditTask .addTaskDateContainer,
+#boardEditTask .subtaskInputContainer,
+#boardEditTask .buttonRequiredField,
+#boardEditTask .taskButton,
+#boardEditTask .priority,
 #boardEditTask .inputField,
 #boardEditTask .taskNameContainer textarea,
 #boardEditTask .taskDescriptionContainer textarea,
@@ -79,46 +97,161 @@
 #boardEditTask .ChoiceOption,
 #boardEditTask .assignedToInput,
 #boardEditTask .assignedDropdown,
-#boardEditTask .subtaskInputContainer,
 #boardEditTask .inputField.bottomInput,
 #boardEditTask .subTaskList,
 #boardEditTask .subTaskEditContainer,
-#boardEditTask .buttonRequiredField {
-    max-width: 400px;
-} 
- 
-#boardEditTask .OptionsContainer .subTaskList {
-    max-width: 400px;
+#boardEditTask .subTaskEditInput,
+#boardEditTask .subTaskItem,
+#boardEditTask .subTaskContent,
+#boardEditTask .subTaskText,
+#boardEditTask .assignedPreviewContainer,
+#boardEditTask .contactLeft,
+#boardEditTask .contactName {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
-#boardEditTask .OptionsContainer .subTaskItem {
-    max-width: 400px;
+#boardEditTask .subTaskContent,
+#boardEditTask .subTaskEditContainer,
+#boardEditTask .subTaskItem,
+#boardEditTask .assignedPreviewContainer,
+#boardEditTask .contactLeft {
+  width: 100%;
 }
 
-#boardEditTask .OptionsContainer .subTaskItem .subTaskContent {
-    max-width: 400px;
+#boardEditTask .subTaskText,
+#boardEditTask .contactName,
+#boardEditTask .mainTitle {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-
-@media (max-width: 1392px) {
-    #boardEditTask .priority {
-        gap: 5px;
-    }
+#boardEditTask .ChoiceOption {
+  width: 100%;
 }
 
-@media (max-width: 1300px) {
-    #boardEditTask .subTaskItem {
-        padding-right: unset;
-        width: unset;
-    }
+#boardEditTask .categorySelectWrapper,
+#boardEditTask .TaskCategoryInput {
+  display: block;
+  width: 100%;
+}
 
-    #boardEditTask .boardEditTaskButton {
-        width: fit-content;
-    }
+#boardEditTask .TaskCategoryInput {
+  display: flex;
+}
 
-    #boardEditTask .boardEditTaskButtonContainer{
-        display: flex;
-        justify-content: flex-end;
-    }
+#boardEditTask .assignedPreviewContainer {
+  flex-wrap: wrap;
+}
 
-}    */
+@media (max-width: 600px) {
+  #boardEditTask {
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+  }
+
+  #boardEditTask .addTaskMain {
+    max-width: 100%;
+    padding: 24px 20px 28px;
+  }
+
+  #boardEditTask .mainTitle {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  #boardEditTask .priority {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #boardEditTask .priorityButton {
+    flex: 1 1 calc(33.333% - 8px);
+    min-width: 0;
+    width: auto;
+  }
+
+  #boardEditTask .buttonRequiredField {
+    margin-top: 24px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #boardEditTask .requiredBottomLeft {
+    width: 100%;
+    padding-bottom: 16px;
+  }
+
+  #boardEditTask .taskButton {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  #boardEditTask {
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+  }
+
+  #boardEditTask .addTaskMain {
+    padding: 20px 16px 24px;
+  }
+
+  #boardEditTask .mainTitle {
+    font-size: 40px;
+  }
+
+  #boardEditTask .taskButton {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #boardEditTask .clearButton,
+  #boardEditTask .createButton,
+  #boardEditTask .boardEditTaskButton {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  #boardEditTask .priorityButton {
+    font-size: 14px;
+    gap: 4px;
+    height: 42px;
+    padding: 0 6px;
+  }
+
+  #boardEditTask .priorityButton .priorityIcon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 320px) {
+  #boardEditTask {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+  }
+
+  #boardEditTask .addTaskMain {
+    padding: 16px 12px 24px;
+  }
+
+  #boardEditTask .mainTitle {
+    font-size: 36px;
+  }
+
+  #boardEditTask .priority {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  #boardEditTask .priorityButton {
+    flex: 1 1 calc(33.333% - 6px);
+    min-width: 0;
+    width: auto;
+  }
+}

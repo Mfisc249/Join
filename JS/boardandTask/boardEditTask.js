@@ -66,7 +66,7 @@ function createSaveDataEditTaskButton(taskID) {
   curentTaskID = taskID;
   let refsaveButtonEditTask = document.createElement('div');
   refsaveButtonEditTask.className = `boardEditTaskButtonContainer`;
-  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); closedialog('boardAddTask'); saveDataEditTask()" class ="ButtonBlueFilled boardEditTaskButton">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
+  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); closedialog('boardEditTask'); saveDataEditTask()" class ="ButtonBlueFilled boardEditTaskButton">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
 }
 
@@ -78,19 +78,20 @@ function showExitButtonEditTask() {
 /**Creates the edit dialog close button and appends it to the add-task header area. */
 function createExitButtonEditTask() {
   let refExitButtonEditTask = document.createElement('div');
-  refExitButtonEditTask.innerHTML = `<div class= "closeDialogX" onclick = "closedialog('boardAddTask')">X</div>`;
+  refExitButtonEditTask.innerHTML = `<div class= "closeDialogX" onclick = "closedialog('boardEditTask')">X</div>`;
   document.getElementById("addTaskHeaderContent").appendChild(refExitButtonEditTask);
 }
 
 /**Reads the current form inputs and writes title, description, due date, and category into the task state object. */
 function getDataEditTask() {
-  const titleInput = document.getElementById("taskName");
-  const descInput = document.getElementById("taskDesc");
-  const dateInput = document.getElementById("DueDate");
+  const editDialog = document.getElementById("boardEditTask");
+  const titleInput = editDialog?.querySelector("#taskName") || document.getElementById("taskName");
+  const descInput = editDialog?.querySelector("#taskDesc") || document.getElementById("taskDesc");
+  const dateInput = editDialog?.querySelector("#DueDate") || document.getElementById("DueDate");
 
-  task.title = titleInput.value;
-  task.description = descInput.value;
-  task.dueDate = dateInput.value;
+  task.title = titleInput?.value ?? "";
+  task.description = descInput?.value ?? "";
+  task.dueDate = dateInput?.value ?? "";
   task.category = selectedCategory;
 }
 

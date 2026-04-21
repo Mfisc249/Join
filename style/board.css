@@ -104,8 +104,8 @@ body {
 }
 
 .highlightTask {
-    height: 215px;
-    width: 252px;
+    height: 300px;
+    width: 300px;
     border: 1px dashed var(--GlobalBorderColorGray);
     border-radius: 30px;
     margin-top: 5px;
@@ -118,8 +118,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #E7E7E7;
     color: var(--GlobalBorderColorGray);
+    background-color: #E7E7E7 !important; 
 }
 
 .noTaskFound {
