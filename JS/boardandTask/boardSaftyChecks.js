@@ -38,5 +38,8 @@ function normalizeCategory(value) {
 
 /** Normalizes a due-date value for safe display in the UI. */
 function normalizeDueDate(value) {
-    return safeText(value, '-');
+    let datetoString = value.toString();
+    let dateSplit = value.split('-').reverse();
+    let res = dateSplit.join('/');
+    return safeText(res, '/');
 }

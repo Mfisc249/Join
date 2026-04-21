@@ -19,6 +19,7 @@ async function editPreparation(taskID) {
   task.title = refTaskEditTask.title;
   task.description = refTaskEditTask.description;
   task.dueDate = refTaskEditTask.dueDate;
+  document.getElementById("DueDate").value = task.dueDate;
   await setupFunctionEditTask( refTaskEditTask);
 }
 
