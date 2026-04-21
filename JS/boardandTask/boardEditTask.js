@@ -5,10 +5,6 @@ let editSubTaskReview = [];
 /**Initializes edit mode for a task, fills the form with existing values, adjusts the dialog UI, and starts edit-specific setup.*/
 async function editPreparation(taskID) {
   let refTaskEditTask = TASK[0][`Task${taskID}`];
-  // const boardDialog = document.getElementById("boardAddTask");
-  // if (boardDialog) {
-  //   boardDialog.classList.add("edit-task-dialog");
-  // }
   isEditTaskMode = true;
   editSubTaskReview = [];
   document.getElementById("mainContent").innerHTML = createTaskTemplate(`${refTaskEditTask.title}`,`${refTaskEditTask.description}`, `${refTaskEditTask.dueDate}`);
@@ -67,8 +63,19 @@ function createSaveDataEditTaskButton(taskID) {
   curentTaskID = taskID;
   let refsaveButtonEditTask = document.createElement('div');
   refsaveButtonEditTask.className = `boardEditTaskButtonContainer`;
-  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); closedialog('boardEditTask'); saveDataEditTask()" class ="ButtonBlueFilled boardEditTaskButton">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
+  refsaveButtonEditTask.innerHTML = `<div onclick ="getDataEditTask(); checkValidation(${taskID})" class ="ButtonBlueFilled boardEditTaskButton">OK <img src="./assets/img/check-2.svg" alt="OK"></div>`
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
+}
+
+function checkValidation(taskID) {
+  if (task.title == "" || task.dueDate == "" || TASK[0][`Task${taskID}`].assignedTo == [] || TASK[0][`Task${taskID}`].assignedTo == undefined || TASK[0][`Task${taskID}`].assignedTo == null ) {
+      return;
+  }else{
+    closedialog('boardEditTask');
+    saveDataEditTask();
+    return;
+  }
+  
 }
 
 /**Shows the existing close button in edit mode by removing the hidden state class. */

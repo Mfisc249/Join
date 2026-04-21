@@ -35,6 +35,12 @@
   align-items: flex-start ;
 }
 
+@media (max-width:1400px){
+  .descriptionImg{
+    display: none;
+  }
+}
+
 @media (max-width: 1300px) {
   #boardAddTask .mainTitle {
     position: unset ;
@@ -170,7 +176,8 @@
   }
 
   #boardAddTask .OptionsContainer .assignedDropdown {
-    width: unset ;
+    width: 100%;
+    margin-top: 75px;
   }
 
   #boardAddTask .OptionsContainer .categorySelectWrapper {
