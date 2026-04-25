@@ -43,9 +43,8 @@
   pointer-events: none;
 }
 
-
 /* Responsive */
-/* .main und .header left:0 wird in standard.css bei 768px gesetzt (sync mit sidebar display:none) */
+/* .main and .header left: 0 is set in standard.css at 768px (in sync with sidebar display: none) */
 
 .canvas-area.disclaimer-text {
   overflow-wrap: break-word;

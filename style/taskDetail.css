@@ -131,6 +131,7 @@ dialog.closed::backdrop {
     margin-bottom: 15px;
     max-height: 200px;
     overflow: auto;
+    padding-left: 10px;
 }
 
 .taskDetailsATContainer {
@@ -154,6 +155,10 @@ dialog.closed::backdrop {
 
 .allPriority {
     justify-content: unset;
+}
+
+.fontSize20px{
+    font-size: 20px;
 }
 
 @media(max-width:750px){

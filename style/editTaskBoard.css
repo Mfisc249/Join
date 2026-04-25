@@ -77,6 +77,10 @@
         justify-content: flex-end;
 }
 
+#boardEditTask .taskNameContainer textarea{
+    height: auto;
+}
+
 #boardEditTask #mainContent,
 #boardEditTask .contentWrapperAddTask,
 #boardEditTask .leftContent,
