@@ -189,7 +189,7 @@ function updateEmptyHintForField(fieldId, placeholderId, placeholderText) {
 /** Creates the empty-state placeholder inside a board column when no tasks exist. */
 function addEmptyFieldPlaceholder(field, placeholder, placeholderId, placeholderText) {
     if (!placeholder) {
-        field.innerHTML = `<div id="${placeholderId}" class="noTaskField taskContainer">${placeholderText}</div>`;
+        field.innerHTML = `<div id="${placeholderId}" class="taskContainer noTaskField">${placeholderText}</div>`;
     }
 }
 

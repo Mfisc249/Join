@@ -110,9 +110,22 @@
     }
 
     .tablecontainer td .taskContainer {
-        min-height: 270px;
+        min-height: 263px;
         position: relative;
     }
+
+    .tablecontainer td .noTaskField {
+        min-height: unset;
+        width: var(--boardWith);
+    }
+
+
+    .plusButtonBoard {
+        width: 30px;
+        height: 30px;
+    }
+
+
 }
 
 @media(max-width:1230px) {

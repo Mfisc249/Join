@@ -94,6 +94,8 @@ dialog.closed::backdrop {
     gap: 5px;
     color: var(--GlobalBlue);
     font-size: 19px;
+    margin-bottom: 15px;
+    padding-right: 20px;
 }
 
 .taskDetailsIcons:hover {
@@ -107,6 +109,11 @@ dialog.closed::backdrop {
 
 .taskDetailsIcons .edit {
     border-left: 1px #D1D1D1 solid;
+    padding-left: 8px;
+}
+
+.taskDetailsIcons .trash{
+    padding-right: 8px;
 }
 
 .subTasks {
@@ -131,7 +138,7 @@ dialog.closed::backdrop {
     margin-bottom: 15px;
     max-height: 200px;
     overflow: auto;
-    padding-left: 10px;
+    padding-left: 16px;
 }
 
 .taskDetailsATContainer {
@@ -151,6 +158,12 @@ dialog.closed::backdrop {
 
 .minWith350 {
     min-width: 350px;
+}
+
+.allContent{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 .allPriority {
