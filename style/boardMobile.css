@@ -102,6 +102,17 @@
         max-width: var(--boardWith);
         gap: 20px;
     }
+
+    .mobilePrioritiyandContacts {
+        position: absolute;
+        bottom: 10px;
+        width: 252px;
+    }
+
+    .tablecontainer td .taskContainer {
+        min-height: 270px;
+        position: relative;
+    }
 }
 
 @media(max-width:1230px) {
@@ -135,8 +146,8 @@
 
     }
 
-    .noTaskField{
-         width: calc(var(--boardWith) - 20px) !important;
+    .noTaskField {
+        width: calc(var(--boardWith) - 20px) !important;
     }
 }
 

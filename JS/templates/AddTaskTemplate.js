@@ -115,7 +115,7 @@ function createTaskTemplate(taskName, taskDescription, taskDueDate) {
               <img class="dropDownArrow" id="categoryDropdownArrow" src="./assets/img/arrow_drop_down.svg" alt="">
             </button>
 
-            <div id="categoryDropdown" class="assignedDropdown hidden">
+            <div id="categoryDropdown" class="assignedDropdown hidden assignedDropdownEditTask">
               <div class="categoryOption" onclick="selectCategory('Technical Task')">Technical Task</div>
               <div class="categoryOption" onclick="selectCategory('User Story')">User Story</div>
             </div>

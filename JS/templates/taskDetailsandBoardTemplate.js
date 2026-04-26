@@ -13,19 +13,21 @@ function taskTamplate(taskID) {
                 <section>
                 <h2 class="marginleft10px paddingBottom5">${safeText(task.title, 'Untitled task')}<h2>
                 <h2 class="marginleft10px boardTaskContent paddingBottom15">${safeText(shortenDescription(task.description), '')}<h2>
-                <div id ="allsubtaskProgressbar${taskID}" class ="displayFLEX allsubtaskProgressbar">
-                    <div class="subtaskProgressbarC marginleft10px">
+                <div class ="mobilePrioritiyandContacts">
+                    <div id ="allsubtaskProgressbar${taskID}" class ="displayFLEX allsubtaskProgressbar">
+                        <div class="subtaskProgressbarC marginleft10px">
                         <div class="subtaskProgressbar" id="subtaskProgressbar${taskID}"></div>
                     </div>
                     <span class ="displayFLEX allSubtaskCheckedCount"> <p id = "subtaskCheckedCount${taskID}"></p>/<p>${subTasks.length}</p>  Subtasks</span>
-                </div>
-                <div class = "displayFLEX paddingBottom5 paddingTop15">
-                    <div id = "taskContactsContainer${taskID}" class="taskContactsContainer paddingBottom5">
+                    </div>
+                    <div class = "displayFLEX paddingBottom5 paddingTop15">
+                        <div id = "taskContactsContainer${taskID}" class="taskContactsContainer paddingBottom5">
                 
                     </div>
-                    <div id = "taskPriorityContainer${taskID}">
+                        <div id = "taskPriorityContainer${taskID}">
                     </div>
-                </div>
+                    </div>
+                <div>
                 </section>
             </div>
             `

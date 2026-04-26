@@ -177,8 +177,13 @@
 
   #boardAddTask .OptionsContainer .assignedDropdown {
     width: 100%;
-    margin-top: 75px;
+    margin-top: 80px;
   }
+
+  #boardAddTask .OptionsContainer .assignedDropdownEditTask{
+    margin-top: 45px;
+  }
+
 
   #boardAddTask .OptionsContainer .categorySelectWrapper {
     display: flex ;
