@@ -124,6 +124,7 @@ dialog.closed::backdrop {
     margin-bottom: 20px;
     max-height: 200px;
     overflow: auto;
+    padding-left: 16px;
 }
 
 .subTasks span {
