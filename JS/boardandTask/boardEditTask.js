@@ -68,7 +68,7 @@ function createSaveDataEditTaskButton(taskID) {
 }
 
 function checkValidation(taskID) {
-  if (task.title == "" || task.dueDate == "" || TASK[0][`Task${taskID}`].assignedTo == [] || TASK[0][`Task${taskID}`].assignedTo == undefined || TASK[0][`Task${taskID}`].assignedTo == null ) {
+  if (task.title == "" || task.dueDate == "" || task.category == "") {
       return;
   }else{
     closedialog('boardEditTask');
