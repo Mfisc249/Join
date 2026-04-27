@@ -20,32 +20,40 @@ document.addEventListener('DOMContentLoaded', async () => {
  * deadline, greeting, and navigation wiring.
  */
 async function initSummary() {
+  const tasks = await getAllTasks();
+  renderTaskCounts(tasks);
+  renderNextDeadline(tasks);
+  handleSessionRedirect();
+  initGreeting();
+  wireSummaryNavigation();
+  showMobileGreetingIfNeeded();
+}
+
+async function getAllTasks() {
   const tasksObj = await DataGET('Tasks');
-  const tasks = tasksObj ? Object.values(tasksObj) : [];
+  return tasksObj ? Object.values(tasksObj) : [];
+}
 
+function renderTaskCounts(tasks) {
   const counts = countTasks(tasks);
-
   setText('sum-todo', counts.todo);
   setText('sum-inprogress', counts.inprogress);
   setText('sum-feedback', counts.feedback);
   setText('sum-done', counts.done);
   setText('sum-board', counts.board);
   setText('sum-urgent', counts.urgent);
+}
 
+function renderNextDeadline(tasks) {
   const nextDeadline = getUpcomingDeadline(tasks);
   setText('sum-deadline-date', nextDeadline ? formatDateLong(nextDeadline) : '—');
-  // Optional: redirect to login if no session info (set to true to enable)
+}
+
+function handleSessionRedirect() {
   const ENABLE_REDIRECT_IF_NO_SESSION = false;
   if (ENABLE_REDIRECT_IF_NO_SESSION && !sessionStorage.getItem('userName')) {
     window.location.href = 'login.html';
-    return;
   }
-
-  initGreeting();
-  wireSummaryNavigation();
-  
-  // Show mobile greeting overlay after login
-  showMobileGreetingIfNeeded();
 }
 
 
@@ -67,19 +75,19 @@ async function DataGET(path = '') {
  */
 function countTasks(tasks) {
   const c = { todo: 0, inprogress: 0, feedback: 0, done: 0, board: 0, urgent: 0 };
-
-  for (const t of tasks) {
-    const col = t?.field?.field;
-    if (col === 'field1') c.todo++;
-    else if (col === 'field2') c.inprogress++;
-    else if (col === 'field3') c.feedback++;
-    else if (col === 'field4') c.done++;
-    else continue;
-
-    if (String(t?.priority).toLowerCase() === 'urgent') c.urgent++;
-  }
+  tasks.forEach(t => updateTaskCounts(t, c));
   c.board = c.todo + c.inprogress + c.feedback + c.done;
   return c;
+}
+
+function updateTaskCounts(t, c) {
+  const col = t?.field?.field;
+  if (col === 'field1') c.todo++;
+  else if (col === 'field2') c.inprogress++;
+  else if (col === 'field3') c.feedback++;
+  else if (col === 'field4') c.done++;
+  else return;
+  if (String(t?.priority).toLowerCase() === 'urgent') c.urgent++;
 }
 
 /**
