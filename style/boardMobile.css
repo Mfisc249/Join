@@ -119,12 +119,15 @@
         width: var(--boardWith);
     }
 
-
     .plusButtonBoard {
         width: 30px;
         height: 30px;
     }
 
+    .searchBar input::placeholder {
+        font-size: 20px;
+
+    }
 
 }
 
