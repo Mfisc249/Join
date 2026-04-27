@@ -7,7 +7,7 @@ function isLoggedIn() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadTemplate('./templates/header.html', '#header-slot');
+  await loadHeaderTemplate('./templates/header.html', '#header-slot');
   handleHeaderAuth();
 });
 
@@ -34,7 +34,7 @@ function handleHeaderAuth() {
  * @param {string} url - Path to the HTML template file.
  * @param {string} targetSelector - CSS selector of the container element.
  */
-async function loadTemplate(url, targetSelector) {
+async function loadHeaderTemplate(url, targetSelector) {
   const target = document.querySelector(targetSelector);
   if (!target) return;
 
@@ -58,6 +58,8 @@ function setupSubmenu() {
   const badge = document.getElementById("circleBadge");
   const menu = document.getElementById("submenu");
   if (!badge || !menu) return;
+  if (badge.dataset.submenuInitialized === "true") return;
+  badge.dataset.submenuInitialized = "true";
 
   const open = () => {
     menu.classList.remove("hidden");
@@ -76,6 +78,10 @@ function setupSubmenu() {
   badge.addEventListener("click", (e) => {
     e.stopPropagation();
     toggle();
+  });
+
+  menu.addEventListener("click", (e) => {
+    e.stopPropagation();
   });
 
   // Klick außerhalb schließt

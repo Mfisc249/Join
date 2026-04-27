@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadTemplate('./templates/sidebar.html', '#sidebar-slot');
+  await loadSidebarTemplate('./templates/sidebar.html', '#sidebar-slot');
   markActiveNav();
   handleSidebarAuth();
   handleGuestMobileNav();
@@ -44,7 +44,7 @@ function handleSidebarAuth() {
  * @param {string} url - Path to the HTML template file.
  * @param {string} targetSelector - CSS selector of the container element.
  */
-async function loadTemplate(url, targetSelector) {
+async function loadSidebarTemplate(url, targetSelector) {
   const target = document.querySelector(targetSelector);
   if (!target) return;
 
