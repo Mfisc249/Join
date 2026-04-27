@@ -211,6 +211,10 @@ dialog.closed::backdrop {
         margin-bottom: 10px;
         padding-right: 16px;
     }
+
+    .addTaskContainer h1{
+        font-size: 47px;
+    }
 }
 
 @media(max-width:599px) {
