@@ -100,7 +100,7 @@ function taskDetailsTamplate(taskID) {
         </header>
         <main>
             <section>
-                <p class = "fontSize20px">${safeText(task.description, 'No description')}</p>
+                <p class = "descriptionSize">${safeText(task.description, 'No description')}</p>
                 <table>
                     <tr>
                         <td><h2>Due date:</h2></td>

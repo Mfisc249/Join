@@ -51,8 +51,8 @@ dialog.closed::backdrop {
     font-size: 61px;
     margin: 0;
     margin-top: 20px;
+    font-weight: 700;
 }
-
 
 .allTaskDetails h2 {
     color: var(--GlobalBlue);
@@ -112,7 +112,7 @@ dialog.closed::backdrop {
     padding-left: 8px;
 }
 
-.taskDetailsIcons .trash{
+.taskDetailsIcons .trash {
     padding-right: 8px;
 }
 
@@ -126,14 +126,14 @@ dialog.closed::backdrop {
     overflow: auto;
 }
 
-.subTasks span{
+.subTasks span {
     display: flex;
     gap: 13px;
     padding-bottom: 15px;
     padding-top: 10px;
 }
 
-#taskDetailsAT{
+#taskDetailsAT {
     margin-top: 8px;
     margin-bottom: 15px;
     max-height: 200px;
@@ -160,7 +160,7 @@ dialog.closed::backdrop {
     min-width: 350px;
 }
 
-.allContent{
+.allContent {
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 20px;
@@ -170,14 +170,45 @@ dialog.closed::backdrop {
     justify-content: unset;
 }
 
-.fontSize20px{
+.descriptionSize {
     font-size: 20px;
 }
 
-@media(max-width:750px){
-    
+@media(max-width:750px) {
+
     .allTaskDetails h1 {
-        font-size: 40px;
+        font-size: 36px;
+    }
+
+    .descriptionSize {
+        font-size: 16px;
+    }
+
+    .allTaskDetails h2 {
+        font-size: 16px;
+    }
+
+    .allTaskDetails td {
+        font-size: 16px;
+    }
+
+    .taskDetailsATContainer span:not(:first-child) {
+        font-size: 16px;
+    }
+
+    .taskDetailsIcons {
+        font-size: 16px;
+    }
+
+    .allContent {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 16px;
+    }
+
+    .taskDetailsIcons{
+        margin-bottom: 10px;
+        padding-right: 16px;
     }
 }
 
@@ -208,7 +239,7 @@ dialog.closed::backdrop {
 }
 
 @media(max-width:380px) {
-     
+
     dialog {
         max-width: 250px;
     }

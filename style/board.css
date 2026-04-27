@@ -11,6 +11,7 @@ body {
     justify-content: space-between;
     align-items: center;
     width: var(--boardWith);
+    margin-bottom: 50px;
 }
 
 .addTaskContainer h1 {
@@ -82,9 +83,13 @@ body {
     min-width: 252px;
     background-color: var(--GlobalWhite);
     padding-top: 10px;
-    padding-right: 24px;
-    padding-left: 24px;
+    padding-right: 18px;
+    padding-left: 10px;
     padding-bottom: 10px;
+}
+
+.tablecontainer td .taskContainer h2{
+    font-size: 16px;
 }
 
 .plusButtonBoard{
