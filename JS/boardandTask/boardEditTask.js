@@ -67,6 +67,7 @@ function createSaveDataEditTaskButton(taskID) {
   document.querySelector(".buttonRequiredField").appendChild(refsaveButtonEditTask);
 }
 
+/**Checks the validation of dueDate, category and title*/
 function checkValidation(taskID) {
   if (task.title == "" || task.dueDate == "" || task.category == "") {
       return;
