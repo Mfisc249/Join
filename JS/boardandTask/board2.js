@@ -4,7 +4,7 @@
 function getTaskDetailsContacts(taskID, renderFunctionSelector) {
     let refAssignedTo = safeArray(getTaskById(taskID).assignedTo);
     renderAssignedContacts(refAssignedTo, taskID, renderFunctionSelector);
-    if (shouldHideAssignedHeadline(refAssignedTo)) {
+    if (shouldHideAssignedHeadline(refAssignedTo) && refAssignedTo.length == 0 && document.getElementById("taskDetailsAT").childElementCount == 0) {
         document.getElementById('taskDetailsATHeadline').classList.add('displayNone');
     }
 }
