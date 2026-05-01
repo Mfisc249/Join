@@ -20,7 +20,6 @@ async function signUp() {
   }, 1100);
 }
 
-
 /**
  * returns the DOM Elements from the signup Form
  * @returns {Object} signup object
@@ -34,13 +33,11 @@ function getSignupData() {
   };
 }
 
-
 /** Shows error if the email is already registered */
 function showSignupError() {
   document.getElementById('signupEmail').classList.add('InputFieldError');
   document.getElementById('signupError').textContent = 'This email is already registered.';
 }
-
 
 /**
  * starts email check and returns logindata and email
@@ -52,7 +49,6 @@ async function checkEmailExists(email) {
   return checkEmailData(loginData, email);
 }
 
-
 /** @returns {boolean} */
 function checkEmailData(loginData, email) {
   let users = Object.values(loginData);
@@ -63,7 +59,6 @@ function checkEmailData(loginData, email) {
   }
   return false;
 }
-
 
 /** @returns {boolean} True if all inputs are valid */
 function checkSignupInputs(name, email, password, confirm) {
@@ -83,7 +78,6 @@ function checkSignupInputs(name, email, password, confirm) {
   return isValid;
 }
 
-
 /**
  * checks inputs and trims name, if first and last name are entered, shows error messages, and returns true if correct
  * @param {HTMLInputElement} name - entered name from input
@@ -101,13 +95,11 @@ function validateName(name) {
   return true;
 }
 
-
 /** @returns {boolean} */
 function isValidEmail(email) {
   let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return pattern.test(email);
 }
-
 
 /**
  * renders error messages and adds red borders at inputs
@@ -122,7 +114,6 @@ function showInputError(input, message) {
   }
 }
 
-
 /** clears the error messages and removes error css for all inputs */
 function clearSignupErrors() {
   document.getElementById('signupError').textContent = '';
@@ -131,7 +122,6 @@ function clearSignupErrors() {
     input.classList.remove('InputFieldError');
   });
 }
-
 
 /**
  * collects all data from user
@@ -147,7 +137,6 @@ async function gatherUserInfo(name, email, password) {
   await createNewUserContact(id, color, date, email, initials, name);
   await createNewUserLogin(id, email, password);
 }
-
 
 /**
  * Creates new user object in Contacts in Firebase
@@ -175,7 +164,6 @@ async function createNewUserContact(id, color, date, email, initials, name) {
   });
 }
 
-
 /**
  * creates new login data for user in logindata in firebase
  * @param {string} id - contact user id
@@ -193,7 +181,6 @@ async function createNewUserLogin(id, email, password) {
   });
 }
 
-
 /**
  * Creates toast element with success message after successful signup
  * @param {string} message - the success message
@@ -208,7 +195,6 @@ function showToast(message) {
   }, 50);
 }
 
-
 /** Toggles the signup button by checking all inputs */
 function toggleSignupButton() {
   let name = getSignupUserName();
@@ -220,7 +206,6 @@ function toggleSignupButton() {
   button.disabled = !(name && email && password && confirm && checkbox);
 }
 
-
 /**
  * Gets trimmed signup name
  * @returns {string} Trimmed name
@@ -229,7 +214,6 @@ function getSignupUserName() {
   let name = document.getElementById('signupName').value.trim();
   return name;
 }
-
 
 /**
  * Gets trimmed email from signup
@@ -240,7 +224,6 @@ function getSignupEmail() {
   return email;
 }
 
-
 /**
  * gets password from signup
  * @returns {string} returns password
@@ -249,7 +232,6 @@ function getSignupPassword() {
   let password = document.getElementById('signupPassword').value;
   return password;
 }
-
 
 /** Initializes signup: prevents refresh, places event listeners on inputs to toggle signup button and change eye icon */
 function initSignup() {
@@ -268,7 +250,6 @@ function initSignup() {
   let checkbox = document.getElementById('signupPrivacy');
   checkbox.addEventListener('change', toggleSignupButton);
 }
-
 
 /**
  * fetches complete database contacts and extracts next highest free number for new user id
@@ -289,7 +270,6 @@ async function getNextContactId() {
   return 'c' + (maxNumber + 1);
 }
 
-
 /**
  * generates initals from user first and last name
  * @param {string} name - user first and last name
@@ -300,7 +280,6 @@ function generateInitials(name) {
   let initials = parts[0][0] + parts[1][0];
   return initials.toUpperCase();
 }
-
 
 /**
  * Assigns random color to new user

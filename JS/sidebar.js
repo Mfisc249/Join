@@ -38,7 +38,6 @@ function handleSidebarAuth() {
   }
 }
 
-
 /**
  * Loads an HTML template file and injects it into the target element.
  * @param {string} url - Path to the HTML template file.
@@ -53,7 +52,6 @@ async function loadSidebarTemplate(url, targetSelector) {
 
   target.innerHTML = await res.text();
 }
-
 
 /**
  * Highlights the active navigation item in desktop sidebar,
@@ -86,7 +84,6 @@ function markActiveNav() {
     link.classList.toggle('active', linkPage === currentPage);
   });
 }
-
 
 /**
  * Shows or hides the guest mobile bottom navigation

@@ -56,7 +56,6 @@ function handleSessionRedirect() {
   }
 }
 
-
 /**
  * Fetches JSON data from Firebase Realtime Database.
  * @param {string} path - The database path to query.
@@ -66,7 +65,6 @@ async function DataGET(path = '') {
   const res = await fetch(SUMMARYURLBASE + path + '.json');
   return await res.json();
 }
-
 
 /**
  * Counts tasks by status and priority.
@@ -109,7 +107,6 @@ function getUpcomingDeadline(tasks) {
   return dates[0] || null;
 }
 
-
 /**
  * Parses a dd/mm/yyyy date string into a Date object.
  * @param {string|null} value - Date string in dd/mm/yyyy format.
@@ -129,7 +126,6 @@ function parseJoinDate(value) {
   return startOfDay(d);
 }
 
-
 /**
  * Strips time from a Date, returning midnight of that day.
  * @param {Date} d - The date to normalize.
@@ -138,7 +134,6 @@ function parseJoinDate(value) {
 function startOfDay(d) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
-
 
 /**
  * Formats a Date as a long English string (e.g. "January 27, 2026").
@@ -149,7 +144,6 @@ function formatDateLong(d) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-
 /**
  * Sets the text content of an element by its ID.
  * @param {string} id - The DOM element ID.
@@ -159,7 +153,6 @@ function setText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = String(value);
 }
-
 
 /**
  * Displays a time-based greeting and the logged-in username.

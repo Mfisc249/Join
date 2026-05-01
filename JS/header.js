@@ -28,7 +28,6 @@ function handleHeaderAuth() {
   }
 }
 
-
 /**
  * Loads an HTML template file and injects it into the target element.
  * @param {string} url - Path to the HTML template file.
@@ -48,7 +47,6 @@ async function loadHeaderTemplate(url, targetSelector) {
   // Initialize header user badge (initials / color / guest) after template load
   initHeaderUser();
 }
-
 
 /**
  * Initializes the header submenu toggle, outside-click close,
@@ -97,7 +95,6 @@ function setupSubmenu() {
   });
 }
 
-
 /**
  * Logs the user out by clearing session and local storage,
  * then redirects to the login page.
@@ -107,7 +104,6 @@ function logout() {
   localStorage.clear();
   window.location.href = "./index.html"; // or "./login.html"
 }
-
 
 /**
  * Sets the user's initials in the header badge from session storage.

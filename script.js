@@ -36,7 +36,6 @@ function initPasswordToggles() {
   });
 }
 
-
 /**
  * Updates the password field icon based on whether the input has content.
  * @param {HTMLInputElement} input - The password input field
@@ -55,7 +54,6 @@ function updatePasswordIcon(input, icon) {
   }
 }
 
-
 /**
  * Toggles password visibility between hidden and visible states.
  * @param {HTMLInputElement} input - The password input field
@@ -73,7 +71,6 @@ function togglePasswordVisibility(input, icon) {
   }
 }
 
-
 /** 
  * creates overlay in DOM before body
  */
@@ -85,7 +82,6 @@ function initLandscapeOverlay() {
     <p>Please rotate your device to portrait mode.</p>`;
   document.body.insertBefore(overlay, document.body.firstChild);
 }
-
 
 /**
  * fetches the login-Data from firebase

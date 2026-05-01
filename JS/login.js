@@ -17,7 +17,6 @@ async function login() {
   }
 }
 
-
 /**
  * Transmits the user key and starts the session. 
  * @param {string} userKey - corresponds to key in login-data json
@@ -27,7 +26,6 @@ async function startUserSession(userKey) {
     window.location.href = 'summary.html';
 }
 
-
 /** shows login-Error with red borders and show message, disables button */
 function showLoginError() {
     document.getElementById('loginEmail').classList.add('InputFieldError');
@@ -36,7 +34,6 @@ function showLoginError() {
       'Check your email and password. Please try again.';
     document.getElementById('loginButton').disabled = false;
 }
-
 
 /**
  * saves user in session storage
@@ -56,7 +53,6 @@ async function saveLoggedInUser(userKey) {
   sessionStorage.setItem('isGuest', 'false');
 }
 
-
 /**
  * Fetches contact data for a user from Firebase
  * @param {string} userKey - The contact ID in Firebase
@@ -69,7 +65,6 @@ async function fetchContactData(userKey) {
   let contactData = await response.json();
   return contactData;
 }
-
 
 /** 
  * Checks the login input values vs. database.
@@ -87,7 +82,6 @@ function checkLoginData(loginData, email, password) {
   }
   return false;
 }
-
 
 document.getElementById('loginButton').addEventListener('click', function (event) {
   event.preventDefault();
