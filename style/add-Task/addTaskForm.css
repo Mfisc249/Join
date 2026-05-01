@@ -51,7 +51,7 @@
 }
 
 .taskNameContainer textarea:focus {
-  border: 2px solid #88e9fa; /* kräftiges Blau */
+  border: 2px solid #88e9fa; /* Strong blue */
   outline: none;
 }
 

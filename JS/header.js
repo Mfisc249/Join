@@ -20,7 +20,7 @@ function handleHeaderAuth() {
   const isLoggedIn_now = !!sessionStorage.getItem("contactId");
   const isGuest = sessionStorage.getItem("isGuest") === "true";
   
-  // guest-mode: nur bei NICHT eingeloggt UND NICHT als Gast
+  // Guest mode: only when not logged in and not using guest access
   if (!isLoggedIn_now && !isGuest) {
     document.body.classList.add("guest-mode");
   } else {
@@ -43,7 +43,7 @@ async function loadHeaderTemplate(url, targetSelector) {
 
   target.innerHTML = await res.text();
   
-  // Setup submenu nach dem Template-Load
+  // Set up submenu after the template has loaded
   setupSubmenu();
   // Initialize header user badge (initials / color / guest) after template load
   initHeaderUser();
@@ -84,14 +84,14 @@ function setupSubmenu() {
     e.stopPropagation();
   });
 
-  // Klick außerhalb schließt
+  // Close when clicking outside
   document.addEventListener("click", (e) => {
     if (!menu.classList.contains("hidden") && !e.target.closest(".user-menu")) {
       close();
     }
   });
 
-  // ESC schließt
+  // Close on Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
   });
@@ -105,7 +105,7 @@ function setupSubmenu() {
 function logout() {
   sessionStorage.clear();
   localStorage.clear();
-  window.location.href = "./index.html"; // oder "./login.html"
+  window.location.href = "./index.html"; // or "./login.html"
 }
 
 

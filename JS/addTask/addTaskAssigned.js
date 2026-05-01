@@ -8,7 +8,7 @@ async function loadContacts() {
 
     if (!data) return;
 
-    contacts = data; // ❗ KEY BEHALTEN
+    contacts = data; // Keep keys intact
 
     renderAssignedTo();
   } catch (error) {
@@ -55,7 +55,7 @@ function toggleContact(contactKey, element) {
 
 /** Toggles the assigned-to dropdown between open, preview, and closed states. */
 function toggleAssignedDropdown(event) {
-  event.stopPropagation(); // verhindert sofortiges Schließen
+  event.stopPropagation(); // Prevent immediate closing
 
   const dropdown = document.getElementById("assignedDropdown");
   const arrow = document.getElementById("assignedDropdownArrow");
@@ -166,7 +166,7 @@ function closeDropdown(dropdown, arrow, label) {
   assignedPreviewMode = false;
   label.textContent = "Select contacts to assign";
 
-  preview.style.display = "flex"; // 👈 wieder einblenden
+  preview.style.display = "flex"; // Show preview again
   renderSelectedContactsBelowInput();
 
   button.classList.remove("activeFocus");
@@ -217,7 +217,7 @@ function toggleCategoryDropdown(event) {
 
 function selectCategory(category) {
   selectedCategory = category;
-  task.category = category; // ❗ WICHTIG für Validation
+  task.category = category; // Required for validation
 
   document.getElementById("categoryLabel").textContent = category;
 
@@ -229,9 +229,9 @@ function selectCategory(category) {
   if (error) error.classList.remove("visible");
   if (button) button.classList.remove("input-error");
 
-  // ✅ Dropdown schließen
+  // Close dropdown
   if (dropdown) dropdown.classList.add("hidden");
 
-  // ✅ Pfeil zurückdrehen
+  // Reset arrow rotation
   if (arrow) arrow.classList.remove("rotate");
 }

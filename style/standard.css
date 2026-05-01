@@ -39,14 +39,14 @@ body.guest-mode .nav {
   display: none;
 }
 
-/* Container für Sidebar/Header/Content */
+/* Container for sidebar, header, and content */
 .app {
   position: relative;
   width: 100%;
   height: 100vh;
 }
 
-/* DIESE FLÄCHE ist ab jetzt auf jeder Seite der "Canvas" */
+/* This area now acts as the page canvas on every screen */
 .main{
     position: fixed;
     left: var(--sidebar-w);

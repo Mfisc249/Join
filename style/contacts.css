@@ -29,7 +29,7 @@
   overflow-y: auto;
   overflow-x: visible;
   
-  /* Höherer z-index um über dem Header zu liegen */
+  /* Higher z-index so the panel stays above the header */
   position: relative;
   z-index: 3500;
   padding-top: 0;
@@ -430,7 +430,7 @@
 /* Logo Position wie Figma */
 .contact-modal-brand {
   position: absolute;
-  top: 170px;  /* Nach oben - näher zu Edit contact */
+  top: 170px;  /* Moved upward, closer to Edit contact */
   left: 46px;
 }
 
@@ -473,7 +473,7 @@
   border-top: 3px solid #29ABE2;
 }
 
-/* Subtitle (nur Add contact) */
+/* Subtitle (Add contact only) */
 .contact-modal-subtitle {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
@@ -506,8 +506,8 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  z-index: 1000;           /* Hoher z-index damit Button über allem liegt */
-  pointer-events: auto;    /* Sicherstellen dass Button klickbar ist */
+  z-index: 1000;           /* High z-index so the button stays above everything */
+  pointer-events: auto;    /* Ensure the button remains clickable */
 }
 
 .contact-modal-close img {
@@ -524,18 +524,18 @@
   position: relative;
   width: 100%;
   height: 100%;
-  /* Kein Grid mehr - absolute Positionierung für direkte Kontrolle */
+  /* No grid here, use absolute positioning for direct control */
 }
 
 .contact-modal-avatar-wrap {
   position: absolute;
-  top: 220px;      /* Weiter nach unten */
-  left: 60px;      /* Weit links */
+  top: 220px;      /* Moved further down */
+  left: 60px;      /* Positioned further left */
   display: flex;
   justify-content: center;
 }
 
-/* Avatar mit Icon für Add-Modus */
+/* Avatar with icon for add mode */
 .contact-modal-avatar {
   width: 120px;
   height: 120px;
@@ -563,7 +563,7 @@
   justify-content: center;
 }
 
-/* Avatar icon (für Add) */
+/* Avatar icon (for add mode) */
 .contact-modal-avatar-icon {
   width: 54px;
   height: 54px;
@@ -576,8 +576,8 @@
 
 .contact-modal-form {
   position: absolute;
-  top: 140px;      /* Gleiche Höhe wie Avatar */
-  left: 240px;     /* Links von Avatar + Avatar-Breite + Gap */
+  top: 140px;      /* Same height as the avatar */
+  left: 240px;     /* Left of avatar plus avatar width and gap */
   width: 380px;
   max-width: 380px;
   display: flex;
@@ -616,7 +616,7 @@
   border: 1px solid #29ABE2;
 }
 
-/* Icons: wirklich SVG anzeigen (keine grauen Kästchen) */
+/* Ensure actual SVG icons are shown instead of gray boxes */
 .contact-input-icon {
   width: 24px;
   height: 24px;
@@ -624,7 +624,7 @@
   object-fit: contain;
   opacity: 0.7;
   margin-left: 12px;
-  filter: none;              /* WICHTIG: falls du irgendwo filter gesetzt hast */
+  filter: none;              /* Important if a filter is applied elsewhere */
 }
 
 .modal-error {
@@ -636,8 +636,8 @@
 
 .contact-modal-actions {
   position: absolute;
-  bottom: 100px;    /* Höher - von 60px auf 80px */
-  left: 240px;     /* Gleiche X-Position wie Form */
+  bottom: 100px;    /* Raised from the previous lower position */
+  left: 240px;     /* Same X position as the form */
   display: flex;
   gap: 25px;
 }
@@ -705,7 +705,7 @@
   height: 20px;
 }
 
-/* Fix für Create Contact Button - Flexbox für Häkchen */
+/* Fix for Create Contact button: use flexbox for the checkmark */
 .btn-primary-dark {
   width: 200px;
   height: 57px;
@@ -759,15 +759,15 @@
   }
 }
 
-/* ===== Fix: wenn das Modal schrumpft, absolute X-Positionen zentrieren ===== */
+/* ===== Fix: center absolute X positions when the modal shrinks ===== */
 @media (max-width: 1300px) {
   .contact-modal-body {
-    padding-left: 120px; /* weniger als 289, damit nix abgeschnitten wird */
+    padding-left: 120px; /* Less than 289 so nothing gets cut off */
   }
 }
 
 @media (max-width: 1280px) {
-  /* rechter Bereich ist dann oft zu schmal für left:289 + width:422 */
+  /* The right area is often too narrow for left:289 + width:422 */
   .contact-modal-form {
     left: 50%;
     transform: translateX(-50%);
@@ -778,9 +778,9 @@
     transform: translateX(-50%);
   }
 
-  /* Avatar auch etwas mehr Richtung Mitte, damit es wie Figma wirkt */
+  /* Move the avatar slightly more toward the center to match Figma */
   .contact-modal-avatar-wrap {
-    left: 120px; /* war 97px – bisschen nach rechts für schmale Layouts */
+    left: 120px; /* Was 97px, shifted slightly right for narrow layouts */
   }
 
   .contact-modal-right {
@@ -881,9 +881,9 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 25px;        /* Mehr gap von 8px auf 25px für mehr Abstand */
-  width: 400px;     /* Erhöht von 287px auf 400px */
-  height: 105px;    /* Höhe angepasst wegen mehr gap */
+  gap: 25px;        /* Increased gap from 8px to 25px for more spacing */
+  width: 400px;     /* Increased from 287px to 400px */
+  height: 105px;    /* Height adjusted for the larger gap */
   flex: none;
   order: 1;
   flex-grow: 0;
@@ -891,12 +891,12 @@
 
 /* Anton Mayer - Name */
 .details-name {
-  width: 400px;           /* Erhöht von 287px auf 400px für längere Namen */
+  width: 400px;           /* Increased from 287px to 400px for longer names */
   height: 56px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 32px;        /* Reduziert von 47px auf 32px */
+  font-size: 32px;        /* Reduced from 47px to 32px */
   line-height: 120%;
   display: flex;
   align-items: center;
@@ -923,12 +923,12 @@
 .details-actions .link-icon:first-child {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;  /* Links ausrichten */
+  justify-content: flex-start;  /* Align to the left */
   align-items: center;
   padding: 0px;
   gap: 8px;
   position: absolute;
-  width: 70px;       /* Breiter für "Edit" Text */
+  width: 70px;       /* Wider for the "Edit" text */
   height: 24px;
   left: 0px;
   top: 0px;
@@ -964,12 +964,12 @@
 .details-actions .link-icon:last-child {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;  /* Links ausrichten */
+  justify-content: flex-start;  /* Align to the left */
   align-items: center;
   padding: 0px;
   gap: 8px;
   position: absolute;
-  width: 90px;       /* Breiter für "Delete" Text */
+  width: 90px;       /* Wider for the "Delete" text */
   height: 24px;
   right: 0px;
   top: 0px;

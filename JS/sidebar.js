@@ -16,12 +16,12 @@ function handleSidebarAuth() {
   const isGuest = sessionStorage.getItem("isGuest") === "true";
   const isLoggedIn = !!sessionStorage.getItem("contactId");
 
-  // Nur bei nicht eingeloggt, nicht als Gast: abgespeckte Sidebar mit Login Button
+  // Show the reduced sidebar with login button only when not logged in and not a guest
   if (!isLoggedIn && !isGuest) {
-    // Navigation ausblenden
+    // Hide navigation
     if (nav) nav.style.display = "none";
 
-    // Login Button einfügen
+    // Insert login button
     if (!document.querySelector(".sidebar-login")) {
       const loginBtn = document.createElement("a");
       loginBtn.href = "./index.html";

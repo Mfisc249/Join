@@ -71,7 +71,7 @@
   height: 100%;
 }
 
-/* circleBadge für Header */
+/* circleBadge for header */
 .header-right .circleBadge {
   width: 56px;
   height: 56px;
@@ -156,7 +156,7 @@
   background: var(--GlobalBlueHover);
 }
 
-/* Button-Reset fürs Logout */
+/* Button reset for logout */
 .submenu-logout {
   width: 130px;
 }

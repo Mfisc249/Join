@@ -97,7 +97,7 @@
   transition: background 0.1s ease, color 0.1s ease;
 }
 
-/* raus mit der "linken leiste" und slide-effekten */
+/* Remove the left bar and slide effects */
 .nav-item::before {
   content: none;
 }
@@ -115,7 +115,7 @@
   height: 30px;
 }
 
-/* SVG Größe vereinheitlichen nach JS-Inlining */
+/* Normalize SVG size after JS inlining */
 .nav-icon svg {
   width: 30px;
   height: 30px;

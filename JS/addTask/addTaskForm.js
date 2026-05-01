@@ -73,13 +73,13 @@ function setupDueDateInput() {
 
   const today = getTodayLocal();
 
-  // ✅ verhindert Vergangenheit im Kalender
+  // Prevent past dates in the calendar
   input.min = today;
 
   input.addEventListener("blur", () => {
     if (!input.value) return;
 
-    // ✅ nur heute oder Zukunft erlaubt
+    // Allow only today or future dates
     if (input.value < today) {
       input.value = "";
     }
@@ -97,7 +97,7 @@ function getTodayLocal() {
 
 /** Toggles the category dropdown arrow rotation state. */
 function toggleCategoryDropdown(event) {
-  event.stopPropagation(); // verhindert, dass andere Click-Handler feuern
+  event.stopPropagation(); // Prevent other click handlers from firing
 
   const dropdown = document.getElementById("categoryDropdown");
   const arrow = document.getElementById("categoryDropdownArrow");
@@ -108,7 +108,7 @@ function toggleCategoryDropdown(event) {
 
 function validateCategory() {
   const categoryLabel = document.getElementById("categoryLabel");
-  const error = document.getElementById("categoryError"); // 👈 FIX
+  const error = document.getElementById("categoryError"); // Fix
   const button = document.querySelector(".TaskCategoryInput");
 
   if (!categoryLabel || !error || !button) return;
@@ -131,7 +131,7 @@ function closeCategoryDropdown(event) {
 
   if (!dropdown || !button) return;
 
-  // 👉 Wenn Klick NICHT auf Button oder Dropdown
+  // If the click is outside the button and dropdown
   if (!button.contains(event.target) && !dropdown.contains(event.target)) {
     dropdown.classList.add("hidden");
     arrow.classList.remove("rotate");

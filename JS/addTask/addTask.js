@@ -215,9 +215,9 @@ function clearForm() {
   resetSubTasksAndCategory();
   resetAssignedContactsAndPriority();
 
-  // Pfeile zurücksetzen
+  // Reset arrows
   const assignedArrow = document.getElementById("assignedDropdownArrow");
-  const categoryArrow = document.getElementById("categoryDropdownArrow"); // oder den richtigen Id-Namen
+  const categoryArrow = document.getElementById("categoryDropdownArrow"); // or the correct ID name
 
   if (assignedArrow) assignedArrow.classList.remove("rotate");
   if (categoryArrow) categoryArrow.classList.remove("rotate");
