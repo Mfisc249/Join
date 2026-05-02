@@ -12,11 +12,15 @@ async function editPreparation(taskID) {
   document.querySelector('.mainTitle').remove();
   createSaveDataEditTaskButton(taskID);
   createExitButtonEditTask();
+   rewriteTaskFields(refTaskEditTask);
+  document.getElementById("DueDate").value = task.dueDate;
+  await setupFunctionEditTask( refTaskEditTask);
+}
+
+function rewriteTaskFields(refTaskEditTask) {
   task.title = refTaskEditTask.title;
   task.description = refTaskEditTask.description;
   task.dueDate = refTaskEditTask.dueDate;
-  document.getElementById("DueDate").value = task.dueDate;
-  await setupFunctionEditTask( refTaskEditTask);
 }
 
 /**Wires up all edit-form behaviors (validation, priority, date, contacts, category, subtasks) and preloads task data into the form state.*/

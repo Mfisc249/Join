@@ -4,20 +4,22 @@ async function widthChangeCallback(myMediaQuery) {
     if (myMediaQuery.matches) {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplateMobile();
         startLoadingScreenMobile();
-        TASK = [];
-        TASKKEYS = [];
-        count = 0;
+        resetArrays();
         await render();
     } else {
         document.getElementById('taskTableContent').innerHTML = taskBoardTamplate();
         startLoadingScreen();
-        TASK = [];
-        TASKKEYS = [];
-        count = 0;
+        resetArrays();
         await render();
     }
 }
 myMediaQuery.addEventListener('change', widthChangeCallback);
+
+function resetArrays() {
+    TASK = [];
+    TASKKEYS = [];
+    count = 0;
+}
 
 /** Opens the mobile move menu next to the selected task card. */
 function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
@@ -34,7 +36,7 @@ function chanchePositionMoveTaskMobile() {
     let mediaQuerymoveTaskMobile = window.matchMedia('(max-width: 670px)')
     if (mediaQuerymoveTaskMobile.matches) {
         return moveTaskPositionOffset = 100;
-    }else{
+    } else {
         return moveTaskPositionOffset = 0;
     }
 }
@@ -46,15 +48,12 @@ function checkFieldTaskMobile(taskID, refDiv, mobileArrowsMoveTaskPosition) {
         case 'field1':
             refDiv.innerHTML = moveTamplateTaskMobileField1(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionCheckedOffset);
             break;
-
         case 'field4':
-            refDiv.innerHTML =  moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionCheckedOffset);
+            refDiv.innerHTML = moveTamplateTaskMobileField4(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionCheckedOffset);
             break;
-
         default:
             refDiv.innerHTML = moveTamplateTaskMobileField2_3(taskID, mobileArrowsMoveTaskPosition, moveTaskPositionCheckedOffset);
-            break;
-    }
+            break; }
 }
 
 /** Removes the temporary mobile move menu from the DOM. */

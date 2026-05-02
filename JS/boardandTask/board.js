@@ -238,12 +238,10 @@ async function searchTask() {
     if (!refSearchInput) {
         return;
     }
-
     if (refSearchInput.value.length >= 1) {
         startTheSearch(refSearchInput);
         return;
     }
-
     if (refSearchInput.value.length == 0) {
         setTaskTableTemplateByViewport();
         await resetTaskDataAndRender();
