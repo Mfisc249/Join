@@ -11,31 +11,34 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Hides navigation and shows a login button when not authenticated.
  */
 function handleSidebarAuth() {
-  const nav = document.querySelector(".nav");
-  const sidebarTop = document.querySelector(".sidebar-top");
+  if (!shouldShowLoggedOutSidebar()) return;
+  hideSidebarNavigation();
+  insertSidebarLoginButton();
+}
+
+function shouldShowLoggedOutSidebar() {
   const isGuest = sessionStorage.getItem("isGuest") === "true";
   const isLoggedIn = !!sessionStorage.getItem("contactId");
+  return !isLoggedIn && !isGuest;
+}
 
-  // Show the reduced sidebar with login button only when not logged in and not a guest
-  if (!isLoggedIn && !isGuest) {
-    // Hide navigation
-    if (nav) nav.style.display = "none";
+function hideSidebarNavigation() {
+  const nav = document.querySelector(".nav");
+  if (nav) nav.style.display = "none";
+}
 
-    // Insert login button
-    if (!document.querySelector(".sidebar-login")) {
-      const loginBtn = document.createElement("a");
-      loginBtn.href = "./index.html";
-      loginBtn.className = "sidebar-login";
-      loginBtn.innerHTML = `
-        <span class="nav-icon">
-          <img src="./assets/img/login.svg" alt="Login">
-        </span>
-        <span>Log In</span>
-      `;
+function insertSidebarLoginButton() {
+  const sidebarTop = document.querySelector(".sidebar-top");
+  if (!sidebarTop || document.querySelector(".sidebar-login")) return;
+  sidebarTop.insertAdjacentElement("afterend", createSidebarLoginButton());
+}
 
-      sidebarTop.insertAdjacentElement("afterend", loginBtn);
-    }
-  }
+function createSidebarLoginButton() {
+  const loginBtn = document.createElement("a");
+  loginBtn.href = "./index.html";
+  loginBtn.className = "sidebar-login";
+  loginBtn.innerHTML = `<span class="nav-icon"><img src="./assets/img/login.svg" alt="Login"></span><span>Log In</span>`;
+  return loginBtn;
 }
 
 /**
@@ -59,27 +62,12 @@ async function loadSidebarTemplate(url, targetSelector) {
  */
 function markActiveNav() {
   const currentPage = location.pathname.split('/').pop();
+  ['.nav-item', '.mobile-nav-item', '.sidebar-bottom .sidebar-link', '.mobile-nav-guest-item']
+    .forEach((selector) => toggleActiveNavLinks(selector, currentPage));
+}
 
-  // Mark active for desktop sidebar
-  document.querySelectorAll('.nav-item').forEach(link => {
-    const linkPage = link.getAttribute('href').split('/').pop();
-    link.classList.toggle('active', linkPage === currentPage);
-  });
-
-  // Mark active for mobile bottom nav
-  document.querySelectorAll('.mobile-nav-item').forEach(link => {
-    const linkPage = link.getAttribute('href').split('/').pop();
-    link.classList.toggle('active', linkPage === currentPage);
-  });
-
-  // Mark active for sidebar bottom links
-  document.querySelectorAll('.sidebar-bottom .sidebar-link').forEach(link => {
-    const linkPage = link.getAttribute('href').split('/').pop();
-    link.classList.toggle('active', linkPage === currentPage);
-  });
-
-  // Mark active for guest mobile bottom nav
-  document.querySelectorAll('.mobile-nav-guest-item').forEach(link => {
+function toggleActiveNavLinks(selector, currentPage) {
+  document.querySelectorAll(selector).forEach((link) => {
     const linkPage = link.getAttribute('href').split('/').pop();
     link.classList.toggle('active', linkPage === currentPage);
   });

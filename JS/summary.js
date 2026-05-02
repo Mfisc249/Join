@@ -108,22 +108,30 @@ function getUpcomingDeadline(tasks) {
 }
 
 /**
- * Parses a dd/mm/yyyy date string into a Date object.
- * @param {string|null} value - Date string in dd/mm/yyyy format.
+ * Parses a task due-date string into a Date object.
+ * Supports both yyyy-mm-dd and dd/mm/yyyy.
+ * @param {string|null} value - Due-date string from stored task data.
  * @returns {Date|null} Parsed date at start of day, or null if invalid.
  */
 function parseJoinDate(value) {
   if (!value) return null;
-  const m = String(value).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if (!m) return null;
+  const normalized = String(value).trim();
+  const isoMatch = normalized.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (isoMatch) return createValidatedDate(isoMatch[1], isoMatch[2], isoMatch[3]);
 
-  const dd = Number(m[1]);
-  const mm = Number(m[2]);
-  const yyyy = Number(m[3]);
+  const slashMatch = normalized.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (slashMatch) return createValidatedDate(slashMatch[3], slashMatch[2], slashMatch[1]);
 
-  const d = new Date(yyyy, mm - 1, dd);
-  if (d.getFullYear() !== yyyy || d.getMonth() !== mm - 1 || d.getDate() !== dd) return null;
-  return startOfDay(d);
+  return null;
+}
+
+function createValidatedDate(year, month, day) {
+  const yyyy = Number(year);
+  const mm = Number(month);
+  const dd = Number(day);
+  const date = new Date(yyyy, mm - 1, dd);
+  if (date.getFullYear() !== yyyy || date.getMonth() !== mm - 1 || date.getDate() !== dd) return null;
+  return startOfDay(date);
 }
 
 /**
@@ -160,25 +168,20 @@ function setText(id, value) {
 function initGreeting() {
   const greetLine = document.getElementById("greet-line");
   const greetName = document.getElementById("greet-name");
+  if (greetLine) greetLine.textContent = `${getGreetingText()}!`;
+  if (greetName) greetName.textContent = getGreetingUserName();
+}
 
-  const userName = sessionStorage.getItem("userName");
-  const isGuest = sessionStorage.getItem("isGuest");
-
+function getGreetingText() {
   const hour = new Date().getHours();
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
+}
 
-  let greeting = "Hello";
-  if (hour < 12) greeting = "Good morning";
-  else if (hour < 18) greeting = "Good afternoon";
-  else greeting = "Good evening";
-
-  if (greetLine) greetLine.textContent = greeting + "!";
-
-  // For guest logins or missing session, show no name; only show name for logged-in users
-  if (isGuest === "true" || !userName) {
-    if (greetName) greetName.textContent = "";
-  } else {
-    if (greetName) greetName.textContent = userName;
-  }
+function getGreetingUserName() {
+  const userName = sessionStorage.getItem("userName");
+  return sessionStorage.getItem("isGuest") === "true" || !userName ? "" : userName;
 }
 
 /**
@@ -193,32 +196,29 @@ function getUserName() {
  * Wires click handlers on summary cards to navigate to the board page.
  */
 function wireSummaryNavigation() {
-  document.querySelectorAll('[data-nav]').forEach((btn) => {
-    const clearPressedState = () => btn.classList.remove('is-pressed');
+  document.querySelectorAll('[data-nav]').forEach(bindSummaryNavButton);
+}
 
-    btn.addEventListener('pointerdown', () => {
-      if (window.innerWidth <= SUMMARY_COMPACT_BREAKPOINT) {
-        btn.classList.add('is-pressed');
-      }
-    });
+function bindSummaryNavButton(button) {
+  const clearPressedState = () => button.classList.remove('is-pressed');
+  button.addEventListener('pointerdown', () => addPressedStateOnCompact(button));
+  ['pointerup', 'pointerleave', 'pointercancel', 'blur']
+    .forEach((eventName) => button.addEventListener(eventName, clearPressedState));
+  button.addEventListener('click', () => handleSummaryNavigation(button));
+}
 
-    btn.addEventListener('pointerup', clearPressedState);
-    btn.addEventListener('pointerleave', clearPressedState);
-    btn.addEventListener('pointercancel', clearPressedState);
-    btn.addEventListener('blur', clearPressedState);
+function addPressedStateOnCompact(button) {
+  if (window.innerWidth <= SUMMARY_COMPACT_BREAKPOINT) button.classList.add('is-pressed');
+}
 
-    btn.addEventListener('click', () => {
-      if (window.innerWidth <= SUMMARY_COMPACT_BREAKPOINT) {
-        btn.classList.add('is-pressed');
-        setTimeout(() => {
-          window.location.href = 'board.html';
-        }, 140);
-        return;
-      }
+function handleSummaryNavigation(button) {
+  if (window.innerWidth > SUMMARY_COMPACT_BREAKPOINT) return goToBoard();
+  button.classList.add('is-pressed');
+  setTimeout(goToBoard, 140);
+}
 
-      window.location.href = 'board.html';
-    });
-  });
+function goToBoard() {
+  window.location.href = 'board.html';
 }
 
 /**
@@ -226,47 +226,35 @@ function wireSummaryNavigation() {
  * Fades out automatically after 2 seconds.
  */
 function showMobileGreetingIfNeeded() {
-  // Only on compact layouts (mobile + tablets)
-  if (window.innerWidth > SUMMARY_COMPACT_BREAKPOINT) return;
-  
-  // Check if this is the first visit to summary after login
-  const summaryVisited = sessionStorage.getItem('summaryVisited');
-  if (summaryVisited) return;
-  
-  // Mark as visited so it doesn't show again
+  if (!shouldShowMobileGreeting()) return;
   sessionStorage.setItem('summaryVisited', 'true');
-  
-  // Get greeting text
-  const userName = sessionStorage.getItem("userName");
-  const isGuest = sessionStorage.getItem("isGuest");
-  
-  const hour = new Date().getHours();
-  let greeting = "Hello";
-  if (hour < 12) greeting = "Good morning";
-  else if (hour < 18) greeting = "Good afternoon";
-  else greeting = "Good evening";
-  
-  // Create overlay
+  const overlay = createGreetingOverlay();
+  document.body.appendChild(overlay);
+  fadeOutGreetingOverlay(overlay);
+}
+
+function shouldShowMobileGreeting() {
+  return window.innerWidth <= SUMMARY_COMPACT_BREAKPOINT && !sessionStorage.getItem('summaryVisited');
+}
+
+function createGreetingOverlay() {
   const overlay = document.createElement('div');
   overlay.className = 'greeting-overlay';
-  
-  const greetLine = document.createElement('div');
-  greetLine.className = 'greetLine';
-  greetLine.textContent = greeting + ',';
-  
-  const greetName = document.createElement('div');
-  greetName.className = 'greetName';
-  greetName.textContent = (isGuest === "true" || !userName) ? "" : userName;
-  
-  overlay.appendChild(greetLine);
-  overlay.appendChild(greetName);
-  document.body.appendChild(overlay);
-  
-  // Fade out after 2 seconds, remove after animation
+  overlay.append(createGreetingTextNode('greetLine', `${getGreetingText()},`));
+  overlay.append(createGreetingTextNode('greetName', getGreetingUserName()));
+  return overlay;
+}
+
+function createGreetingTextNode(className, text) {
+  const element = document.createElement('div');
+  element.className = className;
+  element.textContent = text;
+  return element;
+}
+
+function fadeOutGreetingOverlay(overlay) {
   setTimeout(() => {
     overlay.classList.add('fade-out');
-    setTimeout(() => {
-      overlay.remove();
-    }, 500); // Match CSS transition duration
+    setTimeout(() => overlay.remove(), 500);
   }, 2000);
 }

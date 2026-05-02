@@ -53,46 +53,51 @@ async function loadHeaderTemplate(url, targetSelector) {
  * and Escape key handling.
  */
 function setupSubmenu() {
+  const submenu = getSubmenuElements();
+  if (!submenu || submenu.badge.dataset.submenuInitialized === "true") return;
+  submenu.badge.dataset.submenuInitialized = "true";
+  registerSubmenuHandlers(submenu);
+}
+
+function getSubmenuElements() {
   const badge = document.getElementById("circleBadge");
   const menu = document.getElementById("submenu");
-  if (!badge || !menu) return;
-  if (badge.dataset.submenuInitialized === "true") return;
-  badge.dataset.submenuInitialized = "true";
+  return badge && menu ? { badge, menu } : null;
+}
 
-  const open = () => {
-    menu.classList.remove("hidden");
-    badge.setAttribute("aria-expanded", "true");
-  };
+function setSubmenuState({ badge, menu }, isOpen) {
+  menu.classList.toggle("hidden", !isOpen);
+  badge.setAttribute("aria-expanded", String(isOpen));
+}
 
-  const close = () => {
-    menu.classList.add("hidden");
-    badge.setAttribute("aria-expanded", "false");
-  };
+function toggleSubmenu(submenu) {
+  setSubmenuState(submenu, submenu.menu.classList.contains("hidden"));
+}
 
-  const toggle = () => {
-    menu.classList.contains("hidden") ? open() : close();
-  };
+function registerSubmenuHandlers(submenu) {
+  submenu.badge.addEventListener("click", (e) => handleSubmenuBadgeClick(e, submenu));
+  submenu.menu.addEventListener("click", stopSubmenuEventPropagation);
+  document.addEventListener("click", (e) => closeSubmenuOnOutsideClick(e, submenu));
+  document.addEventListener("keydown", (e) => closeSubmenuOnEscape(e, submenu));
+}
 
-  badge.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggle();
-  });
+function handleSubmenuBadgeClick(event, submenu) {
+  event.stopPropagation();
+  toggleSubmenu(submenu);
+}
 
-  menu.addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
+function stopSubmenuEventPropagation(event) {
+  event.stopPropagation();
+}
 
-  // Close when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!menu.classList.contains("hidden") && !e.target.closest(".user-menu")) {
-      close();
-    }
-  });
+function closeSubmenuOnOutsideClick(event, submenu) {
+  if (!submenu.menu.classList.contains("hidden") && !event.target.closest(".user-menu")) {
+    setSubmenuState(submenu, false);
+  }
+}
 
-  // Close on Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
-  });
+function closeSubmenuOnEscape(event, submenu) {
+  if (event.key === "Escape") setSubmenuState(submenu, false);
 }
 
 /**
@@ -110,23 +115,16 @@ function logout() {
  * Displays "G" for guest users.
  */
 function initHeaderUser() {
-  const initials = sessionStorage.getItem('userInitials');
-  const color = sessionStorage.getItem('userColor');
-  const isGuest = sessionStorage.getItem('isGuest');
-
-  const badge = document.getElementById('circleBadge');
-  if (!badge) return;
-  const badgeSpan = badge.querySelector('span');
+  const badgeSpan = getHeaderBadgeSpan();
   if (!badgeSpan) return;
+  badgeSpan.textContent = getHeaderBadgeText();
+}
 
-  if (isGuest === "true") {
-    badgeSpan.textContent = "G";
-    return;
-  }
+function getHeaderBadgeSpan() {
+  return document.getElementById('circleBadge')?.querySelector('span') || null;
+}
 
-  if (initials) {
-    badgeSpan.textContent = initials;
-  }
-
-  // Do not change badge background color here; keep styling in CSS.
+function getHeaderBadgeText() {
+  if (sessionStorage.getItem('isGuest') === "true") return "G";
+  return sessionStorage.getItem('userInitials') || "";
 }
