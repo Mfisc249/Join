@@ -56,24 +56,20 @@ function toggleContact(contactKey, element) {
 /** Toggles the assigned-to dropdown between open, preview, and closed states. */
 function toggleAssignedDropdown(event) {
   event.stopPropagation(); // Prevent immediate closing
-
   const dropdown = document.getElementById("assignedDropdown");
   const arrow = document.getElementById("assignedDropdownArrow");
   const label = document.getElementById("clearContact");
   const button = document.querySelector(".assignedToInput");
-
   if (dropdown.classList.contains("hidden")) {
     openDropdown(dropdown, arrow, label);
     button.focus();
     return;
   }
-
-  if (!assignedPreviewMode) {
-    openPreview(dropdown, arrow, label);
-    button.focus();
-    return;
-  }
-
+  // if (!assignedPreviewMode) {
+  //   openPreview(dropdown, arrow, label);
+  //   button.focus();
+  //   return;
+  // }
   closeDropdown(dropdown, arrow, label);
   button.focus();
 }
