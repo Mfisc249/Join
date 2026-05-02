@@ -15,6 +15,7 @@ async function widthChangeCallback(myMediaQuery) {
 }
 myMediaQuery.addEventListener('change', widthChangeCallback);
 
+/** Resets cached board task arrays and counters before a rerender. */
 function resetArrays() {
     TASK = [];
     TASKKEYS = [];
@@ -31,6 +32,7 @@ function addMobileMoveTask(mobileArrowsMoveTaskID, taskID) {
     document.getElementById('app-canvas').appendChild(refDiv);
 }
 
+/** Returns the horizontal offset used to keep the mobile move menu in view. */
 function chanchePositionMoveTaskMobile() {
     let moveTaskPositionOffset = 0;
     let mediaQuerymoveTaskMobile = window.matchMedia('(max-width: 670px)')

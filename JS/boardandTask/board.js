@@ -233,6 +233,7 @@ function getActiveSearchInput() {
     }
 }
 
+/** Runs the active board search and restores the full board when the input is cleared. */
 async function searchTask() {
     let refSearchInput = getActiveSearchInput();
     if (!refSearchInput) {

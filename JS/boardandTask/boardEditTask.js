@@ -17,6 +17,7 @@ async function editPreparation(taskID) {
   await setupFunctionEditTask( refTaskEditTask);
 }
 
+/** Copies the selected task values into the shared edit state object. */
 function rewriteTaskFields(refTaskEditTask) {
   task.title = refTaskEditTask.title;
   task.description = refTaskEditTask.description;
