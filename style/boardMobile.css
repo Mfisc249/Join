@@ -129,6 +129,9 @@
 
     }
 
+    .highlightTask {
+        display: none;
+    }
 }
 
 @media(max-width:1230px) {

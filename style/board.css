@@ -124,8 +124,8 @@ body {
 }
 
 .highlightTask {
-    height: 300px;
-    width: 300px;
+    height: 270px;
+    width: 280px;
     border: 1px dashed var(--GlobalBorderColorGray);
     border-radius: 30px;
     margin-top: 5px;
