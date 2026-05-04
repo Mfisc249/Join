@@ -7,61 +7,51 @@ ContactsApp.page = {
   /** Initialises the contacts page — loads data, renders list, binds buttons. */
   async init() {
     if (ContactsApp.state.isInitialized) return;
-
     try {
-      ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
-
-      // Ensure current user's contact is present in the list (if applicable)
-      await this._ensureCurrentUserContactInList();
-
-      ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
-
-      this._bindButtons();
-      ContactsApp.uiModal.initModalListeners();
-
-      ContactsApp.state.isInitialized = true;
+      await this._loadAndRenderContacts();
+      this._initPageControls();
     } catch (err) {
       this._showListError('Kontakte konnten nicht geladen werden.');
     }
+  },
+
+  /** Loads contacts, ensures the current user is included, and renders the list. */
+  async _loadAndRenderContacts() {
+    ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
+    await this._ensureCurrentUserContactInList();
+    ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
+  },
+
+  /** Binds page controls and marks the page as ready. */
+  _initPageControls() {
+    this._bindButtons();
+    ContactsApp.uiModal.initModalListeners();
+    ContactsApp.state.isInitialized = true;
   },
 
   /** Adds the logged-in user's own contact to the list if missing. */
   async _ensureCurrentUserContactInList() {
     const isGuest = sessionStorage.getItem('isGuest') === 'true';
     const myId = sessionStorage.getItem('contactId');
-
     if (isGuest || !myId) return;
-
-    const alreadyInList = ContactsApp.state.contacts.some(c => c.id === myId);
-    if (alreadyInList) return;
-
+    if (ContactsApp.state.contacts.some(c => c.id === myId)) return;
     const me = await ContactsApp.firebase.loadContactById(myId);
-    if (!me) return;
-
-    // add to the beginning so the user is visible
-    ContactsApp.state.contacts.unshift(me);
+    if (me) ContactsApp.state.contacts.unshift(me);
   },
 
   /** Binds click listeners to add, edit, and delete buttons. */
   _bindButtons() {
-    const addBtn = document.getElementById('addContactBtn');
-    const editBtn = document.getElementById('editBtn');
-    const delBtn = document.getElementById('deleteBtn');
+    this._bindOnce('addContactBtn', () => ContactsApp.uiModal.open('add'));
+    this._bindOnce('editBtn', () => this._openEdit());
+    this._bindOnce('deleteBtn', () => this._deleteSelected());
+  },
 
-    if (addBtn && !addBtn.dataset.listenerAdded) {
-      addBtn.addEventListener('click', () => ContactsApp.uiModal.open('add'));
-      addBtn.dataset.listenerAdded = 'true';
-    }
-
-    if (editBtn && !editBtn.dataset.listenerAdded) {
-      editBtn.addEventListener('click', () => this._openEdit());
-      editBtn.dataset.listenerAdded = 'true';
-    }
-
-    if (delBtn && !delBtn.dataset.listenerAdded) {
-      delBtn.addEventListener('click', () => this._deleteSelected());
-      delBtn.dataset.listenerAdded = 'true';
-    }
+  /** Binds a click handler once to a button by ID. */
+  _bindOnce(id, handler) {
+    const button = document.getElementById(id);
+    if (!button || button.dataset.listenerAdded) return;
+    button.addEventListener('click', handler);
+    button.dataset.listenerAdded = 'true';
   },
 
   /** Opens the edit modal for the currently selected contact. */
@@ -77,28 +67,39 @@ ContactsApp.page = {
 
   /** Deletes the selected contact after confirmation and refreshes the list. */
   async _deleteSelected() {
-    const id = ContactsApp.state.selectedContactId;
-    if (!id) return this._showListError('Kein Kontakt ausgewählt.');
-
-    const contact = ContactsApp.state.contacts.find(c => c.id === id);
-    if (!contact) return this._showListError('Kontakt nicht gefunden.');
-
+    const contact = this._getSelectedContact();
+    if (!contact) return;
     const confirmed = await ContactsApp.uiModal._confirmDelete(contact.name);
     if (!confirmed) return;
-
     try {
-      await ContactsApp.firebase.deleteContact(contact.id);
-      await ContactsApp.tasks.removeContactFromAllTasks(contact.id);
-
-      ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
-      ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
-
-      ContactsApp.state.selectedContactId = null;
-      const detailsCard = document.getElementById('detailsCard');
-      if (detailsCard) detailsCard.classList.add('hidden');
+      await this._deleteContactAndRefresh(contact.id);
     } catch (err) {
       alert('Kontakt konnte nicht gelöscht werden.');
     }
+  },
+
+  /** Returns the selected contact or shows the matching list error. */
+  _getSelectedContact() {
+    const id = ContactsApp.state.selectedContactId;
+    if (!id) return this._showListError('Kein Kontakt ausgewählt.');
+    const contact = ContactsApp.state.contacts.find(c => c.id === id);
+    return contact || this._showListError('Kontakt nicht gefunden.');
+  },
+
+  /** Deletes a contact and refreshes the visible list state. */
+  async _deleteContactAndRefresh(id) {
+    await ContactsApp.firebase.deleteContact(id);
+    await ContactsApp.tasks.removeContactFromAllTasks(id);
+    ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
+    ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
+    ContactsApp.state.selectedContactId = null;
+    this._hideDetailsCard();
+  },
+
+  /** Hides the contact details panel if it exists. */
+  _hideDetailsCard() {
+    const detailsCard = document.getElementById('detailsCard');
+    if (detailsCard) detailsCard.classList.add('hidden');
   },
 
   /**

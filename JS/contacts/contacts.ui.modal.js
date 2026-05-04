@@ -11,32 +11,46 @@ ContactsApp.uiModal = {
     const overlay = document.getElementById('contactOverlay');
     const closeBtn = document.getElementById('contactModalClose');
     const form = document.getElementById('contactModalForm');
+    this._bindCloseButton(closeBtn);
+    this._bindOverlayClose(overlay);
+    this._bindFormSubmit(form);
+    this._bindEscapeClose();
+  },
 
-    if (closeBtn && !closeBtn.dataset.listenerAdded) {
-      closeBtn.addEventListener('click', () => this.close());
-      closeBtn.dataset.listenerAdded = 'true';
-    }
+  /** Binds the modal close button once. */
+  _bindCloseButton(closeBtn) {
+    if (!closeBtn || closeBtn.dataset.listenerAdded) return;
+    closeBtn.addEventListener('click', () => this.close());
+    closeBtn.dataset.listenerAdded = 'true';
+  },
 
-    if (overlay && !overlay.dataset.listenerAdded) {
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) this.close();
-      });
-      overlay.dataset.listenerAdded = 'true';
-    }
+  /** Binds overlay click-to-close once. */
+  _bindOverlayClose(overlay) {
+    if (!overlay || overlay.dataset.listenerAdded) return;
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) this.close();
+    });
+    overlay.dataset.listenerAdded = 'true';
+  },
 
-    if (form && !form.dataset.listenerAdded) {
-      form.addEventListener('submit', (e) => this.onSubmit(e));
-      form.dataset.listenerAdded = 'true';
-    }
+  /** Binds form submit once. */
+  _bindFormSubmit(form) {
+    if (!form || form.dataset.listenerAdded) return;
+    form.addEventListener('submit', e => this.onSubmit(e));
+    form.dataset.listenerAdded = 'true';
+  },
 
-    if (!document.body.dataset.modalEsc) {
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !document.getElementById('contactOverlay').classList.contains('d-none')) {
-          this.close();
-        }
-      });
-      document.body.dataset.modalEsc = 'true';
-    }
+  /** Binds Escape key close once. */
+  _bindEscapeClose() {
+    if (document.body.dataset.modalEsc) return;
+    document.addEventListener('keydown', e => this._closeOnEscape(e));
+    document.body.dataset.modalEsc = 'true';
+  },
+
+  /** Closes the modal on Escape if it is open. */
+  _closeOnEscape(e) {
+    const overlay = document.getElementById('contactOverlay');
+    if (e.key === 'Escape' && overlay && !overlay.classList.contains('d-none')) this.close();
   },
 
   /**
@@ -47,75 +61,94 @@ ContactsApp.uiModal = {
   open(mode, contact = null) {
     ContactsApp.state.modal.mode = mode;
     ContactsApp.state.modal.contactId = contact ? contact.id : null;
-
     this._clearErrors();
+    const elements = this._getModalElements();
+    if (mode === 'add') this._setupAddMode(elements);
+    else this._setupEditMode(elements, contact);
+    elements.overlay.classList.remove('d-none');
+    setTimeout(() => elements.nameEl.focus(), 0);
+  },
 
-    const title = document.getElementById('contactModalTitle');
-    const subtitle = document.getElementById('contactModalSubtitle');
-    const deleteBtn = document.getElementById('contactModalDeleteBtn');
-    const saveText = document.getElementById('contactModalSaveText');
+  /** Reads modal DOM references used by add and edit modes. */
+  _getModalElements() {
+    return {
+      title: document.getElementById('contactModalTitle'),
+      subtitle: document.getElementById('contactModalSubtitle'),
+      deleteBtn: document.getElementById('contactModalDeleteBtn'),
+      saveText: document.getElementById('contactModalSaveText'),
+      avatar: document.getElementById('contactModalAvatar'),
+      initialsEl: document.getElementById('contactModalInitials'),
+      avatarIcon: document.getElementById('contactModalAvatarIcon'),
+      nameEl: document.getElementById('modalName'), emailEl: document.getElementById('modalEmail'),
+      phoneEl: document.getElementById('modalPhone'),
+      overlay: document.getElementById('contactOverlay'),
+    };
+  },
 
-    const avatar = document.getElementById('contactModalAvatar');
-    const initialsEl = document.getElementById('contactModalInitials');
-    const avatarIcon = document.getElementById('contactModalAvatarIcon');
+  /** Applies add-contact modal state. */
+  _setupAddMode(el) {
+    el.title.textContent = 'Add contact';
+    el.subtitle.textContent = 'Tasks are better with a team!';
+    el.subtitle.classList.remove('d-none');
+    el.deleteBtn.classList.toggle('d-none', this._isCompact());
+    this._setCancelButton(el.deleteBtn);
+    el.saveText.textContent = 'Create contact';
+    this._fillForm(el, {});
+    this._showAvatarIcon(el);
+  },
 
-    const nameEl = document.getElementById('modalName');
-    const emailEl = document.getElementById('modalEmail');
-    const phoneEl = document.getElementById('modalPhone');
+  /** Applies edit-contact modal state. */
+  _setupEditMode(el, contact) {
+    el.title.textContent = 'Edit contact';
+    el.subtitle.classList.add('d-none');
+    el.deleteBtn.classList.remove('d-none');
+    el.deleteBtn.textContent = 'Delete';
+    el.deleteBtn.onclick = () => this.onDelete();
+    el.saveText.textContent = 'Save';
+    this._fillForm(el, contact || {});
+    this._showAvatarInitials(el, contact || {});
+  },
 
-    if (mode === 'add') {
-      title.textContent = 'Add contact';
-      subtitle.textContent = 'Tasks are better with a team!';
-      subtitle.classList.remove('d-none');
+  /** Returns whether the compact modal layout is active. */
+  _isCompact() {
+    return window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024);
+  },
 
-      if (window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024)) {
-        deleteBtn.classList.add('d-none');
-      } else {
-        deleteBtn.classList.remove('d-none');
-      }
-      deleteBtn.innerHTML = 'Cancel <img src="./assets/img/iconoir_cancel.svg" alt="" class="btn-cancel-x">';
-      deleteBtn.onclick = () => this.close();
+  /** Configures the add-mode cancel button. */
+  _setCancelButton(button) {
+    button.innerHTML = 'Cancel <img src="./assets/img/iconoir_cancel.svg" alt="" class="btn-cancel-x">';
+    button.onclick = () => this.close();
+  },
 
-      saveText.textContent = 'Create contact';
+  /** Fills modal input fields from contact data. */
+  _fillForm(el, contact) {
+    el.nameEl.value = contact.name || '';
+    el.emailEl.value = contact.email || '';
+    el.phoneEl.value = contact.phone || '';
+  },
 
-      nameEl.value = '';
-      emailEl.value = '';
-      phoneEl.value = '';
+  /** Shows the empty avatar icon. */
+  _showAvatarIcon(el) {
+    el.avatar.style.background = '#D1D1D1';
+    el.initialsEl.textContent = '';
+    this._toggleAvatarParts(el, false);
+  },
 
-      avatar.style.background = '#D1D1D1';
-      initialsEl.textContent = '';
-      initialsEl.classList.add('d-none');
-      initialsEl.hidden = true;
-      initialsEl.style.display = 'none';
-      avatarIcon.classList.remove('d-none');
-      avatarIcon.hidden = false;
-      avatarIcon.style.display = 'block';
-    } else {
-      title.textContent = 'Edit contact';
-      subtitle.classList.add('d-none');
+  /** Shows the initials avatar for edit mode. */
+  _showAvatarInitials(el, contact) {
+    el.initialsEl.textContent = ContactsApp.validation.generateInitials(contact.name || '');
+    el.avatar.style.background = contact.color || '#2A3647';
+    this._toggleAvatarParts(el, true);
+  },
 
-      deleteBtn.classList.remove('d-none');
-      deleteBtn.textContent = 'Delete';
-      deleteBtn.onclick = () => this.onDelete();
-
-      saveText.textContent = 'Save';
-
-      nameEl.value = contact?.name || '';
-      emailEl.value = contact?.email || '';
-      phoneEl.value = contact?.phone || '';
-
-      initialsEl.textContent = ContactsApp.validation.generateInitials(contact?.name || '');
-      initialsEl.classList.remove('d-none');
-      initialsEl.hidden = false;
-      initialsEl.style.display = '';
-      avatarIcon.classList.add('d-none');
-      avatarIcon.hidden = true;
-      avatarIcon.style.display = 'none';
-      avatar.style.background = contact?.color || '#2A3647';
-    }
-
-    document.getElementById('contactOverlay').classList.remove('d-none');
-    setTimeout(() => nameEl.focus(), 0);
+  /** Toggles modal avatar initials and icon state. */
+  _toggleAvatarParts(el, showInitials) {
+    el.initialsEl.classList.toggle('d-none', !showInitials);
+    el.initialsEl.hidden = !showInitials;
+    el.initialsEl.style.display = showInitials ? '' : 'none';
+    el.avatarIcon.classList.toggle('d-none', showInitials);
+    el.avatarIcon.hidden = showInitials;
+    el.avatarIcon.style.display = showInitials ? 'none' : 'block';
   },
 
   /** Closes the modal and resets internal state. */
@@ -131,34 +164,54 @@ ContactsApp.uiModal = {
    */
   async onSubmit(e) {
     e.preventDefault();
-
-    const saveBtn = document.getElementById('contactModalSaveBtn');
-    const delBtn = document.getElementById('contactModalDeleteBtn');
-    saveBtn.disabled = true;
-    delBtn.disabled = true;
-
+    const buttons = this._getActionButtons();
+    this._setButtonsDisabled(buttons, true);
     try {
-      this._clearErrors();
-
-      const draft = this._readDraft();
-      const v = ContactsApp.validation.validateContact(draft);
-      if (!v.isValid) return this._showErrors(v.errors, saveBtn, delBtn);
-
-      await this._persistDraft(draft);
-
-      ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
-      ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
-
-      if (ContactsApp.state.modal.mode === 'edit') this._reselectAfterEdit();
-      if (ContactsApp.state.modal.mode === 'add') ContactsApp.page.showContactCreatedNotification();
-
-      this.close();
+      if (!this._validateDraft(buttons)) return;
+      await this._saveDraftAndRefresh();
     } catch (err) {
       alert('Speichern fehlgeschlagen.');
     } finally {
-      saveBtn.disabled = false;
-      delBtn.disabled = false;
+      this._setButtonsDisabled(buttons, false);
     }
+  },
+
+  /** Returns modal action buttons. */
+  _getActionButtons() {
+    return {
+      saveBtn: document.getElementById('contactModalSaveBtn'),
+      delBtn: document.getElementById('contactModalDeleteBtn'),
+    };
+  },
+
+  /** Enables or disables both modal action buttons. */
+  _setButtonsDisabled({ saveBtn, delBtn }, disabled) {
+    saveBtn.disabled = disabled;
+    delBtn.disabled = disabled;
+  },
+
+  /** Validates the current draft and shows errors if needed. */
+  _validateDraft(buttons) {
+    this._clearErrors();
+    const v = ContactsApp.validation.validateContact(this._readDraft());
+    if (v.isValid) return true;
+    this._showErrors(v.errors, buttons.saveBtn, buttons.delBtn);
+    return false;
+  },
+
+  /** Persists the draft, refreshes list state, and closes the modal. */
+  async _saveDraftAndRefresh() {
+    await this._persistDraft(this._readDraft());
+    ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
+    ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
+    this._afterSuccessfulSave();
+    this.close();
+  },
+
+  /** Applies post-save UI updates based on modal mode. */
+  _afterSuccessfulSave() {
+    if (ContactsApp.state.modal.mode === 'edit') this._reselectAfterEdit();
+    if (ContactsApp.state.modal.mode === 'add') ContactsApp.page.showContactCreatedNotification();
   },
 
   /**
@@ -168,69 +221,90 @@ ContactsApp.uiModal = {
    */
   _confirmDelete(name) {
     return new Promise(resolve => {
-      const overlay = document.createElement('div');
-      overlay.className = 'delete-confirm-overlay';
-      overlay.innerHTML = `
-        <div class="delete-confirm-popup">
-          <div class="delete-confirm-inner">
-            <p>Do you really want to delete<br><strong>${name}</strong>?</p>
-            <div class="delete-confirm-actions">
-              <button class="delete-confirm-cancel">Cancel</button>
-              <button class="delete-confirm-delete">Delete</button>
-            </div>
-          </div>
-        </div>`;
+      const overlay = this._createDeleteConfirmOverlay(name);
       document.body.appendChild(overlay);
-      const close = result => { overlay.remove(); resolve(result); };
-      overlay.querySelector('.delete-confirm-cancel').addEventListener('click', () => close(false));
-      overlay.querySelector('.delete-confirm-delete').addEventListener('click', () => close(true));
-      overlay.addEventListener('click', e => { if (e.target === overlay) close(false); });
+      this._bindDeleteConfirmOverlay(overlay, resolve);
     });
+  },
+
+  /** Creates the delete confirmation overlay. */
+  _createDeleteConfirmOverlay(name) {
+    const overlay = document.createElement('div');
+    overlay.className = 'delete-confirm-overlay';
+    overlay.innerHTML = this._deleteConfirmTemplate(name);
+    return overlay;
+  },
+
+  /** Returns the delete confirmation markup. */
+  _deleteConfirmTemplate(name) {
+    return `<div class="delete-confirm-popup"><div class="delete-confirm-inner">
+      <p>Do you really want to delete<br><strong>${name}</strong>?</p>
+      <div class="delete-confirm-actions">
+        <button class="delete-confirm-cancel">Cancel</button>
+        <button class="delete-confirm-delete">Delete</button>
+      </div></div></div>`;
+  },
+
+  /** Binds delete confirmation actions. */
+  _bindDeleteConfirmOverlay(overlay, resolve) {
+    const close = result => { overlay.remove(); resolve(result); };
+    overlay.querySelector('.delete-confirm-cancel').addEventListener('click', () => close(false));
+    overlay.querySelector('.delete-confirm-delete').addEventListener('click', () => close(true));
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(false); });
   },
 
   /** Deletes the currently opened contact after user confirmation. */
   async onDelete() {
-    const id = ContactsApp.state.modal.contactId;
-    if (!id) return;
-
-    const contact = ContactsApp.state.contacts.find(c => c.id === id);
+    const contact = await this._getConfirmedDeleteContact();
     if (!contact) return;
-
-    const confirmed = await this._confirmDelete(contact.name);
-    if (!confirmed) return;
-
-    const saveBtn = document.getElementById('contactModalSaveBtn');
-    const delBtn = document.getElementById('contactModalDeleteBtn');
-    saveBtn.disabled = true;
-    delBtn.disabled = true;
+    const buttons = this._getActionButtons();
+    this._setButtonsDisabled(buttons, true);
     try {
-      const myId = sessionStorage.getItem('contactId');
-      const isMe = contact.id === myId;
-
-      await ContactsApp.firebase.deleteContact(contact.id);
-      await ContactsApp.tasks.removeContactFromAllTasks(contact.id);
-
-      if (isMe) {
-        // clear session and redirect out if user deleted their own account
-        sessionStorage.clear();
-        window.location.href = './index.html';
-        return;
-      }
-
-      ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
-      ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
-
-      ContactsApp.state.selectedContactId = null;
-      const detailsCard = document.getElementById('detailsCard');
-      if (detailsCard) detailsCard.classList.add('hidden');
-
-      this.close();
+      await this._deleteContactFromModal(contact);
     } catch (err) {
       alert('Löschen fehlgeschlagen.');
     } finally {
-      saveBtn.disabled = false;
-      delBtn.disabled = false;
+      this._setButtonsDisabled(buttons, false);
     }
+  },
+
+  /** Returns the modal contact when deleting was confirmed. */
+  async _getConfirmedDeleteContact() {
+    const id = ContactsApp.state.modal.contactId;
+    if (!id) return null;
+    const contact = ContactsApp.state.contacts.find(c => c.id === id);
+    if (!contact) return null;
+    return await this._confirmDelete(contact.name) ? contact : null;
+  },
+
+  /** Deletes the modal contact and applies the correct follow-up state. */
+  async _deleteContactFromModal(contact) {
+    const isMe = contact.id === sessionStorage.getItem('contactId');
+    await ContactsApp.firebase.deleteContact(contact.id);
+    await ContactsApp.tasks.removeContactFromAllTasks(contact.id);
+    if (isMe) return this._redirectAfterOwnAccountDelete();
+    await this._refreshAfterModalDelete();
+  },
+
+  /** Clears the session after deleting the current user's contact. */
+  _redirectAfterOwnAccountDelete() {
+    sessionStorage.clear();
+    window.location.href = './index.html';
+  },
+
+  /** Refreshes contacts UI after deleting another contact. */
+  async _refreshAfterModalDelete() {
+    ContactsApp.state.contacts = await ContactsApp.firebase.loadContacts();
+    ContactsApp.uiList.renderContactsList(ContactsApp.state.contacts);
+    ContactsApp.state.selectedContactId = null;
+    this._hideDetailsCard();
+    this.close();
+  },
+
+  /** Hides the details card if present. */
+  _hideDetailsCard() {
+    const detailsCard = document.getElementById('detailsCard');
+    if (detailsCard) detailsCard.classList.add('hidden');
   },
 
   /**
@@ -252,13 +326,21 @@ ContactsApp.uiModal = {
   async _persistDraft(draft) {
     const now = new Date().toISOString();
     const initials = ContactsApp.validation.generateInitials(draft.name);
-
     if (ContactsApp.state.modal.mode === 'edit') {
-      const patch = { ...draft, initials, updatedAt: now };
-      await ContactsApp.firebase.updateContact(ContactsApp.state.modal.contactId, patch);
+      await this._updateDraft(draft, initials, now);
       return;
     }
+    await this._createDraft(draft, initials, now);
+  },
 
+  /** Updates an existing contact draft. */
+  async _updateDraft(draft, initials, now) {
+    const patch = { ...draft, initials, updatedAt: now };
+    await ContactsApp.firebase.updateContact(ContactsApp.state.modal.contactId, patch);
+  },
+
+  /** Creates a new contact draft. */
+  async _createDraft(draft, initials, now) {
     await ContactsApp.firebase.saveNewContact({
       ...draft,
       initials,

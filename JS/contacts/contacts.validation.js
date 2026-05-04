@@ -11,18 +11,31 @@ ContactsApp.validation = {
    */
   validateContact(contact) {
     const errors = [];
+    this._validateName(contact, errors);
+    this._validateEmail(contact, errors);
+    this._validatePhone(contact, errors);
+    return { isValid: errors.length === 0, errors };
+  },
 
+  /** Adds a name validation error when needed. */
+  _validateName(contact, errors) {
     if (!contact.name || contact.name.trim().length < 2) {
       errors.push('Name muss mindestens 2 Zeichen lang sein.');
     }
+  },
+
+  /** Adds an email validation error when needed. */
+  _validateEmail(contact, errors) {
     if (!contact.email || !this.isValidEmail(contact.email)) {
       errors.push('Gültige E-Mail-Adresse erforderlich.');
     }
+  },
+
+  /** Adds a phone validation error when needed. */
+  _validatePhone(contact, errors) {
     if (contact.phone && !this.isValidPhone(contact.phone)) {
       errors.push('Telefonnummer hat ein ungültiges Format.');
     }
-
-    return { isValid: errors.length === 0, errors };
   },
 
   /**

@@ -12,16 +12,18 @@ ContactsApp.tasks = {
     const { TASKS_PATH } = ContactsApp.config;
     const tasksObj = await ContactsApp.api.get(TASKS_PATH);
     if (!tasksObj) return;
-
-    const updates = {};
-
-    for (const [taskKey, task] of Object.entries(tasksObj)) {
-      const patched = this._removeFromTask(task, contactId);
-      if (patched) updates[taskKey] = patched;
-    }
-
+    const updates = this._collectContactRemovalUpdates(tasksObj, contactId);
     if (Object.keys(updates).length === 0) return;
     await ContactsApp.api.patch(TASKS_PATH, updates);
+  },
+
+  /** Collects all task patches needed after removing a contact. */
+  _collectContactRemovalUpdates(tasksObj, contactId) {
+    return Object.entries(tasksObj).reduce((updates, [taskKey, task]) => {
+      const patched = this._removeFromTask(task, contactId);
+      if (patched) updates[taskKey] = patched;
+      return updates;
+    }, {});
   },
 
   /**
@@ -32,29 +34,27 @@ ContactsApp.tasks = {
    */
   _removeFromTask(task, contactId) {
     if (!task) return null;
-
     let changed = false;
     const clone = structuredClone(task);
-
-    if (Array.isArray(clone.assignedTo)) {
-      const before = clone.assignedTo.length;
-      clone.assignedTo = clone.assignedTo.filter(id => id !== contactId);
-      if (clone.assignedTo.length !== before) changed = true;
-    }
-
-    if (clone.assignedTo && typeof clone.assignedTo === 'object' && !Array.isArray(clone.assignedTo)) {
-      if (clone.assignedTo[contactId] !== undefined) {
-        delete clone.assignedTo[contactId];
-        changed = true;
-      }
-    }
-
-    if (Array.isArray(clone.assignedContacts)) {
-      const before = clone.assignedContacts.length;
-      clone.assignedContacts = clone.assignedContacts.filter(id => id !== contactId);
-      if (clone.assignedContacts.length !== before) changed = true;
-    }
-
+    changed = this._removeFromAssignedArray(clone, 'assignedTo', contactId) || changed;
+    changed = this._removeFromAssignedObject(clone, 'assignedTo', contactId) || changed;
+    changed = this._removeFromAssignedArray(clone, 'assignedContacts', contactId) || changed;
     return changed ? clone : null;
+  },
+
+  /** Removes a contact from an array-based task assignment field. */
+  _removeFromAssignedArray(task, field, contactId) {
+    if (!Array.isArray(task[field])) return false;
+    const before = task[field].length;
+    task[field] = task[field].filter(id => id !== contactId);
+    return task[field].length !== before;
+  },
+
+  /** Removes a contact from an object-based task assignment field. */
+  _removeFromAssignedObject(task, field, contactId) {
+    if (!task[field] || Array.isArray(task[field]) || typeof task[field] !== 'object') return false;
+    if (task[field][contactId] === undefined) return false;
+    delete task[field][contactId];
+    return true;
   },
 };

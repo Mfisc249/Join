@@ -16,53 +16,40 @@ ContactsApp.mobile = {
 
   /** Binds listeners for back button, FABs, edit/delete, and outside-click dismiss. */
   _bindMobileButtons() {
-    // Mobile back button
-    const mobileBackBtn = document.getElementById('mobileBackBtn');
-    if (mobileBackBtn) {
-      mobileBackBtn.addEventListener('click', () => this.closeMobileDetails());
-    }
+    this._bindClick('mobileBackBtn', () => this.closeMobileDetails());
+    this._bindClick('fabAdd', () => ContactsApp.uiModal.open('add'));
+    this._bindClick('fabMenu', () => this.toggleMobileOptionsMenu());
+    this._bindClick('mobileEditBtn', () => this._openSelectedContactForEdit());
+    this._bindClick('mobileDeleteBtn', () => this._deleteSelectedFromMenu());
+    document.addEventListener('click', e => this._closeMenuOnOutsideClick(e));
+  },
 
-    // FAB Add button
-    const fabAdd = document.getElementById('fabAdd');
-    if (fabAdd) {
-      fabAdd.addEventListener('click', () => ContactsApp.uiModal.open('add'));
-    }
+  /** Binds a click listener when the element exists. */
+  _bindClick(id, handler) {
+    const element = document.getElementById(id);
+    if (element) element.addEventListener('click', handler);
+  },
 
-    // FAB Menu button
+  /** Opens the selected contact in edit mode from the mobile menu. */
+  _openSelectedContactForEdit() {
+    this.closeMobileOptionsMenu();
+    const id = ContactsApp.state.selectedContactId;
+    const contact = ContactsApp.state.contacts.find(c => c.id === id);
+    if (contact) ContactsApp.uiModal.open('edit', contact);
+  },
+
+  /** Deletes the selected contact from the mobile menu. */
+  _deleteSelectedFromMenu() {
+    this.closeMobileOptionsMenu();
+    ContactsApp.page._deleteSelected();
+  },
+
+  /** Closes the mobile options menu when a click lands outside it. */
+  _closeMenuOnOutsideClick(e) {
+    const menu = document.getElementById('contactOptionsMenu');
     const fabMenu = document.getElementById('fabMenu');
-    if (fabMenu) {
-      fabMenu.addEventListener('click', () => this.toggleMobileOptionsMenu());
-    }
-
-    // Mobile Edit button
-    const mobileEditBtn = document.getElementById('mobileEditBtn');
-    if (mobileEditBtn) {
-      mobileEditBtn.addEventListener('click', () => {
-        this.closeMobileOptionsMenu();
-        const id = ContactsApp.state.selectedContactId;
-        if (!id) return;
-        const contact = ContactsApp.state.contacts.find(c => c.id === id);
-        if (contact) ContactsApp.uiModal.open('edit', contact);
-      });
-    }
-
-    // Mobile Delete button
-    const mobileDeleteBtn = document.getElementById('mobileDeleteBtn');
-    if (mobileDeleteBtn) {
-      mobileDeleteBtn.addEventListener('click', () => {
-        this.closeMobileOptionsMenu();
-        ContactsApp.page._deleteSelected();
-      });
-    }
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      const menu = document.getElementById('contactOptionsMenu');
-      const fabMenu = document.getElementById('fabMenu');
-      if (menu && !menu.contains(e.target) && !fabMenu.contains(e.target)) {
-        this.closeMobileOptionsMenu();
-      }
-    });
+    if (!menu || !fabMenu) return;
+    if (!menu.contains(e.target) && !fabMenu.contains(e.target)) this.closeMobileOptionsMenu();
   },
 
   /** Switches the mobile view to the contact details panel. */
@@ -83,17 +70,19 @@ ContactsApp.mobile = {
   closeMobileDetails() {
     const content = document.querySelector('.content');
     const mobileBackBtn = document.getElementById('mobileBackBtn');
-    
     if (content) content.classList.remove('mobile-details-open');
     if (mobileBackBtn) mobileBackBtn.classList.add('hidden');
+    this._clearActiveContactItems();
+    ContactsApp.state.selectedContactId = null;
+    this._updateFabVisibility();
+  },
 
+  /** Clears selected state from all visible contact items. */
+  _clearActiveContactItems() {
     document.querySelectorAll('.contact-item').forEach(i => {
       i.classList.remove('active');
       i.setAttribute('aria-selected', 'false');
     });
-    ContactsApp.state.selectedContactId = null;
-    
-    this._updateFabVisibility();
   },
 
   /** Toggles the mobile options (edit/delete) popup menu. */
@@ -114,31 +103,27 @@ ContactsApp.mobile = {
 
   /** Updates FAB visibility based on viewport width and current view state. */
   _updateFabVisibility() {
-    const isMobile = window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024);
-    if (!isMobile) {
-      // Hide FABs on desktop
-      const fabAdd = document.getElementById('fabAdd');
-      const fabMenu = document.getElementById('fabMenu');
-      if (fabAdd) fabAdd.classList.add('hidden');
-      if (fabMenu) fabMenu.classList.add('hidden');
-      return;
-    }
-
-    const content = document.querySelector('.content');
-    const isDetailsOpen = content && content.classList.contains('mobile-details-open');
-    
     const fabAdd = document.getElementById('fabAdd');
     const fabMenu = document.getElementById('fabMenu');
-    
-    if (isDetailsOpen) {
-      // Details view: show menu FAB, hide add FAB
-      if (fabAdd) fabAdd.classList.add('hidden');
-      if (fabMenu) fabMenu.classList.remove('hidden');
-    } else {
-      // List view: show add FAB, hide menu FAB
-      if (fabAdd) fabAdd.classList.remove('hidden');
-      if (fabMenu) fabMenu.classList.add('hidden');
-    }
+    if (!this._isMobile()) return this._setFabVisibility(fabAdd, fabMenu, true, true);
+    const detailsOpen = this._isDetailsOpen();
+    this._setFabVisibility(fabAdd, fabMenu, detailsOpen, !detailsOpen);
+  },
+
+  /** Returns whether the compact contacts layout is active. */
+  _isMobile() {
+    return window.innerWidth <= (ContactsApp.config?.COMPACT_BREAKPOINT || 1024);
+  },
+
+  /** Returns whether the mobile details panel is currently open. */
+  _isDetailsOpen() {
+    return document.querySelector('.content')?.classList.contains('mobile-details-open');
+  },
+
+  /** Applies hidden state to both mobile FABs. */
+  _setFabVisibility(fabAdd, fabMenu, hideAdd, hideMenu) {
+    if (fabAdd) fabAdd.classList.toggle('hidden', hideAdd);
+    if (fabMenu) fabMenu.classList.toggle('hidden', hideMenu);
   },
 
   /** Resets mobile-specific state when the viewport exceeds the mobile breakpoint. */
