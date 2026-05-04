@@ -98,7 +98,6 @@ function getUpcomingDeadline(tasks) {
   const dates = [];
 
   for (const t of tasks) {
-    if (String(t?.priority).toLowerCase() !== 'urgent') continue;
     const d = parseJoinDate(t?.dueDate);
     if (d && d >= today) dates.push(d);
   }
