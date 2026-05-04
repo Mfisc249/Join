@@ -33,53 +33,102 @@ function renderAssignedTo() {
 }
 
 /** Toggles a contact's assignment state and updates checkbox visuals. */
-function toggleContact(contactKey, element) {
+function updateContactSelection(contactKey) {
   const index = task.assignedTo.indexOf(contactKey);
-  const img = element.querySelector(".checkBox");
 
   if (index === -1) {
     task.assignedTo.push(contactKey);
+    return true; // hinzugefügt
+  } else {
+    task.assignedTo.splice(index, 1);
+    return false; // entfernt
+  }
+}
+
+function updateContactUI(element, isSelected) {
+  const img = element.querySelector(".checkBox");
+
+  if (isSelected) {
     element.classList.add("selected");
     img.src = "./assets/img/checkButton.svg";
   } else {
-    task.assignedTo.splice(index, 1);
     element.classList.remove("selected");
     img.src = "./assets/img/Rectangle_5.svg";
   }
+}
 
+function handleDropdownRender() {
   const dropdown = document.getElementById("assignedDropdown");
+
   if (dropdown.classList.contains("hidden")) {
     renderSelectedContactsBelowInput();
   }
 }
 
+function toggleContact(contactKey, element) {
+  const isSelected = updateContactSelection(contactKey);
+  updateContactUI(element, isSelected);
+  handleDropdownRender();
+}
+
 /** Toggles the assigned-to dropdown between open, preview, and closed states. */
+function getAssignedElements() {
+  return {
+    dropdown: document.getElementById("assignedDropdown"),
+    arrow: document.getElementById("assignedDropdownArrow"),
+    label: document.getElementById("clearContact"),
+    button: document.querySelector(".assignedToInput"),
+  };
+}
+
+function handleDropdownOpen(state) {
+  if (state.dropdown.classList.contains("hidden")) {
+    openDropdown(state.dropdown, state.arrow, state.label);
+    state.button.focus();
+    return true;
+  }
+  return false;
+}
+
+function handlePreviewMode(state) {
+  if (!assignedPreviewMode) {
+    openPreview(state.dropdown, state.arrow, state.label);
+    state.button.focus();
+    return true;
+  }
+  return false;
+}
+
+function handleDropdownClose(state) {
+  closeDropdown(state.dropdown, state.arrow, state.label);
+  state.button.focus();
+}
+
 function toggleAssignedDropdown(event) {
-  event.stopPropagation(); // Prevent immediate closing
+  event.stopPropagation();
+
+  const state = getAssignedElements();
+
+  if (handleDropdownOpen(state)) return;
+  if (handlePreviewMode(state)) return;
+
+  handleDropdownClose(state);
+}
+
+function handleArrowClick(event) {
+  event.stopPropagation();
+
   const dropdown = document.getElementById("assignedDropdown");
   const arrow = document.getElementById("assignedDropdownArrow");
   const label = document.getElementById("clearContact");
-  const button = document.querySelector(".assignedToInput");
-  if (dropdown.classList.contains("hidden")) {
-    openDropdown(dropdown, arrow, label);
-    button.focus();
-    return;
-  }
-  // if (!assignedPreviewMode) {
-  //   openPreview(dropdown, arrow, label);
-  //   button.focus();
-  //   return;
-  // }
+
   closeDropdown(dropdown, arrow, label);
-  button.focus();
 }
 
 /** Renders only selected contacts inside the assignment dropdown. */
-function renderSelectedContactsInDropdown() {
-  const container = document.getElementById("assignedDropdown");
-  if (!container) return;
-
+function buildSelectedContactsDropdownHTML() {
   let html = "";
+
   for (let key in contacts) {
     const contact = contacts[key];
 
@@ -87,6 +136,15 @@ function renderSelectedContactsInDropdown() {
       html += contactInitialsCircleTemplate(contact, key);
     }
   }
+
+  return html;
+}
+
+function renderSelectedContactsInDropdown() {
+  const container = document.getElementById("assignedDropdown");
+  if (!container) return;
+
+  const html = buildSelectedContactsDropdownHTML();
 
   container.innerHTML = html;
 
@@ -111,7 +169,7 @@ function renderSelectedContactsBelowInput() {
   previewContainer.innerHTML = buildAssignedContactsHTML(maxVisibleContacts);
 }
 
-function buildAssignedContactsHTML(maxVisibleContacts) {
+function getSelectedContacts() {
   let selectedContacts = [];
 
   for (let i = 0; i < task.assignedTo.length; i++) {
@@ -120,6 +178,12 @@ function buildAssignedContactsHTML(maxVisibleContacts) {
       selectedContacts.push(contacts[key]);
     }
   }
+
+  return selectedContacts;
+}
+
+function buildAssignedContactsHTML(maxVisibleContacts) {
+  const selectedContacts = getSelectedContacts();
 
   let html = "";
 
@@ -188,17 +252,31 @@ function updateAssignedLabel() {
 }
 
 /** Registers outside-click handling to close the assignment dropdown. */
+function getAssignedDropdownElements() {
+  return {
+    dropdown: document.getElementById("assignedDropdown"),
+    button: document.querySelector(".assignedToInput"),
+    arrow: document.getElementById("assignedDropdownArrow"),
+    label: document.getElementById("clearContact"),
+  };
+}
+
+function shouldCloseAssignedDropdown(dropdown, button, target) {
+  if (!dropdown || !button) return false;
+  if (dropdown.classList.contains("hidden")) return false;
+
+  if (dropdown.contains(target) || button.contains(target)) {
+    return false;
+  }
+
+  return true;
+}
+
 function setupAssignedDropdownClose() {
   document.addEventListener("click", (event) => {
-    const dropdown = document.getElementById("assignedDropdown");
-    const button = document.querySelector(".assignedToInput");
+    const { dropdown, button, arrow, label } = getAssignedDropdownElements();
 
-    if (!dropdown || !button) return;
-    if (dropdown.classList.contains("hidden")) return;
-
-    if (!dropdown.contains(event.target) && !button.contains(event.target)) {
-      const arrow = document.getElementById("assignedDropdownArrow");
-      const label = document.getElementById("clearContact");
+    if (shouldCloseAssignedDropdown(dropdown, button, event.target)) {
       closeDropdown(dropdown, arrow, label);
     }
   });
@@ -216,18 +294,12 @@ function selectCategory(category) {
   task.category = category; // Required for validation
 
   document.getElementById("categoryLabel").textContent = category;
-
   const error = document.getElementById("categoryError");
   const button = document.querySelector(".TaskCategoryInput");
   const dropdown = document.getElementById("categoryDropdown");
   const arrow = document.getElementById("categoryDropdownArrow");
-
   if (error) error.classList.remove("visible");
   if (button) button.classList.remove("input-error");
-
-  // Close dropdown
   if (dropdown) dropdown.classList.add("hidden");
-
-  // Reset arrow rotation
   if (arrow) arrow.classList.remove("rotate");
 }

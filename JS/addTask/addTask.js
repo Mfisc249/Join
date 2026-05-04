@@ -64,10 +64,10 @@ async function saveTask(task) {
 }
 
 /** Persists the task payload to Firebase including subtask review defaults. */
-async function saveTaskToFirebase(task, taskID, taskKey) {
+function createTaskPayload(task, taskID) {
   let checkboxString = task.subTasks.map(() => "U").toString();
 
-  const payload = {
+  return {
     ...task,
     id: taskID,
     field: { field: "field1" },
@@ -77,6 +77,10 @@ async function saveTaskToFirebase(task, taskID, taskKey) {
       0: checkboxString,
     },
   };
+}
+
+async function saveTaskToFirebase(task, taskID, taskKey) {
+  const payload = createTaskPayload(task, taskID);
 
   await DataPUT(`Tasks/${taskKey}`, payload);
 
@@ -137,9 +141,7 @@ async function handleTaskSaving() {
 }
 
 /** Creates a task and refreshes the board when creation succeeds. */
-async function createTaskAndRefreshBoard() {
-  errorMessage();
-
+function getTaskFromInput() {
   const task = {
     title: document.getElementById("taskName").value,
     dueDate: document.getElementById("DueDate").value,
@@ -147,12 +149,21 @@ async function createTaskAndRefreshBoard() {
   };
 
   if (!task.title || !task.dueDate || !task.category) {
-    return;
+    return null;
   }
+
+  return task;
+}
+
+async function createTaskAndRefreshBoard() {
+  errorMessage();
+
+  const task = getTaskFromInput();
+  if (!task) return;
 
   await createTask();
 
-  showToast(); // falls du sowas hast
+  showToast();
 
   setTimeout(() => {
     window.location.href = "board.html";
@@ -178,11 +189,12 @@ function resetTaskData() {
 }
 
 /** Clears subtasks UI and resets the selected category display. */
-function resetSubTasksAndCategory() {
+function resetSubTasks() {
   document.getElementById("subtaskInput").value = "";
   renderSubTasks();
+}
 
-  selectedCategory = "";
+function resetCategoryUI() {
   document.getElementById("categoryLabel").textContent = "Select task category";
 
   const button = document.querySelector(".TaskCategoryInput");
@@ -190,12 +202,25 @@ function resetSubTasksAndCategory() {
 
   const error = document.getElementById("categoryError");
   if (error) error.classList.remove("visible");
+}
 
+function resetCategoryDropdown() {
   const dropdown = document.getElementById("categoryDropdown");
   const arrow = document.getElementById("categoryDropdownArrow");
 
   if (dropdown) dropdown.classList.add("hidden");
   if (arrow) arrow.classList.remove("rotate");
+}
+
+function resetCategory() {
+  selectedCategory = "";
+  resetCategoryUI();
+  resetCategoryDropdown();
+}
+
+function resetSubTasksAndCategory() {
+  resetSubTasks();
+  resetCategory();
 }
 
 /** Resets assigned contacts preview and restores default priority selection. */
