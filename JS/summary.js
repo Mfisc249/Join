@@ -52,7 +52,7 @@ function renderNextDeadline(tasks) {
 function handleSessionRedirect() {
   const ENABLE_REDIRECT_IF_NO_SESSION = false;
   if (ENABLE_REDIRECT_IF_NO_SESSION && !sessionStorage.getItem('userName')) {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
   }
 }
 
